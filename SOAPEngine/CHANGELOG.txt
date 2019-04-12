@@ -1,0 +1,285 @@
+1.42, May 23, 2018
+- fixes the custom objects serialization
+
+1.41, Apr 5, 2018
+- implementation for Digest Authentication type on header of requests
+
+1.40.5, Ago 29, 2017
+- fixes when tags contains both unicode and special accented characters.
+
+1.40.4, Ago 2, 2017
+- fixes when tags contains html or unicode characters.
+- fixes for wrong version number.
+
+1.40.3, Jul 28, 2017 (ex 1.4.3)
+- fixes crash's when data contains unicode special characters like ZERO WIDTH (eg. //u200C //u200B).
+
+1.40.2 (ex 1.4.2), Mar 1, 2017
+- fixes for authorization the p12 certificate types.
+
+1.40.1, Feb 27, 2017 (ex 1.4.1)
+- added SOAPEngineXMLDatayKey constant that is used in userInfo notifications.
+- fixes for the constants declaration.
+
+1.40, Feb 23, 2017 (ex 1.4)
+- added a new property named "soapActionRequest" to set a different SOAPAction value in the header of the request for the support of the last versions of WCF services.
+
+1.31, Nov 15, 2016
+- added a new delegate to retrieve original NSData before of the parsing.
+- deprecated didBeforeParsingResponseString leading by didBeforeParsingResponseData.
+
+1.30.1, Oct 18, 2016
+- fixes for running on multi threading tasks.
+
+1.30, Oct 14, 2016
+- implementation for Certificate Pinning Authentication (.cer or .der)
+
+1.29, Sep 19, 2016
+- fix properties declarations for Swift 3.
+- various optimizations.
+
+1.28, Aug 11, 2016
+- header property now support NSString and NSDictionary types.
+- optimizations for NSDate objects.
+- fixes bitcode for AppleTv.
+
+1.27, Apr 7, 2016
+- added a new property named soapNamespace to able to setting the default name of namespace for the tag Envelope.
+- fixes for bitcode generation problems with Xcode 7.3.
+
+1.26.3, Mar 30, 2016
+- fixes on CDATA elements.
+
+1.26.2, Mar 11, 2016
+- extended identification numeric basic types in arrays (int8/16/32/64, long32/64)
+- optimized memory management.
+- improved device detection.
+
+1.26, Feb 17, 2016
+- uses NSProgress to track the sending and received data progress.
+- runs notifications, blocks and delegates in the main thread.
+- supports Enterprise license with bundle-id extended style.
+- fixes in delegate and block for the wrong totals of data sent.
+- fixes crash when not found a value for soapAction attribute on WSDL declaration.
+- fixes when forKey in requestURL is nil.
+- various optimizations.
+
+1.25.2, Feb 1, 2016
+- fixes message "containsString unrecognized selector" on the previous versions of iOS 8.0. fixes.
+
+1.25.1, Gen 28, 2016
+- recompile iOS binary for bitcode support.
+
+1.25, Dic 31, 2015
+- added a supported version for Apple TV.
+- fixes license message on simulator.
+
+1.24, Oct 1, 2015
+- added new method that return a formatted dictionary for a sub-child with attributes.
+- added new property to define attributes for the soap action tag.
+- replaced the statement "retain" of the properties in the statement "strong".
+- fixes during retrieval of the class name when you pass a user-object.
+
+1.23.0, Sep 29, 2015
+- supports attributes for child tag.
+- fixes for soap message with inside another XML base format.
+- optimization performance.
+
+1.22.1, Sep 25, 2015
+- added method that return a single boolean value (like integerValue etc.)
+- fixes for the default tag names for an array parameter.
+- fixes for duplicate symbols when a project already use XPathQuery.
+- fixes when a WSDL definition not contain location attribute or soapAction attribute.
+
+1.22.0, Sep 23, 2015
+- added support for text password on WS-Security.
+- fixes for soap message with inside another XML message.
+- increased the minimum SDK version to iOS 7.1 and Xcode version to 5.1.1.
+
+1.21.2, Aug 29, 2015
+- fixed wrong compilation of framework.
+
+1.21.1, Aug 11, 2015
+- fixes for xml injection.
+- fixes for “Incorrect NSStringEncoding value detected” message.
+- auto detect WSDL call when using requestURL instead of requestWSDL.
+
+1.21.0, Jun 2, 2015
+- parsing soapAction when contains ‘#’.
+- fixes when the xml contains internally JSON.
+- extended method setValue with tag attribute definitions.
+- support for enterprise licenses, one license for multiple apps.
+
+1.20.2, May 22, 2015
+- fixes for basic, digest and NTLM authentication.
+
+1.20.1, May 18, 2015
+- fixes encoding type for response data.
+
+1.20.0, May 14, 2015
+- extended method setValue to allow to define a custom tag for the elements of an array.
+
+1.19.0, May 13, 2015
+- added security token in the Authorization header field.
+- added recovery token authorization with the current social login settings.
+- fixes double slash on namespace of the method.
+- requires the Account.framework.
+
+1.18.2 May, 10, 2015
+- fixes podspec
+
+1.18.1 Apr, 27, 2015
+- fixes for retrieve attributes of tags.
+
+1.18.0 Apr, 26, 2015
+- added a new property named xsdDataTypes to able add the attribute xsi:type="xsd:..." in the requests.
+- fixes for base64 data.
+
+1.17.0 Apr, 22, 2015
+- added a new property named retrievesAttributes to able retrieve the attributes of tags.
+- fixes for retrieve binary data types.
+- fixes for base64 data.
+ 
+1.16.0 Mar, 15, 2015
+- added a new property to change the default tag name when using setValue without key value.
+- fixes for NSNull value parameters.
+
+1.15.0 Feb, 26, 2015
+- added new delegate, and notification for progress of the request.
+- added a new property to enable retrieval http response object.
+- added the response object on didReceiveResponseCode notification.
+- added synchronous request methods.
+- added deprecated attribute for few methods.
+- fixes for encoding special chars in the parameters.
+- removed the 32-bit-only version of the framework from the SDK distribution.
+	(note: the 64-bit framework version is compatible up to, and including, iOS 5.1.1,
+	if your project used the 32-bit version of the framework, SOAPEngine.framework, 
+	update the project to use the 64-bit version, SOAPEngine64.framework).
+
+1.14.0 Feb, 20, 2015
+- added new delegate, and notification for progress of the response.
+
+1.13.1 Feb, 05, 2015
+- fixes when the response of the method no contains data and ends with />
+
+1.13.0 Feb, 02, 2015
+- added new method to quickly set the login methods.
+- added a Swift sample.
+
+1.12.0 Jan, 22, 2015
+- added new properties that returns the current request URL, the current SOAP Action and method name.
+
+1.11.3 Jan, 20, 2015
+- fixes header content-type for SOAP v.1.2.
+
+1.11.2 Jan, 17, 2015
+- fixes of the digest encoding for ws-security.
+
+1.11.1 Jan, 14, 2015
+- added feature when the xml contains internally a JSON analyze this last.
+- fixes for license key when contains invalid characters.
+- fixes WS-Security UTC datetime.
+
+1.11.0 Dic, 22, 2014
+- added new methods to able to call service with WSDL.
+- added a new authorization type for the PAYPAL SOAP API.
+- added two new properties to manage authorization to PAYPAL SOAP API.
+- added a new property for set the password for client certificate.
+- added a new property for set the timeout for all requests.
+- added accepted types (text/xml) in the header of the request.
+- fixes for authentication method with client certificate.
+- minor fixes for recovery of faultcodes data.
+- minor fixes for retrieve namespace of the soapAction.
+
+1.10.0 Dic, 3, 2014
+- added a properties to enable retrieval of the contents of the SOAP header in the server response.
+
+1.9.1 Nov, 10, 2014
+- fixes xml parsing error.
+
+1.9.0 Nov, 4, 2014
+- added encryption/decryption content data with 3DES+BASE64.
+- parse the response xml that contains one other embedded xml.
+- fixes memory leaks.
+ 
+1.8.1 Ago, 27, 2014
+- added a supported version for Mac OS X.
+
+1.8.0 Ago, 12, 2014
+- added dictionary response on delegate, notification and completion block.
+- added delegate and notification before parsing response data.
+- added encryption/decryption content data with AES256+BASE64.
+- added a C# class for encryption/decryption compatible with SOAPEngine.
+- fixes BASE64 conversion for NSData and UIImage/UIImageView objects.
+- automatic setting of the property named actionNamespaceSlash in the case of a failure of the first request.
+- automatic setting of the property named actionQuotes in the case where the soapAction path contains unsupported characters.
+- default to YES for the property named escapingHTML.
+- requires a license code, as required by the new EULA.
+
+1.7.0 Jul, 11, 2014
+- added a example of VS.NET WebService in C#.
+- added the support for sending of UIImage and UIImageView objects.
+- added the conversion of special characters in a compatible html format.
+
+1.6.0 Apr, 12, 2014
+- support for WFC services (svc) with basicHttpBinding.
+
+1.5.1 Feb, 13, 2014
+- fixes for premature release of connections in nested blocks.
+
+1.5.0 Jan, 29, 2014
+- added a new method named "cancel" to able cancel all delegates, blocks or notifications.
+- fixes for fault codes in client SOAP response.
+- added version compiled for arm64 (64-bit, only in purchased version).
+
+1.4.0 Jan, 09, 2014
+- support for NSSet types.
+- support for other more primitive types (short, long).
+- fixes releases object in ARC projects.
+
+1.3.4 Dic, 22, 2013
+- fixes for HTML special characters.
+- fixes for Unicode characters.
+- fixes for blocks inside blocks.
+
+1.3.3 Dic, 18, 2013
+- fixes dictionary error in a double sequential call.
+
+1.3.2 Dic, 10, 2013
+- Extended with two new properties to replace the prefix of the user objects.
+- Decode Unicode characters in readable strings (\Uxxxx).
+- fixes for results in array values.
+
+1.3.1 Dic 04, 2013
+- Thread Safety
+- Support nil/null values replaced with xsi:nil="true"
+
+1.3.0 Dic, 02, 2013
+- Added local notifications.
+- fixes last path slash for namespace actions.
+
+1.2.2 Nov, 08, 2013
+- Implementing block programming
+- fixes log message for IList (C#) elements
+
+1.2.1 Ago, 29, 2013
+- Added the verification methods for certificate authorization.
+- Update WS-Security with encrypted password (digest).
+- fixes for parameters with nil values.
+- fixes for inherited classes.
+- fixes when hostname could not be found.
+
+1.2.0 Ago, 20, 2013
+- Added the verification methods for trusted certificate authorization.
+
+1.1.1 Ago, 17, 2013
+- Property named envelope, allow the define extra attributes for Envelope tag.
+
+1.1.0 Jun, 25, 2013
+- Ability to define a basic or WSS authentication.
+- Property named actionQuotes, allow the quotes in the soapAction header.
+
+1.0.0 Nov, 18, 2012
+- First release.
+
+
