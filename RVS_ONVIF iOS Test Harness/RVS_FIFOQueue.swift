@@ -43,7 +43,10 @@ protocol Queue {
  An efficient variable-size FIFO queue of elements of type "Element."
  */
 struct RVS_FIFOQueue<Element>: Queue {
+    /// This is the "delivery" queue. Elements are removed, one by one, from the top of this queue.
+    /// When the queue is empty, and a request is made for an element, it first asks for the reveresed contents of the right queue, which is then emptied.
     private var _leftQueue: [Element] = []
+    /// This is the "staging queue." We add elements, one by one, to the top of this queue.
     private var _rightQueue: [Element] = []
     
     /* ################################################################## */
@@ -116,9 +119,10 @@ extension RVS_FIFOQueue: MutableCollection {
     /**
      - parameter after: The index we want to get after.
      
-     - retruns: The input plus one (Can't get simpler than that).
+     - returns: The input plus one (Can't get simpler than that). It can return the endIndex, which is past the last element.
      */
     public func index(after inIndex: Int) -> Int {
+        precondition((0..<endIndex).contains(inIndex), "Index out of bounds")
         return inIndex + 1
     }
     
