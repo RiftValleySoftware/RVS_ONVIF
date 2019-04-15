@@ -21,7 +21,6 @@
 		D45A2AB322286CF6000A7555 /* RVS_ONVIF_Test_Harness_ProfileHandler_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45A2AB222286CF6000A7555 /* RVS_ONVIF_Test_Harness_ProfileHandler_TableViewController.swift */; };
 		D45B82F621FF2CA800DE26EF /* RVS_ONVIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45B82F521FF2CA800DE26EF /* RVS_ONVIF.swift */; };
 		D45DFCE02260C4CF00E486B7 /* RVS_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F424BB2206540800729C0F /* RVS_Extensions.swift */; };
-		D45DFCE12260C51800E486B7 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */; };
 		D45DFCEA2260C5FE00E486B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45DFCE92260C5FE00E486B7 /* AppDelegate.swift */; };
 		D45DFCEC2260C5FE00E486B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45DFCEB2260C5FE00E486B7 /* ViewController.swift */; };
 		D45DFCEE2260C5FF00E486B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45DFCED2260C5FF00E486B7 /* Assets.xcassets */; };
@@ -63,6 +62,8 @@
 		D4BAF3F02260E91E00C971D8 /* RVS_ONVIF_iOS.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BC7062223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */; };
 		D4C18EB3220B4F3B00C1A8F9 /* RVS_ONVIF_Test_Harness_Profiles_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C18EB2220B4F3B00C1A8F9 /* RVS_ONVIF_Test_Harness_Profiles_TableViewController.swift */; };
+		D4CC59D72264D00B00F943C3 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */; };
+		D4CC59D82264D00C00F943C3 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */; };
 		D4D793702210C9F6008022FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D7936F2210C9F6008022FC /* Default-568h@2x.png */; };
 		D4DF78BC21FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; };
 		D4DF78C121FF2A7C00E9CB70 /* RVS_ONVIFTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DF78C021FF2A7C00E9CB70 /* RVS_ONVIFTests.swift */; };
@@ -680,6 +681,7 @@
 				D45DFD142260C88C00E486B7 /* RVS_String_Extensions.swift in Sources */,
 				D45DFD112260C88C00E486B7 /* RVS_ONVIF_Profile_S.swift in Sources */,
 				D45DFD0F2260C88C00E486B7 /* RVS_ONVIF_Core.swift in Sources */,
+				D4CC59D82264D00C00F943C3 /* RVS_FIFOQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,7 +692,6 @@
 				D4AE4E982218DE2F00E39BDA /* RVS_ONVIF_Test_Harness_Connect_ViewController.swift in Sources */,
 				D4014D632230450300F9C03A /* RVS_ONVIF_Test_Harness_Functions_TableViewController.swift in Sources */,
 				D4BC7062223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift in Sources */,
-				D45DFCE12260C51800E486B7 /* RVS_FIFOQueue.swift in Sources */,
 				D44ED31E220C8AE900770BB2 /* RVS_ONVIF_Test_Harness_Profile_TableViewController.swift in Sources */,
 				D495F3692215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift in Sources */,
 				D4F2117D2243A82100A4237F /* RVS_ONVIF_Test_Harness_NTP_TableViewController.swift in Sources */,
@@ -725,6 +726,7 @@
 				D42DD7DF22297F9300D7EDE4 /* RVS_ONVIF_Protocols.swift in Sources */,
 				D45B82F621FF2CA800DE26EF /* RVS_ONVIF.swift in Sources */,
 				D42DD7E422298B6300D7EDE4 /* RVS_ONVIF_Profile_S_Public_Structs.swift in Sources */,
+				D4CC59D72264D00B00F943C3 /* RVS_FIFOQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

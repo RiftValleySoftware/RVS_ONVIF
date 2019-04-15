@@ -29,8 +29,14 @@ protocol Queue {
     /**
      Adds a new Element to the end (back) of the queue
      */
-    mutating func enqueue(_ element: Element)
+    mutating func enqueue(_ : Element)
     
+    /* ################################################################## */
+    /**
+     Adds a new Array of Element to the end (back) of the queue
+     */
+    mutating func enqueue(_ : [Element])
+
     /* ################################################################## */
     /**
      Removes and returns the first element from the beginning (front) of the queue. nil, if the queue is empty.
@@ -61,9 +67,19 @@ struct RVS_FIFOQueue<Element>: Queue {
     
     /* ################################################################## */
     /**
+     Add an Array of Element to the end of the queue.
+     - parameter inNewElements: The Elements to be enqueued (placed on the end of the list). They are appened in the order presented.
+     - Complexity: O(m).
+     */
+    mutating func enqueue(_ inNewElements: [Element]) {
+        _rightQueue.append(contentsOf: inNewElements)
+    }
+
+    /* ################################################################## */
+    /**
      Removes and returns from the front of the queue.
      Returns nil for an empty queue.
-     - returns: The first Element
+     - returns: The first Element. Nil, if none.
      - Complexity: Amortized O(1).
      The "Amortized" is because there's a one-time "charge" for dumping the right queue into the left queue.
      The way that this works, is that the right queue is a "staging" queue. It's cheap to shove elements onto the top.
