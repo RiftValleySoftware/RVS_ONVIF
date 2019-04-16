@@ -48,7 +48,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /**
      */
     func updateUI(_ inResetConnect: Bool = false) {
-        if !isConnecting {
+        if !isConnecting || inResetConnect {
             connectButton?.isEnabled = true
             connectButton?.title = "DISCONNECT"
             
