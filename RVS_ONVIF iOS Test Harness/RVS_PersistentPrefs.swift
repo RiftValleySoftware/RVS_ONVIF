@@ -53,16 +53,16 @@ class RVS_PersistentPrefs {
             var savingPrefs: [String: Any] = [:]
             
             // Read in the defaults that we saved.
-            for key in _defaults {
-                savingPrefs[key] = defaults.object(forKey: key)
+            _defaults.forEach {
+                savingPrefs[$0] = defaults.object(forKey: $0)
             }
 
-            for valuePair in _values {
-                savingPrefs[valuePair.key] = valuePair.value
+            _values.forEach {
+                savingPrefs[$0.key] = $0.value
             }
             
             #if DEBUG
-                print("saving Prefs: \(savingPrefs)")
+                print("Saving Prefs: \(String(describing: savingPrefs))")
             #endif
             
             UserDefaults.standard.set(savingPrefs, forKey: _tag)
@@ -74,24 +74,27 @@ class RVS_PersistentPrefs {
      This reads anything in the app defaults container, and applies them to set up the text fields.
      */
     private func _loadState() {
-        if let loadedPrefs = UserDefaults.standard.object(forKey: _tag) as? [String: Any] {
+        let standardDefaultsObject = UserDefaults.standard
+        #if DEBUG
+            print("Standard User Defaults Object: \(String(describing: standardDefaultsObject))")
+        #endif
+
+        if let loadedPrefs = standardDefaultsObject.object(forKey: _tag) as? [String: Any] {
             #if DEBUG
-                print("Loaded Prefs: \(loadedPrefs)")
+                print("Loaded Prefs: \(String(describing: loadedPrefs))")
             #endif
-            
-            let defaults = UserDefaults.standard
             
             if let _defaults = _defaultKeys {
                 var newPrefs: [String: Any] = [:]
                 
                 // Read in the defaults that we saved. This ensures that we get all the various
-                for key in _defaults {
-                    newPrefs[key] = defaults.object(forKey: key)
+                _defaults.forEach {
+                    newPrefs[$0] = loadedPrefs[$0]
                 }
 
                 // Update the defaults with what we saved the last time.
-                for valuePair in loadedPrefs {
-                    newPrefs[valuePair.key] = valuePair.value
+                loadedPrefs.forEach {
+                    newPrefs[$0.key] = $0.value
                 }
                 
                 _values = newPrefs
@@ -104,7 +107,7 @@ class RVS_PersistentPrefs {
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
-     This is private to prevent this struct from being instantiated in an undefined state.
+     This is private to prevent this class from being instantiated in an undefined state.
      */
     private init(_defaults inDefaults: [String: Any] = [:], _tag inTag: String = "", _values inValues: [String: Any] = [:]) {
         _defaultKeys = nil
@@ -144,7 +147,7 @@ class RVS_PersistentPrefs {
         #if DEBUG
             print("Default Prefs: \(String(describing: _values))")
         #endif
-
+        
         UserDefaults.standard.register(defaults: _values)
     }
     
