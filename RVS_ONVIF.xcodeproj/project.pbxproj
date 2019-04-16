@@ -139,6 +139,7 @@
 		8EBA4E04B12EDA792EE7B20B /* Pods-RVS_ONVIF Test Harness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF Test Harness.debug.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF Test Harness/Pods-RVS_ONVIF Test Harness.debug.xcconfig"; sourceTree = "<group>"; };
 		D4014D622230450300F9C03A /* RVS_ONVIF_Test_Harness_Functions_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Functions_TableViewController.swift; sourceTree = "<group>"; };
 		D4014D64223057AC00F9C03A /* RVS_ONVIF_Test_Harness_ProfileDispatcher_Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileDispatcher_Core.swift; sourceTree = "<group>"; };
+		D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RVS_ONVIF Mac Test Harness.entitlements"; sourceTree = "<group>"; };
 		D42DD7DE22297F9300D7EDE4 /* RVS_ONVIF_Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Protocols.swift; sourceTree = "<group>"; };
 		D42DD7E122298AAD00D7EDE4 /* RVS_ONVIF_Core_Public_Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core_Public_Structs.swift; sourceTree = "<group>"; };
 		D42DD7E322298B6300D7EDE4 /* RVS_ONVIF_Profile_S_Public_Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Profile_S_Public_Structs.swift; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 		D45DFCE82260C5FE00E486B7 /* RVS_ONVIF Mac Test Harness */ = {
 			isa = PBXGroup;
 			children = (
+				D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */,
 				D45DFCE92260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_AppDelegate.swift */,
 				D45DFCEB2260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController.swift */,
 				D45DFCED2260C5FF00E486B7 /* Assets.xcassets */,
@@ -500,6 +502,11 @@
 				TargetAttributes = {
 					D45DFCE62260C5FE00E486B7 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					D45DFCFE2260C82B00E486B7 = {
 						CreatedOnToolsVersion = 10.2;
@@ -718,7 +725,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "RVS_ONVIF Mac Test Harness/RVS_ONVIF_Mac_Test_Harness.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -741,7 +747,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "RVS_ONVIF Mac Test Harness/RVS_ONVIF_Mac_Test_Harness.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
