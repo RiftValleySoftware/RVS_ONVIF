@@ -23,7 +23,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     /**
      */
     static let prefsKeys = ["ip_address_and_port", "login_id", "password", "soap_key", "auth_method"]
-
+    
     /* ############################################################################################################################## */
     // MARK: - Internal Class Calculated Properties
     /* ############################################################################################################################## */
@@ -33,6 +33,20 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     class var appDelegateObject: RVS_ONVIF_Mac_Test_Harness_AppDelegate {
         return (NSApplication.shared.delegate as? RVS_ONVIF_Mac_Test_Harness_AppDelegate)!
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - Internal Class Functions
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    class func displayAlert(header inHeader: String, message inMessage: String = "") {
+        let alert = NSAlert.init()
+        alert.messageText = inHeader
+        alert.informativeText = inMessage
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
 
     /* ############################################################################################################################## */
@@ -87,9 +101,10 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter instance: The RVS_ONVIF instance that is calling the delegate.
      - parameter failureWithReason: An enumeration, with associated values that refine the issue.
      */
-    func onvifInstance(_ instance: RVS_ONVIF, failureWithReason: RVS_ONVIF.RVS_Fault!) {
+    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
         onvifInstance = nil
         connectionScreen?.updateUI(true)
+        type(of: self).displayAlert(header: "ERROR!", message: inReason.debugDescription)
     }
 
     /* ################################################################## */
