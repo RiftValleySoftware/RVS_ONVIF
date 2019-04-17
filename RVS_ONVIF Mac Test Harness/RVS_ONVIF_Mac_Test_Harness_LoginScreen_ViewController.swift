@@ -16,6 +16,14 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /* ############################################################################################################################## */
+    // MARK: - Internal Static Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    static let showInfoSegue = "show-info-screen"
+    
+    /* ############################################################################################################################## */
     // MARK: - IB References
     /* ############################################################################################################################## */
     @IBOutlet weak var ipAddressTextField: NSTextField!
@@ -25,11 +33,13 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     @IBOutlet weak var soapKeyTextField: NSTextField!
     @IBOutlet weak var connectButton: NSButton!
     @IBOutlet weak var authModeSegmentedControl: NSSegmentedControl!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     /* ############################################################################################################################## */
     // MARK: - Internal Stored Properties
     /* ############################################################################################################################## */
     var isConnecting: Bool = false
+    var infoScreen: RVS_ONVIF_Mac_Test_Harness_Info_ViewController!
     
     /* ############################################################################################################################## */
     // MARK: - Internal Calculated Properties
@@ -39,38 +49,6 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
      */
     var isConnected: Bool {
         return nil != RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance
-    }
-    
-    /* ############################################################################################################################## */
-    // MARK: - Internal Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    func updateUI(_ inResetConnect: Bool = false) {
-        if !isConnecting || inResetConnect {
-            connectButton?.isEnabled = true
-            connectButton?.title = "DISCONNECT"
-            
-            if inResetConnect {
-                isConnecting = false
-            }
-            
-            if !isConnected {
-                connectButton?.isEnabled = false
-                if !isConnecting {
-                    guard let ipAddress = ipAddressTextField?.stringValue.ipAddress, ipAddress.isValidAddress else { return }
-                    guard let tcpPort = portTextField?.intValue, 0 != tcpPort else { return }
-                    guard let loginID = loginIDTextField?.stringValue, !loginID.isEmpty else { return }
-                    guard let password = passwordTextField?.stringValue, !password.isEmpty else { return }
-                    connectButton?.isEnabled = true
-                    connectButton?.title = "CONNECT"
-                }
-            }
-        } else {
-            connectButton?.isEnabled = false
-            connectButton?.title = "CONNECTING..."
-        }
     }
     
     /* ############################################################################################################################## */
@@ -121,9 +99,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
             
             _ = RVS_ONVIF.makeONVIFInstance(ipAddressAndPort: ipAddress.addressAndPort, loginCredentials: loginCreds, soapEngineLicenseKey: soapKey, authMethod: authMode, delegate: RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject)
         } else {
-            RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance = nil
-            loadState()
-            updateUI()
+            RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance.deinitializeConnection()
         }
     }
     
@@ -214,6 +190,67 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func updateUI(_ inResetConnect: Bool = false) {
+        ipAddressTextField?.isEnabled = !isConnected
+        portTextField?.isEnabled = !isConnected
+        loginIDTextField?.isEnabled = !isConnected
+        passwordTextField?.isEnabled = !isConnected
+        soapKeyTextField?.isEnabled = !isConnected
+        authModeSegmentedControl?.isEnabled = !isConnected
+        
+        if isConnecting {
+            progressIndicator?.startAnimation(nil)
+        }
+        
+        if !isConnecting || inResetConnect {
+            progressIndicator?.stopAnimation(nil)
+            connectButton?.isEnabled = true
+            connectButton?.title = "DISCONNECT"
+            
+            if inResetConnect {
+                isConnecting = false
+                loadState()
+            }
+            
+            if !isConnected {
+                connectButton?.isEnabled = false
+                if !isConnecting {
+                    guard let ipAddress = ipAddressTextField?.stringValue.ipAddress, ipAddress.isValidAddress else { return }
+                    guard let tcpPort = portTextField?.intValue, 0 != tcpPort else { return }
+                    guard let loginID = loginIDTextField?.stringValue, !loginID.isEmpty else { return }
+                    guard let password = passwordTextField?.stringValue, !password.isEmpty else { return }
+                    connectButton?.isEnabled = true
+                    connectButton?.title = "CONNECT"
+                }
+            }
+        } else {
+            connectButton?.isEnabled = false
+            connectButton?.title = "CONNECTING..."
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func openInfoScreen() {
+        if nil == infoScreen, isConnected {
+            performSegue(withIdentifier: type(of: self).showInfoSegue, sender: nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func closeInfoScreen() {
+        if nil != infoScreen {
+            infoScreen.view.window?.performClose(nil)
+            infoScreen = nil
+        }
+    }
 
     /* ############################################################################################################################## */
     // MARK: - Overrides
@@ -240,8 +277,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.connectionScreen = self
-        loadState()
-        updateUI()
+        updateUI(true)
     }
     
     /* ################################################################## */
@@ -250,6 +286,16 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         saveState()
+        closeInfoScreen()
         RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.connectionScreen = nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func prepare(for inSegue: NSStoryboardSegue, sender inSender: Any?) {
+        if let windowController = inSegue.destinationController as? NSWindowController, let viewController = windowController.contentViewController as? RVS_ONVIF_Mac_Test_Harness_Info_ViewController {
+            viewController.loginViewController = self
+        }
     }
 }

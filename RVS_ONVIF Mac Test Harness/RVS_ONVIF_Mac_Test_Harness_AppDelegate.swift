@@ -23,7 +23,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     /**
      */
     static let prefsKeys = ["ip_address_and_port", "login_id", "password", "soap_key", "auth_method"]
-    
+
     /* ############################################################################################################################## */
     // MARK: - Internal Class Calculated Properties
     /* ############################################################################################################################## */
@@ -42,7 +42,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     /**
      */
     class func displayAlert(header inHeader: String, message inMessage: String = "") {
-        let alert = NSAlert.init()
+        let alert = NSAlert()
         alert.messageText = inHeader
         alert.informativeText = inMessage
         alert.addButton(withTitle: "OK")
@@ -103,6 +103,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
         onvifInstance = nil
+        connectionScreen?.closeInfoScreen()
         connectionScreen?.updateUI(true)
         type(of: self).displayAlert(header: "ERROR!", message: inReason.debugDescription)
     }
@@ -115,6 +116,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = inONVIFInstance
+        connectionScreen?.openInfoScreen()
         connectionScreen?.updateUI(true)
     }
     
@@ -126,6 +128,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstanceDeinitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = nil
+        connectionScreen?.closeInfoScreen()
         connectionScreen?.updateUI(true)
     }
 }
