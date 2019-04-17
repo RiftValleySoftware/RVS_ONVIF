@@ -39,7 +39,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     // MARK: - Internal Stored Properties
     /* ############################################################################################################################## */
     var isConnecting: Bool = false
-    var infoScreen: RVS_ONVIF_Mac_Test_Harness_Info_ViewController!
+    var myViews: [AnyHashable: NSViewController] = [:]
     
     /* ############################################################################################################################## */
     // MARK: - Internal Calculated Properties
@@ -185,7 +185,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
                         authModeSegmentedControl?.selectedSegment = authVal
                     }
                 default:
-                    ()
+                    break
                 }
             }
         }
@@ -237,7 +237,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /**
      */
     func openInfoScreen() {
-        if nil == infoScreen, isConnected {
+        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Base_ViewController"], isConnected {
             performSegue(withIdentifier: type(of: self).showInfoSegue, sender: nil)
         }
     }
@@ -245,24 +245,17 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /* ################################################################## */
     /**
      */
-    func closeInfoScreen() {
-        if nil != infoScreen {
-            infoScreen.view.window?.performClose(nil)
-            infoScreen = nil
+    func scramTheReactor() {
+        myViews.forEach {
+            $0.value.view.window?.performClose(nil)
         }
+        view.window?.title = "CONNECT"
+        myViews = [:]
     }
 
     /* ############################################################################################################################## */
     // MARK: - Overrides
     /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    override var representedObject: Any? {
-        didSet {
-        }
-    }
-    
     /* ################################################################## */
     /**
      */
@@ -286,15 +279,17 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         saveState()
-        closeInfoScreen()
+        scramTheReactor()
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.deinitializeConnection()
         RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.connectionScreen = nil
+        NSApp.terminate(self)
     }
     
     /* ################################################################## */
     /**
      */
     override func prepare(for inSegue: NSStoryboardSegue, sender inSender: Any?) {
-        if let windowController = inSegue.destinationController as? NSWindowController, let viewController = windowController.contentViewController as? RVS_ONVIF_Mac_Test_Harness_Info_ViewController {
+        if let windowController = inSegue.destinationController as? NSWindowController, let viewController = windowController.contentViewController as? RVS_ONVIF_Mac_Test_Harness_Base_ViewController {
             viewController.loginViewController = self
         }
     }

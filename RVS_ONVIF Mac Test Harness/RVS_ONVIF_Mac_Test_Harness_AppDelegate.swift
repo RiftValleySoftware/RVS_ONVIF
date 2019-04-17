@@ -103,7 +103,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
         onvifInstance = nil
-        connectionScreen?.closeInfoScreen()
+        connectionScreen?.scramTheReactor()
         connectionScreen?.updateUI(true)
         type(of: self).displayAlert(header: "ERROR!", message: inReason.debugDescription)
     }
@@ -116,6 +116,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = inONVIFInstance
+        connectionScreen?.view.window?.title = "CONNECTED"
         connectionScreen?.openInfoScreen()
         connectionScreen?.updateUI(true)
     }
@@ -128,7 +129,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      */
     func onvifInstanceDeinitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = nil
-        connectionScreen?.closeInfoScreen()
+        connectionScreen?.scramTheReactor()
         connectionScreen?.updateUI(true)
     }
 }

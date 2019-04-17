@@ -14,25 +14,7 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - Main Logged-In Info Screen View Controller
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_Info_ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    var loginViewController: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController!
-    
-    /* ################################################################## */
-    /**
-     */
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        loginViewController?.infoScreen = self
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        loginViewController?.infoScreen = nil
-    }
-    
+class RVS_ONVIF_Mac_Test_Harness_Info_ViewController: RVS_ONVIF_Mac_Test_Harness_Base_ViewController, NSTableViewDataSource, NSTableViewDelegate {    
     /* ################################################################## */
     /**
      */
@@ -45,10 +27,10 @@ class RVS_ONVIF_Mac_Test_Harness_Info_ViewController: NSViewController, NSTableV
      */
     func tableView(_ inTableView: NSTableView, viewFor inTableColumn: NSTableColumn?, row inRow: Int) -> NSView? {
         if let keys = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.deviceInformation.keys {
-            let key = Array(keys)[inRow]
-            if let deviceInfo = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.deviceInformation[key] as? String {
+            let key = Array(keys).sorted()[inRow]
+            if let value = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.deviceInformation[key] as? String {
                 if let column = inTableColumn, let cell = inTableView.makeView(withIdentifier: column.identifier, owner: nil) as? NSTableCellView {
-                    cell.textField?.stringValue = "NAME" == inTableColumn?.title ? key + ":" : deviceInfo
+                    cell.textField?.stringValue = "NAME" == inTableColumn?.title ? key + ":" : value
                     return cell
                 }
             }

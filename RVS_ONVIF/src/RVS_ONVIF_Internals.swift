@@ -290,8 +290,8 @@ extension RVS_ONVIF {
         soap.responseHeader = true  // If this is not set, you will get an empty dictionary.
         
         // If we don't have a realm, and we have force digest selected, then we fail. Otherwise, we just blunder on, and hope the device likes us.
-        if .digest != authMethod || nil != _authData, let realm = _authData?["realm"] {
-            soap.realm = realm
+        if .digest != authMethod || nil != _authData {
+            soap.realm = _authData?["realm"]
             
             // Set up the parameters for the SOAP call.
             if let params = inParams {
