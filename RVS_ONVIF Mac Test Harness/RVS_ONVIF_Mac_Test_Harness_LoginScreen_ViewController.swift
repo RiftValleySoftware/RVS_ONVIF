@@ -22,7 +22,8 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /**
      */
     static let showInfoSegue = "show-info-screen"
-    
+    static let showScopesSegue = "show-scopes-screen"
+
     /* ############################################################################################################################## */
     // MARK: - IB References
     /* ############################################################################################################################## */
@@ -94,6 +95,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
                 }
             }
             
+            saveState()
             isConnecting = true
             updateUI()
             
@@ -195,12 +197,12 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /**
      */
     func updateUI(_ inResetConnect: Bool = false) {
-        ipAddressTextField?.isEnabled = !isConnected
-        portTextField?.isEnabled = !isConnected
-        loginIDTextField?.isEnabled = !isConnected
-        passwordTextField?.isEnabled = !isConnected
-        soapKeyTextField?.isEnabled = !isConnected
-        authModeSegmentedControl?.isEnabled = !isConnected
+        ipAddressTextField?.isEnabled = !isConnected && !isConnecting
+        portTextField?.isEnabled = !isConnected && !isConnecting
+        loginIDTextField?.isEnabled = !isConnected && !isConnecting
+        passwordTextField?.isEnabled = !isConnected && !isConnecting
+        soapKeyTextField?.isEnabled = !isConnected && !isConnecting
+        authModeSegmentedControl?.isEnabled = !isConnected && !isConnecting
         
         if isConnecting {
             progressIndicator?.startAnimation(nil)
@@ -237,11 +239,20 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /**
      */
     func openInfoScreen() {
-        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Base_ViewController"], isConnected {
+        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Info_ViewController"], isConnected {
             performSegue(withIdentifier: type(of: self).showInfoSegue, sender: nil)
         }
     }
     
+    /* ################################################################## */
+    /**
+     */
+    func openScopesScreen() {
+        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController"], isConnected {
+            performSegue(withIdentifier: type(of: self).showScopesSegue, sender: nil)
+        }
+    }
+
     /* ################################################################## */
     /**
      */

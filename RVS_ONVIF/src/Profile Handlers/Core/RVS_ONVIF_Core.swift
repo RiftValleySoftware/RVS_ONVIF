@@ -859,6 +859,8 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                             switch itemArray[0].lowercased() {  // We look at the first leg of the leftovers.
                             case "s", "streaming":
                                 profile = .S(leftover)
+                            case "q", "q/operational", "operational":
+                                profile = .Q(leftover)
                             case "g", "recording":
                                 profile = .G(leftover)
                             default:
