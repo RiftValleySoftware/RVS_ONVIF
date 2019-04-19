@@ -24,6 +24,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     static let showInfoSegue = "show-info-screen"
     static let showScopesSegue = "show-scopes-screen"
     static let showCapabilitiesSegue = "show-capabilities-screen"
+    static let showServiceCapabilitiesSegue = "show-service-cap-screen"
 
     /* ############################################################################################################################## */
     // MARK: - IB References
@@ -260,6 +261,15 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     func openCapabilitiesScreen() {
         if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController"], isConnected {
             performSegue(withIdentifier: type(of: self).showCapabilitiesSegue, sender: nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func openServiceCapabilitiesScreen() {
+        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController"], isConnected {
+            performSegue(withIdentifier: type(of: self).showServiceCapabilitiesSegue, sender: nil)
         }
     }
 
