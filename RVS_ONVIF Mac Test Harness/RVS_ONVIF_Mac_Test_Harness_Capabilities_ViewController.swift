@@ -17,7 +17,9 @@ import RVS_ONVIF_MacOS
 class RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController: RVS_ONVIF_Mac_Test_Harness_Base_ViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var displayTableView: NSTableView!
     
-    var sectionLabels: [String] = []
+    typealias RVS_ONVIF_Mac_Test_Harness_GroupedTableData = (key: String, value: String)
+    
+    var tableRowData: [RVS_ONVIF_Mac_Test_Harness_GroupedTableData] = []
     
     override var loginViewController: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController! {
         get {
@@ -26,58 +28,224 @@ class RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController: RVS_ONVIF_Mac_Test
         
         set {
             super.loginViewController = newValue
-
+            
             if let capabilities = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.capabilities {
-                if nil != capabilities.analyticsCapabilities {
-                    sectionLabels.append("Analytics")
+                if let analyticsCapabilities = capabilities.analyticsCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Analytics", value: ""))
+                    if let xAddr = analyticsCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
                 }
                 
-                if nil != capabilities.analyticsDeviceCapabilities {
-                    sectionLabels.append("Analytics Device")
+                if let analyticsDeviceCapabilities = capabilities.analyticsDeviceCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Analytics Device", value: ""))
+                    if let xAddr = analyticsDeviceCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
                 }
                 
-                if nil != capabilities.deviceCapabilities {
-                    sectionLabels.append("Device")
+                if let deviceCapabilities = capabilities.deviceCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Device", value: ""))
+                    if let xAddr = deviceCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    
+                    if let networkCapabilities = deviceCapabilities.networkCapabilities {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - IP Filter", value: networkCapabilities.isIPFilter ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - Zero Config", value: networkCapabilities.isZeroConfiguration ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - IPv6", value: networkCapabilities.isIPVersion6 ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - DynDNS", value: networkCapabilities.isDynDNS ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - Dot11Config", value: networkCapabilities.isDot11Configuration ? "TRUE" : "FALSE"))
+                        if let dot1XConfiguration = networkCapabilities.dot1XConfiguration {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - Dot1XConfig", value: String(dot1XConfiguration)))
+                        }
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - Hostname From DHCP", value: networkCapabilities.isHostnameFromDHCP ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - IPv6 DHCP", value: networkCapabilities.isDHCPv6 ? "TRUE" : "FALSE"))
+                        if let ntp = networkCapabilities.ntp {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "NETWORK - NTP Servers", value: String(ntp)))
+                        }
+                    }
+                    
+                    if let systemCapabilities = deviceCapabilities.systemCapabilities {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Discovery Resolve", value: systemCapabilities.isDiscoveryResolve ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Discovery Bye", value: systemCapabilities.isDiscoveryBye ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Remote Discovery", value: systemCapabilities.isRemoteDiscovery ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - System Backup", value: systemCapabilities.isSystemBackup ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - System Logging", value: systemCapabilities.isSystemLogging ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Firmware Upgrade", value: systemCapabilities.isFirmwareUpgrade ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - HTTP Firmware Upgrade", value: systemCapabilities.isHttpFirmwareUpgrade ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - HTTP System Backup", value: systemCapabilities.isHttpSystemBackup ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - HTTP System Logging", value: systemCapabilities.isHttpSystemLogging ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - HTTP Support Information", value: systemCapabilities.isHttpSupportInformation ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Storage Configuration", value: systemCapabilities.isStorageConfiguration ? "TRUE" : "FALSE"))
+                        if let maxStorageConfigurations = systemCapabilities.maxStorageConfigurations {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Max Storage Config", value: String(maxStorageConfigurations)))
+                        }
+                        if let geoLocationEntries = systemCapabilities.geoLocationEntries {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Geolocation Entries", value: String(geoLocationEntries)))
+                        }
+                        if let autoGeo = systemCapabilities.autoGeo {
+                            autoGeo.forEach {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Auto Geo Mode", value: String($0)))
+                            }
+                        }
+                        if let storageTypesSupported = systemCapabilities.storageTypesSupported {
+                            storageTypesSupported.forEach {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SYSTEM - Supported Storage Type", value: String($0)))
+                            }
+                        }
+                    }
+                    
+                    if let ioCapabilities = deviceCapabilities.ioCapabilities {
+                        if let inputConnectors = ioCapabilities.inputConnectors {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "DEVICE I/O - Input Connectors", value: String(inputConnectors)))
+                        }
+                        if let relayOutputs = ioCapabilities.relayOutputs {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "DEVICE I/O - Relay Outputs", value: String(relayOutputs)))
+                        }
+                        if let auxiliary = ioCapabilities.auxiliary {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "DEVICE I/O - Auxiliary", value: auxiliary))
+                        }
+                    }
+                    
+                    if let securityCapabilities = deviceCapabilities.securityCapabilities {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - TLS 1.0", value: securityCapabilities.isTLS10 ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - TLS 1.1", value: securityCapabilities.isTLS11 ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - TLS 1.2", value: securityCapabilities.isTLS12 ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Onboard Keygen", value: securityCapabilities.isOnboardKeyGeneration ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Access Policy Config", value: securityCapabilities.isAccessPolicyConfig ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Default Access Policy", value: securityCapabilities.isDefaultAccessPolicy ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Dot 1X", value: securityCapabilities.isDot1X ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Remote User Handling", value: securityCapabilities.isRemoteUserHandling ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - X509 Token", value: securityCapabilities.isX509Token ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - SAML Token", value: securityCapabilities.isSAMLToken ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Kerberos Token", value: securityCapabilities.isKerberosToken ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Username Token", value: securityCapabilities.isUsernameToken ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - HTTP Digest", value: securityCapabilities.isHttpDigest ? "TRUE" : "FALSE"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - REL Token", value: securityCapabilities.isRELToken ? "TRUE" : "FALSE"))
+                        if let supportedEAPMethods = securityCapabilities.supportedEAPMethods {
+                            supportedEAPMethods.forEach {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Supported EAP Method", value: String($0)))
+                            }
+                        }
+                        if let maxUsers = securityCapabilities.maxUsers {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Max Users", value: String(maxUsers)))
+                        }
+                        if let maxUserNameLength = securityCapabilities.maxUserNameLength {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Max Username Length", value: String(maxUserNameLength)))
+                        }
+                        if let maxPasswordLength = securityCapabilities.maxPasswordLength {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "SECURITY - Max Password Length", value: String(maxPasswordLength)))
+                        }
+                   }
+               }
+
+                if let ioCapabilities = capabilities.deviceIOCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Device I/O", value: ""))
+                    if let xAddr = ioCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    if let videoSources = ioCapabilities.videoSources {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Video Sources", value: String(videoSources)))
+                    }
+                    if let videoOutputs = ioCapabilities.videoOutputs {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Video Outputs", value: String(videoOutputs)))
+                    }
+                    if let audioSources = ioCapabilities.audioSources {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Audio Sources", value: String(audioSources)))
+                    }
+                    if let audioOutputs = ioCapabilities.audioOutputs {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Audio Outputs", value: String(audioOutputs)))
+                    }
+                    if let relayOutputs = ioCapabilities.relayOutputs {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Relay Outputs", value: String(relayOutputs)))
+                    }
                 }
-                
-                if nil != capabilities.deviceIOCapabilities {
-                    sectionLabels.append("Device I/O")
+
+                if let displayCapabilities = capabilities.displayCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Display", value: ""))
+                    if let xAddr = displayCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Fixed Layout", value: displayCapabilities.isFixedLayout ? "TRUE" : "FALSE"))
                 }
-                
-                if nil != capabilities.displayCapabilities {
-                    sectionLabels.append("Display")
+
+                if let eventsCapabilities = capabilities.eventsCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Events", value: ""))
+                    if let xAddr = eventsCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Subscription Policy Support", value: eventsCapabilities.isWSSubscriptionPolicySupport ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "WS Pull Point Support", value: eventsCapabilities.isWSPullPointSupport ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Pausable Subscription Support", value: eventsCapabilities.isWSPausableSubscriptionManagerInterfaceSupport ? "TRUE" : "FALSE"))
                 }
-                
-                if nil != capabilities.eventsCapabilities {
-                    sectionLabels.append("Events")
+
+                if let imagingCapabilities = capabilities.imagingCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Imaging", value: ""))
+                    if let xAddr = imagingCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
                 }
-                
-                if nil != capabilities.imagingCapabilities {
-                    sectionLabels.append("Imaging")
+
+                if let mediaCapabilities = capabilities.mediaCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Media", value: ""))
+                    if let xAddr = mediaCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTP Multicast", value: mediaCapabilities.isRTPMulticast ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTP TCP", value: mediaCapabilities.isRTP_TCP ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTSP TCP", value: mediaCapabilities.isRTP_RTSP_TCP ? "TRUE" : "FALSE"))
+                    if let maximumNumberOfProfiles = mediaCapabilities.maximumNumberOfProfiles {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Max Profiles", value: String(maximumNumberOfProfiles)))
+                    }
                 }
-                
-                if nil != capabilities.mediaCapabilities {
-                    sectionLabels.append("Media")
+
+                if let ptzCapabilities = capabilities.ptzCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "PTZ", value: ""))
+                    if let xAddr = ptzCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
                 }
-                
-                if nil != capabilities.ptzCapabilities {
-                    sectionLabels.append("PTZ")
+
+                if let receiverCapabilities = capabilities.receiverCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Receiver", value: ""))
+                    if let xAddr = receiverCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTP Multicast", value: receiverCapabilities.isRTP_Multicast ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTP TCP", value: receiverCapabilities.isRTP_TCP ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "RTSP TCP", value: receiverCapabilities.isRTP_RTSP_TCP ? "TRUE" : "FALSE"))
+                    if let supportedReceivers = receiverCapabilities.supportedReceivers {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Supported Receivers", value: String(supportedReceivers)))
+                    }
+                    if let maximumRTSPURILength = receiverCapabilities.maximumRTSPURILength {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Max URI Length", value: String(maximumRTSPURILength)))
+                    }
                 }
-                
-                if nil != capabilities.receiverCapabilities {
-                    sectionLabels.append("Receiver")
+
+                if let recordingCapabilities = capabilities.recordingCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Recording", value: ""))
+                    if let xAddr = recordingCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dynamic Recordings", value: recordingCapabilities.isDynamicRecordings ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dynamic Tracks", value: recordingCapabilities.isDynamicTracks ? "TRUE" : "FALSE"))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Delete Data", value: recordingCapabilities.isDeleteData ? "TRUE" : "FALSE"))
                 }
-                
-                if nil != capabilities.recordingCapabilities {
-                    sectionLabels.append("Recording")
+
+                if let replayCapabilities = capabilities.replayCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Replay", value: ""))
+                    if let xAddr = replayCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
                 }
-                
-                if nil != capabilities.replayCapabilities {
-                    sectionLabels.append("Replay")
-                }
-                
-                if nil != capabilities.searchCapabilities {
-                    sectionLabels.append("Search")
+
+                if let searchCapabilities = capabilities.searchCapabilities {
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Search", value: ""))
+                    if let xAddr = searchCapabilities.xAddr {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "xAddr", value: xAddr.absoluteString))
+                    }
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Metadata Search", value: searchCapabilities.isMetadataSearch ? "TRUE" : "FALSE"))
                 }
             }
             displayTableView?.reloadData()
@@ -88,28 +256,33 @@ class RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController: RVS_ONVIF_Mac_Test
     /**
      */
     func numberOfRows(in inTableView: NSTableView) -> Int {
-        return sectionLabels.count
+        return tableRowData.count
     }
     
     /* ################################################################## */
     /**
      */
-    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
-        return true
+    func tableView(_ inTableView: NSTableView, isGroupRow inRow: Int) -> Bool {
+        return tableRowData[inRow].value.isEmpty
     }
     
     /* ################################################################## */
     /**
      */
     func tableView(_ inTableView: NSTableView, viewFor inTableColumn: NSTableColumn?, row inRow: Int) -> NSView? {
-        let identifier: NSUserInterfaceItemIdentifier = nil != inTableColumn ? inTableColumn?.identifier ?? NSUserInterfaceItemIdentifier(rawValue: sectionLabels[inRow]) : NSUserInterfaceItemIdentifier(rawValue: sectionLabels[inRow])
-        if let cell = inTableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
-            if let column = inTableColumn, let cell = inTableView.makeView(withIdentifier: column.identifier, owner: nil) as? NSTableCellView {
-                cell.textField?.stringValue = sectionLabels[inRow]
-                return cell
-            }
+        if let column = inTableColumn, let cell = inTableView.makeView(withIdentifier: column.identifier, owner: nil) as? NSTableCellView {
+            cell.textField?.stringValue = "NAME" == inTableColumn?.title ? tableRowData[inRow].key + ":" : tableRowData[inRow].value
             return cell
+        } else if nil == inTableColumn {
+            let groupHeader = NSTextView()
+            groupHeader.isEditable = false
+            groupHeader.font = NSFont.boldSystemFont(ofSize: 20)
+            groupHeader.alignment = .center
+            groupHeader.drawsBackground = false
+            groupHeader.string = tableRowData[inRow].key
+            return groupHeader
         }
+        
         return nil
     }
 }
