@@ -118,6 +118,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
         onvifInstance = inONVIFInstance
         connectionScreen?.view.window?.title = "CONNECTED"
         connectionScreen?.openInfoScreen()
+        connectionScreen?.openServicesScreen()
         connectionScreen?.openScopesScreen()
         connectionScreen?.openCapabilitiesScreen()
         connectionScreen?.openServiceCapabilitiesScreen()
