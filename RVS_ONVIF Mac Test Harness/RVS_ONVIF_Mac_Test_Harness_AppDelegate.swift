@@ -11,6 +11,16 @@
 import Cocoa
 import RVS_ONVIF_MacOS
 
+// Frome here: https://stackoverflow.com/a/52523517/879365
+extension NSView {
+    var isDarkMode: Bool {
+        if #available(OSX 10.14, *) {
+            return effectiveAppearance.name == .darkAqua
+        }
+        return false
+    }
+}
+
 /* ################################################################################################################################## */
 // MARK: - Main Application Delegate
 /* ################################################################################################################################## */
@@ -118,6 +128,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
         onvifInstance = inONVIFInstance
         connectionScreen?.view.window?.title = "CONNECTED"
         connectionScreen?.openInfoScreen()
+        connectionScreen?.openHandlersScreen()
         connectionScreen?.openServicesScreen()
         connectionScreen?.openScopesScreen()
         connectionScreen?.openCapabilitiesScreen()

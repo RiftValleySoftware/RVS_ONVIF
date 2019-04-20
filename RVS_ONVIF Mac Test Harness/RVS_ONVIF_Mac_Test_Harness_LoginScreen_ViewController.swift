@@ -26,6 +26,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     static let showCapabilitiesSegue = "show-capabilities-screen"
     static let showServiceCapabilitiesSegue = "show-service-cap-screen"
     static let showServicesSegue = "show-services-screen"
+    static let showHandlersSegue = "show-handlers-screen"
 
     /* ############################################################################################################################## */
     // MARK: - IB References
@@ -42,7 +43,12 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Stored Properties
     /* ############################################################################################################################## */
-    var isConnecting: Bool = false
+    var isConnecting: Bool = false {
+        didSet {
+            connectButton.isHidden = isConnecting
+        }
+    }
+    
     var myViews: [AnyHashable: NSViewController] = [:]
     
     /* ############################################################################################################################## */
@@ -280,6 +286,15 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
     func openServicesScreen() {
         if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Services_ViewController"], isConnected {
             performSegue(withIdentifier: type(of: self).showServicesSegue, sender: nil)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func openHandlersScreen() {
+        if nil == myViews["RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController"], isConnected {
+            performSegue(withIdentifier: type(of: self).showHandlersSegue, sender: nil)
         }
     }
 
