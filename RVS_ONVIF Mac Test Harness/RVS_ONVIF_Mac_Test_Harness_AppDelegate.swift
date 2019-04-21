@@ -133,6 +133,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
         connectionScreen?.openScopesScreen()
         connectionScreen?.openCapabilitiesScreen()
         connectionScreen?.openServiceCapabilitiesScreen()
+        connectionScreen?.openFunctionsScreen()
         connectionScreen?.updateUI(true)
     }
     
