@@ -11,7 +11,6 @@
  */
 
 import Foundation
-
 /* ###################################################################################################################################### */
 /**
  This file contains extensions and simple utilities that form a baseline of extra runtime seasoning for our projects.
