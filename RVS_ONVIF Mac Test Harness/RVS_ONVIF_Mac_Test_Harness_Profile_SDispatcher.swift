@@ -15,6 +15,25 @@ import RVS_ONVIF_MacOS
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher, RVS_ONVIF_Profile_SDelegate {
+    var scope: ProfileHandlerProtocol
+    
+    /* ################################################################## */
+    /**
+     */
+    required init(scope inScope: ProfileHandlerProtocol) {
+        scope = inScope
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func handleCommand(_ inONVIFInstance: RVS_ONVIF, command inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        if isAbleToHandleThisCommand(inCommand) {
+            return true
+        }
+        return false
+    }
+
     /* ################################################################## */
     /**
      This is called to deliver the device ONVIF profiles.

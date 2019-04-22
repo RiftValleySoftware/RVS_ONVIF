@@ -21,9 +21,31 @@ extension NSView {
     }
 }
 
-protocol RVS_ONVIF_Mac_Test_Harness_Dispatcher: RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate { }
+/* ################################################################################################################################## */
+// MARK: -
+/* ################################################################################################################################## */
+protocol RVS_ONVIF_Mac_Test_Harness_Dispatcher: RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate {
+    var scope: ProfileHandlerProtocol { get set }
+    init(scope: ProfileHandlerProtocol)
+    func handleCommand(_ onvifInstance: RVS_ONVIF, command: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+}
 
+/* ################################################################################################################################## */
+// MARK: -
+/* ################################################################################################################################## */
 extension RVS_ONVIF_Mac_Test_Harness_Dispatcher {
+    /* ################################################################## */
+    /**
+     */
+    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        let commands = scope.availableCommands
+        
+        return commands.reduce(false, { (current, next) -> Bool in
+            return current || next.rawValue == inCommand.rawValue
+        })
+    }
+
     /* ################################################################## */
     /**
      */
@@ -176,6 +198,16 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = inONVIFInstance
         connectionScreen?.view.window?.title = "CONNECTED"
+        inONVIFInstance.profiles.forEach {
+            switch $0.key {
+            case "RVS_ONVIF_Core":
+                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_CoreDispatcher(scope: $0.value))
+            case "RVS_ONVIF_Profile_S":
+                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(scope: $0.value))
+            default:
+                break
+            }
+        }
         connectionScreen?.openInfoScreen()
         connectionScreen?.openHandlersScreen()
         connectionScreen?.openServicesScreen()

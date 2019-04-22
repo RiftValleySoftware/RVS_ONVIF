@@ -12,15 +12,28 @@ import Cocoa
 import RVS_ONVIF_MacOS
 
 /* ################################################################################################################################## */
+// MARK: - Used to Display the Commands
+/* ################################################################################################################################## */
+class RVS_ONVIF_Mac_Test_Harness_CommandButton: NSButton {
+    var associatedCommand: RVS_ONVIF_DeviceRequestProtocol!
+}
+
+/* ################################################################################################################################## */
 // MARK: - Main Logged-In Capabilities Screen View Controller
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Harness_Base_ViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var displayTableView: NSTableView!
     
-    typealias RVS_ONVIF_Mac_Test_Harness_GroupedTableData = (key: String, value: String)
+    typealias RVS_ONVIF_Mac_Test_Harness_GroupedTableData = (key: String, value: String, associatedCommand: RVS_ONVIF_DeviceRequestProtocol?)
     
     var tableRowData: [RVS_ONVIF_Mac_Test_Harness_GroupedTableData] = []
     
+    /* ############################################################################################################################## */
+    // MARK: - Instance Calulated Properties -
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
     override var loginViewController: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController! {
         get {
             return super.loginViewController
@@ -31,7 +44,7 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
             
             if let profileHandlers = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance?.profilesAsArray {
                 profileHandlers.forEach {
-                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: $0.profileName, value: ""))
+                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: $0.profileName, value: "", associatedCommand: nil))
                     let nameSpaces = type(of: $0).namespaces
                     let supportedNamespaces = $0.supportedNamespaces
                     
@@ -41,12 +54,12 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
                         } else {
                             namespace = " X " + namespace
                         }
-                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: namespace, value: ""))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: namespace, value: "", associatedCommand: nil))
                     }
                     
-                    let commands = $0.availableCommandsAsStrings
+                    let commands = $0.availableCommands
                     commands.forEach {
-                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "", value: "        " + $0))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "", value: "        " + $0.rawValue, associatedCommand: $0))
                     }
                 }
             }
@@ -55,6 +68,26 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
         }
     }
 
+    /* ############################################################################################################################## */
+    // MARK: - Control Callbacks -
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    @objc func handleButtonPress(_ inButton: RVS_ONVIF_Mac_Test_Harness_CommandButton) {
+        for dispatcher in RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.dispatchers {
+            if dispatcher.isAbleToHandleThisCommand(inButton.associatedCommand) {
+                #if DEBUG
+                print("Command: \(String(describing: inButton.associatedCommand.rawValue)) handled by \(String(describing: dispatcher)).")
+                #endif
+                break
+            }
+        }
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - NSTableViewDelegate/DataSource Methods -
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
@@ -81,9 +114,13 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
             cell.textColor = tableRowData[inRow].key.starts(with: " √") ? NSColor.green : NSColor.red
             cell.font = NSFont.monospacedDigitSystemFont(ofSize: 17, weight: .light)
         } else if tableRowData[inRow].key.isEmpty {
-            cell.font = NSFont.boldSystemFont(ofSize: 17)
-            cell.textColor = view.isDarkMode ? NSColor.lightGray : NSColor.darkGray
-            cell.string = tableRowData[inRow].value
+            let returnedButton = RVS_ONVIF_Mac_Test_Harness_CommandButton()
+            returnedButton.setButtonType(.momentaryPushIn)
+            returnedButton.title = tableRowData[inRow].associatedCommand?.rawValue ?? "ERROR"
+            returnedButton.target = self
+            returnedButton.action = #selector(handleButtonPress)
+            returnedButton.associatedCommand = tableRowData[inRow].associatedCommand
+            return returnedButton
         } else if tableView(inTableView, isGroupRow: inRow) {
             cell.font = NSFont.boldSystemFont(ofSize: 20)
             cell.alignment = .center
