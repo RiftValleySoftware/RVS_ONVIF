@@ -14,7 +14,7 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher, RVS_ONVIF_CoreDelegate {
+class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
     var scope: ProfileHandlerProtocol
     
     /* ################################################################## */
@@ -22,6 +22,13 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Mac_Test_Harness_Disp
      */
     required init(scope inScope: ProfileHandlerProtocol) {
         scope = inScope
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        return false
     }
     
     /* ################################################################## */
