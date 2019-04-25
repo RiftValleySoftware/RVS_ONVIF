@@ -24,13 +24,20 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Dispatcher {
         scope = inScope
     }
     
+    
     /* ################################################################## */
     /**
      */
     func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        if let profileHandler = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance.profiles["RVS_ONVIF_ProfileS"] {
+            if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
+                return true
+            }
+        }
+        
         return false
     }
-    
+
     /* ################################################################## */
     /**
      */
