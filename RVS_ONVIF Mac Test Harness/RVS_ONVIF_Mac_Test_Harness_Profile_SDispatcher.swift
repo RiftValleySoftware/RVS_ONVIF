@@ -24,7 +24,6 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Dispatcher {
         scope = inScope
     }
     
-    
     /* ################################################################## */
     /**
      */
