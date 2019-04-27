@@ -236,7 +236,7 @@ extension RVS_ONVIF {
      */
     internal func _performSOAPRequest(request inRequest: RVS_ONVIF_DeviceRequestProtocol, params inParams: [String: Any]! = nil, asSSL inAsSSL: Bool = false, path inPath: String = "") {
         let soap = SOAPEngine() // We initialize a new SOAPEngine for each call.
-        soap.retrievesAttributes = inRequest.retrieveAttributes
+        soap.retrievesAttributes = inRequest.isRetrieveAttributes
         soap.delegate = self    // We allow interception of delegate calls.
         soap.licenseKey = self._soapEngineLicenseKey    // So we can work on devices.
         soap.version = .VERSION_1_2

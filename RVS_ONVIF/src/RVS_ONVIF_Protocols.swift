@@ -293,12 +293,12 @@ public protocol RVS_ONVIF_DeviceRequestProtocol {
     /**
      If true, then the SOAP call will include decoded attributes (not just node values).
      */
-    var retrieveAttributes: Bool { get }
+    var isRetrieveAttributes: Bool { get }
     /* ############################################################## */
     /**
      If true, then this operation requires additional parameters (needs a custom setup). Default is false.
      */
-    var requiresParameters: Bool { get }
+    var isRequiresParameters: Bool { get }
 
     /* ############################################################## */
     /**
@@ -347,14 +347,14 @@ extension RVS_ONVIF_DeviceRequestProtocol {
     /**
      Default is false.
      */
-    var retrieveAttributes: Bool {
+    var isRetrieveAttributes: Bool {
         return false
     }
     /* ############################################################## */
     /**
      Default is false.
      */
-    var requiresParameters: Bool {
+    var isRequiresParameters: Bool {
         return false
     }
 
@@ -380,7 +380,7 @@ extension RVS_ONVIF_DeviceRequestProtocol {
         if  nil != inONVIF_Handler {
             ret = " xmlns:trt=\"\(namespaceFor(inONVIF_Handler))\""
             
-            if requiresParameters {
+            if isRequiresParameters {
                 ret += " xmlns:tt=\"http://www.onvif.org/ver10/schema\""
             }
         }
@@ -434,20 +434,40 @@ public extension ConfigurationProtocol {
 public protocol RVS_ONVIF_Dispatcher {
     /* ################################################################## */
     /**
+     This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
      */
     var owner: RVS_ONVIF! { get }
     /* ################################################################## */
     /**
+     This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the "first level" protocol override.
      */
     var profileSig: String { get }
     
     /* ################################################################## */
     /**
+     This method is required to be implemented by the final dispatcher. It is called to handle a command (as opposed to a callback).
+     
+     - parameter inCommand: The command being sent.
+     - parameter params: A parameter Dictionary.
+     - returns: true, if the command is being handled. Can be ignored.
      */
-    func handleCommand(_ onvifInstance: RVS_ONVIF, command: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+    @discardableResult func handleCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
 
     /* ################################################################## */
     /**
+     This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command.
+     
+     - parameter inCommand: The command being sent.
+     - returns: a Dictionary<String, Any>, with the command parameters.
+     */
+    func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]
+
+    /* ################################################################## */
+    /**
+     This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the "first level" protocol override.
+
+     - parameter inCommand: The command being sent.
+     - returns: true, if the command can be handled by this instance.
      */
     func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
 
@@ -527,16 +547,54 @@ public protocol RVS_ONVIF_Dispatcher {
     func onvifInstance(_ instance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration])
 }
 
+/* ################################################################################################################################## */
+// MARK: - This is a special protocol for developing "dispatcher" handlers for RVS_ONVIF instances.
+/* ################################################################################################################################## */
 extension RVS_ONVIF_Dispatcher {
     /* ################################################################## */
     /**
+     This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the "first level" protocol override.
+     
+     - returns: Blank, for the "root" dispatcher protocol.
      */
     public var profileSig: String {
         return ""
     }
-    
+
     /* ################################################################## */
     /**
+     This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command. This implementation returns an empty command.
+     
+     - parameter inCommand: The command being sent.
+     - returns: an empty Dictionary<String, Any>.
+     */
+    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any] {
+        return [:]
+    }
+
+    /* ################################################################## */
+    /**
+     This is called to handle a command (as opposed to a callback).
+     
+     - parameter inCommand: The command being sent.
+     - parameter params: A parameter Dictionary. Optional, and default is empty.
+     - returns: true, if the command is being handled. Can be ignored.
+     */
+    @discardableResult public func handleCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        if isAbleToHandleThisCommand(inCommand) {
+            // The final dispatcher will supply aney required parameters.
+            owner.performRequest(inCommand, params: getGetParametersForCommand(inCommand))
+            return true
+        }
+        return false
+    }
+
+    /* ################################################################## */
+    /**
+     This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the "first level" protocol override.
+     
+     - parameter inCommand: The command being sent.
+     - returns: true, if the command can be handled by this instance.
      */
     public func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
         if let profileHandler = owner.profiles[profileSig] {

@@ -609,7 +609,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         /**
          Return whether or not the particular call requires additional parameters, or can be called standalone.
          */
-        var requiresParameters: Bool {
+        var isRequiresParameters: Bool {
             var ret = false
             
             switch self {
@@ -631,7 +631,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
          Indicate if we should retrieve the attributes inside the xml element, for instance it's needed
          in `getProfiles` to retrieve the token: `<Profiles token="MediaProfile000" fixed="true">`
          */
-        var retrieveAttributes: Bool {
+        var isRetrieveAttributes: Bool {
             return .GetServiceCapabilities == self || .GetCapabilities == self
         }
     }

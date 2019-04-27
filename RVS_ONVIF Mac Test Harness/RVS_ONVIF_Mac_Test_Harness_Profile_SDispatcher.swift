@@ -15,10 +15,17 @@ import RVS_ONVIF_MacOS
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatcher {
+    /* ################################################################## */
+    /**
+     This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
+     */
     var owner: RVS_ONVIF!
     
     /* ################################################################## */
     /**
+     Initializer.
+     
+     - parameter owner: The RVS_ONVIF instance that is referenced by this dispatcher.
      */
     init(owner inOwner: RVS_ONVIF) {
         owner = inOwner
@@ -26,12 +33,13 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatc
 
     /* ################################################################## */
     /**
+     This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command. This implementation returns an empty command.
+     
+     - parameter inCommand: The command being sent.
+     - returns: an empty Dictionary<String, Any>.
      */
-    func handleCommand(_ inONVIFInstance: RVS_ONVIF, command inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
-        if isAbleToHandleThisCommand(inCommand) {
-            return true
-        }
-        return false
+    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any] {
+        return [:]
     }
 
     /* ################################################################## */

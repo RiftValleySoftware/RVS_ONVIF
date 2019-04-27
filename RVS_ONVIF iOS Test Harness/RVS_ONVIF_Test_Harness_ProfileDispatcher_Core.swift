@@ -353,7 +353,7 @@ class RVS_ONVIF_Test_Harness_ProfileDispatcher_Core: RVS_ONVIF_Test_Harness_Prof
             }
 
         default:
-            if profileObject.availableCommands[inIndexPath.row].requiresParameters {
+            if profileObject.availableCommands[inIndexPath.row].isRequiresParameters {
                 if let ret = inTableView.dequeueReusableCell(withIdentifier: RVS_ONVIF_Test_Harness_Functions_TableViewController.textOnlyCellID) {
                     ret.textLabel?.text = commandAsString
                     return ret

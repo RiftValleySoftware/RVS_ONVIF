@@ -76,12 +76,7 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
      */
     @objc func handleButtonPress(_ inButton: RVS_ONVIF_Mac_Test_Harness_CommandButton) {
         for dispatcher in RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.dispatchers {
-            if dispatcher.isAbleToHandleThisCommand(inButton.associatedCommand) {
-                #if DEBUG
-                print("Command: \(String(describing: inButton.associatedCommand.rawValue)) handled by \(String(describing: dispatcher)).")
-                #endif
-                break
-            }
+            guard !dispatcher.handleCommand(inButton.associatedCommand) else { break }
         }
     }
     

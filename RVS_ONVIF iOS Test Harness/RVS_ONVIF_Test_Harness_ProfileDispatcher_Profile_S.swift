@@ -69,7 +69,7 @@ class RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S: RVS_ONVIF_Test_Harness
         
         switch command {
         default:
-            if profileObject.availableCommands[indexPath.row].requiresParameters {
+            if profileObject.availableCommands[indexPath.row].isRequiresParameters {
                 if let ret = tableView.dequeueReusableCell(withIdentifier: RVS_ONVIF_Test_Harness_Functions_TableViewController.textOnlyCellID) {
                     ret.textLabel?.text = command
                     return ret
