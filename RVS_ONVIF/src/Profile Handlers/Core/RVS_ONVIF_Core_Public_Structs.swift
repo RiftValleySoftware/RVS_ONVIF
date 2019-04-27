@@ -1304,3 +1304,63 @@ extension RVS_ONVIF_Core {
         }
     }
 }
+
+/* ################################################################################################################################## */
+// MARK: - Dispatch Core Functions
+/* ################################################################################################################################## */
+public protocol RVS_ONVIF_CoreDispatcher: RVS_ONVIF_Dispatcher {
+}
+
+/* ################################################################################################################################## */
+// MARK: - Dispatch Profile Defaults.
+/* ################################################################################################################################## */
+extension RVS_ONVIF_CoreDispatcher {
+    /* ################################################################## */
+    /**
+     */
+    public var profileSig: String {
+        return "RVS_ONVIF_Core"
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - Dispatch Profile S Function Placeholders (NOP Methods).
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is called to deliver the device ONVIF profiles.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getProfiles: An Array of Profile objects.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getProfiles: [RVS_ONVIF_Profile_S.Profile]) {
+        #if DEBUG
+            print("RVS_ONVIF_CoreDispatcher::onvifInstance:simpleResponseToRequest(\(String(describing: getProfiles))")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+     This is called to deliver the device stream URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getStreamURI: The Stream_URI instance that contains the ONVIF response.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
+        #if DEBUG
+            print("RVS_ONVIF_CoreDispatcher::onvifInstance:simpleResponseToRequest(\(String(describing: getStreamURI))")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+     This is called to deliver the device stream URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getVideoSourceConfigurations: An Array of video source configuration structs.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration]) {
+        #if DEBUG
+            print("RVS_ONVIF_CoreDispatcher::onvifInstance:simpleResponseToRequest(\(String(describing: getVideoSourceConfigurations))")
+        #endif
+    }
+}

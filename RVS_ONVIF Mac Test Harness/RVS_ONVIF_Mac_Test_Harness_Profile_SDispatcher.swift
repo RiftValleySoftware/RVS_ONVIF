@@ -14,27 +14,14 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Dispatcher {
-    var scope: ProfileHandlerProtocol
+class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatcher {
+    var owner: RVS_ONVIF!
     
     /* ################################################################## */
     /**
      */
-    required init(scope inScope: ProfileHandlerProtocol) {
-        scope = inScope
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
-        if let profileHandler = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance.profiles["RVS_ONVIF_ProfileS"] {
-            if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
-                return true
-            }
-        }
-        
-        return false
+    init(owner inOwner: RVS_ONVIF) {
+        owner = inOwner
     }
 
     /* ################################################################## */

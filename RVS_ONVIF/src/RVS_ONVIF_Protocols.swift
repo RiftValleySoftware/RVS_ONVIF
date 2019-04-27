@@ -431,71 +431,120 @@ public extension ConfigurationProtocol {
 /* ################################################################################################################################## */
 // MARK: - This is a special protocol for developing "dispatcher" handlers for RVS_ONVIF instances.
 /* ################################################################################################################################## */
-public protocol RVS_ONVIF_Dispatcher: RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate {
-    var scope: ProfileHandlerProtocol { get set }
-    init(scope: ProfileHandlerProtocol)
+public protocol RVS_ONVIF_Dispatcher {
+    /* ################################################################## */
+    /**
+     */
+    var owner: RVS_ONVIF! { get }
+    /* ################################################################## */
+    /**
+     */
+    var profileSig: String { get }
+    
+    /* ################################################################## */
+    /**
+     */
     func handleCommand(_ onvifInstance: RVS_ONVIF, command: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+
+    /* ################################################################## */
+    /**
+     */
     func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+
+    /* ################################################################################################################################## */
+    // MARK: - Dispatch Core delegate Callback Functions
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is called to deliver the WSDL URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getWSDLURI: The WSDL URI instance. Nil, if there is none available.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getWSDLURI: String!)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the Hostname.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getHostname: The returned hostname tuple. Nil, if there is none available.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the DNS.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getDNS: The DNS Response. Nil, if there is none available.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the Dynamic DNS.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getDynamicDNS: The Dynamic DNS Response. Nil, if there is none available.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the NTP Record.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getNTP: The NTP Response. Nil, if there is none available.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the device ONVIF profiles.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getProfiles: An Array of Profile objects.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getProfiles: [RVS_ONVIF_Profile_S.Profile])
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the device stream URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getStreamURI: The Stream_URI instance that contains the ONVIF response.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getStreamURI: RVS_ONVIF_Profile_S.Stream_URI)
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the device stream URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getVideoSourceConfigurations: An Array of video source configuration structs.
+     */
+    func onvifInstance(_ instance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration])
 }
 
-/* ################################################################################################################################## */
-// MARK: - This extension gives you NOP handlers for the protocol, making it optional.
-/* ################################################################################################################################## */
 extension RVS_ONVIF_Dispatcher {
     /* ################################################################## */
     /**
      */
-    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
-        let commands = scope.availableCommands
-        
-        return commands.reduce(false, { (current, next) -> Bool in
-            return current || next.rawValue == inCommand.rawValue
-        })
+    public var profileSig: String {
+        return ""
     }
     
-    /* ############################################################################################################################## */
-    // MARK: - Core Handlers
-    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getWSDLURI: String!) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!) { }
-    
-    /* ############################################################################################################################## */
-    // MARK: - Profile S Handlers
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getProfiles: [RVS_ONVIF_Profile_S.Profile]) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getStreamURI: RVS_ONVIF_Profile_S.Stream_URI) { }
-    
-    /* ################################################################## */
-    /**
-     */
-    func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration]) { }
+    public func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        if let profileHandler = owner.profiles[profileSig] {
+            if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
+                return true
+            }
+        }
+        
+        return false
+    }
 }

@@ -135,9 +135,10 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
         inONVIFInstance.profiles.forEach {
             switch $0.key {
             case "RVS_ONVIF_Core":
-                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_CoreDispatcher(scope: $0.value))
-            case "RVS_ONVIF_Profile_S":
-                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(scope: $0.value))
+                let dispatcher = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher(owner: onvifInstance)
+                dispatchers.append(dispatcher)
+//            case "RVS_ONVIF_Profile_S":
+//                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(owner: onvifInstance))
             default:
                 break
             }

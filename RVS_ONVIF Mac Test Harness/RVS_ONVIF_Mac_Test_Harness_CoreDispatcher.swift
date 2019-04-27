@@ -14,29 +14,16 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
-    var scope: ProfileHandlerProtocol
+class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
+    var owner: RVS_ONVIF!
     
     /* ################################################################## */
     /**
      */
-    required init(scope inScope: ProfileHandlerProtocol) {
-        scope = inScope
+    init(owner inOwner: RVS_ONVIF) {
+        owner = inOwner
     }
-    
-    /* ################################################################## */
-    /**
-     */
-    func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
-        if let profileHandler = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance.profiles["RVS_ONVIF_Core"] {
-            if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
+
     /* ################################################################## */
     /**
      */
@@ -56,7 +43,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
      */
     func onvifInstance(_ instance: RVS_ONVIF, getWSDLURI: String!) {
         #if DEBUG
-            print("Delegate onvifInstance:getWSDLURI:\(String(describing: getWSDLURI))")
+        print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getWSDLURI:\(String(describing: getWSDLURI))")
         #endif
     }
     
@@ -69,7 +56,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
      */
     func onvifInstance(_ instance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!) {
         #if DEBUG
-            print("Delegate onvifInstance:getHostname:\(String(describing: getHostname))")
+            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getHostname:\(String(describing: getHostname))")
         #endif
     }
     
@@ -82,7 +69,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
      */
     func onvifInstance(_ instance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!) {
         #if DEBUG
-            print("Delegate onvifInstance:getDNS:\(String(describing: getDNS))")
+            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getDNS:\(String(describing: getDNS))")
         #endif
     }
     
@@ -95,7 +82,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
      */
     func onvifInstance(_ instance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!) {
         #if DEBUG
-            print("Delegate onvifInstance:getDynamicDNS:\(String(describing: getDynamicDNS))")
+            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getDynamicDNS:\(String(describing: getDynamicDNS))")
         #endif
     }
     
@@ -108,7 +95,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Dispatcher {
      */
     func onvifInstance(_ instance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!) {
         #if DEBUG
-            print("Delegate onvifInstance:getNTP:\(String(describing: getNTP))")
+            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getNTP:\(String(describing: getNTP))")
         #endif
     }
 }

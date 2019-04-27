@@ -506,3 +506,89 @@ extension RVS_ONVIF_Profile_S {
         }
     }
 }
+
+/* ################################################################################################################################## */
+// MARK: - Dispatch Profile S Functions
+/* ################################################################################################################################## */
+public protocol RVS_ONVIF_Profile_SDispatcher: RVS_ONVIF_Dispatcher {
+}
+
+/* ################################################################################################################################## */
+// MARK: - Dispatch Profile Defaults.
+/* ################################################################################################################################## */
+extension RVS_ONVIF_Profile_SDispatcher {
+    /* ################################################################## */
+    /**
+     */
+    public var profileSig: String {
+        return "RVS_ONVIF_ProfileS"
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - Dispatch Core Function Placeholders (NOP Methods).
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is called to deliver the WSDL URI.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getWSDLURI: The WSDL URI instance. Nil, if there is none available.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getWSDLURI: String!) {
+        #if DEBUG
+            print("RVS_ONVIF_Profile_SDispatcher::onvifInstance:getWSDLURI:\(String(describing: getWSDLURI))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the Hostname.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getHostname: The returned hostname tuple. Nil, if there is none available.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!) {
+        #if DEBUG
+            print("RVS_ONVIF_Profile_SDispatcher::onvifInstance:getHostname:\(String(describing: getHostname))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the DNS.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getDNS: The DNS Response. Nil, if there is none available.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!) {
+        #if DEBUG
+            print("RVS_ONVIF_Profile_SDispatcher::onvifInstance:getDNS:\(String(describing: getDNS))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the Dynamic DNS.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getDynamicDNS: The Dynamic DNS Response. Nil, if there is none available.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!) {
+        #if DEBUG
+            print("RVS_ONVIF_Profile_SDispatcher::onvifInstance:getDynamicDNS:\(String(describing: getDynamicDNS))")
+        #endif
+    }
+    
+    /* ################################################################## */
+    /**
+     This is called to deliver the NTP Record.
+     
+     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
+     - parameter getNTP: The NTP Response. Nil, if there is none available.
+     */
+    public func onvifInstance(_ instance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!) {
+        #if DEBUG
+            print("RVS_ONVIF_Profile_SDispatcher::onvifInstance:getNTP:\(String(describing: getNTP))")
+        #endif
+    }
+}
