@@ -137,12 +137,13 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
             case "RVS_ONVIF_Core":
                 let dispatcher = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher(owner: onvifInstance)
                 dispatchers.append(dispatcher)
-//            case "RVS_ONVIF_Profile_S":
-//                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(owner: onvifInstance))
+            case "RVS_ONVIF_Profile_S":
+                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(owner: onvifInstance))
             default:
                 break
             }
         }
+        
         connectionScreen?.openInfoScreen()
         connectionScreen?.openHandlersScreen()
         connectionScreen?.openServicesScreen()
