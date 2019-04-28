@@ -25,7 +25,7 @@ extension NSView {
 // MARK: - Main Application Delegate
 /* ################################################################################################################################## */
 @NSApplicationMain
-class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, RVS_ONVIFDelegate, RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate {
+class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, RVS_ONVIFDelegate {
     /* ############################################################################################################################## */
     // MARK: - Internal Static Properties
     /* ############################################################################################################################## */
@@ -65,7 +65,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     var onvifInstance: RVS_ONVIF!
     var connectionScreen: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController!
     var prefs: RVS_PersistentPrefs!
-    var dispatchers: [RVS_ONVIF_Dispatcher] = []
     
     /* ############################################################################################################################## */
     // MARK: - Internal Calculated Properties
@@ -136,9 +135,9 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
             switch $0.key {
             case "RVS_ONVIF_Core":
                 let dispatcher = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher(owner: onvifInstance)
-                dispatchers.append(dispatcher)
+                inONVIFInstance.dispatchers.append(dispatcher)
             case "RVS_ONVIF_Profile_S":
-                dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(owner: onvifInstance))
+                inONVIFInstance.dispatchers.append(RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher(owner: onvifInstance))
             default:
                 break
             }
@@ -179,9 +178,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getWSDLURI: The WSDL URI instance. Nil, if there is none available.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getWSDLURI inGetWSDLURI: String!) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getWSDLURI: inGetWSDLURI)
-        }
     }
     
     /* ################################################################## */
@@ -192,9 +188,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getHostname: The returned hostname tuple. Nil, if there is none available.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getHostname inGetHostname: RVS_ONVIF_Core.HostnameResponse!) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getHostname: inGetHostname)
-        }
     }
     
     /* ################################################################## */
@@ -205,9 +198,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getDNS: The DNS Response. Nil, if there is none available.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getDNS inGetDNS: RVS_ONVIF_Core.DNSRecord!) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getDNS: inGetDNS)
-        }
     }
     
     /* ################################################################## */
@@ -218,9 +208,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getDynamicDNS: The Dynamic DNS Response. Nil, if there is none available.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getDynamicDNS inGetDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getDynamicDNS: inGetDynamicDNS)
-        }
     }
     
     /* ################################################################## */
@@ -231,9 +218,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getNTP: The NTP Response. Nil, if there is none available.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getNTP inGetNTP: RVS_ONVIF_Core.NTPRecord!) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getNTP: inGetNTP)
-        }
     }
 
     /* ############################################################################################################################## */
@@ -250,9 +234,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getProfiles: An Array of Profile objects.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getProfiles inGetProfiles: [RVS_ONVIF_Profile_S.Profile]) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getProfiles: inGetProfiles)
-        }
     }
     
     /* ################################################################## */
@@ -263,9 +244,6 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getStreamURI: The Stream_URI instance that contains the ONVIF response.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getStreamURI inGetStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getStreamURI: inGetStreamURI)
-        }
     }
     
     /* ################################################################## */
@@ -276,8 +254,5 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
      - parameter getVideoSourceConfigurations: An Array of video source configuration structs.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, getVideoSourceConfigurations inGetVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration]) {
-        dispatchers.forEach {
-            $0.onvifInstance(inONVIFInstance, getVideoSourceConfigurations: inGetVideoSourceConfigurations)
-        }
     }
 }

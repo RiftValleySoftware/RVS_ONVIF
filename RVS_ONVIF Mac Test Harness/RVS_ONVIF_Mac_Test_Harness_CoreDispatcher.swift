@@ -44,66 +44,17 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
     
     /* ################################################################## */
     /**
-     This is called to deliver the WSDL URI.
+     This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
      
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getWSDLURI: The WSDL URI instance. Nil, if there is none available.
+     - parameter inCommand: The command to which this is a response.
+     - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
+     - returns: true, if the command was used. Can be ignored.
      */
-    func onvifInstance(_ instance: RVS_ONVIF, getWSDLURI: String!) {
+    @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
         #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getWSDLURI:\(String(describing: getWSDLURI))")
+            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
         #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the Hostname.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getHostname: The returned hostname tuple. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!) {
-        #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getHostname:\(String(describing: getHostname))")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the DNS.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getDNS: The DNS Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!) {
-        #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getDNS:\(String(describing: getDNS))")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the Dynamic DNS.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getDynamicDNS: The Dynamic DNS Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!) {
-        #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getDynamicDNS:\(String(describing: getDynamicDNS))")
-        #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the NTP Record.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getNTP: The NTP Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!) {
-        #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::onvifInstance:getNTP:\(String(describing: getNTP))")
-        #endif
+        
+        return isAbleToHandleThisCommand(inCommand)
     }
 }

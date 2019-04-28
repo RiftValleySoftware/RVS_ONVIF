@@ -111,7 +111,7 @@ import SOAPEngine64
                   loginCredentials inCredentials: LoginCredentialTuple,
                   soapEngineLicenseKey inSoapEngineLicenseKey: String? = nil,
                   authMethod inAuthMethod: SOAPAuthMethod = .both,
-                  delegate inDelegate: (RVS_ONVIFDelegate & RVS_ONVIF_CoreDelegate & RVS_ONVIF_Profile_SDelegate)! = nil) {
+                  delegate inDelegate: RVS_ONVIFDelegate! = nil) {
         ipAddressAndPort = inIPAddressAndPort
         loginCredentials = inCredentials
         _soapEngineLicenseKey = inSoapEngineLicenseKey
@@ -144,7 +144,7 @@ import SOAPEngine64
                                         loginCredentials inCredentials: LoginCredentialTuple,
                                         soapEngineLicenseKey inSoapEngineLicenseKey: String? = nil,
                                         authMethod inAuthMethod: SOAPAuthMethod = .both,
-                                        delegate: (RVS_ONVIFDelegate & RVS_ONVIF_CoreDelegate & RVS_ONVIF_Profile_SDelegate)? = nil) -> RVS_ONVIF? {
+                                        delegate: RVS_ONVIFDelegate? = nil) -> RVS_ONVIF? {
         var onvifObject: RVS_ONVIF!
         
         if _isValidIPAddressAndPort(inIPAddressAndPort) && !inCredentials.login.isEmpty && !inCredentials.password.isEmpty {
@@ -235,7 +235,7 @@ import SOAPEngine64
     /**
      This is our delegate object.
      */
-    weak public var delegate: (RVS_ONVIFDelegate & RVS_ONVIF_CoreDelegate & RVS_ONVIF_Profile_SDelegate)! {
+    weak public var delegate: RVS_ONVIFDelegate! {
         /* ############################################################## */
         /**
          A delegate is required for us to initialize our connection. No delegate, no initialization.
@@ -252,6 +252,20 @@ import SOAPEngine64
      This is the SOAP authorization method to use. Default is both, but it can be set to Basic, or Digest; which forces the method.
      */
     public var authMethod: SOAPAuthMethod = .both
+    
+    /* ################################################################## */
+    /**
+     This contains our dispatchers. These are strong references.
+     
+     Dispatchers are how we communicate with the ONVIF devices.
+     */
+    public var dispatchers: [RVS_ONVIF_Dispatcher] = [] {
+        didSet {
+            for var dispatcher in dispatchers {
+                dispatcher.owner = self
+            }
+        }
+    }
 
     /* ################################################################################################################################## */
     // MARK: - Public Calculated Instance Properties

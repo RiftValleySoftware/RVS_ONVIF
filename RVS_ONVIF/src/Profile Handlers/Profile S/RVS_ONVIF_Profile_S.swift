@@ -681,7 +681,11 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
         case _DeviceRequest.GetStreamUri.soapAction:
             let uriResponse = _transformURIDictionary(inResponseDictionary)
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetStreamUri) ?? false) {
-                owner.delegate?.onvifInstance(owner, getStreamURI: uriResponse)
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetStreamUri) {
+                        $0.deliverResponse(_DeviceRequest.GetStreamUri, params: uriResponse)
+                    }
+                }
             }
             ret = true
             
@@ -693,14 +697,22 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
             }
             
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetProfiles) ?? false) {
-                owner.delegate?.onvifInstance(owner, getProfiles: profiles)
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetProfiles) {
+                        $0.deliverResponse(_DeviceRequest.GetProfiles, params: profiles)
+                    }
+                }
             }
             ret = true
         
         case _DeviceRequest.GetVideoSourceConfigurations.soapAction:
             let configurations = _transformVideoSourceConfigurationsDictionary(inResponseDictionary)
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetVideoSourceConfigurations) ?? false) {
-                owner.delegate?.onvifInstance(owner, getVideoSourceConfigurations: configurations)
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetVideoSourceConfigurations) {
+                        $0.deliverResponse(_DeviceRequest.GetVideoSourceConfigurations, params: configurations)
+                    }
+                }
             }
             ret = true
 

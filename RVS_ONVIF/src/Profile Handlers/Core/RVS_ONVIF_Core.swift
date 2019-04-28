@@ -1136,46 +1136,32 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         switch inSOAPRequest {
         case _DeviceRequest.GetDynamicDNS.soapAction:
             // We give the caller the opportunity to vet the data. Default just passes through.
-            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDNS) ?? false) {
-                owner.delegate?.onvifInstance(owner, getDynamicDNS: _parseDynamicDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDynamicDNS) ?? false) {
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetDynamicDNS) {
+                        $0.deliverResponse(_DeviceRequest.GetDynamicDNS, params: _parseDynamicDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                    }
+                }
             }
             
         case _DeviceRequest.GetDNS.soapAction:
             // We give the caller the opportunity to vet the data. Default just passes through.
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDNS) ?? false) {
-                owner.delegate?.onvifInstance(owner, getDNS: _parseDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetDNS) {
+                        $0.deliverResponse(_DeviceRequest.GetDNS, params: _parseDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                    }
+                }
             }
             
         case _DeviceRequest.GetNTP.soapAction:
             // We give the caller the opportunity to vet the data. Default just passes through.
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetNTP) ?? false) {
-                owner.delegate?.onvifInstance(owner, getNTP: _parseNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
-            }
-            
-        case _DeviceRequest.GetWsdlUrl.soapAction:
-            // No need for a separate parser. This is a simple one.
-            guard let responseDict = inResponseDictionary["GetWsdlUrlResponse"] as? [String: String], let response = responseDict["WsdlUrl"] else {
-                let fault = RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil))
-                owner._errorCallback(fault, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
-                break
-            }
-            
-            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetWsdlUrl) ?? false) {
-                owner.delegate?.onvifInstance(owner, getWSDLURI: response)
-            }
-            
-        case _DeviceRequest.GetHostname.soapAction:
-            // No need for a separate parser. This is a simple one.
-            guard let responseDict = inResponseDictionary["GetHostnameResponse"] as? [String: Any], let info = responseDict["HostnameInformation"] as? [String: Any], let fromDHCP = info["FromDHCP"] as? String, let name = info["Name"] as? String else {
-                let fault = RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil))
-                owner._errorCallback(fault, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
-                break
-            }
-            
-            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetHostname) ?? false) {
-                // If the service capability isn't there, then it's never from DHCP.
-                let dhcp = serviceCapabilities.networkCapabilities.isHostnameFromDHCP ? "true" == fromDHCP.lowercased() : false
-                owner.delegate?.onvifInstance(owner, getHostname: HostnameResponse(fromDHCP: dhcp, name: name))
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetNTP) {
+                        $0.deliverResponse(_DeviceRequest.GetDNS, params: _parseNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                    }
+                }
             }
 
         default:    // If we don't recognize the call we made, we try our overflow.
@@ -1198,13 +1184,51 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      */
     internal func _callbackHandlerPartDeux(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> Bool {
         switch inSOAPRequest {
+        case _DeviceRequest.GetWsdlUrl.soapAction:
+            // No need for a separate parser. This is a simple one.
+            guard let responseDict = inResponseDictionary["GetWsdlUrlResponse"] as? [String: String], let response = responseDict["WsdlUrl"] else {
+                let fault = RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil))
+                owner._errorCallback(fault, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetWsdlUrl) ?? false) {
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetWsdlUrl) {
+                        $0.deliverResponse(_DeviceRequest.GetWsdlUrl, params: response)
+                    }
+                }
+            }
+            
+        case _DeviceRequest.GetHostname.soapAction:
+            // No need for a separate parser. This is a simple one.
+            guard let responseDict = inResponseDictionary["GetHostnameResponse"] as? [String: Any], let info = responseDict["HostnameInformation"] as? [String: Any], let fromDHCP = info["FromDHCP"] as? String, let name = info["Name"] as? String else {
+                let fault = RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil))
+                owner._errorCallback(fault, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetHostname) ?? false) {
+                // If the service capability isn't there, then it's never from DHCP.
+                let dhcp = serviceCapabilities.networkCapabilities.isHostnameFromDHCP ? "true" == fromDHCP.lowercased() : false
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetHostname) {
+                        $0.deliverResponse(_DeviceRequest.GetHostname, params: HostnameResponse(fromDHCP: dhcp, name: name))
+                    }
+                }
+            }
+            
         case _DeviceRequest.SetHostname.soapAction,
              _DeviceRequest.SetHostnameFromDHCP.soapAction,
              _DeviceRequest.SetDNS.soapAction,
              _DeviceRequest.SetNTP.soapAction,
              _DeviceRequest.SetDynamicDNS.soapAction:
             if let request = _DeviceRequest(rawValue: inSOAPRequest), !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: request) ?? false) {
-                owner.delegate?.onvifInstance(owner, simpleResponseToRequest: request)
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetHostname) {
+                        $0.deliverResponse(request, params: nil)
+                    }
+                }
             }
 
         default:    // If we don't recognize the call we made, we try our overflow.

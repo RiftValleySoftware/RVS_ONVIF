@@ -436,7 +436,7 @@ public protocol RVS_ONVIF_Dispatcher {
     /**
      This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
      */
-    var owner: RVS_ONVIF! { get }
+    var owner: RVS_ONVIF! { get set }
     /* ################################################################## */
     /**
      This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the "first level" protocol override.
@@ -448,10 +448,19 @@ public protocol RVS_ONVIF_Dispatcher {
      This method is required to be implemented by the final dispatcher. It is called to handle a command (as opposed to a callback).
      
      - parameter inCommand: The command being sent.
-     - parameter params: A parameter Dictionary.
      - returns: true, if the command is being handled. Can be ignored.
      */
-    @discardableResult func handleCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+    @discardableResult func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+    
+    /* ################################################################## */
+    /**
+     This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
+     
+     - parameter inCommand: The command being sent.
+     - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
+     - returns: true, if the command was used. Can be ignored.
+     */
+    @discardableResult func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params: Any!) -> Bool
 
     /* ################################################################## */
     /**
@@ -470,81 +479,6 @@ public protocol RVS_ONVIF_Dispatcher {
      - returns: true, if the command can be handled by this instance.
      */
     func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
-
-    /* ################################################################################################################################## */
-    // MARK: - Dispatch Core delegate Callback Functions
-    /* ################################################################################################################################## */
-    /* ################################################################## */
-    /**
-     This is called to deliver the WSDL URI.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getWSDLURI: The WSDL URI instance. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getWSDLURI: String!)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the Hostname.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getHostname: The returned hostname tuple. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getHostname: RVS_ONVIF_Core.HostnameResponse!)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the DNS.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getDNS: The DNS Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getDNS: RVS_ONVIF_Core.DNSRecord!)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the Dynamic DNS.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getDynamicDNS: The Dynamic DNS Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getDynamicDNS: RVS_ONVIF_Core.DynamicDNSRecord!)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the NTP Record.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getNTP: The NTP Response. Nil, if there is none available.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getNTP: RVS_ONVIF_Core.NTPRecord!)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the device ONVIF profiles.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getProfiles: An Array of Profile objects.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getProfiles: [RVS_ONVIF_Profile_S.Profile])
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the device stream URI.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getStreamURI: The Stream_URI instance that contains the ONVIF response.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getStreamURI: RVS_ONVIF_Profile_S.Stream_URI)
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the device stream URI.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getVideoSourceConfigurations: An Array of video source configuration structs.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration])
 }
 
 /* ################################################################################################################################## */
@@ -580,7 +514,7 @@ extension RVS_ONVIF_Dispatcher {
      - parameter params: A parameter Dictionary. Optional, and default is empty.
      - returns: true, if the command is being handled. Can be ignored.
      */
-    @discardableResult public func handleCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+    @discardableResult public func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
         if isAbleToHandleThisCommand(inCommand) {
             // The final dispatcher will supply aney required parameters.
             owner.performRequest(inCommand, params: getGetParametersForCommand(inCommand))

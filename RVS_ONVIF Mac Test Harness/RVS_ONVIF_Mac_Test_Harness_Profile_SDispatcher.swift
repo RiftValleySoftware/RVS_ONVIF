@@ -41,43 +41,20 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatc
     public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any] {
         return [:]
     }
-
-    /* ################################################################## */
-    /**
-     This is called to deliver the device ONVIF profiles.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getProfiles: An Array of Profile objects.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getProfiles: [RVS_ONVIF_Profile_S.Profile]) {
-        #if DEBUG
-            print("Delegate onvifInstance:simpleResponseToRequest(\(String(describing: getProfiles))")
-        #endif
-    }
     
     /* ################################################################## */
     /**
-     This is called to deliver the device stream URI.
+     This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
      
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getStreamURI: The Stream_URI instance that contains the ONVIF response.
+     - parameter inCommand: The command being sent.
+     - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
+     - returns: true, if the command was used. Can be ignored.
      */
-    func onvifInstance(_ instance: RVS_ONVIF, getStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
+    @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
         #if DEBUG
-            print("Delegate onvifInstance:simpleResponseToRequest(\(String(describing: getStreamURI))")
+            print("RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
         #endif
-    }
-    
-    /* ################################################################## */
-    /**
-     This is called to deliver the device stream URI.
-     
-     - parameter instance: The RVS_ONVIF instance that is calling the delegate.
-     - parameter getVideoSourceConfigurations: An Array of video source configuration structs.
-     */
-    func onvifInstance(_ instance: RVS_ONVIF, getVideoSourceConfigurations: [RVS_ONVIF_Profile_S.VideoSourceConfiguration]) {
-        #if DEBUG
-            print("Delegate onvifInstance:simpleResponseToRequest(\(String(describing: getVideoSourceConfigurations))")
-        #endif
+        
+        return isAbleToHandleThisCommand(inCommand)
     }
 }
