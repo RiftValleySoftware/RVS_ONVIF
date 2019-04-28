@@ -48,7 +48,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
      
      - parameter inCommand: The command to which this is a response.
      - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
-     - returns: true, if the command was used. Can be ignored.
+     - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
         #if DEBUG

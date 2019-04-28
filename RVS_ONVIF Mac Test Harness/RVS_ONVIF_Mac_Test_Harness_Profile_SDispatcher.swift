@@ -46,9 +46,9 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatc
     /**
      This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
      
-     - parameter inCommand: The command being sent.
+     - parameter inCommand: The command to which this is a response.
      - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
-     - returns: true, if the command was used. Can be ignored.
+     - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
         #if DEBUG

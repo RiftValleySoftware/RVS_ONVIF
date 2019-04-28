@@ -32,21 +32,17 @@ import SOAPEngine64
  You instantiate one RVS_ONVIF instance to connect to one device. You can have as many instances as you want, for multiple devices, but each instance corresponds to only one device.
  
  This framework does not handle device discovery. You are expected to give it an IP number and TCP port. It will handle both IPv4 and IPv6.
+
+ DELEGATE
  
- DELEGATION, NOT OBSERVATION
+ Each delegate call is optional. This is done by extending the delegate protocol with "do nothing" methods. They are also all called in the main thread. There are only a couple of calls
+ that come if for errors, successful connection, and successful disconnection.
+
+ DISPATCHER
  
- The ONVIF Framework uses a delegation pattern; not an observer pattern.
+ We use "smart dispatchers" to manage the conversation with the driver. The client instantiates profile dispatchers, and registers them with the driver.
  
- This is mostly because we're talking about device control here, where chaos reigns supreme. It's not always possible (or advisable) to attach a context to an event/response.
- 
- Observers are more complicated than delegates, and there's no real advantage to using them, if you can't attach a context. A delegate gives a simple, straightforward "call me"
- interface, without having to deal with things like messages, payloads, contexts and thread contentions.
- 
- Each delegate call is optional. This is done by extending the delegate protocol with "do nothing" methods. They are also all called in the main thread.
- 
- Each call also contains the deliverable data in as refined a state as possible; usually in the form of data structures specific to the operation.
- 
- If you wish to attach context to commands; you may do so at a level above the delegate, but we can't depend on the transport mechanism to preserve state for us.
+ The driver then uses these to deliver responses, and the client uses them to send requests.
  
  View the README file for more comprehensive documentation.
  */
