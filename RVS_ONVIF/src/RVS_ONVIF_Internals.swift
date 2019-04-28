@@ -153,7 +153,7 @@ extension RVS_ONVIF {
                         self._authCred["qop"] = params["qop"]
                         self._authCred["opaque"] = params["opaque"]
                         self._authCred["algorithm"] = params["algorithm"]
-                        self._authCred["stale"] = params["stale"]
+                        self._authCred["stale"] = params["stale"]?.lowercased()
                         self._authCred["method"] = "POST"
                         self._authCred["uri"] = url.relativePath
                     }
@@ -253,8 +253,12 @@ extension RVS_ONVIF {
         #endif
 
         // Unless we are forcing basic, we always try to use Digest first, as it is (theoretically) *slightly* more secure than Basic.
-        if .basic != authMethod && nil == _authData {
+        // If we are marked stale, we go in again, as well.
+        if .basic != authMethod, (nil == _authData || (.digest == authMethod && ("true" == _authData?["stale"] ?? ""))) {
             #if DEBUG
+                if let stale = _authData?["stale"], "true" == stale {
+                    print("Digest Stale. Into the breach once more.")
+                }
                 print("Requesting SOAP Authorization Realm for Digest")
             #endif
             
@@ -465,6 +469,7 @@ extension RVS_ONVIF {
      This may be called in non-main threads.
      
      This is called before sending out a request. It has the request formed by SOAPEngine.
+     We use this method to form our own Digest Auth.
      
      - parameter inSOAPEngine: The SOAPEngine instance calling this method. It may be nil.
      - parameter didBeforeSending: This is a URL Request that will be sent. You can modify this.
