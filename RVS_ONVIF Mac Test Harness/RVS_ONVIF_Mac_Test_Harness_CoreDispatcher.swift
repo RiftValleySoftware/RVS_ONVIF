@@ -33,12 +33,41 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
 
     /* ################################################################## */
     /**
+     */
+    func hostNameCallback(_ inControl: NSView?) {
+        print("HOSTNAME CALLBACK!")
+    }
+    
+    /* ################################################################## */
+    /**
      This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command. This implementation returns an empty command.
      
      - parameter inCommand: The command being sent.
      - returns: an empty Dictionary<String, Any>.
      */
     public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any] {
+        var dataEntryDialog: RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController!
+        
+        switch inCommand.rawValue {
+        case "SetHostname":
+            dataEntryDialog = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.dialogFactory(["Host Name": .textEntry(defaultValue: "", callback: hostNameCallback)])
+            
+        case "SetHostnameFromDHCP":
+            ()
+            
+        case "SetNTP":
+            ()
+            
+        case "SetDNS":
+            ()
+            
+        case "SetDynamicDNS":
+            ()
+
+        default:
+            ()
+        }
+        print("Data Entry Dialog: \(String(describing: dataEntryDialog))")
         return [:]
     }
     
