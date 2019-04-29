@@ -308,6 +308,7 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
         }
         view.window?.title = "CONNECT"
         myViews = [:]
+        updateUI(true)
     }
 
     /* ############################################################################################################################## */

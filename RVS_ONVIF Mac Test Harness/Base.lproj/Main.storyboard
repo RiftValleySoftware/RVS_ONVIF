@@ -544,6 +544,19 @@
             </objects>
             <point key="canvasLocation" x="2428" y="74"/>
         </scene>
+        <!--Mac Test Harness Function Data View Controller-->
+        <scene sceneID="HpN-Wt-1pW">
+            <objects>
+                <viewController id="FwZ-eM-cXl" customClass="RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="oLQ-mg-MLE">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="T2m-WW-9lc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5682" y="1957"/>
+        </scene>
         <!--CONNECT-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
