@@ -153,11 +153,17 @@ extension RVS_ONVIF {
                         self._authCred["qop"] = params["qop"]
                         self._authCred["opaque"] = params["opaque"]
                         self._authCred["algorithm"] = params["algorithm"]
-                        self._authCred["stale"] = params["stale"]?.lowercased()
-                        self._authCred["method"] = "POST"
+                        // Just make sure that we clean up any monkey business. We want either "true" or "false" for stale.
+                        if let stale = params["stale"]?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), "true" == stale {
+                            self._authCred["stale"] = "true"
+                        } else {
+                            self._authCred["stale"] = "false"
+                        }
+                        self._authCred["method"] = "POST"   // We always POST.
                         self._authCred["uri"] = url.relativePath
                     }
                     
+                    // Make sure that we wrap everything up.
                     self._session.invalidateAndCancel()
                     self._group.leave()
                 }
@@ -186,8 +192,8 @@ extension RVS_ONVIF {
             return header.split(separator: ",").reduce(into: [String: String](), {
                 let pair = $1.split(separator: "=")
                 
-                if let key = pair.first?.trimmingCharacters(in: .whitespaces),
-                    let value = pair.last?.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\"", with: "") {
+                if let key = pair.first?.trimmingCharacters(in: .whitespacesAndNewlines),
+                    let value = pair.last?.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\"", with: "") {
                     $0[key] = value
                 }
             })

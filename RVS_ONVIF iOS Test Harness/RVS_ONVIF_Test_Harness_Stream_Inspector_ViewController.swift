@@ -20,11 +20,11 @@ import RVS_ONVIF_iOS
 class RVS_ONVIF_Test_Harness_VideoPlayerView: UIView {
 }
 
-class RVS_ONVIF_Test_Harness_Stream_Inspector_ViewController: UIViewController, RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate, VLCMediaPlayerDelegate {
+class RVS_ONVIF_Test_Harness_Stream_Inspector_ViewController: UIViewController, VLCMediaPlayerDelegate {
     /* ################################################################## */
     /**
      */
-    var oldDelegate: (RVS_ONVIF_CoreDelegate & RVS_ONVIF_Profile_SDelegate)!
+    var oldDelegate: (RVS_ONVIF_Delegate)!
     
     /* ################################################################## */
     /**

@@ -46,7 +46,6 @@
 		D463A732223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D463A731223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift */; };
 		D467CCA02208A1F9004B8D66 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */; };
 		D46C97C2226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */; };
-		D46CA0DF2231ACFD0083035E /* RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46CA0DE2231ACFD0083035E /* RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S.swift */; };
 		D46F71B5221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */; };
 		D474509B220722800038B694 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4745099220722800038B694 /* RVS_String_Extensions.swift */; };
 		D478B4142268AAF300CE6720 /* RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478B4132268AAF300CE6720 /* RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift */; };
@@ -689,7 +688,6 @@
 				D49089FC21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift in Sources */,
 				D463A732223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift in Sources */,
 				D463A730223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift in Sources */,
-				D46CA0DF2231ACFD0083035E /* RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S.swift in Sources */,
 				D4E96A862225C576001A1616 /* RVS_ONVIF_Test_Harness_VideoSourceConfigurations_TableViewController.swift in Sources */,
 				D45DFCE02260C4CF00E486B7 /* RVS_Extensions.swift in Sources */,
 				D44ED320220CCA9200770BB2 /* RVS_ONVIF_Test_Harness_Stream_Inspector_ViewController.swift in Sources */,

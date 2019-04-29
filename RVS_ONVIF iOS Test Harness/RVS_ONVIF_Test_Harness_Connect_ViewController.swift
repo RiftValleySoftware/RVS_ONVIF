@@ -27,7 +27,7 @@ class RVS_ONVIF_Test_Harness_ONVIF_TableViewController: UITableViewController {
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class for the Initial Login Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFieldDelegate, RVS_ONVIF_CoreDelegate, RVS_ONVIF_Profile_SDelegate {
+class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFieldDelegate, RVS_ONVIF_Delegate {
     /* ############################################################################################################################## */
     // MARK: - Private Class Methods
     /* ############################################################################################################################## */

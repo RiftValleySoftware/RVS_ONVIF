@@ -308,14 +308,9 @@
                         <viewLayoutGuide key="safeArea" id="CBb-54-oaz"/>
                     </view>
                     <navigationItem key="navigationItem" title="LOGIN" id="dYF-og-RnM">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="〈 NAMESPACES" id="Fb5-Bk-X14">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="NAMESPACES 〉" id="Fb5-Bk-X14">
                             <connections>
                                 <segue destination="wUl-b8-LQZ" kind="show" identifier="show-handlers" id="uX7-OV-Zny"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="FUNCTIONS 〉" id="jss-gW-VY8">
-                            <connections>
-                                <segue destination="HXA-Fg-GUf" kind="show" id="qaW-kC-qrd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -324,7 +319,6 @@
                         <outlet property="authMethodSlider" destination="Xfb-qD-p3N" id="wDb-Oq-J9V"/>
                         <outlet property="connectButton" destination="mzE-K8-dUa" id="NJR-xn-74t"/>
                         <outlet property="connectedItemsContainerView" destination="FxJ-dm-M56" id="hk6-eH-OM8"/>
-                        <outlet property="functionsButton" destination="jss-gW-VY8" id="BH6-gY-iYz"/>
                         <outlet property="handlersButton" destination="Fb5-Bk-X14" id="p5y-Hv-Z7G"/>
                         <outlet property="ipAddressTextField" destination="xVK-55-TBb" id="Jle-wV-xv2"/>
                         <outlet property="loginIDTextField" destination="bRE-TS-o4H" id="lC8-ul-W06"/>
@@ -372,7 +366,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65i-wC-vry" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3249" y="99"/>
+            <point key="canvasLocation" x="2218" y="105"/>
         </scene>
         <!--DEVICE INFORMATION-->
         <scene sceneID="6Cm-YV-0sa">
@@ -409,346 +403,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8DW-by-R2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="470" y="99"/>
-        </scene>
-        <!--FUNCTIONS-->
-        <scene sceneID="xiJ-CA-qiy">
-            <objects>
-                <tableViewController title="FUNCTIONS" id="HXA-Fg-GUf" customClass="RVS_ONVIF_Test_Harness_Functions_TableViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="S5z-Pi-8oM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="text-only-cell" textLabel="gQb-xj-jjU" rowHeight="30" style="IBUITableViewCellStyleDefault" id="7fe-L5-P7b">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="30"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7fe-L5-P7b" id="xrs-EJ-6Ud">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="29.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gQb-xj-jjU">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="29.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="button-only-cell" rowHeight="30" id="zhJ-Rk-0ax" customClass="RVS_ONVIF_Test_Harness_Functions_ButtonOnly_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="85.5" width="375" height="30"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zhJ-Rk-0ax" id="hfm-wd-fQr">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="29.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sI-wT-k7A">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="29.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="8sI-wT-k7A" secondAttribute="trailing" id="DSJ-YX-EBt"/>
-                                        <constraint firstItem="8sI-wT-k7A" firstAttribute="top" secondItem="hfm-wd-fQr" secondAttribute="top" id="Mnm-dw-mIP"/>
-                                        <constraint firstAttribute="bottom" secondItem="8sI-wT-k7A" secondAttribute="bottom" id="W9y-aI-iXt"/>
-                                        <constraint firstItem="8sI-wT-k7A" firstAttribute="leading" secondItem="hfm-wd-fQr" secondAttribute="leading" id="tdE-zq-GTd"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="8sI-wT-k7A" id="pHV-qF-bhD"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="button-edit-text-cell" rowHeight="80" id="PKu-m9-21p" customClass="RVS_ONVIF_Test_Harness_Functions_ButtonEdit_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="375" height="80"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PKu-m9-21p" id="3EG-fo-QoB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AzZ-5x-Cyf">
-                                            <rect key="frame" x="16" y="11" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="w6O-G6-PNq"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="9" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="O9I-ey-uxd">
-                                            <rect key="frame" x="8" y="49" width="359" height="30.5"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="O9I-ey-uxd" secondAttribute="bottom" id="9Yq-PB-jvu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="AzZ-5x-Cyf" secondAttribute="trailing" id="CK9-6S-szI"/>
-                                        <constraint firstItem="O9I-ey-uxd" firstAttribute="top" secondItem="AzZ-5x-Cyf" secondAttribute="bottom" constant="8" id="ICH-Ul-E2a"/>
-                                        <constraint firstItem="AzZ-5x-Cyf" firstAttribute="top" secondItem="3EG-fo-QoB" secondAttribute="topMargin" id="MKe-oy-c9i"/>
-                                        <constraint firstItem="AzZ-5x-Cyf" firstAttribute="leading" secondItem="3EG-fo-QoB" secondAttribute="leadingMargin" id="XsW-md-idM"/>
-                                        <constraint firstAttribute="trailing" secondItem="O9I-ey-uxd" secondAttribute="trailing" constant="8" id="cly-Gi-aaK"/>
-                                        <constraint firstItem="O9I-ey-uxd" firstAttribute="leading" secondItem="3EG-fo-QoB" secondAttribute="leading" constant="8" id="g5c-ds-UOl"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="AzZ-5x-Cyf" id="oRc-u9-A5M"/>
-                                    <outlet property="textField" destination="O9I-ey-uxd" id="jOc-2O-TP9"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="button-2-line-edit-text-cell" rowHeight="116" id="Hbr-7N-Hkv" customClass="RVS_ONVIF_Test_Harness_Functions_ButtonEdit_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="195.5" width="375" height="116"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hbr-7N-Hkv" id="rzz-DK-dLt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="115.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tz-wV-I32">
-                                            <rect key="frame" x="16" y="11" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Mk4-eF-C62"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                        </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="9" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bl0-te-wt4">
-                                            <rect key="frame" x="8" y="49" width="359" height="66.5"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3tz-wV-I32" firstAttribute="top" secondItem="rzz-DK-dLt" secondAttribute="topMargin" id="00b-iK-cRb"/>
-                                        <constraint firstItem="bl0-te-wt4" firstAttribute="top" secondItem="3tz-wV-I32" secondAttribute="bottom" constant="8" id="0j9-Vg-vAM"/>
-                                        <constraint firstItem="bl0-te-wt4" firstAttribute="leading" secondItem="rzz-DK-dLt" secondAttribute="leading" constant="8" id="I14-jn-uMp"/>
-                                        <constraint firstAttribute="bottom" secondItem="bl0-te-wt4" secondAttribute="bottom" id="KiR-kP-II9"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3tz-wV-I32" secondAttribute="trailing" id="M0q-xM-9Jc"/>
-                                        <constraint firstItem="3tz-wV-I32" firstAttribute="leading" secondItem="rzz-DK-dLt" secondAttribute="leadingMargin" id="bJL-Bs-JwE"/>
-                                        <constraint firstAttribute="trailing" secondItem="bl0-te-wt4" secondAttribute="trailing" constant="8" id="feX-WF-uVI"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="3tz-wV-I32" id="FYJ-Dp-DQB"/>
-                                    <outlet property="textField" destination="bl0-te-wt4" id="xsh-2o-aZt"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dns-cell" rowHeight="166" id="5h4-du-CkF" customClass="RVS_ONVIF_Test_Harness_Functions_DNS_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="311.5" width="375" height="166"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5h4-du-CkF" id="iKR-VO-7dS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="165.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBQ-t3-tT3" customClass="DNSEditorButton" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="11" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="UWI-uc-wES"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <outlet property="dnsServerIPsTextField" destination="Wba-Mx-pCI" id="caV-Sg-T6Z"/>
-                                                <outlet property="isDHCPSwitch" destination="nb5-pp-F3V" id="WIJ-vh-Rpz"/>
-                                                <outlet property="searchDomainsTextField" destination="LIo-lE-FRY" id="Y7K-ex-O4P"/>
-                                            </connections>
-                                        </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Comma-Delimited Search Domains" textAlignment="natural" minimumFontSize="9" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LIo-lE-FRY">
-                                            <rect key="frame" x="16" y="87" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="rUc-uc-lGf"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-pp-F3V">
-                                            <rect key="frame" x="16" y="49" width="49" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="47" id="aei-uC-Q4t"/>
-                                                <constraint firstAttribute="height" constant="31" id="hb5-kK-CT9"/>
-                                            </constraints>
-                                        </switch>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is DHCP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMU-7M-KvZ">
-                                            <rect key="frame" x="71" y="49" width="288" height="31"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Comma-Delimited  IP Addresses of Servers" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wba-Mx-pCI" userLabel="Dns Server IPs Text Field">
-                                            <rect key="frame" x="16" y="125" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Tyi-Fe-l8y"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="RMU-7M-KvZ" firstAttribute="height" secondItem="nb5-pp-F3V" secondAttribute="height" id="48B-la-iId"/>
-                                        <constraint firstItem="kBQ-t3-tT3" firstAttribute="leading" secondItem="iKR-VO-7dS" secondAttribute="leadingMargin" id="Br7-Tm-cAd"/>
-                                        <constraint firstItem="Wba-Mx-pCI" firstAttribute="trailing" secondItem="iKR-VO-7dS" secondAttribute="trailingMargin" id="DC5-h1-qWp"/>
-                                        <constraint firstItem="nb5-pp-F3V" firstAttribute="leading" secondItem="iKR-VO-7dS" secondAttribute="leadingMargin" id="IQT-8a-i5U"/>
-                                        <constraint firstItem="Wba-Mx-pCI" firstAttribute="top" secondItem="LIo-lE-FRY" secondAttribute="bottom" constant="8" id="KgB-jI-6gA"/>
-                                        <constraint firstItem="RMU-7M-KvZ" firstAttribute="trailing" secondItem="iKR-VO-7dS" secondAttribute="trailingMargin" id="MAF-Mx-OJ2"/>
-                                        <constraint firstItem="Wba-Mx-pCI" firstAttribute="leading" secondItem="iKR-VO-7dS" secondAttribute="leadingMargin" id="Suv-O9-fgN"/>
-                                        <constraint firstItem="LIo-lE-FRY" firstAttribute="leading" secondItem="iKR-VO-7dS" secondAttribute="leadingMargin" id="VLe-GP-1ZU"/>
-                                        <constraint firstItem="nb5-pp-F3V" firstAttribute="top" secondItem="kBQ-t3-tT3" secondAttribute="bottom" constant="8" id="YJE-ai-BQd"/>
-                                        <constraint firstItem="kBQ-t3-tT3" firstAttribute="trailing" secondItem="iKR-VO-7dS" secondAttribute="trailingMargin" id="d9X-n6-bip"/>
-                                        <constraint firstItem="LIo-lE-FRY" firstAttribute="trailing" secondItem="iKR-VO-7dS" secondAttribute="trailingMargin" id="hGB-jy-cb7"/>
-                                        <constraint firstItem="RMU-7M-KvZ" firstAttribute="leading" secondItem="nb5-pp-F3V" secondAttribute="trailing" constant="8" id="k55-3F-8V8"/>
-                                        <constraint firstItem="kBQ-t3-tT3" firstAttribute="top" secondItem="iKR-VO-7dS" secondAttribute="topMargin" id="pqa-3c-QrA"/>
-                                        <constraint firstItem="RMU-7M-KvZ" firstAttribute="centerY" secondItem="nb5-pp-F3V" secondAttribute="centerY" id="vBP-G7-9KK"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Wba-Mx-pCI" secondAttribute="bottom" id="wPB-gT-7Af"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="kBQ-t3-tT3" id="zTy-YB-cGv"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ntp-cell" rowHeight="136" id="b9W-18-xLO" customClass="RVS_ONVIF_Test_Harness_Functions_NTP_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="477.5" width="375" height="136"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b9W-18-xLO" id="WTs-gr-dNU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptD-WY-QWI" customClass="NTPEditorButton" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="11" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="DZr-BN-Exx"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <outlet property="isDHCPSwitch" destination="cEV-dg-qrf" id="ObV-t4-HKa"/>
-                                                <outlet property="ntpServerAddressTextField" destination="B9U-eI-nrS" id="TSg-Hz-i41"/>
-                                            </connections>
-                                        </button>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cEV-dg-qrf">
-                                            <rect key="frame" x="16" y="49" width="49" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="47" id="JVN-Je-whd"/>
-                                                <constraint firstAttribute="height" constant="31" id="MaR-iy-u0g"/>
-                                            </constraints>
-                                        </switch>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is DHCP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyb-yo-do3">
-                                            <rect key="frame" x="71" y="49" width="288" height="31"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Comma-Delimited  Addresses of Servers" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9U-eI-nrS" userLabel="NTP Server IPs Text Field">
-                                            <rect key="frame" x="16" y="95" width="343" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="JE1-xr-0VI"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="dyb-yo-do3" firstAttribute="leading" secondItem="cEV-dg-qrf" secondAttribute="trailing" constant="8" id="0oL-0B-vRY"/>
-                                        <constraint firstItem="ptD-WY-QWI" firstAttribute="trailing" secondItem="WTs-gr-dNU" secondAttribute="trailingMargin" id="75r-Rg-rk3"/>
-                                        <constraint firstItem="dyb-yo-do3" firstAttribute="height" secondItem="cEV-dg-qrf" secondAttribute="height" id="975-Yy-fEc"/>
-                                        <constraint firstItem="ptD-WY-QWI" firstAttribute="top" secondItem="WTs-gr-dNU" secondAttribute="topMargin" id="AiB-8v-qb6"/>
-                                        <constraint firstItem="ptD-WY-QWI" firstAttribute="leading" secondItem="WTs-gr-dNU" secondAttribute="leadingMargin" id="Ck1-JJ-VrS"/>
-                                        <constraint firstItem="dyb-yo-do3" firstAttribute="trailing" secondItem="WTs-gr-dNU" secondAttribute="trailingMargin" id="MIb-i1-ZAM"/>
-                                        <constraint firstItem="B9U-eI-nrS" firstAttribute="trailing" secondItem="WTs-gr-dNU" secondAttribute="trailingMargin" id="OyX-c4-Q6R"/>
-                                        <constraint firstItem="dyb-yo-do3" firstAttribute="centerY" secondItem="cEV-dg-qrf" secondAttribute="centerY" id="Yqk-Pd-T30"/>
-                                        <constraint firstItem="cEV-dg-qrf" firstAttribute="top" secondItem="ptD-WY-QWI" secondAttribute="bottom" constant="8" id="dN5-OM-SqS"/>
-                                        <constraint firstItem="cEV-dg-qrf" firstAttribute="leading" secondItem="WTs-gr-dNU" secondAttribute="leadingMargin" id="e5F-hy-cNU"/>
-                                        <constraint firstItem="B9U-eI-nrS" firstAttribute="leading" secondItem="WTs-gr-dNU" secondAttribute="leadingMargin" id="h7S-aY-HdH"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="B9U-eI-nrS" secondAttribute="bottom" id="uNS-sV-hux"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="ptD-WY-QWI" id="Kaq-rx-xpW"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dyn-dns-cell" rowHeight="136" id="Xl9-Vy-Rbh" customClass="RVS_ONVIF_Test_Harness_Functions_DynDNS_TableViewCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="613.5" width="375" height="136"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xl9-Vy-Rbh" id="W8r-y6-6Py">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bl2-WG-SHH" customClass="DynDNSEditorButton" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="8" width="359" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="OcY-ZV-nEP"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <outlet property="nameTextField" destination="u9n-XU-zKj" id="jRu-rp-diN"/>
-                                                <outlet property="ttlTextField" destination="p7h-0k-sc7" id="Awl-nh-dnJ"/>
-                                                <outlet property="typeSegmentedSwitch" destination="hz1-PR-c7L" id="wrQ-83-K3d"/>
-                                            </connections>
-                                        </button>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hz1-PR-c7L">
-                                            <rect key="frame" x="8" y="38" width="359" height="29"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="28" id="8SD-yT-1Rk"/>
-                                            </constraints>
-                                            <segments>
-                                                <segment title="NoUpdate"/>
-                                                <segment title="ServerUpdates"/>
-                                                <segment title="ClientUpdates"/>
-                                            </segments>
-                                        </segmentedControl>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter TTL As xsd:duration" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p7h-0k-sc7">
-                                            <rect key="frame" x="8" y="70" width="359" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Vq3-nL-zan"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u9n-XU-zKj">
-                                            <rect key="frame" x="8" y="104" width="359" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Gxe-fR-yHc"/>
-                                            </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="bl2-WG-SHH" firstAttribute="leading" secondItem="W8r-y6-6Py" secondAttribute="leadingMargin" id="8Xd-pz-yJj"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="u9n-XU-zKj" secondAttribute="trailing" id="CQ8-dp-mei"/>
-                                        <constraint firstItem="p7h-0k-sc7" firstAttribute="top" secondItem="hz1-PR-c7L" secondAttribute="bottom" constant="4" id="Eko-Ud-8QP"/>
-                                        <constraint firstItem="bl2-WG-SHH" firstAttribute="top" secondItem="W8r-y6-6Py" secondAttribute="topMargin" id="JCF-RN-jbx"/>
-                                        <constraint firstItem="hz1-PR-c7L" firstAttribute="top" secondItem="bl2-WG-SHH" secondAttribute="bottom" id="QO7-ys-VyE"/>
-                                        <constraint firstItem="bl2-WG-SHH" firstAttribute="trailing" secondItem="W8r-y6-6Py" secondAttribute="trailingMargin" id="bqp-kD-Skg"/>
-                                        <constraint firstItem="hz1-PR-c7L" firstAttribute="leading" secondItem="W8r-y6-6Py" secondAttribute="leadingMargin" id="iNg-aj-dV6"/>
-                                        <constraint firstItem="p7h-0k-sc7" firstAttribute="trailing" secondItem="W8r-y6-6Py" secondAttribute="trailingMargin" id="ikn-QH-2eo"/>
-                                        <constraint firstItem="u9n-XU-zKj" firstAttribute="leading" secondItem="W8r-y6-6Py" secondAttribute="leadingMargin" id="lhQ-Tb-mVZ"/>
-                                        <constraint firstItem="p7h-0k-sc7" firstAttribute="leading" secondItem="W8r-y6-6Py" secondAttribute="leadingMargin" id="rX2-Ru-jJ7"/>
-                                        <constraint firstItem="hz1-PR-c7L" firstAttribute="trailing" secondItem="W8r-y6-6Py" secondAttribute="trailingMargin" id="rtv-5u-PTJ"/>
-                                        <constraint firstItem="u9n-XU-zKj" firstAttribute="top" secondItem="p7h-0k-sc7" secondAttribute="bottom" constant="4" id="v2d-lj-g1W"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="bl2-WG-SHH" id="TJA-yl-ndn"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="HXA-Fg-GUf" id="GQQ-vg-pxo"/>
-                            <outlet property="delegate" destination="HXA-Fg-GUf" id="Mzt-Vh-9GM"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5W6-ao-Ux0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1360.8" y="98.50074962518741"/>
+            <point key="canvasLocation" x="455" y="105"/>
         </scene>
         <!--DNS-->
         <scene sceneID="GX5-l9-98V">
@@ -862,7 +517,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A5y-cw-eI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2300" y="99"/>
+            <point key="canvasLocation" x="1330" y="105"/>
         </scene>
         <!--SERVICE CAPABILITIES-->
         <scene sceneID="3OY-sA-eDY">
