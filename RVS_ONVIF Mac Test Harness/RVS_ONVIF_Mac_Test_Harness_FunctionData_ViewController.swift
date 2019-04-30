@@ -28,6 +28,8 @@ enum RVS_ONVIF_Mac_Test_Harness_DialogComponents {
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
+    static let parameterScreenStoryBoardID = "RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController"
+    
     /* ############################################################################################################################## */
     // MARK: - Class Functions
     /* ############################################################################################################################## */
@@ -50,80 +52,79 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
     /* ################################################################## */
     /**
      */
-    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_Mac_Test_Harness_DialogComponents], title inTitleString: String) -> RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController! {
-        let ret = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController()
-
-        inCustomerOrder.forEach {
+    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_Mac_Test_Harness_DialogComponents], command inCommand: RVS_ONVIF_DeviceRequestProtocol, dispatcher inDispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher!) -> RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController! {
+        if  let windowViewController = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen,
+            let ret = windowViewController.storyboard?.instantiateController(withIdentifier: parameterScreenStoryBoardID) as? RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController {
+            ret.command = inCommand
             let label: NSTextView = NSTextView()
-            label.string = $0.key
+            label.string = inCommand.rawValue
             label.alignment = .center
+            label.isEditable = false
+            label.isSelectable = false
             label.font = NSFont.boldSystemFont(ofSize: 20)
-            
-            let control: NSView!
+            insertSpecialView(label, into: ret.view)
 
-            let item = $0.value
-            var callbackHandler: RVS_ONVIF_Mac_Test_Harness_DialogComponents.CallbackHandler!
+            var previousAnchor: NSLayoutYAxisAnchor = label.bottomAnchor
             
-            switch item {
-            case let .textDisplay(inValue, _):
-                control = NSTextView()
-                (control as? NSTextView)?.string = inValue
-            case let .textEntry(inDefaultValue, inCallback):
-                callbackHandler = inCallback
-                control = NSTextField()
-                (control as? NSTextField)?.stringValue = inDefaultValue
-            case .pickOne(let inValues, let inSelectedIndex, let inCallback), .pickAny(let inValues, let inSelectedIndex, let inCallback):
-                callbackHandler = inCallback
-                control = NSSegmentedControl()
-                for value in inValues.enumerated() {
-                    (control as? NSSegmentedControl)?.setLabel(value.element, forSegment: value.offset)
-                }
-                if case .pickAny = item {
-                    (control as? NSSegmentedControl)?.trackingMode = .selectAny
-                } else {
-                    (control as? NSSegmentedControl)?.trackingMode = .selectOne
+            inCustomerOrder.forEach {
+                let label: NSTextView = NSTextView()
+                label.string = $0.key
+                label.alignment = .center
+                label.isEditable = false
+                label.isSelectable = false
+                label.font = NSFont.boldSystemFont(ofSize: 15)
+                
+                let control: NSView!
+
+                let item = $0.value
+                var callbackHandler: RVS_ONVIF_Mac_Test_Harness_DialogComponents.CallbackHandler!
+                
+                switch item {
+                case let .textDisplay(inValue, _):
+                    control = NSTextView()
+                    (control as? NSTextView)?.alignment = .center
+                    (control as? NSTextView)?.isEditable = false
+                    (control as? NSTextView)?.isSelectable = false
+                    (control as? NSTextView)?.font = NSFont.systemFont(ofSize: 15)
+                    (control as? NSTextView)?.string = inValue
+                case let .textEntry(inDefaultValue, inCallback):
+                    callbackHandler = inCallback
+                    control = NSTextField()
+                    (control as? NSTextField)?.stringValue = inDefaultValue
+                case .pickOne(let inValues, let inSelectedIndex, let inCallback), .pickAny(let inValues, let inSelectedIndex, let inCallback):
+                    callbackHandler = inCallback
+                    control = NSSegmentedControl()
+                    for value in inValues.enumerated() {
+                        (control as? NSSegmentedControl)?.setLabel(value.element, forSegment: value.offset)
+                    }
+                    if case .pickAny = item {
+                        (control as? NSSegmentedControl)?.trackingMode = .selectAny
+                    } else {
+                        (control as? NSSegmentedControl)?.trackingMode = .selectOne
+                    }
+                    
+                    (control as? NSSegmentedControl)?.selectedSegment = inSelectedIndex
                 }
                 
-                (control as? NSSegmentedControl)?.selectedSegment = inSelectedIndex
-            }
-            
-            if nil != control {
-                insertSpecialView(label, into: ret.view)
-                insertSpecialView(control, into: ret.view, topConstraint: label.bottomAnchor)
-                if nil != callbackHandler {
-                    (control as? NSControl)?.target = self
-                    (control as? NSControl)?.action = #selector(callbackHandlerFunction)
-                    ret.callbackHash[control] = callbackHandler
+                if nil != control {
+                    insertSpecialView(label, into: ret.view, topConstraint: previousAnchor)
+                    insertSpecialView(control, into: ret.view, topConstraint: label.bottomAnchor)
+                    previousAnchor = control.bottomAnchor
+                    if nil != callbackHandler {
+                        ret.callbackHash[control] = callbackHandler
+                    }
                 }
             }
+            
+            ret.dispatcher = inDispatcher
+            
+            return ret
         }
         
-        let okButton = NSButton()
-        okButton.title = "OK"
-        okButton.target = self
-        okButton.action = #selector(okButtonHandler)
-        okButton.translatesAutoresizingMaskIntoConstraints = false
-        ret.view.addSubview(okButton)
-        okButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
-        okButton.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
-        okButton.trailingAnchor.constraint(equalTo: ret.view.trailingAnchor, constant: -4).isActive = true
-        okButton.bottomAnchor.constraint(equalTo: ret.view.bottomAnchor, constant: -4).isActive = true
-        
-        let cancelButton = NSButton()
-        cancelButton.title = "CANCEL"
-        cancelButton.target = self
-        cancelButton.action = #selector(okButtonHandler)
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        ret.view.addSubview(cancelButton)
-        cancelButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
-        cancelButton.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
-        cancelButton.leadingAnchor.constraint(equalTo: ret.view.leadingAnchor, constant: 4).isActive = true
-        cancelButton.bottomAnchor.constraint(equalTo: ret.view.bottomAnchor, constant: -4).isActive = true
-        
-        ret.titleString = inTitleString
-        
-        return ret
+        return nil
     }
+    
+    @IBOutlet var cancelButton: NSButton!
     
     /* ################################################################## */
     /**
@@ -133,46 +134,26 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
     /* ################################################################## */
     /**
      */
-    var titleString: String = ""
-
+    var command: RVS_ONVIF_DeviceRequestProtocol!
+    
     /* ################################################################## */
     /**
      */
-    @objc func callbackHandlerFunction(_ inControl: NSView) {
-        if let callbackHandler = callbackHash[inControl] {
-            callbackHandler(inControl)
+    var dispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher!
+    
+    /* ################################################################## */
+    /**
+     */
+    override func dismiss(_ inSender: Any?) {
+        if let button = inSender as? NSButton, button != cancelButton {
+            callbackHash.forEach {
+                if let view = $0.key as? NSView {
+                    $0.value(view)
+                }
+            }
+            dispatcher?.sendRequest(command)
         }
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @objc func okButtonHandler(_ inControl: NSButton) {
-        presentingViewController?.dismiss(self)
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    @objc func cancelButtonHandler(_ inControl: NSButton) {
-        presentingViewController?.dismiss(self)
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    override func loadView() {
-        view = NSView()
-    }
-
-    /* ################################################################## */
-    /**
-     */
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        view.window?.standardWindowButton(.miniaturizeButton)!.isHidden = true
-        view.window?.standardWindowButton(.zoomButton)!.isHidden = true
-        view.window?.standardWindowButton(.closeButton)!.isHidden = true
-        view.window?.title = titleString
+        
+        super.dismiss(inSender)
     }
 }

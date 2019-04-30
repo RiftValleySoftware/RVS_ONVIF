@@ -44,6 +44,7 @@
 		D45DFD172260C8F900E486B7 /* SOAPEngineOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */; };
 		D463A730223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D463A72F223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift */; };
 		D463A732223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D463A731223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift */; };
+		D4656A272278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */; };
 		D467CCA02208A1F9004B8D66 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */; };
 		D46C97C2226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */; };
 		D46F71B5221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */; };
@@ -178,6 +179,7 @@
 		D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SOAPEngineOSX.framework; path = SOAPEngine/SOAPEngineOSX.framework; sourceTree = "<group>"; };
 		D463A72F223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift; sourceTree = "<group>"; };
 		D463A731223C2F5C003F5F5E /* RVS_ONVIF_Test_Harness_DNS_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_DNS_TableViewController.swift; sourceTree = "<group>"; };
+		D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
 		D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_PersistentPrefs.swift; sourceTree = "<group>"; };
 		D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift; sourceTree = "<group>"; };
 		D46CA0DE2231ACFD0083035E /* RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileDispatcher_Profile_S.swift; sourceTree = "<group>"; };
@@ -332,7 +334,6 @@
 		D45DFCE82260C5FE00E486B7 /* RVS_ONVIF Mac Test Harness */ = {
 			isa = PBXGroup;
 			children = (
-				D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */,
 				D45DFCE92260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_AppDelegate.swift */,
 				D45DFCEB2260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController.swift */,
 				D41A2D9E2267D0C1002DD485 /* RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift */,
@@ -342,13 +343,12 @@
 				D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */,
 				D40E203F226A5CA200B4A392 /* RVS_ONVIF_Mac_Test_Harness_Services_ViewController.swift */,
 				D47CD339226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift */,
+				D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */,
 				D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */,
 				D4E0A8E3226E183D007049B6 /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift */,
 				D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */,
-				D45DFCED2260C5FF00E486B7 /* Assets.xcassets */,
-				D45DFCEF2260C5FF00E486B7 /* Main.storyboard */,
-				D45DFCF92260C76300E486B7 /* Info.plist */,
-				D45DFCF32260C5FF00E486B7 /* RVS_ONVIF_Mac_Test_Harness.entitlements */,
+				D4EEC5C4227855D300799F6F /* Resources */,
+				D4EEC5C3227855B900799F6F /* Misc */,
 			);
 			path = "RVS_ONVIF Mac Test Harness";
 			sourceTree = "<group>";
@@ -444,6 +444,25 @@
 				D45B82F721FF2DE100DE26EF /* src */,
 			);
 			path = RVS_ONVIF;
+			sourceTree = "<group>";
+		};
+		D4EEC5C3227855B900799F6F /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */,
+				D45DFCF92260C76300E486B7 /* Info.plist */,
+				D45DFCF32260C5FF00E486B7 /* RVS_ONVIF_Mac_Test_Harness.entitlements */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		D4EEC5C4227855D300799F6F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D45DFCED2260C5FF00E486B7 /* Assets.xcassets */,
+				D45DFCEF2260C5FF00E486B7 /* Main.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -642,6 +661,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4656A272278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift in Sources */,
 				D40E2040226A5CA200B4A392 /* RVS_ONVIF_Mac_Test_Harness_Services_ViewController.swift in Sources */,
 				D47CD33A226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift in Sources */,
 				D4838838227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift in Sources */,
@@ -773,7 +793,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_ONVIF Mac Test Harness/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF Mac Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -795,7 +815,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
-				INFOPLIST_FILE = "RVS_ONVIF Mac Test Harness/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF Mac Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

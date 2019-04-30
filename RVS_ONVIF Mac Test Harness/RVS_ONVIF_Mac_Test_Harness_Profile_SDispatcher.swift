@@ -14,7 +14,9 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatcher {
+class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher, RVS_ONVIF_Profile_SDispatcher {
+    var sendParameters: [String: Any]!
+    
     /* ################################################################## */
     /**
      This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
@@ -30,6 +32,12 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatc
     init(owner inOwner: RVS_ONVIF) {
         owner = inOwner
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
+    }
 
     /* ################################################################## */
     /**
@@ -38,7 +46,7 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Profile_SDispatc
      - parameter inCommand: The command being sent.
      - returns: an empty Dictionary<String, Any>.
      */
-    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any] {
+    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
         return [:]
     }
     

@@ -35,10 +35,16 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
     /**
      */
     override var loginViewController: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController! {
+        /* ############################################################## */
+        /**
+         */
         get {
             return super.loginViewController
         }
         
+        /* ############################################################## */
+        /**
+         */
         set {
             super.loginViewController = newValue
             
@@ -95,7 +101,9 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
      */
     @objc func handleButtonPress(_ inButton: RVS_ONVIF_Mac_Test_Harness_CommandButton) {
         for dispatcher in RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.onvifInstance.dispatchers {
-            guard !dispatcher.sendRequest(inButton.associatedCommand) else { break }
+            if let disp = dispatcher as? RVS_ONVIF_Mac_Test_Harness_Dispatcher {
+                disp.setupCommandParameters(inButton.associatedCommand)
+            }
         }
     }
     

@@ -1507,5 +1507,61 @@
             </objects>
             <point key="canvasLocation" x="4803" y="2062"/>
         </scene>
+        <!--Mac Test Harness Function Data View Controller-->
+        <scene sceneID="n9Q-DA-t8y">
+            <objects>
+                <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController" showSeguePresentationStyle="single" id="xrE-lO-v4k" customClass="RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="B16-eh-mXK">
+                        <rect key="frame" x="0.0" y="0.0" width="466" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dxg-8j-Ykh">
+                                <rect key="frame" x="409" y="-3" width="59" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="47" placeholder="YES" id="5iu-iU-8bu"/>
+                                    <constraint firstAttribute="height" constant="30" id="vWe-Et-F6K"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QmV-f9-yl1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                    <connections>
+                                        <action selector="dismissController:" target="xrE-lO-v4k" id="5mK-Mo-HPU"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IPg-nI-aSw">
+                                <rect key="frame" x="-2" y="2" width="81" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" placeholder="YES" id="lbt-oG-MU5"/>
+                                    <constraint firstAttribute="height" constant="21" id="pGQ-j2-boC"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="CANCEL" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2aw-mc-eqX">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="xrE-lO-v4k" id="siY-xu-Exz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Dxg-8j-Ykh" secondAttribute="trailing" constant="4" id="TLM-7G-yUi"/>
+                            <constraint firstAttribute="bottom" secondItem="Dxg-8j-Ykh" secondAttribute="bottom" constant="4" id="aMZ-XP-dP2"/>
+                            <constraint firstItem="Dxg-8j-Ykh" firstAttribute="centerY" secondItem="IPg-nI-aSw" secondAttribute="centerY" id="dFu-ma-ktW"/>
+                            <constraint firstItem="Dxg-8j-Ykh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IPg-nI-aSw" secondAttribute="trailing" id="jKl-eP-6bj"/>
+                            <constraint firstItem="IPg-nI-aSw" firstAttribute="leading" secondItem="B16-eh-mXK" secondAttribute="leading" constant="4" id="uWP-uC-uf5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="IPg-nI-aSw" id="2Vz-jE-Ljz"/>
+                    </connections>
+                </viewController>
+                <customObject id="1bN-4d-4e4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5648" y="1309"/>
+        </scene>
     </scenes>
 </document>
