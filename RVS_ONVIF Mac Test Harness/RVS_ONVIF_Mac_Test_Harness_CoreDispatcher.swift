@@ -50,7 +50,7 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
         
         switch inCommand.rawValue {
         case "SetHostname":
-            dataEntryDialog = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.dialogFactory(["Host Name": .textEntry(defaultValue: "", callback: hostNameCallback)])
+            dataEntryDialog = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.dialogFactory(["Host Name": .textEntry(defaultValue: "", callback: hostNameCallback)], title: inCommand.rawValue)
             
         case "SetHostnameFromDHCP":
             ()
@@ -67,7 +67,12 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_CoreDispatcher {
         default:
             ()
         }
-        print("Data Entry Dialog: \(String(describing: dataEntryDialog))")
+        
+        if let windowViewController = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen {
+            dataEntryDialog.view.frame = windowViewController.view.bounds
+            windowViewController.presentAsModalWindow(dataEntryDialog)
+        }
+        
         return [:]
     }
     

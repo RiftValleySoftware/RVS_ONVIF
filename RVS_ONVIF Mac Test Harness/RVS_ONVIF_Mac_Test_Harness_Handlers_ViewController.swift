@@ -69,6 +69,25 @@ class RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController: RVS_ONVIF_Mac_Test_Har
     }
 
     /* ############################################################################################################################## */
+    // MARK: - Superclass Overrides -
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear() {
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen = self
+        super.viewWillAppear()
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear() {
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen = nil
+        super.viewWillDisappear()
+    }
+
+    /* ############################################################################################################################## */
     // MARK: - Control Callbacks -
     /* ############################################################################################################################## */
     /* ################################################################## */

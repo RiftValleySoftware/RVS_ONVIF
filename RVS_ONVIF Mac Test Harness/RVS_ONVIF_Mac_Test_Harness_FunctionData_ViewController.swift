@@ -50,12 +50,15 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
     /* ################################################################## */
     /**
      */
-    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_Mac_Test_Harness_DialogComponents]) -> RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController! {
+    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_Mac_Test_Harness_DialogComponents], title inTitleString: String) -> RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController! {
         let ret = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController()
 
         inCustomerOrder.forEach {
             let label: NSTextView = NSTextView()
             label.string = $0.key
+            label.alignment = .center
+            label.font = NSFont.boldSystemFont(ofSize: 20)
+            
             let control: NSView!
 
             let item = $0.value
@@ -95,6 +98,30 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
             }
         }
         
+        let okButton = NSButton()
+        okButton.title = "OK"
+        okButton.target = self
+        okButton.action = #selector(okButtonHandler)
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        ret.view.addSubview(okButton)
+        okButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        okButton.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        okButton.trailingAnchor.constraint(equalTo: ret.view.trailingAnchor, constant: -4).isActive = true
+        okButton.bottomAnchor.constraint(equalTo: ret.view.bottomAnchor, constant: -4).isActive = true
+        
+        let cancelButton = NSButton()
+        cancelButton.title = "CANCEL"
+        cancelButton.target = self
+        cancelButton.action = #selector(okButtonHandler)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        ret.view.addSubview(cancelButton)
+        cancelButton.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: 100.0).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: ret.view.leadingAnchor, constant: 4).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: ret.view.bottomAnchor, constant: -4).isActive = true
+        
+        ret.titleString = inTitleString
+        
         return ret
     }
     
@@ -103,6 +130,11 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
      */
     var callbackHash: [AnyHashable: RVS_ONVIF_Mac_Test_Harness_DialogComponents.CallbackHandler] = [:]
     
+    /* ################################################################## */
+    /**
+     */
+    var titleString: String = ""
+
     /* ################################################################## */
     /**
      */
@@ -115,7 +147,32 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
     /* ################################################################## */
     /**
      */
+    @objc func okButtonHandler(_ inControl: NSButton) {
+        presentingViewController?.dismiss(self)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @objc func cancelButtonHandler(_ inControl: NSButton) {
+        presentingViewController?.dismiss(self)
+    }
+
+    /* ################################################################## */
+    /**
+     */
     override func loadView() {
         view = NSView()
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        view.window?.standardWindowButton(.miniaturizeButton)!.isHidden = true
+        view.window?.standardWindowButton(.zoomButton)!.isHidden = true
+        view.window?.standardWindowButton(.closeButton)!.isHidden = true
+        view.window?.title = titleString
     }
 }
