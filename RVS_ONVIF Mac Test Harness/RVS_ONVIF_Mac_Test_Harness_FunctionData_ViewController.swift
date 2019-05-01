@@ -91,18 +91,13 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
                     callbackHandler = inCallback
                     control = NSTextField()
                     (control as? NSTextField)?.stringValue = inDefaultValue
-                case .pickOne(let inValues, let inSelectedIndex, let inCallback), .pickAny(let inValues, let inSelectedIndex, let inCallback):
+                case .pickOne(let inValues, let inSelectedIndex, let inCallback):
                     callbackHandler = inCallback
-                    control = NSSegmentedControl()
-                    for value in inValues.enumerated() {
-                        (control as? NSSegmentedControl)?.setLabel(value.element, forSegment: value.offset)
-                    }
-                    if case .pickAny = item {
-                        (control as? NSSegmentedControl)?.trackingMode = .selectAny
-                    } else {
-                        (control as? NSSegmentedControl)?.trackingMode = .selectOne
-                    }
-                    
+                    control = NSSegmentedControl(labels: inValues, trackingMode: .selectOne, target: nil, action: nil)
+                    (control as? NSSegmentedControl)?.selectedSegment = inSelectedIndex
+                case .pickAny(let inValues, let inSelectedIndex, let inCallback):
+                    callbackHandler = inCallback
+                    control = NSSegmentedControl(labels: inValues, trackingMode: .selectAny, target: nil, action: nil)
                     (control as? NSSegmentedControl)?.selectedSegment = inSelectedIndex
                 }
                 
