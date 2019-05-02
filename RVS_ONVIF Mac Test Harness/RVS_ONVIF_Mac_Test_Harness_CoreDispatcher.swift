@@ -290,6 +290,15 @@ class RVS_ONVIF_Mac_Test_Harness_CoreDispatcher: RVS_ONVIF_Mac_Test_Harness_Disp
             print("RVS_ONVIF_Mac_Test_Harness_CoreDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
         #endif
         
-        return isAbleToHandleThisCommand(inCommand)
+        if isAbleToHandleThisCommand(inCommand) {
+            let alert = NSAlert()
+            alert.messageText = "\(inCommand.rawValue)Response:\n"
+            alert.informativeText = String(describing: inParams)
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            return true
+        }
+        
+        return false
     }
 }

@@ -1039,7 +1039,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetNTP) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetNTP) {
-                        $0.deliverResponse(_DeviceRequest.GetDNS, params: _parseNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                        $0.deliverResponse(_DeviceRequest.GetNTP, params: _parseNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
                     }
                 }
             }

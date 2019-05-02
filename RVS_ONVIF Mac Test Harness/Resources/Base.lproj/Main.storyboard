@@ -1512,11 +1512,11 @@
             <objects>
                 <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController" showSeguePresentationStyle="single" id="xrE-lO-v4k" customClass="RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="B16-eh-mXK">
-                        <rect key="frame" x="0.0" y="0.0" width="466" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="470" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dxg-8j-Ykh">
-                                <rect key="frame" x="409" y="-3" width="59" height="41"/>
+                                <rect key="frame" x="413" y="-3" width="59" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="47" placeholder="YES" id="5iu-iU-8bu"/>
                                     <constraint firstAttribute="height" constant="30" id="vWe-Et-F6K"/>
@@ -1547,15 +1547,15 @@ DQ
                                 </connections>
                             </button>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pFn-ve-0ge">
-                                <rect key="frame" x="0.0" y="278" width="466" height="23"/>
+                                <rect key="frame" x="0.0" y="278" width="470" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ovL-Cz-f9x"/>
                                 </constraints>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="uCo-no-wna">
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="capsule" trackingMode="selectOne" id="uCo-no-wna">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Use Generic Interface" width="232"/>
-                                        <segment label="Use Specific Interface" width="231" selected="YES" tag="1"/>
+                                        <segment label="Use Generic Interface" width="232" selected="YES"/>
+                                        <segment label="Use Specific Interface" width="231" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
