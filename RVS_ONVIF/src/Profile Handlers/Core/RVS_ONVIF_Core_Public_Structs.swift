@@ -109,7 +109,7 @@ extension RVS_ONVIF_Core {
          This is an array of IP addresses. They can be either IPv4 or IPv6.
          */
         public let addresses: [RVS_IPAddress]
-        
+
         /* ############################################################## */
         /**
          We declare this, because we need it to be public.
@@ -1183,6 +1183,45 @@ extension RVS_ONVIF_Core {
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
 public protocol RVS_ONVIF_CoreDispatcher: RVS_ONVIF_Dispatcher {
+    /* ################################################################## */
+    /**
+     This sends an explicit hostname to the device.
+     
+     - parameter inHostname: The new hostname to be set.
+     */
+    func setHostname(_ inHostname: String)
+    
+    /* ################################################################## */
+    /**
+     This tells the device to fetch its hostname from DHCP.
+     
+     - parameter isOn: True, if the device is to fetch its hostname from DHCP.
+     */
+    func setHostnameFromDHCP(_ isOn: Bool)
+    
+    /* ################################################################## */
+    /**
+     This sends DNS data to the device.
+     
+     - parameter inDNSEntry: This is the new DNS information to send to the device.
+     */
+    func setDNS(_ inDNSEntry: RVS_ONVIF_Core.DNSRecord)
+    
+    /* ################################################################## */
+    /**
+     This sends NTP data to the device.
+     
+     - parameter inNTPEntry: This is the new NTP information to send to the device.
+     */
+    func setNTP(_ inNTPEntry: RVS_ONVIF_Core.NTPRecord)
+    
+    /* ################################################################## */
+    /**
+     This sends Dynamic DNS data to the device.
+     
+     - parameter inDynDNSEntry: This is the new Dynamic DNS information to send to the device.
+     */
+    func setDynamicDNS(_ inDynDNSEntry: RVS_ONVIF_Core.DynamicDNSRecord)
 }
 
 /* ################################################################################################################################## */
@@ -1197,5 +1236,116 @@ extension RVS_ONVIF_CoreDispatcher {
      */
     public var profileSig: String {
         return "RVS_ONVIF_Core"
+    }
+
+    /* ################################################################## */
+    /**
+     This sends an explicit hostname to the device.
+     
+     - parameter inHostname: The new hostname to be set.
+     */
+    public func setHostname(_ inHostname: String) {
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetHostname, params: ["Name": inHostname])
+    }
+
+    /* ################################################################## */
+    /**
+     This tells the device to fetch its hostname from DHCP.
+     
+     - parameter isOn: True, if the device is to fetch its hostname from DHCP.
+     */
+    public func setHostnameFromDHCP(_ isOn: Bool) {
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetHostnameFromDHCP, params: ["FromDHCP": isOn ? "true" : "false"])
+    }
+
+    /* ################################################################## */
+    /**
+     This sends DNS data to the device.
+     
+     - parameter inDNSEntry: This is the new DNS information to send to the device.
+     */
+    public func setDNS(_ inDNSEntry: RVS_ONVIF_Core.DNSRecord) {
+        var params: [String: Any] = [:]
+        
+        params["trt:FromDHCP"] = inDNSEntry.isFromDHCP ? "true" : "false"
+        
+        if !inDNSEntry.searchDomain.isEmpty {
+            params["trt:SearchDomain"] = inDNSEntry.searchDomain
+        }
+        
+        if !inDNSEntry.addresses.isEmpty {
+            var ips: [[String: String]] = []
+            for ip in inDNSEntry.addresses where ip.isValidAddress {
+                let type = ip.isV6 ? "IPv6" : "IPv4"
+                let key = "tt:" + type + "Address"
+                let val: [String: String] = ["tt:Type": type, key: ip.address]
+                ips.append(val)
+            }
+            
+            params["trt:DNSManual"] = ips
+        }
+        
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDNS, params: params)
+    }
+    
+    /* ################################################################## */
+    /**
+     This sends NTP data to the device.
+     
+     - parameter inNTPEntry: This is the new NTP information to send to the device.
+     */
+    public func setNTP(_ inNTPEntry: RVS_ONVIF_Core.NTPRecord) {
+        var params: [String: Any] = [:]
+        
+        params["trt:FromDHCP"] = inNTPEntry.isFromDHCP ? "true" : "false"
+        
+        if !inNTPEntry.addresses.isEmpty || !inNTPEntry.names.isEmpty {
+            var ips: [[String: String]] = []
+            for ip in inNTPEntry.addresses where ip.isValidAddress {
+                let type = ip.isV6 ? "IPv6" : "IPv4"
+                let key = "tt:" + type + "Address"
+                let val: [String: String] = ["tt:Type": type, key: ip.address]
+                ips.append(val)
+            }
+            
+            for name in inNTPEntry.names {
+                let val: [String: String] = ["tt:Type": "DNS", "tt:DNSname": name]
+                ips.append(val)
+            }
+            
+            params["trt:NTPManual"] = ips
+        }
+        
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetNTP, params: params)
+    }
+    
+    /* ################################################################## */
+    /**
+     This sends Dynamic DNS data to the device.
+     
+     - parameter inDynDNSEntry: This is the new Dynamic DNS information to send to the device.
+     */
+    public func setDynamicDNS(_ inDynDNSEntry: RVS_ONVIF_Core.DynamicDNSRecord) {
+        var params: [String: Any] = [:]
+        print("Type: \(String(describing: inDynDNSEntry))")
+        switch inDynDNSEntry.type {
+        case .ServerUpdates(let ttl):
+            params["trt:Type"] = "ServerUpdates"
+            if nil != ttl {
+                params["trt:TTL"] = ttl?.asXMLDuration
+            }
+        case .ClientUpdates(let name, let ttl):
+            params["trt:Type"] = "ClientUpdates"
+            if !name.isEmpty {
+                params["trt:Name"] = name
+            }
+            if nil != ttl {
+                params["trt:TTL"] = ttl?.asXMLDuration
+            }
+        case .NoUpdate:
+            params["trt:Type"] = "NoUpdate"
+        }
+        
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDynamicDNS, params: params)
     }
 }

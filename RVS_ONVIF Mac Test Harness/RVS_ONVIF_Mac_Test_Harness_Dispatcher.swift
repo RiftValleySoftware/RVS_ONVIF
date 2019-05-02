@@ -17,5 +17,6 @@ import RVS_ONVIF_MacOS
 public protocol RVS_ONVIF_Mac_Test_Harness_Dispatcher {
     var sendParameters: [String: Any]! { get set }
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
+    func sendSpecificCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
     @discardableResult func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
 }

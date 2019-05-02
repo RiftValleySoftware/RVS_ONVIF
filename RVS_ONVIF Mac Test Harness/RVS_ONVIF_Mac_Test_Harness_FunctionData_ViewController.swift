@@ -28,6 +28,9 @@ enum RVS_ONVIF_Mac_Test_Harness_DialogComponents {
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
+    /* ############################################################################################################################## */
+    // MARK: - Static Properties
+    /* ############################################################################################################################## */
     static let parameterScreenStoryBoardID = "RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController"
     
     /* ############################################################################################################################## */
@@ -62,7 +65,7 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
             label.isEditable = false
             label.isSelectable = false
             label.font = NSFont.boldSystemFont(ofSize: 20)
-            insertSpecialView(label, into: ret.view)
+            insertSpecialView(label, into: ret.view, topConstraint: ret.selectorSwitch.bottomAnchor)
 
             var previousAnchor: NSLayoutYAxisAnchor = label.bottomAnchor
             
@@ -119,8 +122,9 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
         return nil
     }
     
-    @IBOutlet var cancelButton: NSButton!
-    
+    /* ############################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
@@ -135,7 +139,23 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
     /**
      */
     var dispatcher: RVS_ONVIF_Mac_Test_Harness_Dispatcher!
+
+    /* ############################################################################################################################## */
+    // MARK: - Instance IB Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var cancelButton: NSButton!
     
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var selectorSwitch: NSSegmentedControl!
+    
+    /* ############################################################################################################################## */
+    // MARK: - Base Class Override Methods
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
@@ -146,7 +166,11 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
                     $0.value(view)
                 }
             }
-            dispatcher?.sendRequest(command)
+            if 0 == selectorSwitch.selectedSegment {
+                dispatcher?.sendRequest(command)
+            } else {
+                dispatcher?.sendSpecificCommand(command)
+            }
         }
         
         super.dismiss(inSender)

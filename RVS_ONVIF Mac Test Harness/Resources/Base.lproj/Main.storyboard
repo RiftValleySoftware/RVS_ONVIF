@@ -1546,17 +1546,34 @@ DQ
                                     <action selector="dismissController:" target="xrE-lO-v4k" id="siY-xu-Exz"/>
                                 </connections>
                             </button>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pFn-ve-0ge">
+                                <rect key="frame" x="0.0" y="278" width="466" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ovL-Cz-f9x"/>
+                                </constraints>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="uCo-no-wna">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Use Generic Interface" width="232"/>
+                                        <segment label="Use Specific Interface" width="231" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="pFn-ve-0ge" firstAttribute="top" secondItem="B16-eh-mXK" secondAttribute="top" id="3r1-pd-Vft"/>
                             <constraint firstAttribute="trailing" secondItem="Dxg-8j-Ykh" secondAttribute="trailing" constant="4" id="TLM-7G-yUi"/>
                             <constraint firstAttribute="bottom" secondItem="Dxg-8j-Ykh" secondAttribute="bottom" constant="4" id="aMZ-XP-dP2"/>
                             <constraint firstItem="Dxg-8j-Ykh" firstAttribute="centerY" secondItem="IPg-nI-aSw" secondAttribute="centerY" id="dFu-ma-ktW"/>
                             <constraint firstItem="Dxg-8j-Ykh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IPg-nI-aSw" secondAttribute="trailing" id="jKl-eP-6bj"/>
                             <constraint firstItem="IPg-nI-aSw" firstAttribute="leading" secondItem="B16-eh-mXK" secondAttribute="leading" constant="4" id="uWP-uC-uf5"/>
+                            <constraint firstAttribute="trailing" secondItem="pFn-ve-0ge" secondAttribute="trailing" id="uuZ-38-5gO"/>
+                            <constraint firstItem="pFn-ve-0ge" firstAttribute="leading" secondItem="B16-eh-mXK" secondAttribute="leading" id="yPR-Mr-cHx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="IPg-nI-aSw" id="2Vz-jE-Ljz"/>
+                        <outlet property="selectorSwitch" destination="pFn-ve-0ge" id="gNI-6l-P9F"/>
                     </connections>
                 </viewController>
                 <customObject id="1bN-4d-4e4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
