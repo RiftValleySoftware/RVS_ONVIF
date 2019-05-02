@@ -442,6 +442,6 @@ extension RVS_ONVIF_Profile_SDispatcher {
      - returns: "RVS_ONVIF_ProfileS"
      */
     public var profileSig: String {
-        return "RVS_ONVIF_ProfileS"
+        return "RVS_ONVIF_Profile_S"
     }
 }

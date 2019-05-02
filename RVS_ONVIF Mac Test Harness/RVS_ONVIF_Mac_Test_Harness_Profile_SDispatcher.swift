@@ -22,6 +22,7 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
      This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
      */
     var owner: RVS_ONVIF!
+    var profiles: [RVS_ONVIF_Profile_S.Profile] = []
     
     /* ################################################################## */
     /**
@@ -40,12 +41,25 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
     /**
      */
     func sendSpecificCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
+        switch inCommand.rawValue {
+        default:
+            ()
+        }
     }
 
     /* ################################################################## */
     /**
      */
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
+        sendParameters = [:]
+        if inCommand.isRequiresParameters {
+            switch inCommand.rawValue {
+            default:
+                ()
+            }
+        } else {
+            sendRequest(inCommand)
+        }
     }
 
     /* ################################################################## */
@@ -55,7 +69,7 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
      - parameter inCommand: The command being sent.
      - returns: an empty Dictionary<String, Any>.
      */
-    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
+    public func getParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
         return [:]
     }
     
@@ -72,6 +86,20 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
             print("RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
         #endif
         
-        return isAbleToHandleThisCommand(inCommand)
+        if "GetProfiles" == inCommand.rawValue, let profileArray = inParams as? [RVS_ONVIF_Profile_S.Profile] {
+            profiles = profileArray
+            if  let windowViewController = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen,
+                let profileDisplayScreen = windowViewController.storyboard?.instantiateController(withIdentifier: "RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController") as? RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController {
+                    windowViewController.presentAsSheet(profileDisplayScreen)
+            }
+            return true
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "\(inCommand.rawValue)Response:\n"
+            alert.informativeText = String(describing: inParams)
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            return true
+        }
     }
 }

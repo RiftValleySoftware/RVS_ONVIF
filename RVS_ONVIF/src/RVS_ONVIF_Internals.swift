@@ -67,7 +67,8 @@ extension RVS_ONVIF {
                 switch $0.category {
                 case .Profile(let profileVal):
                     if .S("") == profileVal {
-                        _addProfile(RVS_ONVIF_Profile_S(owner: self))
+                        let newProfile = RVS_ONVIF_Profile_S(owner: self)
+                        _addProfile(newProfile)
                     }
 
                 default:
@@ -93,7 +94,8 @@ extension RVS_ONVIF {
             }
         }
         
-        _profiles[String(describing: type(of: profile).self)] = profile
+        let profileTag = String(describing: type(of: profile).self)
+        _profiles[profileTag] = profile
     }
 
     /* ############################################################################################################################## */
@@ -133,7 +135,7 @@ extension RVS_ONVIF {
                 request.httpBody = xmlString.data(using: .utf8)
                 
                 let sessionConfig = URLSessionConfiguration.ephemeral   // We use an ephemeral session in order to avoid having the realm cached.
-                sessionConfig.timeoutIntervalForRequest = 3             // Short timeout to catch naughty Digest responses.
+                sessionConfig.timeoutIntervalForRequest = 1             // Short timeout to catch naughty Digest responses.
 
                 _session = URLSession(configuration: sessionConfig)
                 

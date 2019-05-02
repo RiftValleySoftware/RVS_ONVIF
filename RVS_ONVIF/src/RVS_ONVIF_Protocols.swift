@@ -469,7 +469,7 @@ public protocol RVS_ONVIF_Dispatcher {
      - parameter inCommand: The command being sent.
      - returns: a Dictionary<String, Any>, with the command parameters.
      */
-    func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]!
+    func getParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]!
 
     /* ################################################################## */
     /**
@@ -502,7 +502,7 @@ extension RVS_ONVIF_Dispatcher {
      - parameter inCommand: The command being sent.
      - returns: an empty Dictionary<String, Any>.
      */
-    public func getGetParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
+    public func getParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
         return [:]
     }
 
@@ -517,7 +517,7 @@ extension RVS_ONVIF_Dispatcher {
     @discardableResult public func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
         if isAbleToHandleThisCommand(inCommand) {
             // The final dispatcher will supply any required parameters.
-            if let parameters = getGetParametersForCommand(inCommand), !parameters.isEmpty {
+            if let parameters = getParametersForCommand(inCommand), !parameters.isEmpty {
                 owner.performRequest(inCommand, params: parameters)
                 return true
             } else if !inCommand.isRequiresParameters {
@@ -536,7 +536,10 @@ extension RVS_ONVIF_Dispatcher {
      - returns: true, if the command can be handled by this instance.
      */
     public func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
-        if let profileHandler = owner.profiles[profileSig] {
+        let profileSigRender = profileSig
+        let profileHandler = owner.profiles[profileSigRender]
+        print("Handler: \(String(reflecting: profileHandler))")
+        if let profileHandler = owner.profiles[profileSigRender] {
             if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
                 return true
             }
