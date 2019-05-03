@@ -1580,22 +1580,66 @@ DQ
             </objects>
             <point key="canvasLocation" x="5648" y="1309"/>
         </scene>
+        <!--Mac Test Harness Video Display View Controller-->
+        <scene sceneID="qoM-mZ-PRr">
+            <objects>
+                <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" id="1tq-OQ-eXE" customClass="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="6ak-WH-XgH">
+                        <rect key="frame" x="0.0" y="0.0" width="1020" height="480"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4xf-66-5CT">
+                                <rect key="frame" x="-2" y="-3" width="1024" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="UGd-Cj-5bu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="u66-eC-hjc"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="DONE" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r0D-HD-kzT">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="dismissController:" target="1tq-OQ-eXE" id="Rs0-gO-bXt"/>
+                                    </connections>
+                                </buttonCell>
+                            </button>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="3mA-Xn-vSH">
+                                <rect key="frame" x="0.0" y="29" width="1020" height="451"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4xf-66-5CT" firstAttribute="top" secondItem="3mA-Xn-vSH" secondAttribute="bottom" constant="4" id="Gd0-Fu-sUS"/>
+                            <constraint firstItem="3mA-Xn-vSH" firstAttribute="top" secondItem="6ak-WH-XgH" secondAttribute="top" id="Plb-ed-xxZ"/>
+                            <constraint firstAttribute="bottom" secondItem="4xf-66-5CT" secondAttribute="bottom" constant="4" id="SEe-f8-sut"/>
+                            <constraint firstItem="4xf-66-5CT" firstAttribute="leading" secondItem="6ak-WH-XgH" secondAttribute="leading" constant="4" id="ZPc-2u-vx0"/>
+                            <constraint firstAttribute="trailing" secondItem="4xf-66-5CT" secondAttribute="trailing" constant="4" id="aMe-8k-nkK"/>
+                            <constraint firstItem="3mA-Xn-vSH" firstAttribute="leading" secondItem="6ak-WH-XgH" secondAttribute="leading" id="tg2-Nh-aWk"/>
+                            <constraint firstAttribute="trailing" secondItem="3mA-Xn-vSH" secondAttribute="trailing" id="vTc-kG-RUu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="videoDisplayView" destination="3mA-Xn-vSH" id="s2a-OA-A3L"/>
+                    </connections>
+                </viewController>
+                <customObject id="Egf-7Y-Mwr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7003" y="2062"/>
+        </scene>
         <!--Mac Test Harness Profile Display View Controller-->
         <scene sceneID="UJc-6O-hmV">
             <objects>
                 <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController" id="YFy-iI-3rY" customClass="RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="WgD-y4-3iE">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="512"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdW-sR-RbA">
-                                <rect key="frame" x="0.0" y="29" width="1024" height="483"/>
+                                <rect key="frame" x="0.0" y="29" width="1024" height="451"/>
                                 <clipView key="contentView" id="f0U-p5-ZFn">
-                                    <rect key="frame" x="1" y="0.0" width="1022" height="482"/>
+                                    <rect key="frame" x="1" y="0.0" width="1022" height="450"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Iek-TW-dSC" viewBased="YES" id="QUa-sx-9Kn">
-                                            <rect key="frame" x="0.0" y="0.0" width="1022" height="457"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1022" height="425"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1726,7 +1770,7 @@ DQ
                 </viewController>
                 <customObject id="Zkl-9j-H9E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5923" y="1879"/>
+            <point key="canvasLocation" x="5931" y="2062"/>
         </scene>
     </scenes>
 </document>
