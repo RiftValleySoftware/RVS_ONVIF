@@ -170,6 +170,7 @@
 		D40E203D226A4E4400B4A392 /* RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift; sourceTree = "<group>"; };
 		D40E203F226A5CA200B4A392 /* RVS_ONVIF_Mac_Test_Harness_Services_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Services_ViewController.swift; sourceTree = "<group>"; };
 		D41A2D9E2267D0C1002DD485 /* RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
+		D41E2D13227CD65D006BB481 /* RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h"; sourceTree = "<group>"; };
 		D421B6B7227CBA1800CED3E0 /* RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift; sourceTree = "<group>"; };
 		D42A31752267A21000E168F0 /* RVS_ONVIF_Mac_Test_Harness_Info_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Info_ViewController.swift; sourceTree = "<group>"; };
 		D42DD7DE22297F9300D7EDE4 /* RVS_ONVIF_Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Protocols.swift; sourceTree = "<group>"; };
@@ -188,7 +189,6 @@
 		D45DFCEB2260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController.swift; sourceTree = "<group>"; };
 		D45DFCED2260C5FF00E486B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D45DFCF02260C5FF00E486B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D45DFCF32260C5FF00E486B7 /* RVS_ONVIF_Mac_Test_Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RVS_ONVIF_Mac_Test_Harness.entitlements; sourceTree = "<group>"; };
 		D45DFCF92260C76300E486B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45DFCFF2260C82B00E486B7 /* RVS_ONVIF_MacOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_ONVIF_MacOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D45DFD022260C82B00E486B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -488,8 +488,8 @@
 			isa = PBXGroup;
 			children = (
 				D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */,
+				D41E2D13227CD65D006BB481 /* RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h */,
 				D45DFCF92260C76300E486B7 /* Info.plist */,
-				D45DFCF32260C5FF00E486B7 /* RVS_ONVIF_Mac_Test_Harness.entitlements */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -953,6 +953,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Mac-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF Mac Test Harness/Misc/RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -976,6 +977,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Mac-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF Mac Test Harness/Misc/RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
