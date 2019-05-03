@@ -187,6 +187,7 @@ extension RVS_ONVIF_Profile_S {
          This is the video encoder configuration.
          */
         public let videoEncoderConfiguration: VideoEncoderConfiguration!
+        
         /* ############################################################## */
         /**
          This method fetches the streaming URI for this profile. The delegate will be called with the URI, when it is received.

@@ -90,7 +90,8 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
             profiles = profileArray
             if  let windowViewController = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen,
                 let profileDisplayScreen = windowViewController.storyboard?.instantiateController(withIdentifier: "RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController") as? RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController {
-                    windowViewController.presentAsSheet(profileDisplayScreen)
+                profileDisplayScreen.profiles = profiles
+                windowViewController.presentAsSheet(profileDisplayScreen)
             }
             return true
         } else {
