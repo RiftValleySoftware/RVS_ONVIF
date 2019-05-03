@@ -9,6 +9,7 @@ disabled_rules:
 - large_tuple
 - todo
 - inert_defer
+- reduce_boolean
 
 opt_in_rules:
 - control_statement
