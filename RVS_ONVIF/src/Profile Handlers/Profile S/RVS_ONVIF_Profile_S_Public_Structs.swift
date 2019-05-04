@@ -445,4 +445,21 @@ extension RVS_ONVIF_Profile_SDispatcher {
     public var profileSig: String {
         return "RVS_ONVIF_Profile_S"
     }
+
+    /* ################################################################## */
+    /**
+     We need to reimplement this, because we obfuscate the GetStreamUri command.
+     
+     - parameter inCommand: The command being sent.
+     - returns: true, if the command can be handled by this instance.
+     */
+    public func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
+        switch inCommand.rawValue {
+        case "GetProfiles", "GetStreamUri", "GetVideoSourceConfigurations":
+            return true
+            
+        default:
+            return false
+        }
+    }
 }

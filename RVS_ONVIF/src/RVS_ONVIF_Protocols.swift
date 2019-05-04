@@ -537,9 +537,8 @@ extension RVS_ONVIF_Dispatcher {
      */
     public func isAbleToHandleThisCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool {
         let profileSigRender = profileSig
-        let profileHandler = owner.profiles[profileSigRender]
-        print("Handler: \(String(reflecting: profileHandler))")
         if let profileHandler = owner.profiles[profileSigRender] {
+            print("Handler: \(String(reflecting: profileHandler))")
             if profileHandler.availableCommandsAsStrings.contains(inCommand.rawValue) {
                 return true
             }

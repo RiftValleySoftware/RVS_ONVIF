@@ -23,6 +23,7 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
      */
     var owner: RVS_ONVIF!
     var profiles: [RVS_ONVIF_Profile_S.Profile] = []
+    var profileScreen: RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController!
     
     /* ################################################################## */
     /**
@@ -90,8 +91,15 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
             profiles = profileArray
             if  let windowViewController = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen,
                 let profileDisplayScreen = windowViewController.storyboard?.instantiateController(withIdentifier: "RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController") as? RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController {
-                profileDisplayScreen.profiles = profiles
-                windowViewController.presentAsSheet(profileDisplayScreen)
+                profileScreen = profileDisplayScreen
+                profileScreen.profiles = profiles
+                windowViewController.presentAsSheet(profileScreen)
+            }
+            return true
+        } else if "GetStreamUri" == inCommand.rawValue, let streamingURI = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
+            if let videoDisplayScreen = profileScreen.storyboard?.instantiateController(withIdentifier: "RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController") as? RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController {
+                videoDisplayScreen.streamingURL = streamingURI.uri
+                profileScreen.presentAsSheet(videoDisplayScreen)
             }
             return true
         } else {

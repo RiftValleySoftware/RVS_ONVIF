@@ -14,7 +14,22 @@ import RVS_ONVIF_MacOS
 /* ################################################################################################################################## */
 // MARK: - The Main Video Display View Controller
 /* ################################################################################################################################## */
-class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController {
+class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, VLCMediaPlayerDelegate {
+    /* ################################################################## */
+    /**
+     */
+    var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
+    
+    /* ################################################################## */
+    /**
+     */
+    var media: VLCMedia!
+    
+    /* ################################################################## */
+    /**
+     */
+    var streamingURL: URL!
+
     /* ################################################################## */
     /**
      */
@@ -24,5 +39,49 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController {
     /**
      */
     override func viewDidLoad() {
+        mediaPlayer.delegate = self
+        mediaPlayer.drawable = videoDisplayView
+        media = nil
+        displayStreamingURI(streamingURL)
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear() {
+        mediaPlayer.stop()
+        media = nil
+        super.viewWillDisappear()
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    func displayStreamingURI(_ inURI: URL!) {
+        if let uri = inURI {
+            var login_id: String = ""
+            var password: String = ""
+            
+            if let login_id_string = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.currentPrefs["login_id"], let password_string = RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.currentPrefs["password"] {
+                login_id = login_id_string
+                password = password_string
+            }
+            
+            media = VLCMedia(url: uri)
+            media.addOptions([
+                "network-caching": 0,
+                "network-synchronisation": true,
+                "sout-x264-preset": "ultrafast",
+                "sout-x264-tune": "zerolatency",
+                "sout-x264-lookahead": 15,
+                "sout-x264-keyint": 10,
+                "sout-x264-intra-refresh": true,
+                "sout-x264-mvrange-thread": -1,
+                "rtsp-user": login_id,
+                "rtsp-pwd": password
+                ])
+            mediaPlayer.media = media
+            mediaPlayer.play()
+        }
     }
 }
