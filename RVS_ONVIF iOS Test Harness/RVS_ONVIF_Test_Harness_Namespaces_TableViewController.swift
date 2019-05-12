@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Main Table View Controller Class for inspecting our profile handlers.
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ProfileHandler_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
     // MARK: - Table view data source
 
     /* ################################################################## */

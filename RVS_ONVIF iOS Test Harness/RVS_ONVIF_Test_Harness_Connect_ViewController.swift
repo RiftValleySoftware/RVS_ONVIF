@@ -27,7 +27,7 @@ class RVS_ONVIF_Test_Harness_ONVIF_TableViewController: UITableViewController {
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class for the Initial Login Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFieldDelegate, RVS_ONVIF_Delegate {
+class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFieldDelegate, RVS_ONVIFDelegate {
     /* ############################################################################################################################## */
     // MARK: - Private Class Methods
     /* ############################################################################################################################## */
@@ -181,7 +181,6 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
         activityIndicatorView.isHidden = true
         connectButton.setTitle((nil != onvifInstance ? "DIS" : "") + "CONNECT", for: .normal)
         connectedItemsContainerView.isHidden = nil == onvifInstance
-        functionsButton.isEnabled = nil != onvifInstance
         handlersButton.isEnabled = nil != onvifInstance
         ipAddressTextField.isEnabled = nil == onvifInstance
         portTextField.isEnabled = nil == onvifInstance
@@ -244,11 +243,6 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
     /**
      */
     @IBOutlet weak var activityIndicatorView: UIView!
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var functionsButton: UIBarButtonItem!
     
     /* ################################################################## */
     /**
