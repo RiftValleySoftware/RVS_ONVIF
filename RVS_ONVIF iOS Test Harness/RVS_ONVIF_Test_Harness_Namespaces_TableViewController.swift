@@ -12,9 +12,38 @@ import UIKit
 import RVS_ONVIF_iOS
 
 /* ################################################################################################################################## */
+// MARK: -
+/* ################################################################################################################################## */
+public protocol RVS_ONVIF_iOS_Test_Harness_Dispatcher {
+    var sendParameters: [String: Any]! { get set }
+    func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
+    func sendSpecificCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
+    // We repeat this, because we will be calling it, based on this protocol, not the RVS_ONVIF-defined one, which includes this.
+    @discardableResult func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
+}
+
+/* ################################################################################################################################## */
+// MARK: - Used to Display the Commands
+/* ################################################################################################################################## */
+class RVS_ONVIF_Mac_Test_Harness_CommandButton: UIButton {
+    var associatedCommand: RVS_ONVIF_DeviceRequestProtocol!
+}
+
+/* ################################################################################################################################## */
 // MARK: - Main Table View Controller Class for inspecting our profile handlers.
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+    /* ################################################################## */
+    /**
+     */
+    @objc func handleButtonPress(_ inButton: RVS_ONVIF_Mac_Test_Harness_CommandButton) {
+        for dispatcher in onvifInstance.dispatchers {
+            if let disp = dispatcher as? RVS_ONVIF_iOS_Test_Harness_Dispatcher {
+                disp.setupCommandParameters(inButton.associatedCommand)
+            }
+        }
+    }
+
     // MARK: - Table view data source
 
     /* ################################################################## */
