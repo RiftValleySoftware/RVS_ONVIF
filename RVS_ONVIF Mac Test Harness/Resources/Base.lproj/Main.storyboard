@@ -1580,10 +1580,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="5648" y="1309"/>
         </scene>
-        <!--Mac Test Harness Video Display View Controller-->
+        <!--Video Display View Controller-->
         <scene sceneID="qoM-mZ-PRr">
             <objects>
-                <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" id="1tq-OQ-eXE" customClass="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" id="1tq-OQ-eXE" userLabel="Video Display View Controller" customClass="RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController" customModule="RVS_ONVIF_Mac_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="6ak-WH-XgH">
                         <rect key="frame" x="0.0" y="0.0" width="1020" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>

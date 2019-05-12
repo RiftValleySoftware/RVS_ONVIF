@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03962C5EEECE32768F311BE9 /* libPods-RVS_ONVIF iOS Test Harness.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6D2696E03866A36BA90765 /* libPods-RVS_ONVIF iOS Test Harness.a */; };
 		32225E45A0FFB42FF1C69710 /* libPods-RVS_ONVIF Mac Test Harness.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A310D38034EC80F3C8BAB170 /* libPods-RVS_ONVIF Mac Test Harness.a */; };
 		5035D45CA18E44EAED0B69F0 /* libPods-RVS_ONVIF_MacOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E22A4BE63F35E21DC135A248 /* libPods-RVS_ONVIF_MacOS.a */; };
 		A25A1C5E443C4CFABDFDEA69 /* libPods-RVS_ONVIF_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF5121B7AC81DC1670D1A1CE /* libPods-RVS_ONVIF_iOS.a */; };
@@ -61,22 +62,21 @@
 		D495F3692215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D495F3682215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift */; };
 		D496B47C2261110700E206F5 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; };
 		D496B47D226112E400E206F5 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
+		D4996A362288971E004489C9 /* RVS_ONVIF_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; };
+		D4996A372288971E004489C9 /* RVS_ONVIF_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D499F59A2209B53E0056EBAB /* SOAPEngine64.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; };
-		D499F59C2209B6130056EBAB /* RVS_ONVIF_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; };
 		D4AB7D8822662E2D00E97395 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */; };
 		D4AE4E982218DE2F00E39BDA /* RVS_ONVIF_Test_Harness_Connect_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AE4E972218DE2F00E39BDA /* RVS_ONVIF_Test_Harness_Connect_ViewController.swift */; };
 		D4B9EB382268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */; };
 		D4BA0F5622454C1800963285 /* RVS_ParseXMLDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */; };
 		D4BAF3ED2260E87500C971D8 /* SOAPEngine64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BAF3EF2260E89A00C971D8 /* SOAPEngineOSX.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4BAF3F02260E91E00C971D8 /* RVS_ONVIF_iOS.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BC7062223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */; };
 		D4CC59D92264D37300F943C3 /* RVS_FIFOQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */; };
 		D4D793702210C9F6008022FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D7936F2210C9F6008022FC /* Default-568h@2x.png */; };
 		D4E0095A220C4A490089B914 /* RVS_ONVIF_Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E00959220C4A490089B914 /* RVS_ONVIF_Internals.swift */; };
 		D4E0A8E6226E23B9007049B6 /* RVS_Sequence_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E0A8E5226E23B9007049B6 /* RVS_Sequence_Extensions.swift */; };
 		D4E0A8E7226E23B9007049B6 /* RVS_Sequence_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E0A8E5226E23B9007049B6 /* RVS_Sequence_Extensions.swift */; };
-		F35289F8142292804257AB46 /* libPods-RVS_ONVIF iOS Test Harness.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6D2696E03866A36BA90765 /* libPods-RVS_ONVIF iOS Test Harness.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 			remoteGlobalIDString = D45DFCFE2260C82B00E486B7;
 			remoteInfo = RVS_ONVIF_MacOS;
 		};
-		D4BAF3EA2260E78500C971D8 /* PBXContainerItemProxy */ = {
+		D4996A382288971E004489C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4DF78A921FF2A7C00E9CB70 /* Project object */;
 			proxyType = 1;
@@ -97,17 +97,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D40ABF592209C77200B081A5 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D4BAF3F02260E91E00C971D8 /* RVS_ONVIF_iOS.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D45DFD0B2260C82B00E486B7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +104,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D45DFD072260C82B00E486B7 /* RVS_ONVIF_MacOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4996A3A2288971E004489C9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D4996A372288971E004489C9 /* RVS_ONVIF_iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +165,7 @@
 		D42DD7DE22297F9300D7EDE4 /* RVS_ONVIF_Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Protocols.swift; sourceTree = "<group>"; };
 		D42DD7E122298AAD00D7EDE4 /* RVS_ONVIF_Core_Public_Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core_Public_Structs.swift; sourceTree = "<group>"; };
 		D42DD7E322298B6300D7EDE4 /* RVS_ONVIF_Profile_S_Public_Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Profile_S_Public_Structs.swift; sourceTree = "<group>"; };
+		D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_CoreDispatcher.swift; sourceTree = "<group>"; };
 		D43C70B5221C8D9200C023F1 /* RVS_ONVIF_Test_Harness_DeviceCapabilities_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_DeviceCapabilities_TableViewController.swift; sourceTree = "<group>"; };
 		D44B592922202AFE00F663E9 /* RVS_ONVIF_Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core.swift; sourceTree = "<group>"; };
 		D44D99CA224107D50071B02E /* RVS_IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_IPAddress.swift; sourceTree = "<group>"; };
@@ -245,8 +246,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D499F59C2209B6130056EBAB /* RVS_ONVIF_iOS.framework in Frameworks */,
-				F35289F8142292804257AB46 /* libPods-RVS_ONVIF iOS Test Harness.a in Frameworks */,
+				D4996A362288971E004489C9 /* RVS_ONVIF_iOS.framework in Frameworks */,
+				03962C5EEECE32768F311BE9 /* libPods-RVS_ONVIF iOS Test Harness.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +304,26 @@
 				D41053C0223FB27B004D41E0 /* Profile S */,
 			);
 			path = "Profile Handlers";
+			sourceTree = "<group>";
+		};
+		D43C5B5C228891FC00F9C542 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D49089FF21FF61A50089AEC4 /* Main.storyboard */,
+				D4908A0221FF61A60089AEC4 /* Assets.xcassets */,
+				D4D7936F2210C9F6008022FC /* Default-568h@2x.png */,
+				D4908A0421FF61A60089AEC4 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D43C5B5D2288920E00F9C542 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				D496B47A2261106700E206F5 /* RVS_ONVIF_Test_Harness-Bridging-Header.h */,
+				D4908A0721FF61A60089AEC4 /* Info.plist */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		D43C70B4221C889600C023F1 /* Utility Extensions */ = {
@@ -383,12 +404,9 @@
 				D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */,
 				D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */,
 				D45A2AB222286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift */,
-				D49089FF21FF61A50089AEC4 /* Main.storyboard */,
-				D4908A0221FF61A60089AEC4 /* Assets.xcassets */,
-				D4D7936F2210C9F6008022FC /* Default-568h@2x.png */,
-				D4908A0421FF61A60089AEC4 /* LaunchScreen.storyboard */,
-				D496B47A2261106700E206F5 /* RVS_ONVIF_Test_Harness-Bridging-Header.h */,
-				D4908A0721FF61A60089AEC4 /* Info.plist */,
+				D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */,
+				D43C5B5C228891FC00F9C542 /* Resources */,
+				D43C5B5D2288920E00F9C542 /* Misc */,
 			);
 			path = "RVS_ONVIF iOS Test Harness";
 			sourceTree = "<group>";
@@ -520,16 +538,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4908A0A21FF61A60089AEC4 /* Build configuration list for PBXNativeTarget "RVS_ONVIF iOS Test Harness" */;
 			buildPhases = (
-				C4DEF8AD4CD725B9089B69EF /* [CP] Check Pods Manifest.lock */,
+				1BE92CFF8310F01F1C4B04DA /* [CP] Check Pods Manifest.lock */,
 				D49089F521FF61A50089AEC4 /* Sources */,
 				D49089F721FF61A50089AEC4 /* Resources */,
 				D49089F621FF61A50089AEC4 /* Frameworks */,
-				D40ABF592209C77200B081A5 /* Copy Frameworks */,
+				D4996A3A2288971E004489C9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4BAF3EB2260E78500C971D8 /* PBXTargetDependency */,
+				D4996A392288971E004489C9 /* PBXTargetDependency */,
 			);
 			name = "RVS_ONVIF iOS Test Harness";
 			productName = "RVS_ONVIF Test Harness";
@@ -562,7 +580,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D45DFCE62260C5FE00E486B7 = {
@@ -631,6 +649,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1BE92CFF8310F01F1C4B04DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF iOS Test Harness-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5BE4A498B602EC33199DB06B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -691,28 +731,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C4DEF8AD4CD725B9089B69EF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF iOS Test Harness-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -861,10 +879,10 @@
 			target = D45DFCFE2260C82B00E486B7 /* RVS_ONVIF_MacOS */;
 			targetProxy = D45DFD042260C82B00E486B7 /* PBXContainerItemProxy */;
 		};
-		D4BAF3EB2260E78500C971D8 /* PBXTargetDependency */ = {
+		D4996A392288971E004489C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4DF78B121FF2A7C00E9CB70 /* RVS_ONVIF_iOS */;
-			targetProxy = D4BAF3EA2260E78500C971D8 /* PBXContainerItemProxy */;
+			targetProxy = D4996A382288971E004489C9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -911,7 +929,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Mac-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -935,7 +952,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Mac-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -948,7 +964,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 273276ED3ABCD65A8FA4D86E /* Pods-RVS_ONVIF_MacOS.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -982,7 +998,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF61A2F1554B896C05777940 /* Pods-RVS_ONVIF_MacOS.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -1016,6 +1032,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B1525E23AE8902854BD2D2F8 /* Pods-RVS_ONVIF iOS Test Harness.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -1026,8 +1043,7 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit",
 					"$(PROJECT_DIR)/RVS_ONVIF\\ iOS\\ Test\\ Harness",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF iOS Test Harness/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF iOS Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1035,7 +1051,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF iOS Test Harness/RVS_ONVIF_Test_Harness-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF iOS Test Harness/Misc/RVS_ONVIF_Test_Harness-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1045,6 +1061,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 569DF7E9E90D71BA50868321 /* Pods-RVS_ONVIF iOS Test Harness.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1056,8 +1073,7 @@
 					"$(PROJECT_DIR)/Pods/MobileVLCKit",
 					"$(PROJECT_DIR)/RVS_ONVIF\\ iOS\\ Test\\ Harness",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF iOS Test Harness/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_FILE = "$(SRCROOT)/RVS_ONVIF iOS Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1065,7 +1081,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF iOS Test Harness/RVS_ONVIF_Test_Harness-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF iOS Test Harness/Misc/RVS_ONVIF_Test_Harness-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1124,7 +1140,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1185,7 +1202,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

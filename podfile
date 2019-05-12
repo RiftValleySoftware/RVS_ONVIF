@@ -3,23 +3,23 @@ def shared_pods
 end
 
 target 'RVS_ONVIF_iOS' do
-    platform :ios, '11.0'
+    platform :ios, '12.0'
     shared_pods
 end
 
 target 'RVS_ONVIF_MacOS' do
-    platform :macos, '10.12'
+    platform :macos, '10.14'
     shared_pods
 end
 
 target 'RVS_ONVIF iOS Test Harness' do
-    platform :ios, '11.0'
+    platform :ios, '12.0'
     shared_pods
     pod 'MobileVLCKit'
 end
 
 target 'RVS_ONVIF Mac Test Harness' do
-    platform :macos, '10.12'
+    platform :macos, '10.14'
     shared_pods
     pod 'VLCKit'
 end
