@@ -166,11 +166,6 @@ class RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController: NSViewController {
                     $0.value(view)
                 }
             }
-            if 0 == selectorSwitch.selectedSegment {
-                dispatcher?.sendRequest(command)
-            } else {
-                dispatcher?.sendSpecificCommand(command)
-            }
         }
         
         super.dismiss(inSender)

@@ -46,7 +46,6 @@ class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harn
         for dispatcher in onvifInstance.dispatchers {
             if let disp = dispatcher as? RVS_ONVIF_Test_Harness_Dispatcher {
                 disp.setupCommandParameters(inButton.associatedCommand)
-                disp.sendRequest(inButton.associatedCommand)
             }
         }
     }

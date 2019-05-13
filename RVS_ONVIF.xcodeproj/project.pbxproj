@@ -414,10 +414,10 @@
 				D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */,
 				D45A2AB222286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift */,
 				D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */,
+				D463694E228990DF00A487D4 /* RVS_ONVIF_Test_Harness_DisplayResponse_ViewController.swift */,
 				D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */,
 				D463695022899D2300A487D4 /* RVS_ONVIF_Test_Harness_ProfileSDispatcher.swift */,
 				D45F28962289B8930065DE8C /* RVS_ONVIF_Test_Harness_FunctionData_ViewController.swift */,
-				D463694E228990DF00A487D4 /* RVS_ONVIF_Test_Harness_DisplayResponse_ViewController.swift */,
 				D43C5B5C228891FC00F9C542 /* Resources */,
 				D43C5B5D2288920E00F9C542 /* Misc */,
 			);

@@ -129,12 +129,12 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
     /**
      */
     @IBAction func sendButtonHit(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
         if 0 == selectorSwitch.selectedSegmentIndex {
             dispatcher?.sendRequest(command)
         } else {
             dispatcher?.sendSpecificCommand(command)
         }
+        dismiss(animated: true, completion: nil)
     }
     
     /* ############################################################################################################################## */
