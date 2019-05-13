@@ -397,6 +397,17 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
      */
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = inONVIFInstance
+        inONVIFInstance.profiles.forEach {
+            switch $0.key {
+            case "RVS_ONVIF_Core":
+                let dispatcher = RVS_ONVIF_Test_Harness_CoreDispatcher(owner: onvifInstance)
+                inONVIFInstance.dispatchers.append(dispatcher)
+            case "RVS_ONVIF_Profile_S":
+                inONVIFInstance.dispatchers.append(RVS_ONVIF_Test_Harness_ProfileSDispatcher(owner: onvifInstance))
+            default:
+                break
+            }
+        }
         _setUIState()
     }
     

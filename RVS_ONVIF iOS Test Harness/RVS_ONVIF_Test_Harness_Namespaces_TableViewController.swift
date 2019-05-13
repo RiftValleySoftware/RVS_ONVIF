@@ -12,17 +12,6 @@ import UIKit
 import RVS_ONVIF_iOS
 
 /* ################################################################################################################################## */
-// MARK: -
-/* ################################################################################################################################## */
-public protocol RVS_ONVIF_iOS_Test_Harness_Dispatcher {
-    var sendParameters: [String: Any]! { get set }
-    func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
-    func sendSpecificCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
-    // We repeat this, because we will be calling it, based on this protocol, not the RVS_ONVIF-defined one, which includes this.
-    @discardableResult func sendRequest(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> Bool
-}
-
-/* ################################################################################################################################## */
 // MARK: - Used to Display the Commands
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_CommandButton: UIButton {
@@ -30,17 +19,63 @@ class RVS_ONVIF_Mac_Test_Harness_CommandButton: UIButton {
 }
 
 /* ################################################################################################################################## */
+// MARK: - Used to Display the Commands as Tappable Buttons
+/* ################################################################################################################################## */
+class RVS_ONVIF_Test_Harness_Namespaces_Command_TableViewCell: UITableViewCell {
+    @IBOutlet var commandButton: RVS_ONVIF_Mac_Test_Harness_CommandButton!
+}
+
+/* ################################################################################################################################## */
 // MARK: - Main Table View Controller Class for inspecting our profile handlers.
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+    let displayDataSegueID = "show-response"
+    typealias ResponseData = (header: String, data: String)
+    
+    /* ################################################################## */
+    /**
+     */
+    func displayResult (header inHeader: String, data inData: String) {
+        performSegue(withIdentifier: displayDataSegueID, sender: (header: inHeader, data: inData))
+    }
+    
     /* ################################################################## */
     /**
      */
     @objc func handleButtonPress(_ inButton: RVS_ONVIF_Mac_Test_Harness_CommandButton) {
         for dispatcher in onvifInstance.dispatchers {
-            if let disp = dispatcher as? RVS_ONVIF_iOS_Test_Harness_Dispatcher {
+            if let disp = dispatcher as? RVS_ONVIF_Test_Harness_Dispatcher {
                 disp.setupCommandParameters(inButton.associatedCommand)
+                disp.sendRequest(inButton.associatedCommand)
             }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen = self
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen = nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? RVS_ONVIF_Test_Harness_DisplayResponse_ViewController, let sender = sender as? ResponseData {
+            destination.responseName = sender.header
+            destination.responseData = sender.data
         }
     }
 
@@ -72,7 +107,7 @@ class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harn
     /**
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "show_profile_data_cell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "show_profile_data_cell", for: indexPath)
         let profileHandler = onvifInstance.profilesAsArray[indexPath.section]
         var numberOfLines = 1
         var text: String = ""
@@ -97,8 +132,13 @@ class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harn
             }
             cell.textLabel?.font = UIFont.monospacedDigitSystemFont(ofSize: 17, weight: .light)
         } else {
-            cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
-            text = profileHandler.availableCommandsAsStrings[indexPath.row - 1]
+            cell = tableView.dequeueReusableCell(withIdentifier: "RVS_ONVIF_Test_Harness_Namespaces_Command_TableViewCell", for: indexPath)
+            
+            if let myCell = cell as? RVS_ONVIF_Test_Harness_Namespaces_Command_TableViewCell {
+                myCell.commandButton.setTitle(profileHandler.availableCommandsAsStrings[indexPath.row - 1], for: .normal)
+                myCell.commandButton.addTarget(self, action: #selector(handleButtonPress), for: .touchUpInside)
+                myCell.commandButton.associatedCommand = profileHandler.availableCommands[indexPath.row - 1]
+            }
         }
         
         cell.textLabel?.adjustsFontSizeToFitWidth = true
