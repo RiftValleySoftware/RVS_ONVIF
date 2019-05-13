@@ -439,6 +439,74 @@
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="104.7976011994003"/>
         </scene>
+        <!--Test Harness Function Data View Controller-->
+        <scene sceneID="mft-BE-paO">
+            <objects>
+                <viewController storyboardIdentifier="dynamicDataEntry" id="Cch-IJ-EID" customClass="RVS_ONVIF_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XWE-vy-efN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2g-Ba-DWC">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="AWQ-5B-HR1"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="e6S-c6-J4w">
+                                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="wWd-Pu-Utm">
+                                            <connections>
+                                                <action selector="cancelButtonHit:" destination="Cch-IJ-EID" id="lMs-bJ-APg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="SEND" id="6dR-wH-17E">
+                                            <connections>
+                                                <action selector="sendButtonHit:" destination="Cch-IJ-EID" id="GGK-ng-Hv8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lbT-OF-w9q">
+                                <rect key="frame" x="0.0" y="64" width="375" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="rkd-0G-zxd"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-aO-La3">
+                                <rect key="frame" x="0.0" y="91" width="375" height="576"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lbT-OF-w9q" firstAttribute="trailing" secondItem="ue3-Ad-uqy" secondAttribute="trailing" id="5bh-dd-GAR"/>
+                            <constraint firstItem="lbT-OF-w9q" firstAttribute="leading" secondItem="ue3-Ad-uqy" secondAttribute="leading" id="AJ5-Is-jng"/>
+                            <constraint firstItem="m2g-Ba-DWC" firstAttribute="top" secondItem="ue3-Ad-uqy" secondAttribute="top" id="Wyj-nt-uSD"/>
+                            <constraint firstItem="OdV-aO-La3" firstAttribute="top" secondItem="lbT-OF-w9q" secondAttribute="bottom" id="cow-52-oPg"/>
+                            <constraint firstItem="m2g-Ba-DWC" firstAttribute="trailing" secondItem="ue3-Ad-uqy" secondAttribute="trailing" id="duW-Rd-4Yq"/>
+                            <constraint firstItem="OdV-aO-La3" firstAttribute="leading" secondItem="ue3-Ad-uqy" secondAttribute="leading" id="mmT-sS-fMk"/>
+                            <constraint firstItem="lbT-OF-w9q" firstAttribute="top" secondItem="m2g-Ba-DWC" secondAttribute="bottom" id="pw2-Qw-kip"/>
+                            <constraint firstItem="m2g-Ba-DWC" firstAttribute="leading" secondItem="ue3-Ad-uqy" secondAttribute="leading" id="scA-LQ-6YD"/>
+                            <constraint firstItem="OdV-aO-La3" firstAttribute="trailing" secondItem="ue3-Ad-uqy" secondAttribute="trailing" id="urn-bF-TgX"/>
+                            <constraint firstItem="OdV-aO-La3" firstAttribute="bottom" secondItem="ue3-Ad-uqy" secondAttribute="bottom" id="vpX-oB-Vvd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ue3-Ad-uqy"/>
+                    </view>
+                    <connections>
+                        <outlet property="navItem" destination="e6S-c6-J4w" id="fBF-LK-Ggh"/>
+                        <outlet property="scrollView" destination="OdV-aO-La3" id="6jg-HE-VFC"/>
+                        <outlet property="selectorSwitch" destination="lbT-OF-w9q" id="212-SA-Y06"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wfy-V9-0ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3061.5999999999999" y="874.81259370314854"/>
+        </scene>
         <!--DEVICE INFORMATION-->
         <scene sceneID="6Cm-YV-0sa">
             <objects>
