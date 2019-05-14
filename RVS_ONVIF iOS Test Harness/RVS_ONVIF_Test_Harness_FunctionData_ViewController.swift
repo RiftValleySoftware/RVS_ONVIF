@@ -21,7 +21,6 @@ enum RVS_ONVIF_Test_Harness_DialogComponents {
     case textEntry(defaultValue: String, callback: CallbackHandler)
     case textDisplay(value: String, callback: CallbackHandler)
     case pickOne(values: [String], selectedIndex: Int, callback: CallbackHandler)
-    case pickAny(values: [String], selectedIndex: Int, callback: CallbackHandler)
 }
 
 /* ################################################################################################################################## */
@@ -47,8 +46,8 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
         } else {
             inSubView.topAnchor.constraint(equalTo: inContainer.topAnchor, constant: 0).isActive = true
         }
-        inSubView.trailingAnchor.constraint(equalTo: inContainer.trailingAnchor, constant: 0).isActive = true
-        inSubView.leadingAnchor.constraint(equalTo: inContainer.leadingAnchor, constant: 0).isActive = true
+        inSubView.trailingAnchor.constraint(equalTo: inContainer.trailingAnchor, constant: 20).isActive = true
+        inSubView.leadingAnchor.constraint(equalTo: inContainer.leadingAnchor, constant: 20).isActive = true
         inSubView.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
     }
     
@@ -121,6 +120,15 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
     /* ################################################################## */
     /**
      */
+    @IBAction func callbackDispatcher(_ inView: UIView) {
+        if let callback = callbackHash[inView] {
+            callback(inView)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
     @IBAction func cancelButtonHit(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -177,14 +185,13 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
                 callbackHandler = inCallback
                 control = UITextField()
                 (control as? UITextField)?.text = inDefaultValue
+                let events: UIControl.Event = [.touchUpInside, .valueChanged, .editingChanged, .editingDidEnd, .editingDidEndOnExit]
+                (control as? UITextField)?.addTarget(self, action: #selector(callbackDispatcher), for: events)
             case .pickOne(let inValues, let inSelectedIndex, let inCallback):
                 callbackHandler = inCallback
                 control = UISegmentedControl(items: inValues)
                 (control as? UISegmentedControl)?.selectedSegmentIndex = inSelectedIndex
-            case .pickAny(let inValues, let inSelectedIndex, let inCallback):
-                callbackHandler = inCallback
-                control = UISegmentedControl(items: inValues)
-                (control as? UISegmentedControl)?.selectedSegmentIndex = inSelectedIndex
+                (control as? UITextField)?.addTarget(self, action: #selector(callbackDispatcher), for: .valueChanged)
             }
             
             if nil != control {
@@ -192,7 +199,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
                 type(of: self).insertSpecialView(control, into: scrollView, topConstraint: label.bottomAnchor)
                 previousAnchor = control.bottomAnchor
                 if nil != callbackHandler {
-                    callbackHash[control] = callbackHandler
+                    callbackHash[control!] = callbackHandler
                 }
             }
         }
