@@ -191,7 +191,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
                 callbackHandler = inCallback
                 control = UISegmentedControl(items: inValues)
                 (control as? UISegmentedControl)?.selectedSegmentIndex = inSelectedIndex
-                (control as? UITextField)?.addTarget(self, action: #selector(callbackDispatcher), for: .valueChanged)
+                (control as? UISegmentedControl)?.addTarget(self, action: #selector(callbackDispatcher), for: .valueChanged)
             }
             
             if nil != control {

@@ -473,8 +473,8 @@
                                     <constraint firstAttribute="height" constant="27" id="rkd-0G-zxd"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Generic Command"/>
+                                    <segment title="Specific Command"/>
                                 </segments>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-aO-La3">
