@@ -168,7 +168,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
             label.textAlignment = .center
             label.font = UIFont.boldSystemFont(ofSize: 15)
             
-            let control: UIView!
+            let control: UIView!    // OK for it to be let. We'll only initialize it once.
             
             let item = $0.value
             var callbackHandler: RVS_ONVIF_Test_Harness_DialogComponents.CallbackHandler!
@@ -197,7 +197,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
             if nil != control {
                 type(of: self).insertSpecialView(label, into: scrollView, topConstraint: previousAnchor)
                 type(of: self).insertSpecialView(control, into: scrollView, topConstraint: label.bottomAnchor)
-                previousAnchor = control.bottomAnchor
+                previousAnchor = control!.bottomAnchor
                 if nil != callbackHandler {
                     callbackHash[control!] = callbackHandler
                 }

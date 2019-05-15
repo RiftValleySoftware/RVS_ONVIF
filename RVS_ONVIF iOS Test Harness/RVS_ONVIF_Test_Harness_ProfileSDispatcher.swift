@@ -47,15 +47,52 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
      */
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
     }
-    
+
     /* ################################################################## */
     /**
      This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command. This implementation returns an empty command.
      
      - parameter inCommand: The command being sent.
-     - returns: a Dictionary<String, Any>, with the sending parameters, of nil, if the call is to be canceled.
+     - returns: an empty Dictionary<String, Any>.
      */
     public func getParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
-        return sendParameters
+        if "GetStreamUri" == inCommand.rawValue {
+        }
+        
+        return [:]
+    }
+    
+    /* ################################################################## */
+    /**
+     This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
+     
+     - parameter inCommand: The command to which this is a response.
+     - parameter params: The data returned (and parsed) from the device. It can be any one of the various data types.
+     - returns: true, if the response was consumed. Can be ignored.
+     */
+    @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
+        #if DEBUG
+            print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
+        #endif
+        
+        if "GetProfiles" == inCommand.rawValue, let profileArray = inParams as? [RVS_ONVIF_Profile_S.Profile] {
+            #if DEBUG
+                print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Profile Array: \(String(reflecting: profileArray))")
+            #endif
+            return true
+        } else if "GetStreamUri" == inCommand.rawValue, let streamingURI = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
+            #if DEBUG
+                print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Stream URI: \(String(reflecting: streamingURI))")
+            #endif
+            return true
+        } else {
+            let header = "\(inCommand.rawValue)Response:"
+            var body = ""
+            if let params = inParams {
+                body = String(reflecting: params)
+            }
+            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.displayResult(header: header, data: body)
+            return true
+        }
     }
 }
