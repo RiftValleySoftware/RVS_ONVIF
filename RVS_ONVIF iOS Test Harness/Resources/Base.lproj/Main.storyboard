@@ -388,6 +388,7 @@
                     </tableView>
                     <connections>
                         <segue destination="0yQ-JG-BO4" kind="show" identifier="show-response" id="nac-zg-Mup"/>
+                        <segue destination="cOT-De-q7h" kind="show" identifier="display-profiles-profiles" id="PDI-A0-Y8X"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65i-wC-vry" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -438,6 +439,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWG-PC-aA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="104.7976011994003"/>
+        </scene>
+        <!--Test Harness ProfileS Profiles Table View Controller-->
+        <scene sceneID="gvu-c6-i41">
+            <objects>
+                <tableViewController storyboardIdentifier="display-profiles-profiles" id="cOT-De-q7h" customClass="RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zub-vi-Mxy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="cOT-De-q7h" id="S50-zC-1Hy"/>
+                            <outlet property="delegate" destination="cOT-De-q7h" id="pVv-70-qkX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyd-Bk-eNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2217" y="875"/>
         </scene>
         <!--Test Harness Function Data View Controller-->
         <scene sceneID="mft-BE-paO">

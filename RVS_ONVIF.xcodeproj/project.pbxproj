@@ -49,6 +49,7 @@
 		D463A730223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D463A72F223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift */; };
 		D4656A272278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */; };
 		D467CCA02208A1F9004B8D66 /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */; };
+		D46AD0C5228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46AD0C4228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift */; };
 		D46C97C2226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */; };
 		D46F71B5221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */; };
 		D474509B220722800038B694 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4745099220722800038B694 /* RVS_String_Extensions.swift */; };
@@ -192,6 +193,7 @@
 		D463A72F223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift; sourceTree = "<group>"; };
 		D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
 		D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_PersistentPrefs.swift; sourceTree = "<group>"; };
+		D46AD0C4228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift; sourceTree = "<group>"; };
 		D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift; sourceTree = "<group>"; };
 		D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift; sourceTree = "<group>"; };
 		D4745099220722800038B694 /* RVS_String_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_String_Extensions.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */,
 				D463695022899D2300A487D4 /* RVS_ONVIF_Test_Harness_ProfileSDispatcher.swift */,
 				D45F28962289B8930065DE8C /* RVS_ONVIF_Test_Harness_FunctionData_ViewController.swift */,
+				D46AD0C4228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift */,
 				D43C5B5C228891FC00F9C542 /* Resources */,
 				D43C5B5D2288920E00F9C542 /* Misc */,
 			);
@@ -854,6 +857,7 @@
 				D4AE4E982218DE2F00E39BDA /* RVS_ONVIF_Test_Harness_Connect_ViewController.swift in Sources */,
 				D4BC7062223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift in Sources */,
 				D463695122899D2300A487D4 /* RVS_ONVIF_Test_Harness_ProfileSDispatcher.swift in Sources */,
+				D46AD0C5228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift in Sources */,
 				D4CC59D92264D37300F943C3 /* RVS_FIFOQueue.swift in Sources */,
 				D495F3692215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift in Sources */,
 				D45A2AB322286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift in Sources */,

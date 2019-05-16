@@ -75,6 +75,8 @@ class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harn
         if let destination = segue.destination as? RVS_ONVIF_Test_Harness_DisplayResponse_ViewController, let sender = sender as? ResponseData {
             destination.responseName = sender.header
             destination.responseData = sender.data
+        } else if let destination = segue.destination as? RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController, let sender = sender as? [RVS_ONVIF_Profile_S.Profile] {
+            destination.profiles = sender
         }
     }
 

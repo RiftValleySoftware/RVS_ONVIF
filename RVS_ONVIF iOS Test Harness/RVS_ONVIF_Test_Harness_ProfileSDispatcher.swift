@@ -15,6 +15,8 @@ import RVS_ONVIF_iOS
 // MARK: - Dispatch Profile S Functions
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatcher, RVS_ONVIF_Profile_SDispatcher {
+    static let profileDisplaySegueID = "display-profiles-profiles"
+    
     /* ################################################################## */
     /**
      This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.
@@ -46,6 +48,7 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
     /**
      */
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
+        sendRequest(inCommand)
     }
 
     /* ################################################################## */
@@ -79,6 +82,7 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
             #if DEBUG
                 print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Profile Array: \(String(reflecting: profileArray))")
             #endif
+            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.performSegue(withIdentifier: type(of: self).profileDisplaySegueID, sender: profileArray)
             return true
         } else if "GetStreamUri" == inCommand.rawValue, let streamingURI = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
             #if DEBUG
