@@ -440,10 +440,10 @@
             </objects>
             <point key="canvasLocation" x="3061.5999999999999" y="104.7976011994003"/>
         </scene>
-        <!--Test Harness ProfileS Profiles Table View Controller-->
+        <!--PROFILES-->
         <scene sceneID="gvu-c6-i41">
             <objects>
-                <tableViewController storyboardIdentifier="display-profiles-profiles" id="cOT-De-q7h" customClass="RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="display-profiles-profiles" title="PROFILES" id="cOT-De-q7h" customClass="RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zub-vi-Mxy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,11 +492,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Eb-SgN">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Eb-SgN" customClass="RVS_ONVIF_Test_Harness_ProfileButton" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
                                             <rect key="frame" x="16" y="0.0" width="171.5" height="43.5"/>
                                             <state key="normal" title="GetStreamURI (UDP)"/>
                                         </button>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNF-2X-pu4">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNF-2X-pu4" customClass="RVS_ONVIF_Test_Harness_ProfileButton" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
                                             <rect key="frame" x="187.5" y="0.0" width="171.5" height="43.5"/>
                                             <state key="normal" title="GetStreamURI (TCP)"/>
                                         </button>
@@ -523,10 +523,28 @@
                             <outlet property="delegate" destination="cOT-De-q7h" id="pVv-70-qkX"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="4zf-KD-sN6" kind="show" identifier="display-video" id="6aD-KW-6Lj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dyd-Bk-eNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2216.8000000000002" y="874.81259370314854"/>
+        </scene>
+        <!--Test Harness ProfileS Profile Viewer View Controller-->
+        <scene sceneID="IdE-Jj-amU">
+            <objects>
+                <viewController id="4zf-KD-sN6" customClass="RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Cv-T9-e3l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8mQ-3s-6kK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDz-Ot-c6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2217" y="1585"/>
         </scene>
         <!--Test Harness Function Data View Controller-->
         <scene sceneID="mft-BE-paO">

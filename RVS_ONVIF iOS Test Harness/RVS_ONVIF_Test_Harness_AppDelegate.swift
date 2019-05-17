@@ -14,6 +14,7 @@ import UIKit
 class RVS_ONVIF_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var openNamespaceHandlerScreen: RVS_ONVIF_Test_Harness_Namespaces_TableViewController!
+    var openProfileSProfilesScreen: RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController!
     
     /* ################################################################## */
     /**

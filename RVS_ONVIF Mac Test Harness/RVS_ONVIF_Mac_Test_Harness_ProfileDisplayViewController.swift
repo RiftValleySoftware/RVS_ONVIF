@@ -12,12 +12,15 @@ import Cocoa
 import RVS_ONVIF_MacOS
 
 /* ################################################################################################################################## */
-// MARK: - Used to Display the Commands
+// MARK: - Holds a Profile Instance
 /* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_ProfileButton: NSButton {
     var associatedProfile: RVS_ONVIF_Profile_S.Profile!
 }
 
+/* ################################################################################################################################## */
+// MARK: - Used to Display the Commands
+/* ################################################################################################################################## */
 class RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     /* ################################################################## */
     /**

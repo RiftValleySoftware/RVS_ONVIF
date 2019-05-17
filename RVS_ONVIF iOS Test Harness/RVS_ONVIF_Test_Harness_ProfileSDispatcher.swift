@@ -88,6 +88,7 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
             #if DEBUG
                 print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Stream URI: \(String(reflecting: streamingURI))")
             #endif
+            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen.displayVideoScreen(streamingURI.uri, onvifInstance: streamingURI.owner)
             return true
         } else {
             let header = "\(inCommand.rawValue)Response:"
