@@ -12,12 +12,28 @@ import UIKit
 import RVS_ONVIF_iOS
 
 /* ################################################################################################################################## */
+// MARK: - Standard Data Cell View
+/* ################################################################################################################################## */
+class RVS_ONVIF_Test_Harness_StandardCell: UITableViewCell {
+    @IBOutlet var labelView: UILabel!
+    @IBOutlet var dataView: UILabel!
+}
+
+/* ################################################################################################################################## */
+// MARK: - Callout Button Cell View
+/* ################################################################################################################################## */
+class RVS_ONVIF_Test_Harness_ButtonCell: UITableViewCell {
+    @IBOutlet var udpButton: UIButton!
+    @IBOutlet var tcpButton: UIButton!
+}
+
+/* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewController {
     static let standardTextReuseID = "standard-text"
     static let calloutButtonsReuseID = "callout-buttons"
-    
+
     /* ################################################################## */
     /**
      */
@@ -100,6 +116,24 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     /* ################################################################## */
     /**
      */
+    @objc func streamButtonUDPHit(_ inButton: UIButton) {
+        #if DEBUG
+            print("Stream UDP")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    @objc func streamButtonTCPHit(_ inButton: UIButton) {
+        #if DEBUG
+            print("Stream TCP")
+        #endif
+    }
+
+    /* ################################################################## */
+    /**
+     */
     override func numberOfSections(in inTableView: UITableView) -> Int {
         return profiles.count
     }
@@ -118,7 +152,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
         let profile = profiles[inSection]
         let data = getDataDisplayForProfile(profile)
-        return data.count
+        return data.count + 1
     }
     
     /* ################################################################## */
@@ -126,32 +160,25 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
      */
     override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         let profile = profiles[inIndexPath.section]
-        let data = getDataDisplayForProfile(profile)[inIndexPath.row]
+        let profileData = getDataDisplayForProfile(profile)
         
-        let ret = UITableViewCell()
-        
-        let keyLabel = UILabel()
-        keyLabel.text = data.key
-        
-        ret.addSubview(keyLabel)
-        
-        keyLabel.translatesAutoresizingMaskIntoConstraints = false
-        keyLabel.topAnchor.constraint(equalTo: ret.topAnchor, constant: 0).isActive = true
-        keyLabel.leadingAnchor.constraint(equalTo: ret.leadingAnchor, constant: 0).isActive = true
-        keyLabel.trailingAnchor.constraint(equalTo: ret.trailingAnchor, constant: 0).isActive = true
-        
-        let valueLabel = UILabel()
-        valueLabel.text = data.value
-        
-        ret.addSubview(valueLabel)
-        
-        valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        keyLabel.bottomAnchor.constraint(equalTo: valueLabel.topAnchor, constant: 0).isActive = true
-        valueLabel.topAnchor.constraint(equalTo: keyLabel.bottomAnchor, constant: 0).isActive = true
-        valueLabel.trailingAnchor.constraint(equalTo: ret.trailingAnchor, constant: 0).isActive = true
-        valueLabel.leadingAnchor.constraint(equalTo: keyLabel.leadingAnchor, constant: 0).isActive = true
-        valueLabel.bottomAnchor.constraint(equalTo: ret.bottomAnchor, constant: 0).isActive = true
+        if inIndexPath.row == profileData.count, let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).calloutButtonsReuseID, for: inIndexPath) as? RVS_ONVIF_Test_Harness_ButtonCell {
+            
+            ret.udpButton?.addTarget(self, action: #selector(streamButtonUDPHit), for: .touchUpInside)
 
-        return ret
+            if (profile.owner?.capabilities?.mediaCapabilities?.isRTP_TCP ?? false) || (profile.owner?.capabilities?.mediaCapabilities?.isRTP_RTSP_TCP ?? false) {
+                ret.tcpButton?.isHidden = false
+                ret.tcpButton?.addTarget(self, action: #selector(streamButtonTCPHit), for: .touchUpInside)
+            }
+            
+            return ret
+        } else if let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).standardTextReuseID, for: inIndexPath) as? RVS_ONVIF_Test_Harness_StandardCell {
+            let data = profileData[inIndexPath.row]
+            ret.labelView.text = data.key
+            ret.dataView.text = data.value
+            return ret
+        }
+        
+        return UITableViewCell()
     }
 }

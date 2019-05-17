@@ -448,6 +448,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="standard-text" id="iEz-Jc-8AK" customClass="RVS_ONVIF_Test_Harness_StandardCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iEz-Jc-8AK" id="Jrq-Ib-Isd">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="abm-yx-rh8">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="22"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VALUE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="OCd-mU-aOr">
+                                            <rect key="frame" x="16" y="22" width="343" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="OCd-mU-aOr" firstAttribute="top" secondItem="abm-yx-rh8" secondAttribute="bottom" id="KTl-e2-hdK"/>
+                                        <constraint firstAttribute="trailing" secondItem="OCd-mU-aOr" secondAttribute="trailing" constant="16" id="RbN-3j-JzJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="OCd-mU-aOr" secondAttribute="bottom" id="Udp-S9-yta"/>
+                                        <constraint firstItem="abm-yx-rh8" firstAttribute="leading" secondItem="Jrq-Ib-Isd" secondAttribute="leading" constant="16" id="Ze2-Hq-PG1"/>
+                                        <constraint firstItem="OCd-mU-aOr" firstAttribute="leading" secondItem="Jrq-Ib-Isd" secondAttribute="leading" constant="16" id="bJx-yw-7I1"/>
+                                        <constraint firstAttribute="trailing" secondItem="abm-yx-rh8" secondAttribute="trailing" constant="16" id="dGQ-gk-oKZ"/>
+                                        <constraint firstItem="abm-yx-rh8" firstAttribute="top" secondItem="Jrq-Ib-Isd" secondAttribute="top" id="dcU-7l-EnA"/>
+                                        <constraint firstItem="OCd-mU-aOr" firstAttribute="height" secondItem="abm-yx-rh8" secondAttribute="height" id="twu-Z2-yDY"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dataView" destination="OCd-mU-aOr" id="p6K-bs-ldo"/>
+                                    <outlet property="labelView" destination="abm-yx-rh8" id="No1-r9-OdS"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="callout-buttons" id="7mF-56-ElZ" customClass="RVS_ONVIF_Test_Harness_ButtonCell" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7mF-56-ElZ" id="d5L-EO-yks">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-Eb-SgN">
+                                            <rect key="frame" x="16" y="0.0" width="171.5" height="43.5"/>
+                                            <state key="normal" title="GetStreamURI (UDP)"/>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNF-2X-pu4">
+                                            <rect key="frame" x="187.5" y="0.0" width="171.5" height="43.5"/>
+                                            <state key="normal" title="GetStreamURI (TCP)"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RNF-2X-pu4" firstAttribute="width" secondItem="UG8-Eb-SgN" secondAttribute="width" id="2gC-Am-uQK"/>
+                                        <constraint firstAttribute="bottom" secondItem="UG8-Eb-SgN" secondAttribute="bottom" id="CUV-gf-fpf"/>
+                                        <constraint firstItem="RNF-2X-pu4" firstAttribute="leading" secondItem="UG8-Eb-SgN" secondAttribute="trailing" id="V4a-Vr-s0c"/>
+                                        <constraint firstAttribute="bottom" secondItem="RNF-2X-pu4" secondAttribute="bottom" id="Zbi-fb-uwY"/>
+                                        <constraint firstItem="UG8-Eb-SgN" firstAttribute="top" secondItem="d5L-EO-yks" secondAttribute="top" id="h2e-w1-l1n"/>
+                                        <constraint firstItem="UG8-Eb-SgN" firstAttribute="leading" secondItem="d5L-EO-yks" secondAttribute="leading" constant="16" id="h3N-zj-GFr"/>
+                                        <constraint firstAttribute="trailing" secondItem="RNF-2X-pu4" secondAttribute="trailing" constant="16" id="jaq-Fo-0Gi"/>
+                                        <constraint firstItem="RNF-2X-pu4" firstAttribute="top" secondItem="d5L-EO-yks" secondAttribute="top" id="wnY-SE-IBV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="tcpButton" destination="RNF-2X-pu4" id="LzJ-Er-V89"/>
+                                    <outlet property="udpButton" destination="UG8-Eb-SgN" id="eq4-Zk-Y7M"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="cOT-De-q7h" id="S50-zC-1Hy"/>
                             <outlet property="delegate" destination="cOT-De-q7h" id="pVv-70-qkX"/>
@@ -456,7 +526,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dyd-Bk-eNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2217" y="875"/>
+            <point key="canvasLocation" x="2216.8000000000002" y="874.81259370314854"/>
         </scene>
         <!--Test Harness Function Data View Controller-->
         <scene sceneID="mft-BE-paO">
