@@ -538,13 +538,39 @@
                     <view key="view" contentMode="scaleToFill" id="6Cv-T9-e3l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eE5-Kf-kNc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9Bx-J3-rS7">
+                                <rect key="frame" x="163.5" y="309.5" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9Bx-J3-rS7" secondAttribute="height" multiplier="1:1" id="XbW-Rf-vCC"/>
+                                    <constraint firstAttribute="width" constant="48" id="bfl-6V-RWy"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eE5-Kf-kNc" firstAttribute="bottom" secondItem="8mQ-3s-6kK" secondAttribute="bottom" id="bGN-Kf-D0q"/>
+                            <constraint firstItem="9Bx-J3-rS7" firstAttribute="centerX" secondItem="6Cv-T9-e3l" secondAttribute="centerX" id="eAs-78-SXO"/>
+                            <constraint firstItem="eE5-Kf-kNc" firstAttribute="top" secondItem="8mQ-3s-6kK" secondAttribute="top" id="i3G-ya-iGD"/>
+                            <constraint firstItem="eE5-Kf-kNc" firstAttribute="leading" secondItem="8mQ-3s-6kK" secondAttribute="leading" id="iKn-tv-ghh"/>
+                            <constraint firstItem="9Bx-J3-rS7" firstAttribute="centerY" secondItem="6Cv-T9-e3l" secondAttribute="centerY" id="kCi-rt-VTy"/>
+                            <constraint firstItem="eE5-Kf-kNc" firstAttribute="trailing" secondItem="8mQ-3s-6kK" secondAttribute="trailing" id="kio-2A-Tah"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8mQ-3s-6kK"/>
                     </view>
+                    <connections>
+                        <outlet property="displayView" destination="eE5-Kf-kNc" id="gHF-e9-Dur"/>
+                        <outlet property="throbber" destination="9Bx-J3-rS7" id="NUj-vw-lkl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDz-Ot-c6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2217" y="1585"/>
+            <point key="canvasLocation" x="2216.8000000000002" y="1584.5577211394304"/>
         </scene>
         <!--Test Harness Function Data View Controller-->
         <scene sceneID="mft-BE-paO">

@@ -34,6 +34,7 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
     /**
      */
     @IBOutlet weak var videoDisplayView: NSView!
+    @IBOutlet weak var throbber: NSProgressIndicator!
     
     /* ################################################################## */
     /**
@@ -82,6 +83,16 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
                 ])
             mediaPlayer.media = media
             mediaPlayer.play()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if nil != mediaPlayer.time.value {
+            throbber.isHidden = true
+            videoDisplayView.isHidden = false
         }
     }
 }

@@ -22,4 +22,5 @@ target 'RVS_ONVIF Mac Test Harness' do
     platform :macos, '10.14'
     shared_pods
     pod 'VLCKit'
+    pod 'SOAPEngine'
 end

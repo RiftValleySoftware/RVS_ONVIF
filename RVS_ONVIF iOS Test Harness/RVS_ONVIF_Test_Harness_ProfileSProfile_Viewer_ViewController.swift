@@ -19,13 +19,16 @@ class RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController: UIViewContro
     var onvifInstance: RVS_ONVIF!
     var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
     var media: VLCMedia!
-
+    
+    @IBOutlet weak var throbber: UIActivityIndicatorView!
+    @IBOutlet weak var displayView: UIView!
+    
     /* ################################################################## */
     /**
      */
     override func viewDidLoad() {
         mediaPlayer.delegate = self
-        mediaPlayer.drawable = view
+        mediaPlayer.drawable = displayView
         media = nil
         displayStreamingURI(rtpURI)
     }
@@ -67,6 +70,16 @@ class RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController: UIViewContro
                 ])
             mediaPlayer.media = media
             mediaPlayer.play()
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if nil != mediaPlayer.time.value {
+            throbber.isHidden = true
+            displayView.isHidden = false
         }
     }
 }
