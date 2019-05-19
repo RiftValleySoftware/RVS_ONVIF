@@ -531,10 +531,10 @@
             </objects>
             <point key="canvasLocation" x="2216.8000000000002" y="874.81259370314854"/>
         </scene>
-        <!--Test Harness ProfileS Profile Viewer View Controller-->
+        <!--VIDEO DISPLAY-->
         <scene sceneID="IdE-Jj-amU">
             <objects>
-                <viewController id="4zf-KD-sN6" customClass="RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="VIDEO DISPLAY" id="4zf-KD-sN6" customClass="RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController" customModule="RVS_ONVIF_iOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Cv-T9-e3l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

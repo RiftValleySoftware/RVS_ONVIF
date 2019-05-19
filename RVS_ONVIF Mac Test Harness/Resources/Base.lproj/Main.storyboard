@@ -1604,28 +1604,28 @@ DQ
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3mA-Xn-vSH">
                                 <rect key="frame" x="0.0" y="29" width="1020" height="451"/>
                             </customView>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="52X-1C-H4C">
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="QvQ-gg-BV9">
                                 <rect key="frame" x="486" y="216" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="DpF-P6-70Z"/>
-                                    <constraint firstAttribute="width" secondItem="52X-1C-H4C" secondAttribute="height" multiplier="1:1" id="fBB-1e-Yyq"/>
+                                    <constraint firstAttribute="width" secondItem="QvQ-gg-BV9" secondAttribute="height" multiplier="1:1" id="4SA-Uj-Tt2"/>
+                                    <constraint firstAttribute="width" constant="48" id="Hhd-eX-J88"/>
                                 </constraints>
                             </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="QvQ-gg-BV9" firstAttribute="centerY" secondItem="6ak-WH-XgH" secondAttribute="centerY" id="3y8-hw-2IL"/>
                             <constraint firstItem="4xf-66-5CT" firstAttribute="top" secondItem="3mA-Xn-vSH" secondAttribute="bottom" constant="4" id="Gd0-Fu-sUS"/>
                             <constraint firstItem="3mA-Xn-vSH" firstAttribute="top" secondItem="6ak-WH-XgH" secondAttribute="top" id="Plb-ed-xxZ"/>
                             <constraint firstAttribute="bottom" secondItem="4xf-66-5CT" secondAttribute="bottom" constant="4" id="SEe-f8-sut"/>
                             <constraint firstItem="4xf-66-5CT" firstAttribute="leading" secondItem="6ak-WH-XgH" secondAttribute="leading" constant="4" id="ZPc-2u-vx0"/>
                             <constraint firstAttribute="trailing" secondItem="4xf-66-5CT" secondAttribute="trailing" constant="4" id="aMe-8k-nkK"/>
-                            <constraint firstItem="52X-1C-H4C" firstAttribute="centerX" secondItem="6ak-WH-XgH" secondAttribute="centerX" id="iQb-QP-3Pg"/>
+                            <constraint firstItem="QvQ-gg-BV9" firstAttribute="centerX" secondItem="6ak-WH-XgH" secondAttribute="centerX" id="ew7-Jy-7dc"/>
                             <constraint firstItem="3mA-Xn-vSH" firstAttribute="leading" secondItem="6ak-WH-XgH" secondAttribute="leading" id="tg2-Nh-aWk"/>
                             <constraint firstAttribute="trailing" secondItem="3mA-Xn-vSH" secondAttribute="trailing" id="vTc-kG-RUu"/>
-                            <constraint firstItem="52X-1C-H4C" firstAttribute="centerY" secondItem="6ak-WH-XgH" secondAttribute="centerY" id="xd3-27-bzo"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="throbber" destination="52X-1C-H4C" id="SS2-a0-gFn"/>
+                        <outlet property="throbber" destination="QvQ-gg-BV9" id="tny-O2-xKH"/>
                         <outlet property="videoDisplayView" destination="3mA-Xn-vSH" id="s2a-OA-A3L"/>
                     </connections>
                 </viewController>

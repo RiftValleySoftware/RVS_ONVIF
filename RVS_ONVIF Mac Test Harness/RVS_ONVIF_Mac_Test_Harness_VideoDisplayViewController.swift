@@ -43,9 +43,18 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
         mediaPlayer.delegate = self
         mediaPlayer.drawable = videoDisplayView
         media = nil
+        throbber?.startAnimation(nil)
         displayStreamingURI(streamingURL)
     }
     
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayVideoScreen = self
+    }
+
     /* ################################################################## */
     /**
      */
@@ -53,6 +62,7 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
         mediaPlayer.stop()
         media = nil
         super.viewWillDisappear()
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayVideoScreen = nil
     }
 
     /* ################################################################## */
@@ -91,7 +101,7 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
      */
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
         if nil != mediaPlayer.time.value {
-            throbber.isHidden = true
+            throbber?.stopAnimation(nil)
             videoDisplayView.isHidden = false
         }
     }

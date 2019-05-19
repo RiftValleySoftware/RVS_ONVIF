@@ -124,6 +124,22 @@ class RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController: NSViewController,
         inButton.associatedProfile.fetchURI(streamType: "RTP-Unicast", andProtocol: "TCP")
     }
     
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayProfilesScreen = self
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayProfilesScreen = nil
+    }
+
     /* ############################################################################################################################## */
     // MARK: - NSTableViewDelegate/DataSource Methods -
     /* ############################################################################################################################## */

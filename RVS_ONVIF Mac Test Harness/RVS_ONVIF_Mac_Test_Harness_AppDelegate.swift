@@ -65,6 +65,9 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
     var onvifInstance: RVS_ONVIF!
     var connectionScreen: RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController!
     var functionHandlerScreen: RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController!
+    var displayProfilesScreen: RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController!
+    var displayVideoScreen: RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController!
+
     var prefs: RVS_PersistentPrefs!
     
     /* ############################################################################################################################## */

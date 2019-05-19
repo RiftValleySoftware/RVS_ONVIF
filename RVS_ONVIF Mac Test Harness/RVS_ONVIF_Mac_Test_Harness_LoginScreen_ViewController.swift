@@ -303,6 +303,12 @@ class RVS_ONVIF_Mac_Test_Harness_LoginScreen_ViewController: NSViewController {
      */
     func scramTheReactor() {
         isConnecting = false
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayVideoScreen?.dismiss(nil)
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayVideoScreen = nil
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayProfilesScreen?.dismiss(nil)
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.displayProfilesScreen = nil
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen?.dismiss(nil)
+        RVS_ONVIF_Mac_Test_Harness_AppDelegate.appDelegateObject.functionHandlerScreen = nil
         myViews.forEach {
             $0.value.view.window?.performClose(nil)
         }
