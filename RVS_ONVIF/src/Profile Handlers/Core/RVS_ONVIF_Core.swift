@@ -863,6 +863,8 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                                 profile = .Q(leftover)
                             case "g", "recording":
                                 profile = .G(leftover)
+                            case "t":
+                                profile = .T(leftover)
                             default:
                                 profile = .Unknown(leftover)
                             }

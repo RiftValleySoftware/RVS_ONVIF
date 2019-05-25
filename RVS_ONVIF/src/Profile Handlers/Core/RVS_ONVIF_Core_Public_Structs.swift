@@ -29,12 +29,14 @@ extension RVS_ONVIF_Core {
             case Unknown(String)
             /// Core profile (implicit)
             case Core(String)
-            /// Profile S (Streaming)
-            case S(String)
             /// Profile G (Recording)
             case G(String)
             /// Profile Q (Easy Setup)
             case Q(String)
+            /// Profile S (Streaming)
+            case S(String)
+            /// Profile T (Advanced Streaming)
+            case T(String)
 
             /* ############################################################## */
             /**
@@ -42,7 +44,12 @@ extension RVS_ONVIF_Core {
              */
             public static func == (lhs: ProfileType, rhs: ProfileType) -> Bool {
                 switch (lhs, rhs) {
-                case (.Unknown, .Unknown), (.Core, .Core), (.S, .S), (.G, .G), (.Q, .Q):
+                case (.Unknown, .Unknown),
+                     (.Core, .Core),
+                     (.G, .G),
+                     (.Q, .Q),
+                     (.S, .S),
+                     (.T, .T):
                     return true
                 default:
                     return false
