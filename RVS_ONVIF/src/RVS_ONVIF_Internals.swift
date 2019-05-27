@@ -149,20 +149,23 @@ extension RVS_ONVIF {
                     // Upon return, we should have a response that can be parsed. We ignore errors, if the header is there.
                     if let httpStatus = inResponse as? HTTPURLResponse, httpStatus.statusCode == 401, let authenticateHeader = httpStatus.allHeaderFields["Www-Authenticate"] as? String {
                         // Get the realm and other params from the authentication challenge.
-                        let params = self._extractAuthenticateParams(authenticateHeader: authenticateHeader)
-                        self._authCred["realm"] = params["realm"]
-                        self._authCred["nonce"] = params["nonce"]
-                        self._authCred["qop"] = params["qop"]
-                        self._authCred["opaque"] = params["opaque"]
-                        self._authCred["algorithm"] = params["algorithm"]
-                        // Just make sure that we clean up any monkey business. We want either "true" or "false" for stale.
-                        if let stale = params["stale"]?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), "true" == stale {
-                            self._authCred["stale"] = "true"
-                        } else {
-                            self._authCred["stale"] = "false"
-                        }
-                        self._authCred["method"] = "POST"   // We always POST.
-                        self._authCred["uri"] = url.relativePath
+                        self._authCred = self._extractAuthenticateParams(authenticateHeader: authenticateHeader).reduce(into: [String: String](), { (reductionBase, elem) in
+                            let key = elem.key.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                            var value = elem.value.trimmingCharacters(in: .whitespacesAndNewlines)
+                            switch key {
+                            case "stale":
+                                // Make sure that we have something in the stale flag.
+                                value = "true" == value.lowercased() ? "true" : "false"
+                            case "url":
+                                value = url.relativePath    // This is the path that applies to the auth header. It is server-relative.
+                            case "method":
+                                value = "POST" // We always ring twice (We always POST).
+                            default:
+                                ()
+                            }
+                            
+                            reductionBase[key] = value
+                        })
                     }
                     
                     // Make sure that we wrap everything up.
@@ -189,9 +192,9 @@ extension RVS_ONVIF {
          - returns: a Dictionary, with the realm and nonce parameters.
          */
         private func _extractAuthenticateParams(authenticateHeader inAuthenticateHeader: String) -> [String: String] {
-            let header = String(inAuthenticateHeader.dropFirst(7))
+            let header = String(inAuthenticateHeader.dropFirst(7))  // We drop the first seven characters ("Digest").
             
-            return header.split(separator: ",").reduce(into: [String: String](), {
+            let ret = header.split(separator: ",").reduce(into: [String: String](), {
                 let pair = $1.split(separator: "=")
                 
                 if let key = pair.first?.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -199,6 +202,8 @@ extension RVS_ONVIF {
                     $0[key] = value
                 }
             })
+            
+            return ret
         }
         
         /* ############################################################################################################################## */
@@ -459,6 +464,7 @@ extension RVS_ONVIF {
             core.scopes = []
             core.capabilities = nil
             core.serviceCapabilities = nil
+            _authData = [:]
             _profiles = [String(describing: RVS_ONVIF_Core.self): core] // Make sure that we leave the core handler, for if we want to reinitialize.
             DispatchQueue.main.async {  // We always make callbacks in the main thread.
                 self.delegate?.onvifInstanceDeinitialized(self)
