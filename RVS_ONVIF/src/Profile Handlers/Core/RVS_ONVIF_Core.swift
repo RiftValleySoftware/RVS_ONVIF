@@ -590,6 +590,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case GetDNS
         case GetNTP
         case GetDynamicDNS
+        case GetNetworkInterfaces
 
         case SetHostname
         case SetHostnameFromDHCP
@@ -1046,6 +1047,9 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 }
             }
 
+        case _DeviceRequest.GetNetworkInterfaces.soapAction:
+            ()
+            
         default:    // If we don't recognize the call we made, we try our overflow.
             return _callbackHandlerPartDeux(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
         }

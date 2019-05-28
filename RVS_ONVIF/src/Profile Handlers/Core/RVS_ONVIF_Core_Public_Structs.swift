@@ -1184,6 +1184,214 @@ extension RVS_ONVIF_Core {
             owner = inOwner
         }
     }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes a single network interface data model
+     */
+    public struct NetworkInterface: OwnedInstanceProtocol {
+        /* ############################################################## */
+        /**
+         This is us.
+         */
+        public let owner: RVS_ONVIF!
+        
+        /* ############################################################## */
+        /**
+         The interface token
+         */
+        public var token: String = ""
+        
+        /* ############################################################## */
+        /**
+         The enabled flag. If true, the interface is enabled.
+         */
+        public var isEnabled: Bool = false
+
+        /* ############################################################## */
+        /**
+         OPTIONAL: The newtwork interface general info. This may be nil.
+         */
+        public var info: NetworkInterfaceInfo!
+
+        /* ############################################################## */
+        /**
+         OPTIONAL: The newtwork interface link info. This may be nil.
+         */
+        public var link: NetworkInterfaceLink!
+
+        /* ############################################################## */
+        /**
+         OPTIONAL: The IPv4 newtwork interface info. This may be nil.
+         */
+        public var ipV4: IPNetworkInterface!
+
+        /* ############################################################## */
+        /**
+         OPTIONAL: The IPv6 newtwork interface info. This may be nil.
+         */
+        public var ipV6: IPNetworkInterface!
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for the "info" item of the newtork interface struct
+     */
+    public struct NetworkInterfaceInfo {
+        /* ############################################################## */
+        /**
+         The interface name. This is optional, and may be empty
+         */
+        public var name: String = ""
+        
+        /* ############################################################## */
+        /**
+         The hardware MAC address. It is a string in the format 00-FF\:00-FF\:00-FF\:00-FF\:00-FF\:00-FF
+         */
+        public var hwAddress: String = ""
+        
+        /* ############################################################## */
+        /**
+         The maximum transmission unit (MTU) size. 0 is undefined.
+         */
+        public var mtu: Int = 0
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for the "link" item of the newtork interface struct
+     */
+    public struct NetworkInterfaceLink {
+        /* ############################################################## */
+        /**
+         The admin settings.
+         */
+        public var adminSettings: NetworkInterfaceConnectionSetting
+        
+        /* ############################################################## */
+        /**
+         The operator settings.
+         */
+        public var operSettings: NetworkInterfaceConnectionSetting
+        
+        /* ############################################################## */
+        /**
+         The interface type.
+         */
+        public var interfaceType: RVS_ONVIF_Core.IANA_Types
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for an IPv4 or IPv6 address, as used in the Network Interface Info List.
+     */
+    public struct IPAddressEntry {
+        /// This will be either a v4 or v6 address
+        public var address: RVS_IPAddress
+        
+        /// The length of the address submask.
+        public var prefixLength: Int
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for an IPv4 or IPv6 interface configuration. It has a couple of fields which are not filled for IPv4.
+     */
+    public struct IPConfiguration {
+        /* ############################################################## */
+        /**
+         This is true, if the interface uses DHCP.
+         */
+        public var isDHCP: Bool = false
+        
+        /* ############################################################## */
+        /**
+         OPTIONAL -This contains any IP addresses manually entered. It is optional, and can be nil
+         */
+        public var manual: [IPAddressEntry]!
+        
+        /* ############################################################## */
+        /**
+         OPTIONAL -This contains any IP addresses available for local loopback link. It is optional, and can be nil
+         */
+        public var linkLocal: [IPAddressEntry]!
+        
+        /* ############################################################## */
+        /**
+         OPTIONAL -This contains any IP addresses assigned by DHCP. It is optional, and can be nil
+         */
+        public var fromDHCP: [IPAddressEntry]!
+        
+        /* ############################################################## */
+        /**
+         OPTIONAL -ONLY FOR IPV6: This is a list of addresses from Router Advertisement.
+         This will be nil for IPv4 interfaces.
+         */
+        public var fromRA: [IPAddressEntry]!
+        
+        /* ############################################################## */
+        /**
+         ONLY FOR IPV6: This is true, if the interface will accept router advertisement.
+         This will be nil for IPv4 interfaces.
+         */
+        public var isAbleToAcceptRouterAdvert: Bool!
+    }
+
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for an IPv4 interface.
+     */
+    public struct IPNetworkInterface {
+        /* ############################################################## */
+        /**
+         The enabled flag. If true, the interface is enabled.
+         */
+        public var isEnabled: Bool = false
+        
+        /* ############################################################## */
+        /**
+         The IPv4 configuration for this interface.
+         */
+        public var configuration: IPConfiguration
+    }
+
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the settings for an admin or operator of a link.
+     */
+    public struct NetworkInterfaceConnectionSetting: OwnedInstanceProtocol {
+        /* ############################################################## */
+        /**
+         This enum describes the duplex type (Half or Full).
+         */
+        public enum Duplex: String {
+            case Half, Full
+        }
+        
+        /* ############################################################## */
+        /**
+         This is us.
+         */
+        public let owner: RVS_ONVIF!
+        
+        /* ############################################################## */
+        /**
+         True, if auto speed negotiation is on.
+         */
+        public var autoNegotiation: Bool = false
+        
+        /* ############################################################## */
+        /**
+         The interface speed.
+         */
+        public var speed: Int = 0
+        
+        /* ############################################################## */
+        /**
+         The duplex type.
+         */
+        public var duplex: Duplex
+    }
 }
 
 /* ################################################################################################################################## */
