@@ -1286,7 +1286,7 @@ extension RVS_ONVIF_Core {
      This struct describes the model for an IPv4 or IPv6 address, as used in the Network Interface Info List.
      */
     public struct IPAddressEntry {
-        /// This will be either a v4 or v6 address
+        /// This will be either a RVS_IPAddressV4 or RVS_IPAddressV6 address
         public var address: RVS_IPAddress
         
         /// The length of the address submask.
