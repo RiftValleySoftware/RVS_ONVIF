@@ -1231,6 +1231,12 @@ extension RVS_ONVIF_Core {
          OPTIONAL: The IPv6 newtwork interface info. This may be nil.
          */
         public var ipV6: IPNetworkInterface!
+        
+        /* ############################################################## */
+        /**
+         OPTIONAL: Any extension to the interface. This may be nil.
+         */
+        public var networkInterfaceExtension: NetworkInterfaceExtension!
     }
     
     /* ###################################################################################################################################### */
@@ -1283,6 +1289,117 @@ extension RVS_ONVIF_Core {
     
     /* ###################################################################################################################################### */
     /**
+     This struct describes the model for a network interface extension record.
+     */
+    public struct NetworkInterfaceExtension {
+        /* ############################################################## */
+        /**
+         The interface type.
+         */
+        public var interfaceType: RVS_ONVIF_Core.IANA_Types
+        
+        /* ############################################################## */
+        /**
+         A placeholder for 802.3 configuration. This is optional, and may be nil.
+         */
+        public var dot3Configuration: Any!
+        
+        /* ############################################################## */
+        /**
+         802.11 configuration. This is optional, and may be nil.
+         */
+        public var dot11: Any!
+        
+        /* ############################################################## */
+        /**
+         Optional extension placeholder.
+         */
+        public var networkInterfaceSetConfigurationExtension2: Any!
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for a network interface 802.11 configuration extension record.
+     */
+    public struct Dot11Configuration {
+        /* ################################################################################################################################## */
+        /**
+         This struct describes the model for the security (login) info for an 802.11 WiFi network.
+         */
+        public struct Dot11SecurityConfiguration {
+            /* ############################################################################################################################## */
+            /**
+             This struct has the key and/or passphrase for a login.
+             All properties are optional, and may be empty.
+             */
+            public struct Dot11PSKSet {
+                /// The key (256 bits, presented as 64 hex octets).
+                public var key: String = ""
+                /// The passphrase (a String).
+                public var passphrase: String = ""
+                /// This is optional, and contains any extension info.
+                public var dot11PSKSetExtension: Any!
+            }
+            
+            /// The network security mode.
+            public enum Dot11SecurityMode: String {
+                case none = "None"
+                case wep = "WEP"
+                case psk = "PSK"
+                case dot1x = "Dot1X"
+                case extended = "Extended"
+            }
+            
+            /// The encryption type.
+            public enum Dot11Cipher: String {
+                case ccmp = "CCMP"
+                case tkip = "TKIP"
+                case any = "Any"
+                case extended = "Extended"
+            }
+            
+            /// The security mode to be used.
+            public var mode: Dot11SecurityMode = .none
+            
+            /// The algorithm. This is optional, and may be nil.
+            public var algorithm: Dot11Cipher!
+            
+            /// The PSK. This is optional, and may be nil.
+            public var psk: Dot11PSKSet!
+            
+            /// The Dot.1X reference token. This is optional, and may be nil.
+            public var dot1XToken: String!
+            
+            /// This is optional, and contains any extension info.
+            public var dot11SecurityConfigurationExtension: Any!
+        }
+        
+       /// The connection mode for this network.
+        public enum Dot11StationMode: String {
+            case adHoc = "Ad-hoc"
+            case infrastructure = "Infrastructure"
+            case extended = "Extended"
+            case error
+        }
+        
+        /// The SSID of the network, as a String.
+        public var ssid: String
+        
+        /// The mode of this WiFi connection.
+        public var mode: Dot11StationMode = .error
+        
+        /// An alias for this network.
+        public var alias: String = ""
+        
+        /// The priority for this network. Type is unknown.
+        public var priority: Any!
+        
+        /// The security login info for this network.
+        public var security: Dot11SecurityConfiguration
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
      This struct describes the model for an IPv4 or IPv6 address, as used in the Network Interface Info List.
      */
     public struct IPAddressEntry {
@@ -1325,16 +1442,23 @@ extension RVS_ONVIF_Core {
         /* ############################################################## */
         /**
          OPTIONAL -ONLY FOR IPV6: This is a list of addresses from Router Advertisement.
-         This will be nil for IPv4 interfaces.
+         This will always be nil for IPv4 interfaces.
          */
         public var fromRA: [IPAddressEntry]!
         
         /* ############################################################## */
         /**
          ONLY FOR IPV6: This is true, if the interface will accept router advertisement.
-         This will be nil for IPv4 interfaces.
+         This will always be nil for IPv4 interfaces.
          */
         public var isAbleToAcceptRouterAdvert: Bool!
+
+        /* ############################################################## */
+        /**
+         ONLY FOR IPV6: The IPv6 extension interface info. It is optional, and can be nil
+         This will always be nil for IPv4 interfaces.
+         */
+        public var ipv6ConfigurationExtension: Any!
     }
 
     /* ###################################################################################################################################### */
