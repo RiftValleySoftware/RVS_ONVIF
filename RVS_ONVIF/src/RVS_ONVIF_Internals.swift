@@ -393,10 +393,9 @@ extension RVS_ONVIF {
      - returns: An instance of RVS_IPAddress, set to the type of IP address.
      */
     internal func _parseIPAddress(_ inDictionary: [String: Any]) -> RVS_IPAddress! {
-        print("IP Address: \(String(describing: inDictionary))")
-        if let ipAddressString = (inDictionary["IPv4Address"] ?? inDictionary["IPv6Address"]) as? String {
+        if let ipAddressString = (inDictionary["Address"] ?? inDictionary["IPv6Address"] ?? inDictionary["IPv6Address"]) as? String {
             return ipAddressString.ipAddress
-        } else if let ipAddressStringWrapper = (inDictionary["IPv4Address"] ?? inDictionary["IPv6Address"]) as? [String: Any],
+        } else if let ipAddressStringWrapper = (inDictionary["Address"] ?? inDictionary["IPv4Address"] ?? inDictionary["IPv6Address"]) as? [String: Any],
             let ipAddressString = ipAddressStringWrapper["value"] as? String {
             return ipAddressString.ipAddress
         }

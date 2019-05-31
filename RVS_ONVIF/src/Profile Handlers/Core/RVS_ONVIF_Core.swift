@@ -888,6 +888,238 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         
         return ret
     }
+    
+    /* ############################################################################################################################## */
+    // MARK: - GetNetworkInterfaces Parser
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This parses the response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an Array of NetworkInterface instances.
+     */
+    internal func _transformNetworkInterfacesResponse(_ inResponseDictionary: [String: Any]) -> [NetworkInterface] {
+        #if DEBUG
+            print("Parsing the Network Interfaces Response: \(String(reflecting: inResponseDictionary))")
+        #endif
+        
+        let ret: [NetworkInterface] = []
+        
+        if let outerWrapper = inResponseDictionary["GetNetworkInterfacesResponse"] as? [String: Any] {
+            var outerWrapperArray: [[String: Any]] = []
+            
+            if let outerWrapperArrayTemp = outerWrapper["NetworkInterfaces"] as? [[String: Any]] {
+                outerWrapperArray = outerWrapperArrayTemp
+            } else if let outerWrapperArrayTemp = outerWrapper["NetworkInterfaces"] as? [String: Any] {
+                outerWrapperArray = [outerWrapperArrayTemp]
+            }
+            
+            outerWrapperArray.forEach {
+                let token = owner._parseString($0, key: "token") ?? ""
+                let isEnabled = owner._parseBoolean($0, key: "Enabled")
+                let info = _transformNetworkInterfaceInfo($0)
+                let link = _transformNetworkInterfaceLink($0)
+                let ipv4 = _transformNetworkInterfaceIP($0, key: "IPv4")
+                let ipv6 = _transformNetworkInterfaceIP($0, key: "IPv6")
+                let networkInterfaceExtension = _transformNetworkInterfaceExtension($0)
+
+                #if DEBUG
+                    print("\tNetwork Interface Info: \(token)")
+                    print("\t\ttoken: \(token)")
+                    print("\t\tisEnabled: \(isEnabled)")
+                    print("\t\tinfo: \(String(describing: info))")
+                    print("\t\tlink: \(String(describing: link))")
+                    print("\t\tipv4: \(String(describing: ipv4))")
+                    print("\t\tipv6: \(String(describing: ipv6))")
+                    print("\t\tnetworkInterfaceExtension: \(String(describing: networkInterfaceExtension))")
+                #endif
+            }
+        }
+        
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the Info response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a NetworkInterfaceInfo instance, or nil (if none)
+     */
+    internal func _transformNetworkInterfaceInfo(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceInfo! {
+        
+        if let info = inResponseDictionary["Info"] as? [String: Any] {
+            let name = owner._parseString(info, key: "Name") ?? ""
+            let hwAddress = owner._parseString(info, key: "HwAddress") ?? ""
+            let mtu = owner._parseInteger(info, key: "MTU") ?? 0
+            
+            return NetworkInterfaceInfo(name: name, hwAddress: hwAddress, mtu: mtu)
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the Link response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a NetworkInterfaceLink instance, or nil (if none)
+     */
+    internal func _transformNetworkInterfaceLink(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceLink! {
+        
+        if let link = inResponseDictionary["Link"] as? [String: Any] {
+            var interfaceType = IANA_Types.other
+            
+            if let interfaceTypeInt = owner._parseInteger(link, key: "InterfaceType") {
+                interfaceType = IANA_Types(rawValue: interfaceTypeInt) ?? .other
+            }
+            
+            let adminSettings = _transformNetworkInterfaceConnectionSetting(link, key: "AdminSettings")
+            let operSettings = _transformNetworkInterfaceConnectionSetting(link, key: "OperSettings")
+            
+            return NetworkInterfaceLink(adminSettings: adminSettings, operSettings: operSettings, interfaceType: interfaceType)
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the Connection Setting Type response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - parameter key: The key to be used to fetch the data.
+     - returns: a NetworkInterfaceConnectionSetting instance
+     */
+    internal func _transformNetworkInterfaceConnectionSetting(_ inResponseDictionary: [String: Any], key inKey: String) -> NetworkInterfaceConnectionSetting {
+        if let link = inResponseDictionary[inKey] as? [String: Any] {
+            let speed = owner._parseInteger(link, key: "Speed") ?? 0
+            let autoNegotiation = owner._parseBoolean(link, key: "AutoNegotiation")
+            let duplexString = owner._parseString(link, key: "Duplex") ?? ""
+            let duplex = NetworkInterfaceConnectionSetting.Duplex(rawValue: duplexString) ?? .Full
+            return NetworkInterfaceConnectionSetting(owner: owner, autoNegotiation: autoNegotiation, speed: speed, duplex: duplex)
+        }
+        
+        return NetworkInterfaceConnectionSetting(owner: owner, autoNegotiation: false, speed: 0, duplex: .Full)
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the IPv4/6 response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - parameter key: The key to be used to fetch the data.
+     - returns: an IPNetworkInterface instance (with IPv4/6 info), or nil (if none)
+     */
+    internal func _transformNetworkInterfaceIP(_ inResponseDictionary: [String: Any], key inKey: String) -> IPNetworkInterface! {
+        if let ipConfig = inResponseDictionary[inKey] as? [String: Any], let configDict = ipConfig["Config"] as? [String: Any] {
+            let isEnabled = owner._parseBoolean(ipConfig, key: "Enabled")
+            let config = _transformNetworkInterfaceIP(configDict)
+            return IPNetworkInterface(isEnabled: isEnabled, configuration: config)
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the IPv4/6 configuration from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an IPConfiguration instance (with IPv4/6 info)
+     */
+    internal func _transformNetworkInterfaceIP(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
+        let ipv6ConfigurationExtension = inResponseDictionary["Extension"]
+        var isDHCP: Bool = false
+        var isAbleToAcceptRouterAdvert: Bool! = nil
+        
+        var manual: [IPAddressEntry]! = nil
+        var linkLocal: [IPAddressEntry]! = nil
+        var fromDHCP: [IPAddressEntry]! = nil
+        var fromRA: [IPAddressEntry]! = nil
+
+        // Have to do this, because IPv6 and IPv4 are different (what a mess).
+        if let dhcpStatusStr = inResponseDictionary["DHCP"] as? String {
+            let isDHCPBoolStr = dhcpStatusStr.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let isDHCPBool = "true" == isDHCPBoolStr || "on" == isDHCPBoolStr
+            isDHCP = isDHCPBool
+        }
+        
+        if let manualArray = inResponseDictionary["Manual"] as? [[String: String]] {
+            manual = []
+            manualArray.forEach {
+                manual.append(_transformIPAddressEntry($0))
+            }
+        } else if let manualStr = inResponseDictionary["Manual"] as? [String: String] {
+            manual = [_transformIPAddressEntry(manualStr)]
+        }
+        
+        if let linkLocalArray = inResponseDictionary["LinkLocal"] as? [[String: String]] {
+            linkLocal = []
+            linkLocalArray.forEach {
+                linkLocal.append(_transformIPAddressEntry($0))
+            }
+        } else if let linkLocalStr = inResponseDictionary["LinkLocal"] as? [String: String] {
+            linkLocal = [_transformIPAddressEntry(linkLocalStr)]
+        }
+        
+        if let fromDHCPArray = inResponseDictionary["FromDHCP"] as? [[String: String]] {
+            fromDHCP = []
+            fromDHCPArray.forEach {
+                fromDHCP.append(_transformIPAddressEntry($0))
+            }
+        } else if let fromDHCPStr = inResponseDictionary["FromDHCP"] as? [String: String] {
+            fromDHCP = [_transformIPAddressEntry(fromDHCPStr)]
+        }
+        
+        if let fromRAArray = inResponseDictionary["FromRA"] as? [[String: String]] {
+            fromRA = []
+            fromRAArray.forEach {
+                fromRA.append(_transformIPAddressEntry($0))
+            }
+        } else if let fromRAStr = inResponseDictionary["FromRA"] as? [String: String] {
+            fromRA = [_transformIPAddressEntry(fromRAStr)]
+        }
+        
+        if nil != inResponseDictionary["AcceptRouterAdvert"] as? String {
+            isAbleToAcceptRouterAdvert = owner._parseBoolean(inResponseDictionary, key: "AcceptRouterAdvert")
+        }
+        
+        return IPConfiguration(isDHCP: isDHCP, manual: manual, linkLocal: linkLocal, fromDHCP: fromDHCP, fromRA: fromRA, isAbleToAcceptRouterAdvert: isAbleToAcceptRouterAdvert, ipv6ConfigurationExtension: ipv6ConfigurationExtension)
+    }
+
+    /* ################################################################## */
+    /**
+     This parses the Extension response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an NetworkInterfaceExtension instance (with IPv6 info), or nil (if none)
+     */
+    internal func _transformNetworkInterfaceExtension(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceExtension! {
+        if let networkInterfaceExtension = inResponseDictionary["Extension"] as? [String: Any] {
+            #if DEBUG
+                print("Parsing the Network Extension Link: \(String(reflecting: networkInterfaceExtension))")
+            #endif
+        }
+        
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
+     This parses an IP Address response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an IPAddressEntry instance (with IPv6 info)
+     */
+    internal func _transformIPAddressEntry(_ inResponseDictionary: [String: Any]) -> IPAddressEntry {
+        let ipAddress = owner._parseIPAddress(inResponseDictionary)
+        let prefixLength = owner._parseInteger(inResponseDictionary, key: "PrefixLength") ?? 0
+
+        return IPAddressEntry(address: ipAddress, prefixLength: prefixLength)
+    }
 
     /* ################################################################################################################################## */
     // MARK: - Public Static Properties
@@ -1046,10 +1278,11 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     }
                 }
             }
-
-        case _DeviceRequest.GetNetworkInterfaces.soapAction:
-            ()
             
+        case _DeviceRequest.GetNetworkInterfaces.soapAction:
+            let networkInterfaces: [NetworkInterface] = _transformNetworkInterfacesResponse(inResponseDictionary)
+            print(String(reflecting: networkInterfaces))
+
         default:    // If we don't recognize the call we made, we try our overflow.
             return _callbackHandlerPartDeux(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
         }
@@ -1186,7 +1419,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             
             // Let the delegate know that we're finally ready.
             owner.delegate?.onvifInstanceInitialized(owner)
-        
+            
         default:    // If we don't recognize the call we made, we drop out.
             return false
         }
