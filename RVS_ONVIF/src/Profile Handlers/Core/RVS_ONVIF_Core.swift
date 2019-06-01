@@ -901,40 +901,40 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      */
     internal func _transformNetworkInterfacesResponse(_ inResponseDictionary: [String: Any]) -> [NetworkInterface] {
         #if DEBUG
-            print("Parsing the Network Interfaces Response: \(String(reflecting: inResponseDictionary))")
+            print("Parsing the Network Interfaces Response")
         #endif
         
-        let ret: [NetworkInterface] = []
+        var ret: [NetworkInterface] = []
         
-        if let outerWrapper = inResponseDictionary["GetNetworkInterfacesResponse"] as? [String: Any] {
-            var outerWrapperArray: [[String: Any]] = []
+        var outerWrapperArray: [[String: Any]] = []
+        
+        if let outerWrapperArrayTemp = inResponseDictionary["NetworkInterfaces"] as? [[String: Any]] {
+            outerWrapperArray = outerWrapperArrayTemp
+        } else if let outerWrapperArrayTemp = inResponseDictionary["NetworkInterfaces"] as? [String: Any] {
+            outerWrapperArray = [outerWrapperArrayTemp]
+        }
+        
+        outerWrapperArray.forEach {
+            let token = owner._parseString($0, key: "token") ?? ""
+            let isEnabled = owner._parseBoolean($0, key: "Enabled")
+            let info = _transformNetworkInterfaceInfo($0)
+            let link = _transformNetworkInterfaceLink($0)
+            let ipv4 = _transformNetworkInterfaceIP($0, key: "IPv4")
+            let ipv6 = _transformNetworkInterfaceIP($0, key: "IPv6")
+            let networkInterfaceExtension = _transformNetworkInterfaceExtension($0)
             
-            if let outerWrapperArrayTemp = outerWrapper["NetworkInterfaces"] as? [[String: Any]] {
-                outerWrapperArray = outerWrapperArrayTemp
-            } else if let outerWrapperArrayTemp = outerWrapper["NetworkInterfaces"] as? [String: Any] {
-                outerWrapperArray = [outerWrapperArrayTemp]
-            }
+            #if DEBUG
+                print("\tNetwork Interface Info: \(token)")
+                print("\t\ttoken: \(token)")
+                print("\t\tisEnabled: \(isEnabled)")
+                print("\t\tinfo: \(String(describing: info))")
+                print("\t\tlink: \(String(describing: link))")
+                print("\t\tipv4: \(String(describing: ipv4))")
+                print("\t\tipv6: \(String(describing: ipv6))")
+                print("\t\tnetworkInterfaceExtension: \(String(describing: networkInterfaceExtension))\n")
+            #endif
             
-            outerWrapperArray.forEach {
-                let token = owner._parseString($0, key: "token") ?? ""
-                let isEnabled = owner._parseBoolean($0, key: "Enabled")
-                let info = _transformNetworkInterfaceInfo($0)
-                let link = _transformNetworkInterfaceLink($0)
-                let ipv4 = _transformNetworkInterfaceIP($0, key: "IPv4")
-                let ipv6 = _transformNetworkInterfaceIP($0, key: "IPv6")
-                let networkInterfaceExtension = _transformNetworkInterfaceExtension($0)
-
-                #if DEBUG
-                    print("\tNetwork Interface Info: \(token)")
-                    print("\t\ttoken: \(token)")
-                    print("\t\tisEnabled: \(isEnabled)")
-                    print("\t\tinfo: \(String(describing: info))")
-                    print("\t\tlink: \(String(describing: link))")
-                    print("\t\tipv4: \(String(describing: ipv4))")
-                    print("\t\tipv6: \(String(describing: ipv6))")
-                    print("\t\tnetworkInterfaceExtension: \(String(describing: networkInterfaceExtension))")
-                #endif
-            }
+            ret.append(NetworkInterface(owner: owner, token: token, isEnabled: isEnabled, info: info, link: link, ipV4: ipv4, ipV6: ipv6, networkInterfaceExtension: networkInterfaceExtension))
         }
         
         return ret
@@ -1016,7 +1016,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
     internal func _transformNetworkInterfaceIP(_ inResponseDictionary: [String: Any], key inKey: String) -> IPNetworkInterface! {
         if let ipConfig = inResponseDictionary[inKey] as? [String: Any], let configDict = ipConfig["Config"] as? [String: Any] {
             let isEnabled = owner._parseBoolean(ipConfig, key: "Enabled")
-            let config = _transformNetworkInterfaceIP(configDict)
+            let config = _transformNetworkInterfaceIPIndividual(configDict)
             return IPNetworkInterface(isEnabled: isEnabled, configuration: config)
         }
         
@@ -1025,12 +1025,12 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
     
     /* ################################################################## */
     /**
-     This parses the IPv4/6 configuration from the GetNetworkInterfaces command.
+     This parses an individual IPv4/6 configuration from the GetNetworkInterfaces command.
      
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an IPConfiguration instance (with IPv4/6 info)
      */
-    internal func _transformNetworkInterfaceIP(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
+    internal func _transformNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
         let ipv6ConfigurationExtension = inResponseDictionary["Extension"]
         var isDHCP: Bool = false
         var isAbleToAcceptRouterAdvert: Bool! = nil
@@ -1102,11 +1102,68 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             #if DEBUG
                 print("Parsing the Network Extension Link: \(String(reflecting: networkInterfaceExtension))")
             #endif
+            
+            if let interfaceTypeInt = owner._parseInteger(networkInterfaceExtension, key: "InterfaceType"), let interfaceType = RVS_ONVIF_Core.IANA_Types(rawValue: interfaceTypeInt) {
+                
+                return NetworkInterfaceExtension(interfaceType: interfaceType, dot3Configuration: networkInterfaceExtension["Dot3"], dot11: _transformNetworkInterfaceDot11Configuration(networkInterfaceExtension["Dot11"] as? [String: Any]), networkInterfaceSetConfigurationExtension2: networkInterfaceExtension["NetworkInterfaceSetConfigurationExtension2"])
+            }
         }
         
         return nil
     }
 
+    /* ################################################################## */
+    /**
+     This parses the 802.11 response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a Dot11Configuration instance, or nil (if none)
+     */
+    internal func _transformNetworkInterfaceDot11Configuration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration! {
+        if let ssid = inResponseDictionary["SSID"] as? String, let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11StationMode(rawValue: modeStr) {
+            let alias = owner._parseString(inResponseDictionary, key: "Alias") ?? ""
+            let priority = owner._parseInteger(inResponseDictionary, key: "Priority") ?? 0
+            let securityConfiguration = _transformNetworkInterfaceDot11SecurityConfiguration(inResponseDictionary["Security"] as? [String: Any])
+            
+            return Dot11Configuration(ssid: ssid, mode: mode, alias: alias, priority: priority, security: securityConfiguration)
+        }
+        
+        return nil
+    }
+
+    /* ################################################################## */
+    /**
+     This parses the 802.11 security configuration response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a Dot11Configuration.Dot11SecurityConfiguration instance, or nil (if none)
+     */
+    internal func _transformNetworkInterfaceDot11SecurityConfiguration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration {
+        if let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11SecurityConfiguration.Dot11SecurityMode(rawValue: modeStr), let algorithmStr = owner._parseString(inResponseDictionary, key: "Algorithm"), let algorithm = Dot11Configuration.Dot11SecurityConfiguration.Dot11Cipher(rawValue: algorithmStr) {
+            
+            let psk = _transformNetworkInterfaceDot11PSKSet(inResponseDictionary["PSK"] as? [String: Any])
+            
+            return Dot11Configuration.Dot11SecurityConfiguration(mode: mode, algorithm: algorithm, psk: psk, dot1XToken: owner._parseString(inResponseDictionary, key: "Dot1X"), dot11SecurityConfigurationExtension: inResponseDictionary["Extension"])
+        }
+        
+        return Dot11Configuration.Dot11SecurityConfiguration(mode: .none, algorithm: .any, psk: nil, dot1XToken: nil, dot11SecurityConfigurationExtension: nil)
+    }
+
+    /* ################################################################## */
+    /**
+     This parses the 802.11 security configuration PSK Set response from the GetNetworkInterfaces command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a Dot11Configuration.Dot11SecurityConfiguration instance, or nil (if none)
+     */
+    internal func _transformNetworkInterfaceDot11PSKSet(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration.Dot11PSKSet! {
+        if let key = owner._parseString(inResponseDictionary, key: "Key"), let passphrase = owner._parseString(inResponseDictionary, key: "Passphrase") {
+            return Dot11Configuration.Dot11SecurityConfiguration.Dot11PSKSet(key: key, passphrase: passphrase, dot11PSKSetExtension: inResponseDictionary["Extension"])
+        }
+        
+        return nil
+    }
+    
     /* ################################################################## */
     /**
      This parses an IP Address response from the GetNetworkInterfaces command.
@@ -1185,6 +1242,12 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      This is the cache for the device service capabilities. It is filled at initialization time.
      */
     public var serviceCapabilities: ServiceCapabilities!
+    
+    /* ################################################################## */
+    /**
+     This is the cache for the device network interface information. It is filled at initialization time.
+     */
+    public var networkInterfaces: [NetworkInterface]!
 
     /* ################################################################################################################################## */
     // MARK: - Public Instance Calculated Properties
@@ -1215,7 +1278,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         _DeviceRequest.allCases.forEach {
             switch $0 {
             // We already got these.
-            case .GetDeviceInformation, .GetScopes, .GetServices, .GetCapabilities, .GetServiceCapabilities:
+            case .GetDeviceInformation, .GetScopes, .GetServices, .GetCapabilities, .GetServiceCapabilities, .GetNetworkInterfaces:
                 break
                 
             case .GetDynamicDNS, .SetDynamicDNS:    // Only supplied if the device supports DynDNS.
@@ -1258,7 +1321,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     }
                 }
             }
-            
+        
         case _DeviceRequest.GetDNS.soapAction:
             // We give the caller the opportunity to vet the data. Default just passes through.
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDNS) ?? false) {
@@ -1278,10 +1341,6 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     }
                 }
             }
-            
-        case _DeviceRequest.GetNetworkInterfaces.soapAction:
-            let networkInterfaces: [NetworkInterface] = _transformNetworkInterfacesResponse(inResponseDictionary)
-            print(String(reflecting: networkInterfaces))
 
         default:    // If we don't recognize the call we made, we try our overflow.
             return _callbackHandlerPartDeux(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
@@ -1404,6 +1463,16 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
             
             scopes = _transformScopesDictionary(mainResponse)
+            owner.performRequest(_DeviceRequest.GetNetworkInterfaces)    // Cascade to get the device network interfaces.
+            
+        case _DeviceRequest.GetNetworkInterfaces.soapAction:
+            // We do one extra unwind here, to reduce the CC of the parser method.
+            guard let mainResponse = inResponseDictionary["GetNetworkInterfacesResponse"] as? [String: Any] else {
+                owner._errorCallback(RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil)), soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            networkInterfaces = _transformNetworkInterfacesResponse(mainResponse)
             owner.performRequest(_DeviceRequest.GetCapabilities)    // Cascade to get the device capabilities.
 
         case _DeviceRequest.GetCapabilities.soapAction:
@@ -1419,7 +1488,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             
             // Let the delegate know that we're finally ready.
             owner.delegate?.onvifInstanceInitialized(owner)
-            
+
         default:    // If we don't recognize the call we made, we drop out.
             return false
         }

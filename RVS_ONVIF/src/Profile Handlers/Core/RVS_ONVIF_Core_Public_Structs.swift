@@ -1308,7 +1308,7 @@ extension RVS_ONVIF_Core {
         /**
          802.11 configuration. This is optional, and may be nil.
          */
-        public var dot11: Any!
+        public var dot11: Dot11Configuration!
         
         /* ############################################################## */
         /**
