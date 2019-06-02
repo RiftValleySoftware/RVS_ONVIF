@@ -16,4 +16,28 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
     let basicCellID = "basic-cell"
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Override UITableViewDataSource Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return onvifInstance.core.networkInterfaces.count
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "TEST"
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
 }
