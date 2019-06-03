@@ -133,7 +133,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - parameter inResponseBody: The Dictionary ([String: Any]) of the response body data.
      - returns: An Array of Profile struct instances, created from the response data.
      */
-    internal func _transformProfilesDictionary(_ inResponseBody: [String: Any]) -> [RVS_ONVIF_Profile_S.Profile] {
+    internal func _parseProfilesDictionary(_ inResponseBody: [String: Any]) -> [RVS_ONVIF_Profile_S.Profile] {
         var ret: [RVS_ONVIF_Profile_S.Profile] = []
         
         if let profileResponse = inResponseBody["GetProfilesResponse"] as? [String: Any], let profiles = profileResponse["Profiles"] as? [[String: Any]] {
@@ -413,7 +413,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A Stream Struct, created from the response data.
      */
-    internal func _transformURIDictionary(_ inResponseDictionary: [String: Any]) -> RVS_ONVIF_Profile_S.Stream_URI {
+    internal func _parseURIDictionary(_ inResponseDictionary: [String: Any]) -> RVS_ONVIF_Profile_S.Stream_URI {
         #if DEBUG
             print(String(describing: inResponseDictionary))
         #endif
@@ -478,7 +478,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      
      - returns: A populated VideoEncoderConfigurationOptions instance. Nil, if there was an issue.
      */
-    internal func _transformVideoEncoderConfigurationOptions(_ inVideoEncoderConfigurationOptions: [String: Any]) -> VideoEncoderConfigurationOptions! {
+    internal func _parseVideoEncoderConfigurationOptions(_ inVideoEncoderConfigurationOptions: [String: Any]) -> VideoEncoderConfigurationOptions! {
         var name: String!
         var useCount: Int!
         var token: String!
@@ -524,7 +524,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - parameter inResponseBody: The Dictionary ([String: Any]) of the response body data.
      - returns: An Array of VideoSourceConfiguration struct instances, created from the response data.
      */
-    internal func _transformVideoSourceConfigurationsDictionary(_ inResponseBody: [String: Any]) -> [VideoSourceConfiguration] {
+    internal func _parseVideoSourceConfigurationsDictionary(_ inResponseBody: [String: Any]) -> [VideoSourceConfiguration] {
         var ret: [VideoSourceConfiguration] = []
         
         var configurations: [[String: Any]] = []
@@ -679,7 +679,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
         
         switch inSOAPRequest {
         case _DeviceRequest.GetStreamUri.soapAction:
-            let uriResponse = _transformURIDictionary(inResponseDictionary)
+            let uriResponse = _parseURIDictionary(inResponseDictionary)
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetStreamUri) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetStreamUri) {
@@ -691,7 +691,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
             
         case _DeviceRequest.GetProfiles.soapAction:
             _cachedProfiles = [:]   // We save the fetched profiles in our cache, so we can look them up later.
-            let profiles = _transformProfilesDictionary(inResponseDictionary)
+            let profiles = _parseProfilesDictionary(inResponseDictionary)
             profiles.forEach {
                 _cachedProfiles[$0.token] = $0    // We use the token as the Dictionary key, which lets us find the profile quickly.
             }
@@ -706,7 +706,7 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
             ret = true
         
         case _DeviceRequest.GetVideoSourceConfigurations.soapAction:
-            let configurations = _transformVideoSourceConfigurationsDictionary(inResponseDictionary)
+            let configurations = _parseVideoSourceConfigurationsDictionary(inResponseDictionary)
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetVideoSourceConfigurations) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetVideoSourceConfigurations) {
