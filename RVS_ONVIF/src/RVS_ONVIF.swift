@@ -270,7 +270,7 @@ import SOAPEngine64
     /**
      Shortcut to access the core profile, as it will always be there.
      
-     - returns the core object. nil if there was an error.
+     - returns: the core object. nil if there was an error.
      */
     public var core: RVS_ONVIF_Core! {
         return _profiles["RVS_ONVIF_Core"] as? RVS_ONVIF_Core
@@ -280,7 +280,7 @@ import SOAPEngine64
     /**
      Shortcut to access the device information.
      
-     - returns the device information Dictionary. nil if there was an error.
+     - returns: the device information Dictionary. nil if there was an error.
      */
     public var deviceInformation: [String: Any]! {
         return core?.deviceInformation
@@ -290,7 +290,7 @@ import SOAPEngine64
     /**
      Shortcut to access the services.
      
-     - returns the services Array. nil if there was an error.
+     - returns: the services Array. nil if there was an error.
      */
     public var services: [String: RVS_ONVIF_Core.Service]! {
         return core?.services
@@ -300,7 +300,7 @@ import SOAPEngine64
     /**
      Shortcut to access the scopes.
      
-     - returns the scopes Array. nil if there was an error.
+     - returns: the scopes Array. nil if there was an error.
      */
     public var scopes: [RVS_ONVIF_Core.Scope]! {
         return core?.scopes
@@ -310,7 +310,7 @@ import SOAPEngine64
     /**
      Shortcut to access the capabilities.
      
-     - returns the capability instance. nil if there was an error.
+     - returns: the capability instance. nil if there was an error.
      */
     public var capabilities: RVS_ONVIF_Core.Capabilities! {
         return core?.capabilities
@@ -320,10 +320,20 @@ import SOAPEngine64
     /**
      Shortcut to access the default service capabilities.
      
-     - returns the service capability instance. nil if there was an error.
+     - returns: the service capability instance. nil if there was an error.
      */
     public var serviceCapabilities: RVS_ONVIF_Core.ServiceCapabilities! {
         return core?.serviceCapabilities
+    }
+    
+    /* ################################################################## */
+    /**
+     Shortcut to access the device network interface information.
+     
+     - returns: The cached device network interface Array.
+     */
+    public var networkInterfaces: [RVS_ONVIF_Core.NetworkInterface]! {
+        return core?.networkInterfaces
     }
 
     /* ################################################################################################################################## */

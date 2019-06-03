@@ -58,6 +58,7 @@
 		D476E409227B7A6400B48A4A /* RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D476E408227B7A6400B48A4A /* RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift */; };
 		D478B4142268AAF300CE6720 /* RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478B4132268AAF300CE6720 /* RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift */; };
 		D47CD33A226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47CD339226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift */; };
+		D4803EA222A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4803EA122A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift */; };
 		D4837A022274EAD6007FAA4A /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E0A8E3226E183D007049B6 /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift */; };
 		D4838838227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */; };
 		D48A036F2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */; };
@@ -206,6 +207,7 @@
 		D476E408227B7A6400B48A4A /* RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift; sourceTree = "<group>"; };
 		D478B4132268AAF300CE6720 /* RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Scopes_ViewController.swift; sourceTree = "<group>"; };
 		D47CD339226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift; sourceTree = "<group>"; };
+		D4803EA122A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift; sourceTree = "<group>"; };
 		D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift; sourceTree = "<group>"; };
 		D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
 		D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_FIFOQueue.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				D4E0A8E3226E183D007049B6 /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift */,
 				D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */,
 				D476E408227B7A6400B48A4A /* RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift */,
+				D4803EA122A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift */,
 				D421B6B7227CBA1800CED3E0 /* RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift */,
 				D4EEC5C4227855D300799F6F /* Resources */,
 				D4EEC5C3227855B900799F6F /* Misc */,
@@ -842,6 +845,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D476E409227B7A6400B48A4A /* RVS_ONVIF_Mac_Test_Harness_ProfileDisplayViewController.swift in Sources */,
+				D4803EA222A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift in Sources */,
 				D4656A272278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift in Sources */,
 				D40E2040226A5CA200B4A392 /* RVS_ONVIF_Mac_Test_Harness_Services_ViewController.swift in Sources */,
 				D47CD33A226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift in Sources */,
