@@ -133,7 +133,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Analytics Capability instance.
      */
-    private func _transformAnalyticsResponse(_ inResponseDictionary: [String: Any]) -> AnalyticsCapabilities {
+    private func _parseAnalyticsResponse(_ inResponseDictionary: [String: Any]) -> AnalyticsCapabilities {
         #if DEBUG
             print("\nDevice Analytics Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -156,7 +156,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter soapEngine: The SOAPEngine object that executed the request.
      - returns: the parsed DNS record, or nil, if there was an error.
      */
-    private func _transformDynamicDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> DynamicDNSRecord! {
+    private func _parseDynamicDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> DynamicDNSRecord! {
         #if DEBUG
             print("\nDNS Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -220,7 +220,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter soapEngine: The SOAPEngine object that executed the request.
      - returns: the parsed DNS record, or nil, if there was an error.
      */
-    private func _transformDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.DNSRecord! {
+    private func _parseDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.DNSRecord! {
         #if DEBUG
         print("\nDNS Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -260,7 +260,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter soapEngine: The SOAPEngine object that executed the request.
      - returns: the parsed NTP record, or nil, if there was an error.
      */
-    private func _transformNTPRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.NTPRecord! {
+    private func _parseNTPRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.NTPRecord! {
         #if DEBUG
             print("\nNTP Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -309,7 +309,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Capability instance.
      */
-    private func _transformDeviceResponse(_ inResponseDictionary: [String: Any]) -> DeviceCapabilities {
+    private func _parseDeviceResponse(_ inResponseDictionary: [String: Any]) -> DeviceCapabilities {
         #if DEBUG
             print("\nDevice Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -320,15 +320,15 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         }
         
         if let networkCapabilities = inResponseDictionary["Network"] as? [String: Any] {
-            ret.networkCapabilities = _transformNetworkServiceCapabilitiesDictionary(networkCapabilities)
+            ret.networkCapabilities = _parseNetworkServiceCapabilitiesDictionary(networkCapabilities)
         }
         
         if let systemCapabilities = inResponseDictionary["System"] as? [String: Any] {
-            ret.systemCapabilities = _transformSystemServiceCapabilitiesDictionary(systemCapabilities)
+            ret.systemCapabilities = _parseSystemServiceCapabilitiesDictionary(systemCapabilities)
         }
         
         if let securityCapabilities = inResponseDictionary["Security"] as? [String: Any] {
-            ret.securityCapabilities = _transformSecurityServiceCapabilitiesDictionary(securityCapabilities)
+            ret.securityCapabilities = _parseSecurityServiceCapabilitiesDictionary(securityCapabilities)
         }
         
         if let ioCapabilities = inResponseDictionary["IO"] as? [String: Any] {
@@ -351,7 +351,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device I/O Capability instance.
      */
-    private func _transformDeviceIOResponse(_ inResponseDictionary: [String: Any]) -> InternalDeviceIOCapabilities {
+    private func _parseDeviceIOResponse(_ inResponseDictionary: [String: Any]) -> InternalDeviceIOCapabilities {
         #if DEBUG
             print("\nDevice I/O Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -374,7 +374,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device I/O Capability instance.
      */
-    private func _transformDisplayResponse(_ inResponseDictionary: [String: Any]) -> DisplayCapabilities {
+    private func _parseDisplayResponse(_ inResponseDictionary: [String: Any]) -> DisplayCapabilities {
         #if DEBUG
             print("\nDevice Display Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -393,7 +393,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Events instance.
      */
-    private func _transformEventsResponse(_ inResponseDictionary: [String: Any]) -> EventsCapabilities {
+    private func _parseEventsResponse(_ inResponseDictionary: [String: Any]) -> EventsCapabilities {
         #if DEBUG
             print("\nDevice Events Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -414,7 +414,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Media Capabilities instance.
      */
-    private func _transformMediaResponse(_ inResponseDictionary: [String: Any]) -> MediaCapabilities {
+    private func _parseMediaResponse(_ inResponseDictionary: [String: Any]) -> MediaCapabilities {
         #if DEBUG
             print("\nDevice Media Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -436,7 +436,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Receiver Capabilities instance.
      */
-    private func _transformReceiverResponse(_ inResponseDictionary: [String: Any]) -> ReceiverCapabilities {
+    private func _parseReceiverResponse(_ inResponseDictionary: [String: Any]) -> ReceiverCapabilities {
         #if DEBUG
             print("\nDevice Receiver Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -459,7 +459,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Recording Capabilities instance.
      */
-    private func _transformRecordingResponse(_ inResponseDictionary: [String: Any]) -> RecordingCapabilities {
+    private func _parseRecordingResponse(_ inResponseDictionary: [String: Any]) -> RecordingCapabilities {
         #if DEBUG
             print("\nDevice Recording Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -480,7 +480,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Search Capabilities instance.
      */
-    private func _transformSearchResponse(_ inResponseDictionary: [String: Any]) -> SearchCapabilities {
+    private func _parseSearchResponse(_ inResponseDictionary: [String: Any]) -> SearchCapabilities {
         #if DEBUG
             print("\nDevice Search Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -499,7 +499,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Capabilities instance.
      */
-    private func _transformAnalyticDeviceResponse(_ inResponseDictionary: [String: Any]) -> AnalyticsDeviceCapabilities! {
+    private func _parseAnalyticDeviceResponse(_ inResponseDictionary: [String: Any]) -> AnalyticsDeviceCapabilities! {
         #if DEBUG
             print("\nDevice Analytics Device Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -517,7 +517,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Capabilities instance.
      */
-    private func _transformImagingResponse(_ inResponseDictionary: [String: Any]) -> ImagingCapabilities! {
+    private func _parseImagingResponse(_ inResponseDictionary: [String: Any]) -> ImagingCapabilities! {
         #if DEBUG
             print("\nDevice Imaging Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -535,7 +535,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Capabilities instance.
      */
-    private func _transformPTZResponse(_ inResponseDictionary: [String: Any]) -> PTZCapabilities! {
+    private func _parsePTZResponse(_ inResponseDictionary: [String: Any]) -> PTZCapabilities! {
         #if DEBUG
             print("\nDevice PTZ Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -553,7 +553,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Capabilities instance.
      */
-    private func _transformReplayResponse(_ inResponseDictionary: [String: Any]) -> ReplayCapabilities! {
+    private func _parseReplayResponse(_ inResponseDictionary: [String: Any]) -> ReplayCapabilities! {
         #if DEBUG
             print("\nDevice Replay Capabilities Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -573,7 +573,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Network Dictionary ([String: Any]) of the response data.
      - returns: A new Network Capability Instance
      */
-    private func _transformNetworkServiceCapabilitiesDictionary(_ networkCapabilities: [String: Any]) -> NetworkCapabilities {
+    private func _parseNetworkServiceCapabilitiesDictionary(_ networkCapabilities: [String: Any]) -> NetworkCapabilities {
         var ret = NetworkCapabilities(owner: owner)
         #if DEBUG
             print("Network Capabilities Response: \(String(describing: networkCapabilities))")
@@ -598,7 +598,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Security Dictionary ([String: Any]) of the response data.
      - returns: A new Security Capability Instance
      */
-    private func _transformSecurityServiceCapabilitiesDictionary(_ securityCapabilities: [String: Any]) -> SecurityCapabilities {
+    private func _parseSecurityServiceCapabilitiesDictionary(_ securityCapabilities: [String: Any]) -> SecurityCapabilities {
         var ret = SecurityCapabilities(owner: owner)
         #if DEBUG
             print("Security Capabilities Response: \(String(describing: securityCapabilities))")
@@ -634,7 +634,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Security Dictionary ([String: Any]) of the response data.
      - returns: A new Security Capability Instance
      */
-    private func _transformSystemServiceCapabilitiesDictionary(_ systemCapabilities: [String: Any]) -> SystemCapabilities {
+    private func _parseSystemServiceCapabilitiesDictionary(_ systemCapabilities: [String: Any]) -> SystemCapabilities {
         var ret = SystemCapabilities(owner: owner)
         #if DEBUG
             print("System Capabilities Response: \(String(describing: systemCapabilities))")
@@ -672,59 +672,59 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inCapabilitiesDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Device Capability instance.
      */
-    internal func _transformDeviceCapabilitiesDictionary(_ inCapabilitiesDictionary: [String: Any]) -> Capabilities {
+    internal func _parseDeviceCapabilitiesDictionary(_ inCapabilitiesDictionary: [String: Any]) -> Capabilities {
         var ret = Capabilities(owner: owner)
         
         if let analyticsResponse = inCapabilitiesDictionary["Analytics"] as? [String: Any] {
-            ret.analyticsCapabilities = _transformAnalyticsResponse(analyticsResponse)
+            ret.analyticsCapabilities = _parseAnalyticsResponse(analyticsResponse)
         }
         
         if let response = inCapabilitiesDictionary["AnalyticsDevice"] as? [String: Any] {
-            ret.analyticsDeviceCapabilities = _transformAnalyticDeviceResponse(response)
+            ret.analyticsDeviceCapabilities = _parseAnalyticDeviceResponse(response)
         }
         
         if let deviceResponse = inCapabilitiesDictionary["Device"] as? [String: Any] {
-            ret.deviceCapabilities = _transformDeviceResponse(deviceResponse)
+            ret.deviceCapabilities = _parseDeviceResponse(deviceResponse)
         }
         
         if let response = inCapabilitiesDictionary["DeviceIO"] as? [String: Any] {
-            ret.deviceIOCapabilities = _transformDeviceIOResponse(response)
+            ret.deviceIOCapabilities = _parseDeviceIOResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Display"] as? [String: Any] {
-            ret.displayCapabilities = _transformDisplayResponse(response)
+            ret.displayCapabilities = _parseDisplayResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Events"] as? [String: Any] {
-            ret.eventsCapabilities = _transformEventsResponse(response)
+            ret.eventsCapabilities = _parseEventsResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Imaging"] as? [String: Any] {
-            ret.imagingCapabilities = _transformImagingResponse(response)
+            ret.imagingCapabilities = _parseImagingResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Media"] as? [String: Any] {
-            ret.mediaCapabilities = _transformMediaResponse(response)
+            ret.mediaCapabilities = _parseMediaResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["PTZ"] as? [String: Any] {
-            ret.ptzCapabilities = _transformPTZResponse(response)
+            ret.ptzCapabilities = _parsePTZResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Receiver"] as? [String: Any] {
-            ret.receiverCapabilities = _transformReceiverResponse(response)
+            ret.receiverCapabilities = _parseReceiverResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Recording"] as? [String: Any] {
-            ret.recordingCapabilities = _transformRecordingResponse(response)
+            ret.recordingCapabilities = _parseRecordingResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Replay"] as? [String: Any] {
-            ret.replayCapabilities = _transformReplayResponse(response)
+            ret.replayCapabilities = _parseReplayResponse(response)
         }
         
         if let response = inCapabilitiesDictionary["Search"] as? [String: Any] {
-            ret.searchCapabilities = _transformSearchResponse(response)
+            ret.searchCapabilities = _parseSearchResponse(response)
         }
         
         #if DEBUG
@@ -744,7 +744,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: A new Service Capability instance.
      */
-    internal func _transformServiceCapabilitiesDictionary(_ inResponseDictionary: [String: Any]) -> ServiceCapabilities {
+    internal func _parseServiceCapabilitiesDictionary(_ inResponseDictionary: [String: Any]) -> ServiceCapabilities {
         var ret = ServiceCapabilities(owner: owner)
         
         if let servicesResponse = inResponseDictionary["GetServiceCapabilitiesResponse"] as? [String: Any], let capabilities = servicesResponse["Capabilities"] as? [String: Any] {
@@ -752,15 +752,15 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 print("Service Capabilities Response: \(String(describing: capabilities))")
             #endif
             if let networkResponse = capabilities["Network"] as? [String: Any], let networkCapabilities = networkResponse["attributes"] as? [String: Any] {
-                ret.networkCapabilities = _transformNetworkServiceCapabilitiesDictionary(networkCapabilities)
+                ret.networkCapabilities = _parseNetworkServiceCapabilitiesDictionary(networkCapabilities)
             }
             
             if let securityResponse = capabilities["Security"] as? [String: Any], let securityCapabilities = securityResponse["attributes"] as? [String: Any] {
-                ret.securityCapabilities = _transformSecurityServiceCapabilitiesDictionary(securityCapabilities)
+                ret.securityCapabilities = _parseSecurityServiceCapabilitiesDictionary(securityCapabilities)
             }
             
             if let systemResponse = capabilities["System"] as? [String: Any], let systemCapabilities = systemResponse["attributes"] as? [String: Any] {
-                ret.systemCapabilities = _transformSystemServiceCapabilitiesDictionary(systemCapabilities)
+                ret.systemCapabilities = _parseSystemServiceCapabilitiesDictionary(systemCapabilities)
             }
             
             if let miscResponse = capabilities["Misc"] as? [String: Any], let auxCommands = miscResponse["AuxiliaryCommands"] as? String {
@@ -782,7 +782,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - returns: An Array of Service struct instances, created from the response data.
      */
-    internal func _transformServicesDictionary(_ inResponseDictionary: [String: Any]) -> [Service] {
+    internal func _parseServicesDictionary(_ inResponseDictionary: [String: Any]) -> [Service] {
         #if DEBUG
             print("Transforming Services Dictionary: \(String(describing: inResponseDictionary))")
         #endif
@@ -807,7 +807,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                         var capabilities: ServiceCapabilities!
                         
                         if let capabilitiesAny = element["Capabilities"] as? [String: Any] {  // This is optional, so we check for it seperately.
-                            capabilities = _transformServiceCapabilitiesDictionary(["GetServiceCapabilitiesResponse": capabilitiesAny])
+                            capabilities = _parseServiceCapabilitiesDictionary(["GetServiceCapabilitiesResponse": capabilitiesAny])
                         }
                         
                         ret.append(Service(owner: self.owner, namespace: namespace, xAddr: uri, version: String(format: "%d.%02d", major, minor), capabilities: capabilities))
@@ -829,7 +829,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an Array of Scope enum instances, containing interpreted versions of the device scopes.
      */
-    internal func _transformScopesDictionary(_ inResponseDictionary: [String: Any]) -> [Scope] {
+    internal func _parseScopesDictionary(_ inResponseDictionary: [String: Any]) -> [Scope] {
         #if DEBUG
             print("Transforming Scopes Dictionary: \(String(describing: inResponseDictionary))")
         #endif
@@ -899,7 +899,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an Array of NetworkInterface instances.
      */
-    internal func _transformNetworkInterfacesResponse(_ inResponseDictionary: [String: Any]) -> [NetworkInterface] {
+    internal func _parseNetworkInterfacesResponse(_ inResponseDictionary: [String: Any]) -> [NetworkInterface] {
         #if DEBUG
             print("Parsing the Network Interfaces Response")
         #endif
@@ -917,11 +917,11 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         outerWrapperArray.forEach {
             let token = owner._parseString($0, key: "token") ?? ""
             let isEnabled = owner._parseBoolean($0, key: "Enabled")
-            let info = _transformNetworkInterfaceInfo($0)
-            let link = _transformNetworkInterfaceLink($0)
-            let ipv4 = _transformNetworkInterfaceIP($0, key: "IPv4")
-            let ipv6 = _transformNetworkInterfaceIP($0, key: "IPv6")
-            let networkInterfaceExtension = _transformNetworkInterfaceExtension($0)
+            let info = _parseNetworkInterfaceInfo($0)
+            let link = _parseNetworkInterfaceLink($0)
+            let ipv4 = _parseNetworkInterfaceIP($0, key: "IPv4")
+            let ipv6 = _parseNetworkInterfaceIP($0, key: "IPv6")
+            let networkInterfaceExtension = _parseNetworkInterfaceExtension($0)
             
             #if DEBUG
                 print("\tNetwork Interface Info: \(token)")
@@ -947,7 +947,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: a NetworkInterfaceInfo instance, or nil (if none)
      */
-    internal func _transformNetworkInterfaceInfo(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceInfo! {
+    internal func _parseNetworkInterfaceInfo(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceInfo! {
         
         if let info = inResponseDictionary["Info"] as? [String: Any] {
             let name = owner._parseString(info, key: "Name") ?? ""
@@ -967,7 +967,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: a NetworkInterfaceLink instance, or nil (if none)
      */
-    internal func _transformNetworkInterfaceLink(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceLink! {
+    internal func _parseNetworkInterfaceLink(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceLink! {
         
         if let link = inResponseDictionary["Link"] as? [String: Any] {
             var interfaceType = IANA_Types.other
@@ -976,8 +976,8 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 interfaceType = IANA_Types(rawValue: interfaceTypeInt) ?? .other
             }
             
-            let adminSettings = _transformNetworkInterfaceConnectionSetting(link, key: "AdminSettings")
-            let operSettings = _transformNetworkInterfaceConnectionSetting(link, key: "OperSettings")
+            let adminSettings = _parseNetworkInterfaceConnectionSetting(link, key: "AdminSettings")
+            let operSettings = _parseNetworkInterfaceConnectionSetting(link, key: "OperSettings")
             
             return NetworkInterfaceLink(adminSettings: adminSettings, operSettings: operSettings, interfaceType: interfaceType)
         }
@@ -993,7 +993,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter key: The key to be used to fetch the data.
      - returns: a NetworkInterfaceConnectionSetting instance
      */
-    internal func _transformNetworkInterfaceConnectionSetting(_ inResponseDictionary: [String: Any], key inKey: String) -> NetworkInterfaceConnectionSetting {
+    internal func _parseNetworkInterfaceConnectionSetting(_ inResponseDictionary: [String: Any], key inKey: String) -> NetworkInterfaceConnectionSetting {
         if let link = inResponseDictionary[inKey] as? [String: Any] {
             let speed = owner._parseInteger(link, key: "Speed") ?? 0
             let autoNegotiation = owner._parseBoolean(link, key: "AutoNegotiation")
@@ -1013,10 +1013,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter key: The key to be used to fetch the data.
      - returns: an IPNetworkInterface instance (with IPv4/6 info), or nil (if none)
      */
-    internal func _transformNetworkInterfaceIP(_ inResponseDictionary: [String: Any], key inKey: String) -> IPNetworkInterface! {
+    internal func _parseNetworkInterfaceIP(_ inResponseDictionary: [String: Any], key inKey: String) -> IPNetworkInterface! {
         if let ipConfig = inResponseDictionary[inKey] as? [String: Any], let configDict = ipConfig["Config"] as? [String: Any] {
             let isEnabled = owner._parseBoolean(ipConfig, key: "Enabled")
-            let config = _transformNetworkInterfaceIPIndividual(configDict)
+            let config = _parseNetworkInterfaceIPIndividual(configDict)
             return IPNetworkInterface(isEnabled: isEnabled, configuration: config)
         }
         
@@ -1030,7 +1030,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an IPConfiguration instance (with IPv4/6 info)
      */
-    internal func _transformNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
+    internal func _parseNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
         let ipv6ConfigurationExtension = inResponseDictionary["Extension"]
         var isDHCP: Bool = false
         var isAbleToAcceptRouterAdvert: Bool! = nil
@@ -1050,37 +1050,37 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         if let manualArray = inResponseDictionary["Manual"] as? [[String: String]] {
             manual = []
             manualArray.forEach {
-                manual.append(_transformIPAddressEntry($0))
+                manual.append(_parseIPAddressEntry($0))
             }
         } else if let manualStr = inResponseDictionary["Manual"] as? [String: String] {
-            manual = [_transformIPAddressEntry(manualStr)]
+            manual = [_parseIPAddressEntry(manualStr)]
         }
         
         if let linkLocalArray = inResponseDictionary["LinkLocal"] as? [[String: String]] {
             linkLocal = []
             linkLocalArray.forEach {
-                linkLocal.append(_transformIPAddressEntry($0))
+                linkLocal.append(_parseIPAddressEntry($0))
             }
         } else if let linkLocalStr = inResponseDictionary["LinkLocal"] as? [String: String] {
-            linkLocal = [_transformIPAddressEntry(linkLocalStr)]
+            linkLocal = [_parseIPAddressEntry(linkLocalStr)]
         }
         
         if let fromDHCPArray = inResponseDictionary["FromDHCP"] as? [[String: String]] {
             fromDHCP = []
             fromDHCPArray.forEach {
-                fromDHCP.append(_transformIPAddressEntry($0))
+                fromDHCP.append(_parseIPAddressEntry($0))
             }
         } else if let fromDHCPStr = inResponseDictionary["FromDHCP"] as? [String: String] {
-            fromDHCP = [_transformIPAddressEntry(fromDHCPStr)]
+            fromDHCP = [_parseIPAddressEntry(fromDHCPStr)]
         }
         
         if let fromRAArray = inResponseDictionary["FromRA"] as? [[String: String]] {
             fromRA = []
             fromRAArray.forEach {
-                fromRA.append(_transformIPAddressEntry($0))
+                fromRA.append(_parseIPAddressEntry($0))
             }
         } else if let fromRAStr = inResponseDictionary["FromRA"] as? [String: String] {
-            fromRA = [_transformIPAddressEntry(fromRAStr)]
+            fromRA = [_parseIPAddressEntry(fromRAStr)]
         }
         
         if nil != inResponseDictionary["AcceptRouterAdvert"] as? String {
@@ -1097,7 +1097,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an NetworkInterfaceExtension instance (with IPv6 info), or nil (if none)
      */
-    internal func _transformNetworkInterfaceExtension(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceExtension! {
+    internal func _parseNetworkInterfaceExtension(_ inResponseDictionary: [String: Any]) -> NetworkInterfaceExtension! {
         if let networkInterfaceExtension = inResponseDictionary["Extension"] as? [String: Any] {
             #if DEBUG
                 print("Parsing the Network Extension Link: \(String(reflecting: networkInterfaceExtension))")
@@ -1105,7 +1105,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             
             if let interfaceTypeInt = owner._parseInteger(networkInterfaceExtension, key: "InterfaceType"), let interfaceType = RVS_ONVIF_Core.IANA_Types(rawValue: interfaceTypeInt) {
                 
-                return NetworkInterfaceExtension(interfaceType: interfaceType, dot3Configuration: networkInterfaceExtension["Dot3"], dot11: _transformNetworkInterfaceDot11Configuration(networkInterfaceExtension["Dot11"] as? [String: Any]), networkInterfaceSetConfigurationExtension2: networkInterfaceExtension["NetworkInterfaceSetConfigurationExtension2"])
+                return NetworkInterfaceExtension(interfaceType: interfaceType, dot3Configuration: networkInterfaceExtension["Dot3"], dot11: _parseNetworkInterfaceDot11Configuration(networkInterfaceExtension["Dot11"] as? [String: Any]), networkInterfaceSetConfigurationExtension2: networkInterfaceExtension["NetworkInterfaceSetConfigurationExtension2"])
             }
         }
         
@@ -1119,11 +1119,11 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: a Dot11Configuration instance, or nil (if none)
      */
-    internal func _transformNetworkInterfaceDot11Configuration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration! {
+    internal func _parseNetworkInterfaceDot11Configuration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration! {
         if let ssid = inResponseDictionary["SSID"] as? String, let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11StationMode(rawValue: modeStr) {
             let alias = owner._parseString(inResponseDictionary, key: "Alias") ?? ""
             let priority = owner._parseInteger(inResponseDictionary, key: "Priority") ?? 0
-            let securityConfiguration = _transformNetworkInterfaceDot11SecurityConfiguration(inResponseDictionary["Security"] as? [String: Any])
+            let securityConfiguration = _parseNetworkInterfaceDot11SecurityConfiguration(inResponseDictionary["Security"] as? [String: Any])
             
             return Dot11Configuration(ssid: ssid, mode: mode, alias: alias, priority: priority, security: securityConfiguration)
         }
@@ -1138,10 +1138,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: a Dot11Configuration.Dot11SecurityConfiguration instance, or nil (if none)
      */
-    internal func _transformNetworkInterfaceDot11SecurityConfiguration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration {
+    internal func _parseNetworkInterfaceDot11SecurityConfiguration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration {
         if let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11SecurityConfiguration.Dot11SecurityMode(rawValue: modeStr), let algorithmStr = owner._parseString(inResponseDictionary, key: "Algorithm"), let algorithm = Dot11Configuration.Dot11SecurityConfiguration.Dot11Cipher(rawValue: algorithmStr) {
             
-            let psk = _transformNetworkInterfaceDot11PSKSet(inResponseDictionary["PSK"] as? [String: Any])
+            let psk = _parseNetworkInterfaceDot11PSKSet(inResponseDictionary["PSK"] as? [String: Any])
             
             return Dot11Configuration.Dot11SecurityConfiguration(mode: mode, algorithm: algorithm, psk: psk, dot1XToken: owner._parseString(inResponseDictionary, key: "Dot1X"), dot11SecurityConfigurationExtension: inResponseDictionary["Extension"])
         }
@@ -1156,7 +1156,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: a Dot11Configuration.Dot11SecurityConfiguration instance, or nil (if none)
      */
-    internal func _transformNetworkInterfaceDot11PSKSet(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration.Dot11PSKSet! {
+    internal func _parseNetworkInterfaceDot11PSKSet(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration.Dot11SecurityConfiguration.Dot11PSKSet! {
         if let key = owner._parseString(inResponseDictionary, key: "Key"), let passphrase = owner._parseString(inResponseDictionary, key: "Passphrase") {
             return Dot11Configuration.Dot11SecurityConfiguration.Dot11PSKSet(key: key, passphrase: passphrase, dot11PSKSetExtension: inResponseDictionary["Extension"])
         }
@@ -1171,7 +1171,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an IPAddressEntry instance (with IPv6 info)
      */
-    internal func _transformIPAddressEntry(_ inResponseDictionary: [String: Any]) -> IPAddressEntry {
+    internal func _parseIPAddressEntry(_ inResponseDictionary: [String: Any]) -> IPAddressEntry {
         let ipAddress = owner._parseIPAddress(inResponseDictionary)
         let prefixLength = owner._parseInteger(inResponseDictionary, key: "PrefixLength") ?? 0
 
@@ -1317,7 +1317,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDynamicDNS) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetDynamicDNS) {
-                        $0.deliverResponse(_DeviceRequest.GetDynamicDNS, params: _transformDynamicDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                        $0.deliverResponse(_DeviceRequest.GetDynamicDNS, params: _parseDynamicDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
                     }
                 }
             }
@@ -1327,7 +1327,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDNS) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetDNS) {
-                        $0.deliverResponse(_DeviceRequest.GetDNS, params: _transformDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                        $0.deliverResponse(_DeviceRequest.GetDNS, params: _parseDNSRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
                     }
                 }
             }
@@ -1337,7 +1337,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetNTP) ?? false) {
                 owner.dispatchers.forEach {
                     if $0.isAbleToHandleThisCommand(_DeviceRequest.GetNTP) {
-                        $0.deliverResponse(_DeviceRequest.GetNTP, params: _transformNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
+                        $0.deliverResponse(_DeviceRequest.GetNTP, params: _parseNTPRecord(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine))
                     }
                 }
             }
@@ -1441,7 +1441,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             owner.performRequest(_DeviceRequest.GetServices, params: ["IncludeCapability": "true"]) // Cascade to get the services.
             
         case _DeviceRequest.GetServices.soapAction: // Get the ONVIF services for the device.
-            let serviceArray = _transformServicesDictionary(inResponseDictionary)
+            let serviceArray = _parseServicesDictionary(inResponseDictionary)
             // Load up our cache.
             services = [:]
             serviceArray.forEach { [unowned self] in    // We do this, so that it's easy to look up a service by its namespace.
@@ -1451,7 +1451,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
             owner.performRequest(_DeviceRequest.GetServiceCapabilities) // Cascade to get the service capabilities.
             
         case _DeviceRequest.GetServiceCapabilities.soapAction:  // Get the service capabilities.
-            let returnedCapabilities: ServiceCapabilities = _transformServiceCapabilitiesDictionary(inResponseDictionary)
+            let returnedCapabilities: ServiceCapabilities = _parseServiceCapabilitiesDictionary(inResponseDictionary)
             serviceCapabilities = returnedCapabilities
             owner.performRequest(_DeviceRequest.GetScopes)  // Cascade to get the scopes.
             
@@ -1462,7 +1462,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 break
             }
             
-            scopes = _transformScopesDictionary(mainResponse)
+            scopes = _parseScopesDictionary(mainResponse)
             owner.performRequest(_DeviceRequest.GetNetworkInterfaces)    // Cascade to get the device network interfaces.
             
         case _DeviceRequest.GetNetworkInterfaces.soapAction:
@@ -1472,7 +1472,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 break
             }
             
-            networkInterfaces = _transformNetworkInterfacesResponse(mainResponse)
+            networkInterfaces = _parseNetworkInterfacesResponse(mainResponse)
             owner.performRequest(_DeviceRequest.GetCapabilities)    // Cascade to get the device capabilities.
 
         case _DeviceRequest.GetCapabilities.soapAction:
@@ -1482,7 +1482,7 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 break
             }
             
-            capabilities = _transformDeviceCapabilitiesDictionary(capabilitiesResponse)
+            capabilities = _parseDeviceCapabilitiesDictionary(capabilitiesResponse)
             
             owner._setUpProfileHandlers()   // We ask our handler to establish its profile handlers, based on our available services.
             
