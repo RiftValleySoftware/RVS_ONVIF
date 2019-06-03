@@ -30,8 +30,17 @@ class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVI
     /* ################################################################## */
     /**
      */
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "TEST"
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection inSection: Int) -> String? {
+        let networkConfig = onvifInstance.core.networkInterfaces[inSection]
+        var name = "Default"
+        
+        if !networkConfig.info.name.isEmpty {
+            name = networkConfig.info.name
+        } else if !networkConfig.token.isEmpty {
+            name = networkConfig.token
+        }
+        
+        return name
     }
     
     /* ################################################################## */
