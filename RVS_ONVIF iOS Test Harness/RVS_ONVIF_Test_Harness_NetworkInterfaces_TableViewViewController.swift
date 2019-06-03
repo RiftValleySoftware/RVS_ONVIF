@@ -16,7 +16,50 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
     let basicCellID = "basic-cell"
-    
+
+    /* ############################################################################################################################## */
+    // MARK: - Private Instance Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    private var _networkInterfaceDictionaryArray: [[String: Any?]] = []
+
+    /* ################################################################## */
+    /**
+     */
+    internal func setUpArray() {
+        _networkInterfaceDictionaryArray = []
+        for i in onvifInstance.core.networkInterfaces.enumerated() {
+            _networkInterfaceDictionaryArray.append([:])
+            setUpInterfaceInfoSection(for: i.element, atIndex: i.offset)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    internal func setUpInterfaceInfoSection(for inInterface: RVS_ONVIF_Core.NetworkInterface?, atIndex inAtIndex: Int) {
+        guard let info = inInterface?.info else { return }
+        
+        var section: [[String: String]] = []
+        section.append(["Name": info.name])
+        section.append(["HWAddress": info.hwAddress])
+        section.append(["MTU": String(info.mtu)])
+        _networkInterfaceDictionaryArray[inAtIndex]["Info"] = section
+    }
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Superclass Override Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpArray()
+        tableView.reloadData()
+    }
+
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Override UITableViewDataSource Methods
     /* ############################################################################################################################## */
@@ -48,5 +91,14 @@ class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVI
      */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: basicCellID, for: indexPath)
+        
+        return cell
     }
 }
