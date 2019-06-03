@@ -29,11 +29,18 @@ extension UIView {
      This allows us to add a subview, and set it up with auto-layout constraints to fill the superview.
      
      - parameter inSubview: The subview we want to add.
+     - parameter below: Any UIView subclass of an item that is above the item we are inserting.
+     - parameter by: An offset between the view above and the one being inserted. This can be supplied, even if there is no view being sent in as "below."
      */
-    func addContainedView(_ inSubView: UIView) {
+    func addContainedView(_ inSubView: UIView, below inUpperView: UIView! = nil, by inConstant: CGFloat = 0) {
         addSubview(inSubView)
         inSubView.translatesAutoresizingMaskIntoConstraints = false
-        inSubView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        if nil != inUpperView, let bottomAnchor = inUpperView?.bottomAnchor {
+            inUpperView?.bottomAnchor.constraint(equalTo: inSubView.topAnchor, constant: inConstant).isActive = true
+            inSubView.topAnchor.constraint(equalTo: bottomAnchor, constant: inConstant).isActive = true
+        } else {
+            inSubView.topAnchor.constraint(equalTo: self.topAnchor, constant: inConstant).isActive = true
+        }
         inSubView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         inSubView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         inSubView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true

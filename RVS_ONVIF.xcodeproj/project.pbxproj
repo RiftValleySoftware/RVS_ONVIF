@@ -339,6 +339,7 @@
 		D43C5B5D2288920E00F9C542 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				D4F424BB2206540800729C0F /* RVS_Extensions.swift */,
 				D496B47A2261106700E206F5 /* RVS_ONVIF_Test_Harness-Bridging-Header.h */,
 				D4908A0721FF61A60089AEC4 /* Info.plist */,
 			);
@@ -370,7 +371,6 @@
 		D45DFCE22260C52400E486B7 /* Utility Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D4F424BB2206540800729C0F /* RVS_Extensions.swift */,
 				D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */,
 				D4E0A8E5226E23B9007049B6 /* RVS_Sequence_Extensions.swift */,
 				D467CC9F2208A1F9004B8D66 /* RVS_PersistentPrefs.swift */,
@@ -569,6 +569,7 @@
 				D49089F721FF61A50089AEC4 /* Resources */,
 				D49089F621FF61A50089AEC4 /* Frameworks */,
 				D4996A3A2288971E004489C9 /* Embed Frameworks */,
+				9ECCE8A93D4EEEEB92069AFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -761,6 +762,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9ECCE8A93D4EEEEB92069AFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF iOS Test Harness/Pods-RVS_ONVIF iOS Test Harness-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF iOS Test Harness/Pods-RVS_ONVIF iOS Test Harness-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF iOS Test Harness/Pods-RVS_ONVIF iOS Test Harness-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C9AE228A33FCAD69C4751CF1 /* [CP] Embed Pods Frameworks */ = {
