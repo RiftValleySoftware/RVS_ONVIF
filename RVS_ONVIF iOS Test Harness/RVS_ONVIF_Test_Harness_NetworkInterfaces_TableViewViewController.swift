@@ -24,7 +24,7 @@ fileprivate extension UIView {
         }
         inSubView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         inSubView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        inSubView.heightAnchor.constraint(equalToConstant: RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight)
+        inSubView.heightAnchor.constraint(equalToConstant: RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight).isActive = true
     }
 }
 
