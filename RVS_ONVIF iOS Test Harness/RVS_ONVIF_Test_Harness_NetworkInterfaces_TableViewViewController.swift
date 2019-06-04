@@ -213,7 +213,7 @@ class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVI
             
             if let pskRec = dot11.security.psk {
                 section["Dot11-Security-PSK-Key"] = pskRec.key
-                section["Dot11-Security-PSK-PassPhrase"] = pskRec.passphrase
+                section["Dot11-Security-PSK-Passphrase"] = pskRec.passphrase
                 if let ext = pskRec.dot11PSKSetExtension {
                     section["Dot11-Security-PSK-Extension"] = String(describing: ext)
                 }

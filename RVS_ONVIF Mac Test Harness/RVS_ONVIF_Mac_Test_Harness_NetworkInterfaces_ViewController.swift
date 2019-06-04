@@ -81,6 +81,7 @@ class RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController: RVS_ONVIF_Mac
                             }
                         }
                     }
+                    
                     if let ipv6 = i.element.ipV6 {
                         tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "IPv6", value: ""))
                         tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Enabled", value: ipv6.isEnabled ? "YES" : "NO"))
@@ -126,8 +127,49 @@ class RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController: RVS_ONVIF_Mac
                             tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Extension", value: String(describing: ext)))
                         }
                     }
+                    
+                    if let sect = i.element.networkInterfaceExtension {
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Extension", value: ""))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "InterfaceType", value: String(sect.interfaceType.rawValue)))
+                        
+                        if let ext = sect.dot3Configuration {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot3", value: String(describing: ext)))
+                        }
+                        
+                        if let dot11 = sect.dot11 {
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-SSID", value: dot11.ssid))
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Alias", value: dot11.alias))
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-StationMode", value: dot11.mode.rawValue))
+                            tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-SecurityMode", value: dot11.security.mode.rawValue))
+                            
+                            if let priority = dot11.priority {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Priority", value: String(describing: priority)))
+                            }
+                            
+                            if let algorithm = dot11.security.algorithm {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-Algorithm", value: algorithm.rawValue))
+                            }
+                            
+                            if let pskRec = dot11.security.psk {
+                                if let ext = pskRec.dot11PSKSetExtension {
+                                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-PSK-Key", value: pskRec.key))
+                                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-PSK-Passphrase", value: pskRec.passphrase))
+                                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-PSK-Extension", value: String(describing: ext)))
+                                }
+                            }
+                            
+                            if let token = dot11.security.dot1XToken {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-Token", value: token))
+                            }
+                            
+                            if let ext = dot11.security.dot11SecurityConfigurationExtension {
+                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Dot11-Security-Extension", value: String(describing: ext)))
+                            }
+                        }
+                    }
                 }
             }
+            
             displayTableView?.reloadData()
         }
     }
@@ -156,7 +198,11 @@ class RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController: RVS_ONVIF_Mac
         } else if nil == inTableColumn {
             let groupHeader = NSTextView()
             groupHeader.isEditable = false
-            groupHeader.font = NSFont.boldSystemFont(ofSize: 20)
+            groupHeader.font = NSFont.boldSystemFont(ofSize: 17)
+            if tableRowData[inRow].key.starts(with: "NETWORK INTERFACE ") {
+                groupHeader.textColor = NSColor.yellow
+            }
+            
             groupHeader.alignment = .center
             groupHeader.drawsBackground = false
             groupHeader.string = tableRowData[inRow].key
