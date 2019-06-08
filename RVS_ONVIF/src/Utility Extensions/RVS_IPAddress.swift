@@ -565,12 +565,12 @@ public struct RVS_IPAddressV6: RVS_IPAddress {
 /**
  This is an extension to the String type that returns the String as an IP address.
  */
-public extension String {
+public extension StringProtocol {
     /* ################################################################## */
     /**
      - returns: the String, parsed as an IP address. It will be either an instance of RVS_IPAddressV4 or RVS_IPAddressV6. It will be nil, if the IP Address is invalid (no instance).
      */
     var ipAddress: RVS_IPAddress? {
-        return RVS_IPAddressExtractIPAddress(self)
+        return RVS_IPAddressExtractIPAddress(String(self))
     }
 }

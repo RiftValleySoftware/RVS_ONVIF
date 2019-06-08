@@ -202,23 +202,20 @@ import SOAPEngine64
     }
 
     /* ################################################################################################################################## */
-    // MARK: - Public Stored Instance Constants
+    // MARK: - Public Stored Instance Properties
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is a String, with our IP address and TCP port.
      */
-    public let ipAddressAndPort: String
+    public var ipAddressAndPort: String
     
     /* ################################################################## */
     /**
      These are our login credentials.
      */
-    public let loginCredentials: LoginCredentialTuple!
-
-    /* ################################################################################################################################## */
-    // MARK: - Public Stored Instance Properties
-    /* ################################################################################################################################## */
+    public var loginCredentials: LoginCredentialTuple!
+    
     /* ################################################################## */
     /**
      These are our various profile handlers. They should be read-only for users of the framework.

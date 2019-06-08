@@ -10,11 +10,11 @@
 
 import SwiftUI
 
-struct RVS_ONVIF_iOS_MultiTest_ContentView : View {
+struct RVS_ONVIF_iOS_MultiTest_ContentView: View {
     @State private var selection = 0
  
     var body: some View {
-        TabbedView(selection: $selection){
+        TabbedView(selection: $selection) {
             Text("First View")
                 .font(.title)
                 .tabItemLabel(Image("first"))
@@ -28,7 +28,7 @@ struct RVS_ONVIF_iOS_MultiTest_ContentView : View {
 }
 
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         RVS_ONVIF_iOS_MultiTest_ContentView()
     }

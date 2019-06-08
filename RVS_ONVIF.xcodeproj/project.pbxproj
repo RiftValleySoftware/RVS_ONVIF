@@ -63,6 +63,21 @@
 		D4803EA222A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4803EA122A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift */; };
 		D4837A022274EAD6007FAA4A /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E0A8E3226E183D007049B6 /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift */; };
 		D4838838227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */; };
+		D4869F7A22ABF4DD00521845 /* RVS_ONVIF_iOS_TestBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4869F7922ABF4DD00521845 /* RVS_ONVIF_iOS_TestBaseClass.swift */; };
+		D4869F7C22ABF4DD00521845 /* RVS_ONVIF_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; };
+		D4869F8222ABF8E300521845 /* RVS_ONVIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45B82F521FF2CA800DE26EF /* RVS_ONVIF.swift */; };
+		D4869F8322ABF8E600521845 /* RVS_ONVIF_Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DD7DE22297F9300D7EDE4 /* RVS_ONVIF_Protocols.swift */; };
+		D4869F8422ABF8EB00521845 /* RVS_ONVIF_Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E00959220C4A490089B914 /* RVS_ONVIF_Internals.swift */; };
+		D4869F8522ABF8F200521845 /* RVS_ONVIF_Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B592922202AFE00F663E9 /* RVS_ONVIF_Core.swift */; };
+		D4869F8622ABF8F200521845 /* RVS_ONVIF_Core_IANATypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E66AF3229DBC5300032A4A /* RVS_ONVIF_Core_IANATypes.swift */; };
+		D4869F8722ABF8F200521845 /* RVS_ONVIF_Core_Public_Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DD7E122298AAD00D7EDE4 /* RVS_ONVIF_Core_Public_Structs.swift */; };
+		D4869F8822ABF8F800521845 /* RVS_ONVIF_Profile_S.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45844412216F23C0075F2E8 /* RVS_ONVIF_Profile_S.swift */; };
+		D4869F8922ABF8F800521845 /* RVS_ONVIF_Profile_S_Public_Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42DD7E322298B6300D7EDE4 /* RVS_ONVIF_Profile_S_Public_Structs.swift */; };
+		D4869F8A22ABF8FF00521845 /* RVS_ParseXMLDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */; };
+		D4869F8B22ABF8FF00521845 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4745099220722800038B694 /* RVS_String_Extensions.swift */; };
+		D4869F8C22ABF8FF00521845 /* RVS_IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D99CA224107D50071B02E /* RVS_IPAddress.swift */; };
+		D4869F8D22ABF95300521845 /* SOAPEngine64.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; };
+		D4869F8E22ABF95A00521845 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; };
 		D48A036F2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */; };
 		D48A03702288A9FC002FBB21 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */; };
 		D49089FC21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49089FB21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift */; };
@@ -112,6 +127,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D45DFCFE2260C82B00E486B7;
 			remoteInfo = RVS_ONVIF_MacOS;
+		};
+		D4869F7D22ABF4DD00521845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4DF78A921FF2A7C00E9CB70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4DF78B121FF2A7C00E9CB70;
+			remoteInfo = RVS_ONVIF_iOS;
 		};
 		D4996A382288971E004489C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -236,6 +258,9 @@
 		D47CD339226B6A5500BE1DAC /* RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Handlers_ViewController.swift; sourceTree = "<group>"; };
 		D4803EA122A5B560003078CE /* RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController.swift; sourceTree = "<group>"; };
 		D4838837227752490034E588 /* RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_FunctionData_ViewController.swift; sourceTree = "<group>"; };
+		D4869F7722ABF4DD00521845 /* RVS_ONVIF_iOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_ONVIF_iOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4869F7922ABF4DD00521845 /* RVS_ONVIF_iOS_TestBaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_iOS_TestBaseClass.swift; sourceTree = "<group>"; };
+		D4869F7B22ABF4DD00521845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
 		D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_FIFOQueue.swift; sourceTree = "<group>"; };
 		D49089F921FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_ONVIF iOS Test Harness.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +319,16 @@
 				D496B47D226112E400E206F5 /* libxml2.2.tbd in Frameworks */,
 				D45DFD172260C8F900E486B7 /* SOAPEngineOSX.framework in Frameworks */,
 				5035D45CA18E44EAED0B69F0 /* libPods-RVS_ONVIF_MacOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4869F7422ABF4DD00521845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4869F7C22ABF4DD00521845 /* RVS_ONVIF_iOS.framework in Frameworks */,
+				D4869F8D22ABF95300521845 /* SOAPEngine64.framework in Frameworks */,
+				D4869F8E22ABF95A00521845 /* libxml2.2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +493,15 @@
 			path = RVS_ONVIF_MacOS;
 			sourceTree = "<group>";
 		};
+		D4869F7822ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D4869F7922ABF4DD00521845 /* RVS_ONVIF_iOS_TestBaseClass.swift */,
+				D4869F7B22ABF4DD00521845 /* Info.plist */,
+			);
+			path = RVS_ONVIF_iOS_Tests;
+			sourceTree = "<group>";
+		};
 		D49089FA21FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +581,7 @@
 			isa = PBXGroup;
 			children = (
 				D4DF78B421FF2A7C00E9CB70 /* RVS_ONVIF */,
+				D4869F7822ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */,
 				D4BAF3E62260E0D100C971D8 /* RVS_ONVIF_iOS */,
 				D45DFD002260C82B00E486B7 /* RVS_ONVIF_MacOS */,
 				D49089FA21FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness */,
@@ -557,6 +602,7 @@
 				D45DFCE72260C5FE00E486B7 /* RVS_ONVIF Mac Test Harness.app */,
 				D45DFCFF2260C82B00E486B7 /* RVS_ONVIF_MacOS.framework */,
 				D4A2A32A22A6BE7600B78ECC /* RVS_ONVIF iOS MultiTest.app */,
+				D4869F7722ABF4DD00521845 /* RVS_ONVIF_iOS_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,6 +677,24 @@
 			productReference = D45DFCFF2260C82B00E486B7 /* RVS_ONVIF_MacOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D4869F7622ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4869F7F22ABF4DD00521845 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_iOS_Tests" */;
+			buildPhases = (
+				D4869F7322ABF4DD00521845 /* Sources */,
+				D4869F7422ABF4DD00521845 /* Frameworks */,
+				D4869F7522ABF4DD00521845 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4869F7E22ABF4DD00521845 /* PBXTargetDependency */,
+			);
+			name = RVS_ONVIF_iOS_Tests;
+			productName = RVS_ONVIF_iOS_Tests;
+			productReference = D4869F7722ABF4DD00521845 /* RVS_ONVIF_iOS_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D49089F821FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4908A0A21FF61A60089AEC4 /* Build configuration list for PBXNativeTarget "RVS_ONVIF iOS Test Harness" */;
@@ -696,7 +760,7 @@
 		D4DF78A921FF2A7C00E9CB70 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
@@ -710,6 +774,9 @@
 					};
 					D45DFCFE2260C82B00E486B7 = {
 						CreatedOnToolsVersion = 10.2;
+					};
+					D4869F7622ABF4DD00521845 = {
+						CreatedOnToolsVersion = 10.2.1;
 					};
 					D49089F821FF61A50089AEC4 = {
 						CreatedOnToolsVersion = 10.1;
@@ -738,6 +805,7 @@
 			projectRoot = "";
 			targets = (
 				D4DF78B121FF2A7C00E9CB70 /* RVS_ONVIF_iOS */,
+				D4869F7622ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */,
 				D49089F821FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness */,
 				D4A2A32922A6BE7600B78ECC /* RVS_ONVIF iOS MultiTest */,
 				D45DFCFE2260C82B00E486B7 /* RVS_ONVIF_MacOS */,
@@ -753,6 +821,13 @@
 			files = (
 				D45DFCEE2260C5FF00E486B7 /* Assets.xcassets in Resources */,
 				D45DFCF12260C5FF00E486B7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4869F7522ABF4DD00521845 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +1059,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4869F7322ABF4DD00521845 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4869F8B22ABF8FF00521845 /* RVS_String_Extensions.swift in Sources */,
+				D4869F8622ABF8F200521845 /* RVS_ONVIF_Core_IANATypes.swift in Sources */,
+				D4869F8A22ABF8FF00521845 /* RVS_ParseXMLDuration.swift in Sources */,
+				D4869F8222ABF8E300521845 /* RVS_ONVIF.swift in Sources */,
+				D4869F8822ABF8F800521845 /* RVS_ONVIF_Profile_S.swift in Sources */,
+				D4869F7A22ABF4DD00521845 /* RVS_ONVIF_iOS_TestBaseClass.swift in Sources */,
+				D4869F8922ABF8F800521845 /* RVS_ONVIF_Profile_S_Public_Structs.swift in Sources */,
+				D4869F8722ABF8F200521845 /* RVS_ONVIF_Core_Public_Structs.swift in Sources */,
+				D4869F8522ABF8F200521845 /* RVS_ONVIF_Core.swift in Sources */,
+				D4869F8322ABF8E600521845 /* RVS_ONVIF_Protocols.swift in Sources */,
+				D4869F8422ABF8EB00521845 /* RVS_ONVIF_Internals.swift in Sources */,
+				D4869F8C22ABF8FF00521845 /* RVS_IPAddress.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D49089F521FF61A50089AEC4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1052,6 +1146,11 @@
 			isa = PBXTargetDependency;
 			target = D45DFCFE2260C82B00E486B7 /* RVS_ONVIF_MacOS */;
 			targetProxy = D45DFD042260C82B00E486B7 /* PBXContainerItemProxy */;
+		};
+		D4869F7E22ABF4DD00521845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4DF78B121FF2A7C00E9CB70 /* RVS_ONVIF_iOS */;
+			targetProxy = D4869F7D22ABF4DD00521845 /* PBXContainerItemProxy */;
 		};
 		D4996A392288971E004489C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1224,6 +1323,52 @@
 			};
 			name = Release;
 		};
+		D4869F8022ABF4DD00521845 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SOAPEngine",
+				);
+				INFOPLIST_FILE = RVS_ONVIF_iOS_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D4869F8122ABF4DD00521845 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KSAUGZFWP2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SOAPEngine",
+				);
+				INFOPLIST_FILE = RVS_ONVIF_iOS_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D4908A0821FF61A60089AEC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B1525E23AE8902854BD2D2F8 /* Pods-RVS_ONVIF iOS Test Harness.debug.xcconfig */;
@@ -1292,7 +1437,6 @@
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "RVS_ONVIF iOS MultiTest/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1313,7 +1457,6 @@
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "RVS_ONVIF iOS MultiTest/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1537,6 +1680,15 @@
 			buildConfigurations = (
 				D45DFD092260C82B00E486B7 /* Debug */,
 				D45DFD0A2260C82B00E486B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4869F7F22ABF4DD00521845 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_iOS_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4869F8022ABF4DD00521845 /* Debug */,
+				D4869F8122ABF4DD00521845 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -11,15 +11,20 @@
  */
 
 import Foundation
-/* ###################################################################################################################################### */
-/**
- This file contains extensions and simple utilities that form a baseline of extra runtime seasoning for our projects.
- */
+
 /* ###################################################################################################################################### */
 /**
  These are a variety of cool String extensions that add some great extra cheese on the pizza.
  */
-public extension String {
+public extension StringProtocol {
+    /* ################################################################## */
+    /**
+     - returns: the localized string (main bundle) for this string.
+     */
+    var localizedVariant: String {
+        return NSLocalizedString(String(self), comment: "") // Need to force self into a String.
+    }
+    
     /* ################################################################## */
     /**
      From here: https://stackoverflow.com/q/24123518/879365, but modified from here: https://stackoverflow.com/a/55639723/879365
@@ -58,14 +63,6 @@ public extension String {
         }
         
         return hash
-    }
-    
-    /* ################################################################## */
-    /**
-     - returns: the localized string (main bundle) for this string.
-     */
-    var localizedVariant: String {
-        return NSLocalizedString(self, comment: "")
     }
     
     /* ################################################################## */
@@ -114,8 +111,6 @@ public extension String {
     }
 }
 
-/* ###################################################################################################################################### */
-// MARK: - Extensions -
 /* ###################################################################################################################################### */
 /**
  This extension will allow searching and indexing substrings. It comes straight from here: https://stackoverflow.com/a/32306142/879365

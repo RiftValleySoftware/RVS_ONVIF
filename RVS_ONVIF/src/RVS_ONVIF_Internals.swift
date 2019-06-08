@@ -486,9 +486,9 @@ extension RVS_ONVIF {
      
      - parameter inSOAPEngine: The SOAPEngine instance calling this method. It may be nil.
      - parameter didBeforeSending: This is a URL Request that will be sent. You can modify this.
-     - returns a Data object. It should be the inData parameter, unchanged.
+     - returns the NSURLRequest object.
      */
-    public func soapEngine(_ soapEngine: SOAPEngine!, didBeforeSending inRequest: NSMutableURLRequest!) -> NSMutableURLRequest! {
+    public func soapEngine(_ soapEngine: SOAPEngine!, didBeforeSendingURLRequest inRequest: NSMutableURLRequest!) -> NSMutableURLRequest! {
         #if DEBUG
             print("didBeforeSending: \(String(describing: inRequest))")
         #endif
@@ -527,23 +527,6 @@ extension RVS_ONVIF {
         }
         
         return inRequest
-    }
-    
-    /* ################################################################## */
-    /**
-     This may be called in non-main threads.
-     
-     This is called before the data is sent into the parser.
-     
-     - parameter inSOAPEngine: The SOAPEngine instance calling this method. It may be nil.
-     - parameter didBeforeParsingResponseData: The data that will be parsed. You can modify this.
-     - returns a Data object. It should be the inData parameter, unchanged.
-     */
-    public func soapEngine(_ inSOAPEngine: SOAPEngine!, didBeforeParsingResponseData inData: Data!) -> Data! {
-        #if DEBUG
-            print("beforeParsingData: \(String(describing: inData))")
-        #endif
-        return inData
     }
     
     /* ################################################################## */
