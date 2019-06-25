@@ -67,6 +67,12 @@ import SOAPEngine64
     
     /* ################################################################## */
     /**
+     This is a flag that is set by classes that override this in order to afford testing. If true, then we don't actually send data out.
+     */
+    internal var _testingSetup: Bool = false
+    
+    /* ################################################################## */
+    /**
      This tracks the number of times a nonce has been created.
      */
     internal var _nonceCount: Int = 0

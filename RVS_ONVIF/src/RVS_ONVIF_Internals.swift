@@ -267,7 +267,7 @@ extension RVS_ONVIF {
 
         // Unless we are forcing basic, we always try to use Digest first, as it is (theoretically) *slightly* more secure than Basic.
         // If we are marked stale, we go in again, as well.
-        if .basic != authMethod, (nil == _authData || (.digest == authMethod && ("true" == _authData?["stale"] ?? ""))) {
+        if !_testingSetup && .basic != authMethod && (nil == _authData || (.digest == authMethod && ("true" == _authData?["stale"] ?? ""))) {
             #if DEBUG
                 if let stale = _authData?["stale"], "true" == stale {
                     print("Digest Stale. Into the breach once more.")
@@ -339,6 +339,9 @@ extension RVS_ONVIF {
                 }
             }
             
+            #if DEBUG
+            print("Calling SOAPEngine: URI: \(reqURLString), Action: \(inRequest.soapAction), Namespace: \(inRequest.headerNamespaceFor(self))")
+            #endif
             // This is the actual SOAPEngine request. We ask for a parsed Dictionary in response.
             soap.requestURL(reqURLString, soapAction: inRequest.soapAction)
         } else {
@@ -470,6 +473,20 @@ extension RVS_ONVIF {
             }
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This may be called in non-main threads.
+     
+     This is a special base method that is designed to be overridden. If the module is set to be tested, then this is called, instead of the regular method.
+     
+     - parameter inSOAPEngine: The SOAPEngine instance calling this method. It may be nil.
+     - parameter didBeforeSendingURLRequest: This is a URL Request that will be sent. You can modify this.
+     - returns nil.
+     */
+    @objc internal func _soapEngine(_ soapEngine: SOAPEngine!, didBeforeSendingURLRequest inRequest: NSMutableURLRequest!) -> NSMutableURLRequest! {
+        return nil
+    }
 
     /* ################################################################################################################################## */
     // MARK: - Public SOAPEngineDelegate Instance Methods
@@ -485,48 +502,56 @@ extension RVS_ONVIF {
      We use this method to form our own Digest Auth.
      
      - parameter inSOAPEngine: The SOAPEngine instance calling this method. It may be nil.
-     - parameter didBeforeSending: This is a URL Request that will be sent. You can modify this.
+     - parameter didBeforeSendingURLRequest: This is a URL Request that will be sent. You can modify this.
      - returns the NSURLRequest object.
      */
     public func soapEngine(_ soapEngine: SOAPEngine!, didBeforeSendingURLRequest inRequest: NSMutableURLRequest!) -> NSMutableURLRequest! {
         #if DEBUG
-            print("didBeforeSending: \(String(describing: inRequest))")
+            print("didBeforeSendingURLRequest: \(String(describing: inRequest))")
+            if _testingSetup {
+                print("Testing Setup -Communication Will be Interrupted.")
+            }
         #endif
-        // Build an RFC2617 authentication header (https://tools.ietf.org/html/rfc2617)
-        if .AUTH_CUSTOM == soapEngine.authorizationMethod, let username = _authData?["username"], let realm = _authData?["realm"], let password = _authData?["password"], let uri = _authData?["uri"], let method = _authData?["method"], let nonce = _authData?["nonce"], let qop = _authData?["qop"], let body = String(data: inRequest.httpBody ?? Data(), encoding: .utf8) {
-            let cnonce = NSUUID().uuidString.replacingOccurrences(of: "-", with: "")
-            var ha1: String = "\(username):\(realm):\(password)".md5
-            var ha2: String = "\(method):\(uri)".md5
-            var response = ""
-            var extra = ""
-            
-            if let opaque = _authData?["opaque"] {
-                extra = ", opaque=\"\(opaque)\""
-            }
-            
-            if "MD5-sess" == method {
-                ha1 = (ha1 + ":\(nonce):\(cnonce)").md5
-            }
-            
-            switch qop {
-            case "auth-int":
-                ha2 = ("\(method):\(uri):" + body.md5).md5
-                fallthrough
+        // If we are testing,
+        if _testingSetup {
+            return _soapEngine(soapEngine, didBeforeSendingURLRequest: inRequest)
+        } else {
+            // Build an RFC2617 authentication header (https://tools.ietf.org/html/rfc2617)
+            if .AUTH_CUSTOM == soapEngine.authorizationMethod, let username = _authData?["username"], let realm = _authData?["realm"], let password = _authData?["password"], let uri = _authData?["uri"], let method = _authData?["method"], let nonce = _authData?["nonce"], let qop = _authData?["qop"], let body = String(data: inRequest.httpBody ?? Data(), encoding: .utf8) {
+                let cnonce = NSUUID().uuidString.replacingOccurrences(of: "-", with: "")
+                var ha1: String = "\(username):\(realm):\(password)".md5
+                var ha2: String = "\(method):\(uri)".md5
+                var response = ""
+                var extra = ""
                 
-            case "auth":
-                response = "\(ha1):\(nonce):\(String(_nonceCount)):\(cnonce):\(qop):\(ha2)".md5
-                _nonceCount += 1
+                if let opaque = _authData?["opaque"] {
+                    extra = ", opaque=\"\(opaque)\""
+                }
                 
-            default:
-                response = "\(ha1):\(nonce):\(ha2)".md5
+                if "MD5-sess" == method {
+                    ha1 = (ha1 + ":\(nonce):\(cnonce)").md5
+                }
+                
+                switch qop {
+                case "auth-int":
+                    ha2 = ("\(method):\(uri):" + body.md5).md5
+                    fallthrough
+                    
+                case "auth":
+                    response = "\(ha1):\(nonce):\(String(_nonceCount)):\(cnonce):\(qop):\(ha2)".md5
+                    _nonceCount += 1
+                    
+                default:
+                    response = "\(ha1):\(nonce):\(ha2)".md5
+                }
+                
+                let authenticationHeader = "Digest response=\"\(response)\", nonce=\"\(nonce)\", method=\"\(method)\", username=\"\(username)\", uri=\"\(uri)\", qop=\"\(qop)\", cnonce=\"\(cnonce)\"" + extra
+                
+                soapEngine.header = authenticationHeader
             }
             
-            let authenticationHeader = "Digest response=\"\(response)\", nonce=\"\(nonce)\", method=\"\(method)\", username=\"\(username)\", uri=\"\(uri)\", qop=\"\(qop)\", cnonce=\"\(cnonce)\"" + extra
-            
-            soapEngine.header = authenticationHeader
+            return inRequest
         }
-        
-        return inRequest
     }
     
     /* ################################################################## */
