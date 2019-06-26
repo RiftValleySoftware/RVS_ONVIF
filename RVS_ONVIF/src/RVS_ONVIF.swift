@@ -128,6 +128,141 @@ import SOAPEngine64
     }
 
     /* ################################################################################################################################## */
+    // MARK: - Internal Class Methods
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     We define this here, so that we can override it in our tester methods.
+     
+     - parameter inSoapEngine: An optional parameter, with the SOAPEngine instance, primed, and ready to go.
+     - parameter uri: A String, with the URI to call.
+     - parameter action: A String, with the action to call.
+     */
+    internal class func _callSOAPEngine(_ inSoapEngine: SOAPEngine!, uri inURI: String, action inAction: String) {
+        #if DEBUG
+            print("Calling SOAPEngine: URI: \(inURI), Action: \(inAction)")
+        #endif
+        inSoapEngine?.requestURL(inURI, soapAction: inAction)
+    }
+    
+    /* ################################################################################################################################## */
+    // MARK: - Internal Instance Methods
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is inspired by the ONVIFCamera library, by Rémy Virin, but I'm a jerk, and couldn't leave well enough alone.
+     We define this here, so that we can override it in our tester methods.
+
+     Perform a SOAP request
+     Responses happen through the error and success instance callbacks.
+     
+     - parameter request: The Device Request instance.
+     - parameter params: An optional (default is nil) parameter that contains parameters to be added to the SOAP request.
+     - parameter asSSL: An optional Bool (default is false), that requires the request to be made as SSL (HTTPS).
+     - parameter path: An optional (default is empty string) path. If provided, it will trump the one in the request.
+     */
+    internal func _performSOAPRequest(request inRequest: RVS_ONVIF_DeviceRequestProtocol, params inParams: [String: Any]! = nil, asSSL inAsSSL: Bool = false, path inPath: String = "") {
+        let soap = SOAPEngine() // We initialize a new SOAPEngine for each call.
+        soap.retrievesAttributes = inRequest.isRetrieveAttributes
+        soap.delegate = self    // We allow interception of delegate calls.
+        soap.licenseKey = self._soapEngineLicenseKey    // So we can work on devices.
+        soap.version = .VERSION_1_2
+        soap.authorizationMethod = .AUTH_CUSTOM
+        soap.envelope = inRequest.headerNamespaceFor(self)
+        
+        let path = inPath.isEmpty ? inRequest.pathFor(self) : inPath
+        
+        // See if we need to make this HTTPS.
+        let reqURLString = "http" + (inAsSSL ? "s" : "") + "://" + self.ipAddressAndPort + path
+        
+        #if DEBUG
+            print("SOAP Request URL: \(reqURLString)")
+        #endif
+        
+        // Unless we are forcing basic, we always try to use Digest first, as it is (theoretically) *slightly* more secure than Basic.
+        // If we are marked stale, we go in again, as well.
+        if !_testingSetup && .basic != authMethod && (nil == _authData || (.digest == authMethod && ("true" == _authData?["stale"] ?? ""))) {
+            #if DEBUG
+                if let stale = _authData?["stale"], "true" == stale {
+                    print("Digest Stale. Into the breach once more.")
+                }
+                print("Requesting SOAP Authorization Realm for Digest")
+            #endif
+            
+            // Get the result of a Digest challenge.
+            _authData = _AuthorizationSetup().authCreds(for: reqURLString)
+            _authData?["username"] = self.loginCredentials?.login ?? ""     // Add the username, so we have it all in one place.
+            _authData?["password"] = self.loginCredentials?.password ?? ""  // Add the password, so we have it all in one place.
+            
+            #if DEBUG   // These are printouts for debug mode.
+                if _authData?.isEmpty ?? false {
+                    if .both == authMethod {
+                        print("No SOAP Authorization Realm (Digest), but Trying Basic Authentication")
+                    } else {
+                        print("No SOAP Authorization Realm (Digest), and We Will Not Allow Basic Authorization.")
+                    }
+                } else {
+                    print("Received SOAP Authorization Realm for Digest: \(String(describing: _authData))")
+                }
+            #endif
+            
+            // If they didn't play nice, we switch to basic to avoid checking for a realm every call.
+            if nil == _authData && .digest != authMethod {
+                authMethod = .basic
+                soap.authorizationMethod = .AUTH_BASIC
+                #if DEBUG
+                    print("Switching to Basic SOAP Authorization.")
+                #endif
+            }
+        }
+        
+        soap.username = self.loginCredentials?.login ?? ""
+        soap.password = self.loginCredentials?.password ?? ""
+        soap.responseHeader = true  // If this is not set, you will get an empty dictionary.
+        
+        // If we don't have a realm, and we have force digest selected, then we fail. Otherwise, we just blunder on, and hope the device likes us.
+        if .digest != authMethod || nil != _authData {
+            soap.realm = _authData?["realm"]
+            
+            // Set up the parameters for the SOAP call.
+            if let params = inParams {
+                #if DEBUG
+                    print("SOAP Request Parameters: \(params)")
+                #endif
+                var modifiedParams: [String: Any] = [:]
+                
+                params.forEach {
+                    var namespace = ""
+                    if nil == $0.key.firstIndex(of: ":") {
+                        namespace = inRequest.soapSpace + ":"
+                    }
+                    modifiedParams["\(namespace)\($0.key)"] = $0.value
+                }
+                
+                soap.defaultTagName = nil
+                
+                modifiedParams.forEach {
+                    let param = $0
+                    if let array = param.value as? [Any] {
+                        array.forEach {
+                            soap.setValue($0, forKey: param.key)
+                        }
+                    } else {
+                        soap.setValue(param.value, forKey: param.key)
+                    }
+                }
+            }
+            
+            // This is the actual SOAPEngine request. We ask for a parsed Dictionary in response.
+            type(of: self)._callSOAPEngine(soap, uri: reqURLString, action: inRequest.soapAction)
+        } else {
+            DispatchQueue.main.async {  // All callbacks happen in the main queue.
+                self._errorCallback(RVS_Fault(faultCode: .NilRealm))
+            }
+        }
+    }
+
+    /* ################################################################################################################################## */
     // MARK: - Public Class Methods
     /* ################################################################################################################################## */
     /* ################################################################## */

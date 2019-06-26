@@ -2,6 +2,16 @@ def shared_pods
     pod 'SwiftLint'
 end
 
+target 'RVS_ONVIF_iOS_Tests' do
+    platform :ios, '12.0'
+    pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+    shared_pods
+end
+
+target 'RVS_ONVIF' do
+    shared_pods
+end
+
 target 'RVS_ONVIF_iOS' do
     platform :ios, '12.0'
     shared_pods

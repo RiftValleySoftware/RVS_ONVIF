@@ -21,6 +21,7 @@ opt_in_rules:
 excluded:
 - Pods
 - SOAPEngine
+- RVS_ONVIF_iOS_Tests/*
 
 file_length:
 - 2000 # warning
