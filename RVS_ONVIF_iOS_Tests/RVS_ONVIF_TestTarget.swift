@@ -15,7 +15,7 @@ import XCTest
  This is a special testing subclass of the RVS_ONVIF class. It will implement the ability to insert mock transactions into the SOAPEngine.
  */
 class RVS_ONVIF_TestTarget: RVS_ONVIF {
-    var expectation: XCTestExpectation!
+    var targetMock: RVS_ONVIF_TestTarget_MockDevice!
     
     /* ################################################################## */
     /**
@@ -23,8 +23,9 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
      
      - parameter delegate: This is an optional (default is nil) parameter that allows you to specify a delegate up front. If it is provided, the instance will be immediately initialized.
      */
-    internal init(delegate inDelegate: RVS_ONVIFDelegate! = nil) {
+    internal init(mock inMock: RVS_ONVIF_TestTarget_MockDevice, delegate inDelegate: RVS_ONVIFDelegate! = nil) {
         super.init()
+        targetMock = inMock
         ipAddressAndPort = "127.0.0.1:80"
         loginCredentials = RVS_ONVIF.LoginCredentialTuple(login: "test", password: "test")
         _testingSetup = true    // By setting this to true, we intercept communications to a device, allowing us to inject our own data.
@@ -93,5 +94,9 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
         #if DEBUG
             print("Test SOAP Request: \(String(describing: soup))")
         #endif
+        
+        if let response = targetMock.makeTransaction(soup) {
+            _successCallback(response, soapRequest: inRequest.soapAction)
+        }
     }
 }

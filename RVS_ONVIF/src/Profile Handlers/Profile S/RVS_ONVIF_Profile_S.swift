@@ -671,10 +671,10 @@ public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: true, if the callback was handled (including as an error).
      */
-    public func callbackHandler(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> Bool {
+    public func callbackHandler(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> Bool {
         var ret = false
         
         switch inSOAPRequest {

@@ -153,10 +153,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil
      - returns: the parsed DNS record, or nil, if there was an error.
      */
-    private func _parseDynamicDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> DynamicDNSRecord! {
+    private func _parseDynamicDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> DynamicDNSRecord! {
         #if DEBUG
             print("\nDNS Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -217,10 +217,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: the parsed DNS record, or nil, if there was an error.
      */
-    private func _parseDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.DNSRecord! {
+    private func _parseDNSRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> RVS_ONVIF_Core.DNSRecord! {
         #if DEBUG
         print("\nDNS Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -257,10 +257,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: the parsed NTP record, or nil, if there was an error.
      */
-    private func _parseNTPRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> RVS_ONVIF_Core.NTPRecord! {
+    private func _parseNTPRecord(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> RVS_ONVIF_Core.NTPRecord! {
         #if DEBUG
             print("\nNTP Response: \(String(describing: inResponseDictionary))")
         #endif
@@ -1307,10 +1307,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
 
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: true, if the callback was handled (including as an error).
      */
-    public func callbackHandler(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> Bool {
+    public func callbackHandler(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> Bool {
         switch inSOAPRequest {
         case _DeviceRequest.GetDynamicDNS.soapAction:
             // We give the caller the opportunity to vet the data. Default just passes through.
@@ -1357,10 +1357,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: true, if the callback was handled (including as an error).
      */
-    internal func _callbackHandlerPartDeux(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> Bool {
+    internal func _callbackHandlerPartDeux(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> Bool {
         switch inSOAPRequest {
         case _DeviceRequest.GetWsdlUrl.soapAction:
             // No need for a separate parser. This is a simple one.
@@ -1425,10 +1425,10 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String
-     - parameter soapEngine: The SOAPEngine object that executed the request.
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
      - returns: true, if the callback was handled (including as an error).
      */
-    internal func _callbackHandlerPartTroix(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) -> Bool {
+    internal func _callbackHandlerPartTroix(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> Bool {
         switch inSOAPRequest {
         case _DeviceRequest.GetDeviceInformation.soapAction:    // First, we get the initial device information call.
             guard let deviceInfo = inResponseDictionary["GetDeviceInformationResponse"] as? [String: Any] else {

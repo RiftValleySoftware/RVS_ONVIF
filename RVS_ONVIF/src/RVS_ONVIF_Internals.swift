@@ -43,7 +43,7 @@ extension RVS_ONVIF {
      - parameter soapRequest: The SOAP request object call, as a String
      - parameter soapEngine: The SOAPEngine object that executed the request.
      */
-    internal func _successCallback(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine) {
+    internal func _successCallback(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine! = nil) {
         #if DEBUG
             print("Response from \(inSOAPRequest) SOAP Call. Data: " + String(describing: inResponseDictionary))
         #endif

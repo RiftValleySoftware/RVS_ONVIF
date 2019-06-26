@@ -8,8 +8,6 @@
  The Great Rift Valley Software Company: https://riftvalleysoftware.com
  */
 
-import Foundation
-import XCTest
 import SwiftyXMLParser
 
 /* ###################################################################################################################################### */
@@ -21,12 +19,61 @@ import SwiftyXMLParser
 public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
     /* ################################################################## */
     /**
-     The default lookup table uses a String as the key (built from the stimulus), and responds with XML, in a String.
+     This just strips the namespace off of element names.
      
-     This needs to be filled out; either by subclasses, or by assignment.
+     - parameter inElementName: A String, with the fully-qualified element name.
+     
+     - returns: the element name, minus the namespace header, and the namespace header, minus the element name.
+     */
+    class func stripNamespace(_ inElementName: String) -> (namespace: String, element: String)! {
+        if let colonIndex = inElementName.firstIndex(of: ":") {
+            return (namespace: String(inElementName.prefix(upTo: colonIndex)), element: String(inElementName.suffix(from: inElementName.index(after: colonIndex))))
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This is a simple lookup table that returns raw XML in response to keys.
      */
     var lookupTable: [String: String] = [:]
 
+    /* ################################################################## */
+    /**
+     This is a brute-force parser for XML elements. We use this to translate from the SwiftyXML object model into a simple string-key Dictionary.
+     
+     - parameter inPreparsed: The SwiftyXML preparsed object.
+     
+     - returns: A Dictionary, keyed on the unqualified names, of the contents of the object.
+     */
+    class func recursiveParser(_ inPreparsed: XML.Element) -> [String: Any] {
+        var ret: [String: Any] = [:]
+            
+        for child in inPreparsed.childElements {
+            if let elemName = stripNamespace(child.name) {
+                if 0 < child.childElements.count {
+                    var contents: [String: Any] = [:]
+                    for shorty in child.childElements {
+                        if let shortyName = stripNamespace(shorty.name) {
+                            // We do this, so we don't have to pick the value out of an unnecessary Dictionary.
+                            if 0 < shorty.childElements.count {
+                                contents[shortyName.element] = recursiveParser(shorty)
+                            } else {
+                                contents[shortyName.element] = shorty.text  // Shouldn't be nil, but if so, what the hell...
+                            }
+                        }
+                    }
+                    ret[elemName.element] = contents
+                } else {
+                    ret[elemName.element] = child.text ?? ""
+                }
+            }
+        }
+        
+        return ret
+    }
+    
     /* ################################################################## */
     /**
      This will parse response XML, and return a parsed Dictionary.
@@ -34,10 +81,18 @@ public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
      - parameter inXML: The response data as an XML String
      - returns: A Dictionary, containing the parsed response.
      */
-    func parseXML(_ inXML: String) -> [String: Any]? {
-        if !inXML.isEmpty, let data = inXML.data(using: .utf8) {
+    func parseXML(_ inXML: String, action inAction: String) -> [String: Any]? {
+        var ret: [String: Any]!
+        
+        if !inXML.isEmpty {
+            let parsedObject = try! XML.parse(inXML)
+            let soapBody = parsedObject["SOAP-ENV:Envelope", "SOAP-ENV:Body"]   // Strip off the SOAP stuff.
+            if let elem = soapBody.element {
+                ret = type(of: self).recursiveParser(elem)
+            }
         }
-        return nil
+        
+        return ret
     }
 
     /* ################################################################## */
@@ -49,11 +104,10 @@ public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
      - returns: A Dictionary, containing the parsed response.
      */
     func makeTransaction(_ inCommand: [String: Any]) -> [String: Any]? {
-        if let inputDictionary = inCommand as? [String: String] {
+        if let inputDictionary = inCommand as? [String: String], let action = inputDictionary["action"] {
             let key = inputDictionary.values.joined()   // Brute-force join
-            
             if let xml = lookupTable[key] {
-                return parseXML(xml)
+                return parseXML(xml, action: action)
             }
         }
         return nil

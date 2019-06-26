@@ -30,14 +30,13 @@ class RVS_ONVIF_iOS_TestBaseClass: XCTestCase, RVS_ONVIFDelegate {
         
         print(axisCamera.makeTransaction(["action": "trt:GetDeviceInformation"]) ?? "ERROR")
         
-        let testTarget = RVS_ONVIF_TestTarget(delegate: self)
-        testTarget.expectation = XCTestExpectation()
-        testTarget.expectation.expectedFulfillmentCount = 2
+        let testTarget = RVS_ONVIF_TestTarget(mock: axisCamera, delegate: self)
+        let expectation = XCTestExpectation()
         
         print(String(reflecting: testTarget))
         
         // Wait until the expectation is fulfilled, with a timeout of half a second.
-        wait(for: [testTarget.expectation], timeout: 10)
+        wait(for: [expectation], timeout: 10)
         
         print(String(reflecting: testTarget))
     }
