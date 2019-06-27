@@ -8,7 +8,7 @@
  The Great Rift Valley Software Company: https://riftvalleysoftware.com
  */
 
-import SwiftyXMLParser
+import SWXMLHash
 
 /* ###################################################################################################################################### */
 /**
@@ -16,58 +16,95 @@ import SwiftyXMLParser
  
  The default is a simple "match stimulus" lookup, but you are free to do what you want.
  */
-public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
+public class RVS_ONVIF_TestTarget_MockDevice {
     /* ################################################################## */
     /**
      This just strips the namespace off of element names.
      
      - parameter inElementName: A String, with the fully-qualified element name.
      
-     - returns: the element name, minus the namespace header, and the namespace header, minus the element name.
+     - returns: the element name, minus the namespace header, and the namespace header, minus the element name, or just the element name.
      */
-    class func stripNamespace(_ inElementName: String) -> (namespace: String, element: String)! {
+    class func stripNamespace(_ inElementName: String) -> (namespace: String, element: String) {
         if let colonIndex = inElementName.firstIndex(of: ":") {
             return (namespace: String(inElementName.prefix(upTo: colonIndex)), element: String(inElementName.suffix(from: inElementName.index(after: colonIndex))))
         }
         
-        return nil
+        return (namespace: "", element: inElementName)
     }
-    
+
     /* ################################################################## */
     /**
      This is a simple lookup table that returns raw XML in response to keys.
      */
     var lookupTable: [String: String] = [:]
-
+    
     /* ################################################################## */
     /**
-     This is a brute-force parser for XML elements. We use this to translate from the SwiftyXML object model into a simple string-key Dictionary.
+     This is a basic recursive routine that grabs the parsed values from the input SWXMLHas element.
      
-     - parameter inPreparsed: The SwiftyXML preparsed object.
-     
-     - returns: A Dictionary, keyed on the unqualified names, of the contents of the object.
+     - parameter inParsedXML: A single parsed XML element
+     - returns: Some kind of data. It could be an end node, resolved to String, Int or Double, or it could be a Dictionary, containing child elements, or it could be an Array, also containing child elements.
      */
-    class func recursiveParser(_ inPreparsed: XML.Element) -> [String: Any] {
-        var ret: [String: Any] = [:]
+    class func downTheRabbithole(_ inParsedXML: SWXMLHash.XMLElement) -> Any? {
+        var ret: Any? = nil
+        
+        if !inParsedXML.text.isEmpty {
+            ret = inParsedXML.text
+        } else {
             
-        for child in inPreparsed.childElements {
-            if let elemName = stripNamespace(child.name) {
-                if 0 < child.childElements.count {
-                    var contents: [String: Any] = [:]
-                    for shorty in child.childElements {
-                        if let shortyName = stripNamespace(shorty.name) {
-                            // We do this, so we don't have to pick the value out of an unnecessary Dictionary.
-                            if 0 < shorty.childElements.count {
-                                contents[shortyName.element] = recursiveParser(shorty)
-                            } else {
-                                contents[shortyName.element] = shorty.text  // Shouldn't be nil, but if so, what the hell...
+            var attributes: Any? = nil
+            
+            if 0 < inParsedXML.allAttributes.count {
+                let attrArray = inParsedXML.allAttributes
+                var temp: [String: Any] = [:]
+                for (key, value) in attrArray {
+                    temp[key] = value.text
+                }
+                
+                attributes = temp
+            }
+            
+            var children: Any? = nil
+            
+            if let chilluns = inParsedXML.children as? [XMLElement] {
+                var retArray: [[String: Any]] = []
+                for child in chilluns {
+                    if let val = downTheRabbithole(child) {
+                        retArray.append([child.name: val])
+                    }
+                }
+                
+                // Now, check to see if we have any dupes. If not, we can just use the Dictionary. If so, then we strip the names and use the values as just Array elements.
+                let retDict = retArray.reduce(into: [String: Any]()) { (current: inout [String: Any], next) in
+                    for (key, value) in next {
+                        current[key] = value
+                    }
+                }
+                
+                if retDict.count != retArray.count {
+                    var tempDict: [String: [Any]] = [:]
+                    tempDict = retArray.reduce(into: [String: [Any]]()) { (current: inout [String: [Any]], next) in
+                        for (key, value) in next {
+                            if nil == current[key] {
+                                current[key] = []
                             }
+                            current[key]?.append(value)
                         }
                     }
-                    ret[elemName.element] = contents
+                    children = tempDict
                 } else {
-                    ret[elemName.element] = child.text ?? ""
+                    children = retDict
                 }
+            }
+            
+            if nil != children && nil == attributes {
+                ret = children
+            } else if nil != attributes && nil == children {
+                ret = attributes
+            } else if let attributes = attributes, let children = children {
+                let retTemp: [String: Any] = ["attributes": attributes, "Values": children]
+                ret = retTemp
             }
         }
         
@@ -82,13 +119,19 @@ public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
      - returns: A Dictionary, containing the parsed response.
      */
     func parseXML(_ inXML: String, action inAction: String) -> [String: Any]? {
-        var ret: [String: Any]!
+        let strippedAction = type(of: self).stripNamespace(inAction)
+        var ret: [String: Any]! = nil
         
         if !inXML.isEmpty {
-            let parsedObject = try! XML.parse(inXML)
-            let soapBody = parsedObject["SOAP-ENV:Envelope", "SOAP-ENV:Body"]   // Strip off the SOAP stuff.
-            if let elem = soapBody.element {
-                ret = type(of: self).recursiveParser(elem)
+            let xml = SWXMLHash.config { config in
+                config.shouldProcessNamespaces = true   // No namespaces. We are copying the way SOAPEngine does it.
+                }.parse(inXML)
+            
+            if let main = xml["Envelope"]["Body"]["\(strippedAction.element)Response"].element {
+                ret = [:]
+                if let val =  type(of: self).downTheRabbithole(main) {
+                    ret["\(strippedAction.element)Response"] = val
+                }
             }
         }
         
@@ -105,7 +148,7 @@ public class RVS_ONVIF_TestTarget_MockDevice: NSObject, XMLParserDelegate {
      */
     func makeTransaction(_ inCommand: [String: Any]) -> [String: Any]? {
         if let inputDictionary = inCommand as? [String: String], let action = inputDictionary["action"] {
-            let key = inputDictionary.values.joined()   // Brute-force join
+            let key = inputDictionary.values.sorted().joined()   // Brute-force join
             if let xml = lookupTable[key] {
                 return parseXML(xml, action: action)
             }

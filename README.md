@@ -4,7 +4,8 @@ DEPENDENCIES
 =
 BUILD DEPENDENCIES
 -
-For testing, we depend upon [SwiftyXMLParser](https://github.com/yahoojapan/SwiftyXMLParser), written by [Yahoo Japan](https://developer.yahoo.co.jp/) to parse mock XML data.
+For testing, we depend upon [SWXMLHash](https://github.com/drmohundro/SWXMLHash), written by [David Mohundro](https://mohundro.com/) to parse mock XML data.
+**NOTE:** For whatever reason, the CocoaPods project sets the Swift version of the SWXMLHash project to 3.0. Set it to 5. It will work.
 For code LINTing, we use [SwiftLint](https://github.com/realm/SwiftLint), written by the fine folks at [Realm.io](https://realm.io/).
 
 RUNTIME DEPENDENCIES

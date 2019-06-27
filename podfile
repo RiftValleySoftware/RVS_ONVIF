@@ -4,7 +4,7 @@ end
 
 target 'RVS_ONVIF_iOS_Tests' do
     platform :ios, '12.0'
-    pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+    pod 'SWXMLHash', '~> 4.7.0'
     shared_pods
 end
 

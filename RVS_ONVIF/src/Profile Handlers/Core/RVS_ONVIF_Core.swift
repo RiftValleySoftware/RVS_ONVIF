@@ -790,11 +790,11 @@ public class RVS_ONVIF_Core: ProfileHandlerProtocol {
         
         if let servicesResponse = inResponseDictionary["GetServicesResponse"] as? [String: Any] {
             #if DEBUG
-            print("Services Response: \(String(describing: servicesResponse))")
+                print("Services Response: \(String(describing: servicesResponse))")
             #endif
             if let servicesList = servicesResponse["Service"] as? [[String: Any]] {
                 #if DEBUG
-                print("Services List: \(String(describing: servicesList))")
+                    print("Services List: \(String(describing: servicesList))")
                 #endif
                 servicesList.forEach { [unowned self] (element) in
                     if  let version = element["Version"] as? [String: String],
