@@ -17,7 +17,7 @@ import XCTest
  It will not work on-device, as this has a nil SOAPEngine key.
  You can change the IP Address/Port and login ID prior to calling this class instance's setup() method.
  */
-class RVS_ONVIF_iOS_TestBaseClass: XCTestCase, RVS_ONVIFDelegate {
+class RVS_ONVIF_Generic_TestBaseClass: XCTestCase, RVS_ONVIFDelegate {
     /* ################################################################## */
     /**
      Set up prior to every test.

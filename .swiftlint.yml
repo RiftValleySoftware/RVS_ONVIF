@@ -22,6 +22,7 @@ excluded:
 - Pods
 - SOAPEngine
 - RVS_ONVIF_iOS_Tests/*
+- GenericTests/*
 
 file_length:
 - 2000 # warning
