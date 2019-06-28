@@ -28,6 +28,7 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
         evaluateGetServiceCapabilities()
         evaluateGetScopes()
         evaluateGetNetworkInterfaces()
+        evaluateGetCapabilities()
         expectation.fulfill()
     }
     
@@ -220,10 +221,10 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
         if let scopes = testTarget.scopes {
             for scope in scopes {
                 XCTAssertEqual(scope.owner, testTarget)
-                if case let RVS_ONVIF_MacOS_Tests.RVS_ONVIF_Core.Scope.Category.Location(location) = scope.category {
+                if case let RVS_ONVIF_Core.Scope.Category.Location(location) = scope.category {
                     XCTAssertEqual("", location)
                     XCTAssertTrue(scope.isConfigurable)
-                } else if case let RVS_ONVIF_MacOS_Tests.RVS_ONVIF_Core.Scope.Category.Profile(profile) = scope.category {
+                } else if case let RVS_ONVIF_Core.Scope.Category.Profile(profile) = scope.category {
                     switch profile {
                     case let .S(alt):
                         XCTAssertEqual("Streaming", alt)
@@ -233,10 +234,10 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
                         XCTFail("Unknown Profile")
                     }
                     XCTAssertFalse(scope.isConfigurable)
-                } else if case let RVS_ONVIF_MacOS_Tests.RVS_ONVIF_Core.Scope.Category.Hardware(hardware) = scope.category {
+                } else if case let RVS_ONVIF_Core.Scope.Category.Hardware(hardware) = scope.category {
                     XCTAssertEqual("M5525-E", hardware)
                     XCTAssertFalse(scope.isConfigurable)
-                } else if case let RVS_ONVIF_MacOS_Tests.RVS_ONVIF_Core.Scope.Category.Name(name) = scope.category {
+                } else if case let RVS_ONVIF_Core.Scope.Category.Name(name) = scope.category {
                     XCTAssertEqual("AXIS M5525-E", name)
                     XCTAssertFalse(scope.isConfigurable)
                 } else {
@@ -257,7 +258,110 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
             XCTAssertEqual(1, networkInterfaces.count)
             for networkInterface in networkInterfaces {
                 XCTAssertEqual(networkInterface.owner, testTarget)
+                XCTAssertEqual(networkInterface.token, "")
+                XCTAssertTrue(networkInterface.isEnabled)
+                XCTAssertEqual(networkInterface.info.name, "eth0")
+                XCTAssertEqual(networkInterface.info.hwAddress, "AC:CC:8E:BE:CC:EA")
+                XCTAssertEqual(networkInterface.info.mtu, 1500)
+                XCTAssertEqual(networkInterface.link.interfaceType, .ethernetCsmacd)
+                XCTAssertEqual(networkInterface.link.adminSettings.owner, testTarget)
+                XCTAssertTrue(networkInterface.link.adminSettings.autoNegotiation)
+                XCTAssertEqual(networkInterface.link.adminSettings.speed, 100)
+                XCTAssertEqual(networkInterface.link.adminSettings.duplex, .Full)
+                XCTAssertEqual(networkInterface.link.operSettings.owner, testTarget)
+                XCTAssertTrue(networkInterface.link.operSettings.autoNegotiation)
+                XCTAssertEqual(networkInterface.link.operSettings.speed, 100)
+                XCTAssertEqual(networkInterface.link.operSettings.duplex, .Full)
             }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     Evaluate the Network Interfaces Struct
+     */
+    func evaluateGetCapabilities() {
+        if let capabilities = testTarget.capabilities {
+            XCTAssertEqual(capabilities.owner, testTarget)
+            XCTAssertEqual(capabilities.deviceCapabilities.owner, testTarget)
+            XCTAssertEqual(capabilities.deviceCapabilities.xAddr, URL(string: "http://192.168.4.12/onvif/device_service"))
+            
+            XCTAssertEqual(capabilities.deviceCapabilities.networkCapabilities.owner, testTarget)
+            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isIPFilter)
+            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isZeroConfiguration)
+            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isIPVersion6)
+            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isDynDNS)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isDot11Configuration)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isHostnameFromDHCP)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isDHCPv6)
+            XCTAssertNil(capabilities.deviceCapabilities.networkCapabilities.ntp)
+            XCTAssertNil(capabilities.deviceCapabilities.networkCapabilities.dot1XConfiguration)
+            
+            XCTAssertEqual(capabilities.deviceCapabilities.systemCapabilities.owner, testTarget)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isDiscoveryResolve)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isDiscoveryBye)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isSystemLogging)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isRemoteDiscovery)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isSystemBackup)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isFirmwareUpgrade)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpFirmwareUpgrade)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpSystemBackup)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpSystemLogging)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpSupportInformation)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isStorageConfiguration)
+            XCTAssertNil(capabilities.deviceCapabilities.systemCapabilities.maxStorageConfigurations)
+            XCTAssertNil(capabilities.deviceCapabilities.systemCapabilities.geoLocationEntries)
+            XCTAssertNil(capabilities.deviceCapabilities.systemCapabilities.autoGeo)
+            XCTAssertNil(capabilities.deviceCapabilities.systemCapabilities.storageTypesSupported)
+            
+            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.owner, testTarget)
+            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.inputConnectors, 4)
+            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.relayOutputs, 0)
+            XCTAssertNil(capabilities.deviceCapabilities.ioCapabilities.auxiliary)
+            
+            XCTAssertEqual(capabilities.deviceCapabilities.securityCapabilities.owner, testTarget)
+            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isTLS11)
+            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isTLS12)
+            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isOnboardKeyGeneration)
+            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isAccessPolicyConfig)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isTLS10)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isDefaultAccessPolicy)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isDot1X)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isRemoteUserHandling)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isX509Token)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isSAMLToken)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isKerberosToken)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isUsernameToken)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isHttpDigest)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isRELToken)
+            XCTAssertNil(capabilities.deviceCapabilities.securityCapabilities.supportedEAPMethods)
+            XCTAssertNil(capabilities.deviceCapabilities.securityCapabilities.maxUsers)
+            XCTAssertNil(capabilities.deviceCapabilities.securityCapabilities.maxUserNameLength)
+            XCTAssertNil(capabilities.deviceCapabilities.securityCapabilities.maxPasswordLength)
+            
+            XCTAssertEqual(capabilities.eventsCapabilities.owner, testTarget)
+            XCTAssertFalse(capabilities.eventsCapabilities.isWSSubscriptionPolicySupport)
+            XCTAssertFalse(capabilities.eventsCapabilities.isWSPullPointSupport)
+            XCTAssertFalse(capabilities.eventsCapabilities.isWSPausableSubscriptionManagerInterfaceSupport)
+            XCTAssertNil(capabilities.eventsCapabilities.xAddr)
+
+            XCTAssertEqual(capabilities.mediaCapabilities.owner, testTarget)
+            XCTAssertFalse(capabilities.mediaCapabilities.isRTPMulticast)
+            XCTAssertFalse(capabilities.mediaCapabilities.isRTP_TCP)
+            XCTAssertFalse(capabilities.mediaCapabilities.isRTP_RTSP_TCP)
+            XCTAssertNil(capabilities.mediaCapabilities.xAddr)
+            XCTAssertNil(capabilities.mediaCapabilities.maximumNumberOfProfiles)
+
+            XCTAssertNil(capabilities.analyticsCapabilities)
+            XCTAssertNil(capabilities.analyticsDeviceCapabilities)
+            XCTAssertNil(capabilities.deviceIOCapabilities)
+            XCTAssertNil(capabilities.displayCapabilities)
+            XCTAssertNil(capabilities.imagingCapabilities)
+            XCTAssertNil(capabilities.ptzCapabilities)
+            XCTAssertNil(capabilities.receiverCapabilities)
+            XCTAssertNil(capabilities.recordingCapabilities)
+            XCTAssertNil(capabilities.replayCapabilities)
+            XCTAssertNil(capabilities.searchCapabilities)
         }
     }
     
@@ -276,6 +380,8 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
     /* ################################################################## */
     /**
      Tests simple initialization (actually, not so simple).
+     
+     This is a "brute-force" test to make sure that the read-in responses result in an objct that is properly set up.
      */
     func testInitializers() {
         testTarget = RVS_ONVIF_TestTarget(mock: mockDevice, delegate: self)
