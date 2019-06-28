@@ -126,12 +126,12 @@
 		D4E66AF5229DBC5300032A4A /* RVS_ONVIF_Core_IANATypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E66AF3229DBC5300032A4A /* RVS_ONVIF_Core_IANATypes.swift */; };
 		D4EE9A1622C61899005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1422C61899005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift */; };
 		D4EE9A1722C61899005B8B7C /* AxisM5525ECameraMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1522C61899005B8B7C /* AxisM5525ECameraMock.swift */; };
-		D4EE9A1A22C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift */; };
+		D4EE9A1A22C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */; };
 		D4EE9A2D22C62EC3005B8B7C /* RVS_ONVIF_TestTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4869F7922ABF4DD00521845 /* RVS_ONVIF_TestTarget.swift */; };
 		D4EE9A2E22C62EC3005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1422C61899005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift */; };
 		D4EE9A2F22C62EC3005B8B7C /* AxisM5525ECameraMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1522C61899005B8B7C /* AxisM5525ECameraMock.swift */; };
 		D4EE9A3022C62EC3005B8B7C /* RVS_ONVIF_Generic_TestBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */; };
-		D4EE9A3122C62EC3005B8B7C /* RVS_ONVIF_Initialization_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift */; };
+		D4EE9A3122C62EC3005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,7 +319,7 @@
 		D4E66AF3229DBC5300032A4A /* RVS_ONVIF_Core_IANATypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core_IANATypes.swift; sourceTree = "<group>"; };
 		D4EE9A1422C61899005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_TestTarget_MockDevice.swift; sourceTree = "<group>"; };
 		D4EE9A1522C61899005B8B7C /* AxisM5525ECameraMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisM5525ECameraMock.swift; sourceTree = "<group>"; };
-		D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Initialization_Tests.swift; sourceTree = "<group>"; };
+		D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Tests_AxisM5525E_Initializer.swift; sourceTree = "<group>"; };
 		D4EE9A1F22C62E3B005B8B7C /* RVS_ONVIF_MacOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_ONVIF_MacOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4EE9A2322C62E3B005B8B7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F424BB2206540800729C0F /* RVS_Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_Extensions.swift; sourceTree = "<group>"; };
@@ -628,10 +628,10 @@
 			children = (
 				D4DF78B421FF2A7C00E9CB70 /* RVS_ONVIF */,
 				D4EE9A1322C61899005B8B7C /* GenericTests */,
-				D4869F7822ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */,
-				D4EE9A2022C62E3B005B8B7C /* RVS_ONVIF_MacOS_Tests */,
 				D4BAF3E62260E0D100C971D8 /* RVS_ONVIF_iOS */,
 				D45DFD002260C82B00E486B7 /* RVS_ONVIF_MacOS */,
+				D4869F7822ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */,
+				D4EE9A2022C62E3B005B8B7C /* RVS_ONVIF_MacOS_Tests */,
 				D49089FA21FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness */,
 				D4A2A32B22A6BE7600B78ECC /* RVS_ONVIF iOS MultiTest */,
 				D45DFCE82260C5FE00E486B7 /* RVS_ONVIF Mac Test Harness */,
@@ -672,7 +672,7 @@
 				D4EE9A1422C61899005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift */,
 				D4EE9A1822C61FD4005B8B7C /* Mocks */,
 				D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */,
-				D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift */,
+				D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */,
 			);
 			path = GenericTests;
 			sourceTree = "<group>";
@@ -1108,7 +1108,7 @@
 			files = (
 				D4869F8B22ABF8FF00521845 /* RVS_String_Extensions.swift in Sources */,
 				D4869F8622ABF8F200521845 /* RVS_ONVIF_Core_IANATypes.swift in Sources */,
-				D4EE9A1A22C628E1005B8B7C /* RVS_ONVIF_Initialization_Tests.swift in Sources */,
+				D4EE9A1A22C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */,
 				D4869F8A22ABF8FF00521845 /* RVS_ParseXMLDuration.swift in Sources */,
 				D4869F8222ABF8E300521845 /* RVS_ONVIF.swift in Sources */,
 				D4869F8822ABF8F800521845 /* RVS_ONVIF_Profile_S.swift in Sources */,
@@ -1195,7 +1195,7 @@
 				D4AE507922C6336E0082AD0B /* RVS_IPAddress.swift in Sources */,
 				D4EE9A2E22C62EC3005B8B7C /* RVS_ONVIF_TestTarget_MockDevice.swift in Sources */,
 				D4EE9A2F22C62EC3005B8B7C /* AxisM5525ECameraMock.swift in Sources */,
-				D4EE9A3122C62EC3005B8B7C /* RVS_ONVIF_Initialization_Tests.swift in Sources */,
+				D4EE9A3122C62EC3005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */,
 				D4AE507422C633620082AD0B /* RVS_ONVIF_Core_Public_Structs.swift in Sources */,
 				D4AE507322C633620082AD0B /* RVS_ONVIF_Core_IANATypes.swift in Sources */,
 				D4AE507722C6336E0082AD0B /* RVS_ParseXMLDuration.swift in Sources */,

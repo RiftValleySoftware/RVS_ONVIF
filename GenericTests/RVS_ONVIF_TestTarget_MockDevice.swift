@@ -97,8 +97,10 @@ open class RVS_ONVIF_TestTarget_MockDevice {
             } else if nil != attributes && nil == children {
                 ret = attributes
             } else if let attributes = attributes, let children = children {
-                let retTemp: [String: Any] = ["attributes": attributes, "Values": children]
-                ret = retTemp
+                if var retTemp = children as? [String: Any] {
+                    retTemp["attributes"] = attributes
+                    ret = retTemp
+                }
             }
         }
         
