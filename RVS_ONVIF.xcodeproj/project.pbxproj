@@ -95,6 +95,7 @@
 		D4869F8C22ABF8FF00521845 /* RVS_IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D99CA224107D50071B02E /* RVS_IPAddress.swift */; };
 		D48A036F2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */; };
 		D48A03702288A9FC002FBB21 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43C5B5A2288916B00F9C542 /* RVS_ONVIF_Test_Harness_CoreDispatcher.swift */; };
+		D48F630822C59ED4005997A6 /* AxisM5525ECameraMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48F630722C59ED4005997A6 /* AxisM5525ECameraMock.swift */; };
 		D49089FC21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49089FB21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift */; };
 		D4908A0121FF61A50089AEC4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49089FF21FF61A50089AEC4 /* Main.storyboard */; };
 		D4908A0321FF61A60089AEC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4908A0221FF61A60089AEC4 /* Assets.xcassets */; };
@@ -294,6 +295,7 @@
 		D4869F7B22ABF4DD00521845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D48A036E2288A4D7002FBB21 /* RVS_ONVIF_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
 		D48AD4B32207494500BF9936 /* RVS_FIFOQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_FIFOQueue.swift; sourceTree = "<group>"; };
+		D48F630722C59ED4005997A6 /* AxisM5525ECameraMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxisM5525ECameraMock.swift; sourceTree = "<group>"; };
 		D49089F921FF61A50089AEC4 /* RVS_ONVIF iOS Test Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_ONVIF iOS Test Harness.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49089FB21FF61A50089AEC4 /* RVS_ONVIF_Test_Harness_AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_AppDelegate.swift; sourceTree = "<group>"; };
 		D4908A0021FF61A50089AEC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				D4869F7922ABF4DD00521845 /* RVS_ONVIF_TestTarget.swift */,
 				D4C8A8BD22C3B44D0054F52F /* RVS_ONVIF_TestTarget_MockDevice.swift */,
 				D4C8A8BB22C393720054F52F /* RVS_ONVIF_iOS_Tests.swift */,
+				D48F630722C59ED4005997A6 /* AxisM5525ECameraMock.swift */,
 				D4869F7B22ABF4DD00521845 /* Info.plist */,
 			);
 			path = RVS_ONVIF_iOS_Tests;
@@ -1209,6 +1212,7 @@
 				D4C8A8BE22C3B44D0054F52F /* RVS_ONVIF_TestTarget_MockDevice.swift in Sources */,
 				D4869F8422ABF8EB00521845 /* RVS_ONVIF_Internals.swift in Sources */,
 				D4869F8C22ABF8FF00521845 /* RVS_IPAddress.swift in Sources */,
+				D48F630822C59ED4005997A6 /* AxisM5525ECameraMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
