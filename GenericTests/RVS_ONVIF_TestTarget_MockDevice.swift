@@ -16,7 +16,7 @@ import SWXMLHash
  
  The default is a simple "match stimulus" lookup, but you are free to do what you want.
  */
-public class RVS_ONVIF_TestTarget_MockDevice {
+open class RVS_ONVIF_TestTarget_MockDevice {
     /* ################################################################## */
     /**
      This just strips the namespace off of element names.
@@ -32,12 +32,6 @@ public class RVS_ONVIF_TestTarget_MockDevice {
         
         return (namespace: "", element: inElementName)
     }
-
-    /* ################################################################## */
-    /**
-     This is a simple lookup table that returns raw XML in response to keys.
-     */
-    var lookupTable: [String: String] = [:]
     
     /* ################################################################## */
     /**
@@ -155,4 +149,20 @@ public class RVS_ONVIF_TestTarget_MockDevice {
         }
         return nil
     }
+
+    /* ################################################################################################################################## */
+    // MARK: - Override These -
+    /* ################################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This is a simple lookup table that returns raw XML in response to keys.
+     */
+    var lookupTable: [String: String]  { return [:] }
+    
+    /* ################################################################## */
+    /**
+     This is a name for the mock device.
+     Get-only.
+     */
+    var name: String { return "ERROR" }
 }

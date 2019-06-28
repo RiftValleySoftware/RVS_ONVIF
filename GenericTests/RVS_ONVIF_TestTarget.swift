@@ -12,7 +12,9 @@ import XCTest
 
 /* ###################################################################################################################################### */
 /**
- This is a special testing subclass of the RVS_ONVIF class. It will implement the ability to insert mock transactions into the SOAPEngine.
+ This is a special testing subclass of the RVS_ONVIF class. It will implement the ability to insert mock transactions above the SOAPEngine.
+ 
+ Unfortunately, we can't inject into SOAPEngine, so these tests exclude it. However, we have to assume that SOAPEngine is solid. Good bet.
  */
 class RVS_ONVIF_TestTarget: RVS_ONVIF {
     var targetMock: RVS_ONVIF_TestTarget_MockDevice!
@@ -21,6 +23,7 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
     /**
      This is a special intializer for this class. We eschew the main factory method in favor of our own instantiator.
      
+     - parameter mock: This is an instance of a subclass of RVS_ONVIF_TestTarget_MockDevice. It's the "device" that we'll test with.
      - parameter delegate: This is an optional (default is nil) parameter that allows you to specify a delegate up front. If it is provided, the instance will be immediately initialized.
      */
     internal init(mock inMock: RVS_ONVIF_TestTarget_MockDevice, delegate inDelegate: RVS_ONVIFDelegate! = nil) {
@@ -37,15 +40,13 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
             delegate = inDelegate
         }
     }
-
+    
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Methods
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is inspired by the ONVIFCamera library, by Rémy Virin, but I'm a jerk, and couldn't leave well enough alone.
-     
-     Perform a SOAP request
+     Bypass a SOAP request
      Responses happen through the error and success instance callbacks.
      
      - parameter request: The Device Request instance.
@@ -96,7 +97,10 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
         #endif
         
         if let response = targetMock.makeTransaction(soup) {
-            _successCallback(response, soapRequest: inRequest.soapAction)
+            // We do this, so that we test against a separate thread.
+            DispatchQueue.global().async { [unowned self] in
+                self._successCallback(response, soapRequest: inRequest.soapAction)
+            }
         }
     }
 }

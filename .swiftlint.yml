@@ -18,12 +18,6 @@ opt_in_rules:
 - colon
 - comma
 
-excluded:
-- Pods
-- SOAPEngine
-- RVS_ONVIF_iOS_Tests/*
-- GenericTests/*
-
 file_length:
 - 2000 # warning
 - 2001 # error
@@ -39,3 +33,9 @@ line_length:
 cyclomatic_complexity:
 - 14 # warning
 - 15 # error
+
+excluded:
+- Pods
+- SOAPEngine
+- RVS_ONVIF_iOS_Tests/*
+- GenericTests/*
