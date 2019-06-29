@@ -37,5 +37,4 @@ cyclomatic_complexity:
 excluded:
 - Pods
 - SOAPEngine
-- RVS_ONVIF_iOS_Tests/*
-- GenericTests/*
+- RVS_ONVIF/GenericTests

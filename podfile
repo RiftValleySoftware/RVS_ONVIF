@@ -46,7 +46,6 @@ end
 
 target 'RVS_ONVIF iOS Test Harness' do
     pod 'MobileVLCKit'
-    pod 'Reveal-SDK', :configurations => ['Debug']
     shared_pods_ios
 end
 
