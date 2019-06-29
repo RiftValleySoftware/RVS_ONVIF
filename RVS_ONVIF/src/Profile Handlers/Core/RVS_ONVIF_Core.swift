@@ -15,7 +15,7 @@ import SOAPEngine64
 /**
  This file contains methods, data structures and callbacks for the ONVIF Core Profile.
  */
-public class RVS_ONVIF_Core: ProfileHandlerProtocol {
+open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Static Properties
     /* ###################################################################################################################################### */

@@ -114,7 +114,7 @@ open class RVS_ONVIF_TestTarget_MockDevice {
      - parameter inXML: The response data as an XML String
      - returns: A Dictionary, containing the parsed response.
      */
-    func parseXML(_ inXML: String, action inAction: String) -> [String: Any]? {
+    internal func parseXML(_ inXML: String, action inAction: String) -> [String: Any]? {
         let strippedAction = type(of: self).stripNamespace(inAction)
         var ret: [String: Any]! = nil
         
@@ -142,7 +142,7 @@ open class RVS_ONVIF_TestTarget_MockDevice {
      - parameter inCommand: The command that is to be "sent" to the "device".
      - returns: A Dictionary, containing the parsed response.
      */
-    func makeTransaction(_ inCommand: [String: Any]) -> [String: Any]? {
+    internal func makeTransaction(_ inCommand: [String: Any]) -> [String: Any]? {
         if let inputDictionary = inCommand as? [String: String], let action = inputDictionary["action"] {
             let key = inputDictionary.values.sorted().joined()   // Brute-force join
             if let xml = lookupTable[key] {
@@ -157,9 +157,40 @@ open class RVS_ONVIF_TestTarget_MockDevice {
     /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is a simple lookup table that returns raw XML in response to keys.
+     This is a simple lookup table that returns raw XML in response to keys (Get-only).
+     
+     The included keys are required for all mocks.
+     
+     The key is the (namespace included) command, with the values (not the keys) of any parameters smashed onto the end.
+     The value needs to be pure (100% complete) XML, as returned in response to that command, from the device. Quotes (") need to be escaped.
      */
-    var lookupTable: [String: String]  { return [:] }
+    var lookupTable: [String: String]  {
+        return [
+            /// Core GetDeviceInformation
+            "trt:GetDeviceInformation":
+            "",
+            
+            /// Core GetServices
+            "trt:GetServicestrue":
+            "",
+            
+            /// Core GetServiceCapabilities
+            "trt:GetServiceCapabilities":
+            "",
+            
+            /// Core GetScopes
+            "trt:GetScopes":
+            "",
+            
+            /// Core GetNetworkInterfaces
+            "trt:GetNetworkInterfaces":
+            "",
+            
+            /// Core GetCapabilities
+            "trt:GetCapabilities":
+            ""
+        ]
+    }
     
     /* ################################################################## */
     /**

@@ -15,7 +15,7 @@ import SOAPEngine64
 /**
  This class implements the Profile S functionality.
  */
-public class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
+open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
     /* ################################################################################################################################## */
     // MARK: - Private Static Properties
     /* ###################################################################################################################################### */

@@ -46,7 +46,7 @@ import SOAPEngine64
  
  View the README file for more comprehensive documentation.
  */
-@objc public class RVS_ONVIF: NSObject, SOAPEngineDelegate {
+@objc open class RVS_ONVIF: NSObject, SOAPEngineDelegate {
     /* ################################################################################################################################## */
     // MARK: - Internal Constants
     /* ################################################################################################################################## */
@@ -93,7 +93,7 @@ import SOAPEngine64
     /**
      Blank initializer (Internal, so only the factory can create it outside the framework).
      */
-    internal override init() {
+    public override init() {
         loginCredentials = nil
         ipAddressAndPort = ""
         _soapEngineLicenseKey = ""
