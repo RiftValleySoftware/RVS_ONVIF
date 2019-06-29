@@ -40,13 +40,12 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
      Evaluate the Device Information Dictionary
      */
     func evaluateDeviceInformation() {
-        if let deviceInformation = testTarget.deviceInformation as? [String: String] {
+        if let deviceInformation = testTarget.deviceInformation {
             XCTAssertEqual(5, deviceInformation.count)
-            XCTAssertEqual(deviceInformation["Manufacturer"], "AXIS")
-            XCTAssertEqual(deviceInformation["Model"], "M5525-E")
-            XCTAssertEqual(deviceInformation["FirmwareVersion"], "8.40.1.1")
-            XCTAssertEqual(deviceInformation["SerialNumber"], "ACCC8EBECCEA")
-            XCTAssertEqual(deviceInformation["HardwareId"], "757")
+            XCTAssertEqual(deviceInformation["Manufacturer"] as? String, "pelco")
+            XCTAssertEqual(deviceInformation["Model"] as? String, "IMP321-1ES")
+            XCTAssertEqual(deviceInformation["FirmwareVersion"] as? String, "01.16.42-20180912")
+            XCTAssertEqual(deviceInformation["SerialNumber"] as? String, "T82212128")
         } else {
             XCTFail("Device Information Record Missing")
         }
@@ -58,7 +57,7 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
      */
     func evaluateServices() {
         if let services = testTarget.services {
-            XCTAssertEqual(13, services.count)
+            XCTAssertEqual(8, services.count)
             for (key, value) in services {
                 XCTAssertFalse(key.isEmpty)
                 XCTAssertEqual(value.owner, testTarget)
@@ -70,32 +69,22 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
                 
                 if let serviceXAddr = value.xAddr {
                     switch key {
-                    case "http://www.onvif.org/ver10/device/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/device_service"), serviceXAddr)
-                    case "http://www.onvif.org/ver20/ptz/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.onvif.org/ver10/recording/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.onvif.org/ver10/search/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.onvif.org/ver10/events/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.onvif.org/ver10/deviceIO/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.axis.com/vapix/ws/certificates":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.onvif.org/ver10/replay/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
+                    case "http://www.onvif.org/ver20/imaging/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
                     case "http://www.onvif.org/ver10/media/wsdl":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.axis.com/vapix/ws/entry":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.axis.com/vapix/ws/event1":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.axis.com/vapix/ws/action1":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
-                    case "http://www.axis.com/vapix/ws/webserver":
-                        XCTAssertEqual(URL(string: "http://192.168.4.12/onvif/services"), serviceXAddr)
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/device/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/deviceIO/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/events/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/subscribe_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/recording/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/search/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
+                    case "http://www.onvif.org/ver10/replay/wsdl":
+                        XCTAssertEqual(URL(string: "http://192.168.4.18:80/onvif/device_service"), serviceXAddr)
                     default:
                         XCTFail("Unknown Service")
                     }
@@ -105,33 +94,23 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
                 
                 if let version = value.version {
                     switch key {
+                    case "http://www.onvif.org/ver20/imaging/wsdl":
+                        XCTAssertEqual("16.06", version)
+                    case "http://www.onvif.org/ver10/media/wsdl":
+                        XCTAssertEqual("16.06", version)
                     case "http://www.onvif.org/ver10/device/wsdl":
-                        XCTAssertEqual("2.21", version)
-                    case "http://www.onvif.org/ver20/ptz/wsdl":
-                        XCTAssertEqual("2.41", version)
+                        XCTAssertEqual("16.06", version)
+                    case "http://www.onvif.org/ver10/deviceIO/wsdl":
+                        XCTAssertEqual("16.06", version)
+                    case "http://www.onvif.org/ver10/events/wsdl":
+                        XCTAssertEqual("16.06", version)
                     case "http://www.onvif.org/ver10/recording/wsdl":
                         XCTAssertEqual("2.50", version)
                     case "http://www.onvif.org/ver10/search/wsdl":
-                        XCTAssertEqual("2.42", version)
-                    case "http://www.onvif.org/ver10/events/wsdl":
-                        XCTAssertEqual("2.21", version)
-                    case "http://www.onvif.org/ver10/deviceIO/wsdl":
-                        XCTAssertEqual("2.61", version)
-                    case "http://www.axis.com/vapix/ws/certificates":
-                        XCTAssertEqual("1.01", version)
+                        XCTAssertEqual("16.06", version)
                     case "http://www.onvif.org/ver10/replay/wsdl":
                         XCTAssertEqual("2.21", version)
-                    case "http://www.onvif.org/ver10/media/wsdl":
-                        XCTAssertEqual("2.60", version)
-                    case "http://www.axis.com/vapix/ws/entry":
-                        XCTAssertEqual("1.01", version)
-                    case "http://www.axis.com/vapix/ws/event1":
-                        XCTAssertEqual("1.01", version)
-                    case "http://www.axis.com/vapix/ws/action1":
-                        XCTAssertEqual("1.01", version)
-                    case "http://www.axis.com/vapix/ws/webserver":
-                        XCTAssertEqual("1.01", version)
-                    default:
+                   default:
                         XCTFail("Unknown Service")
                     }
                 } else {
@@ -152,53 +131,56 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
             XCTAssertEqual(serviceCapabilities.owner, testTarget)
             if let networkCapabilities = serviceCapabilities.networkCapabilities {
                 XCTAssertEqual(networkCapabilities.owner, testTarget)
-                XCTAssertTrue(networkCapabilities.isDHCPv6)
-                XCTAssertTrue(networkCapabilities.isDynDNS)
-                XCTAssertTrue(networkCapabilities.isIPVersion6)
+                XCTAssertEqual(1, networkCapabilities.ntp)
+                XCTAssertEqual(0, networkCapabilities.dot1XConfiguration)
                 XCTAssertTrue(networkCapabilities.isZeroConfiguration)
+                XCTAssertTrue(networkCapabilities.isIPFilter)
+                XCTAssertFalse(networkCapabilities.isDHCPv6)
+                XCTAssertFalse(networkCapabilities.isDynDNS)
+                XCTAssertFalse(networkCapabilities.isIPVersion6)
                 XCTAssertFalse(networkCapabilities.isHostnameFromDHCP)
                 XCTAssertFalse(networkCapabilities.isDot11Configuration)
-                XCTAssertEqual(1, networkCapabilities.ntp)
             } else {
                 XCTFail("Service Network Capabilities Record Missing")
             }
             
             if let securityCapabilities = serviceCapabilities.securityCapabilities {
                 XCTAssertEqual(securityCapabilities.owner, testTarget)
+                XCTAssertEqual(40, securityCapabilities.maxPasswordLength)
+                XCTAssertEqual(40, securityCapabilities.maxUserNameLength)
+                XCTAssertEqual(10, securityCapabilities.maxUsers)
                 XCTAssertTrue(securityCapabilities.isHttpDigest)
                 XCTAssertTrue(securityCapabilities.isUsernameToken)
                 XCTAssertTrue(securityCapabilities.isDefaultAccessPolicy)
-                XCTAssertTrue(securityCapabilities.isAccessPolicyConfig)
-                XCTAssertTrue(securityCapabilities.isOnboardKeyGeneration)
-                XCTAssertTrue(securityCapabilities.isTLS10)
-                XCTAssertTrue(securityCapabilities.isTLS11)
-                XCTAssertTrue(securityCapabilities.isTLS12)
-                XCTAssertFalse(securityCapabilities.isRemoteUserHandling)
-                XCTAssertFalse(securityCapabilities.isX509Token)
                 XCTAssertFalse(securityCapabilities.isSAMLToken)
                 XCTAssertFalse(securityCapabilities.isKerberosToken)
+                XCTAssertFalse(securityCapabilities.isX509Token)
+                XCTAssertFalse(securityCapabilities.isDot1X)
+                XCTAssertFalse(securityCapabilities.isRemoteUserHandling)
+                XCTAssertFalse(securityCapabilities.isAccessPolicyConfig)
+                XCTAssertFalse(securityCapabilities.isOnboardKeyGeneration)
+                XCTAssertFalse(securityCapabilities.isTLS10)
+                XCTAssertFalse(securityCapabilities.isTLS11)
+                XCTAssertFalse(securityCapabilities.isTLS12)
                 XCTAssertFalse(securityCapabilities.isRELToken)
                 XCTAssertNil(securityCapabilities.supportedEAPMethods)
-                XCTAssertNil(securityCapabilities.maxUsers)
-                XCTAssertNil(securityCapabilities.maxUserNameLength)
-                XCTAssertNil(securityCapabilities.maxPasswordLength)
             } else {
                 XCTFail("Service Security Capabilities Record Missing")
             }
             
             if let systemCapabilities = serviceCapabilities.systemCapabilities {
                 XCTAssertEqual(systemCapabilities.owner, testTarget)
-                XCTAssertTrue(systemCapabilities.isDiscoveryResolve)
                 XCTAssertTrue(systemCapabilities.isDiscoveryBye)
+                XCTAssertTrue(systemCapabilities.isHttpSupportInformation)
+                XCTAssertTrue(systemCapabilities.isHttpSystemLogging)
+                XCTAssertTrue(systemCapabilities.isFirmwareUpgrade)
                 XCTAssertTrue(systemCapabilities.isSystemLogging)
-                XCTAssertFalse(systemCapabilities.isRemoteDiscovery)
-                XCTAssertFalse(systemCapabilities.isSystemBackup)
-                XCTAssertFalse(systemCapabilities.isFirmwareUpgrade)
-                XCTAssertFalse(systemCapabilities.isHttpFirmwareUpgrade)
-                XCTAssertFalse(systemCapabilities.isHttpSystemBackup)
-                XCTAssertFalse(systemCapabilities.isHttpSystemLogging)
-                XCTAssertFalse(systemCapabilities.isHttpSupportInformation)
+                XCTAssertTrue(systemCapabilities.isSystemBackup)
+                XCTAssertTrue(systemCapabilities.isHttpFirmwareUpgrade)
+                XCTAssertFalse(systemCapabilities.isDiscoveryResolve)
                 XCTAssertFalse(systemCapabilities.isStorageConfiguration)
+                XCTAssertFalse(systemCapabilities.isHttpSystemBackup)
+                XCTAssertFalse(systemCapabilities.isRemoteDiscovery)
                 XCTAssertNil(systemCapabilities.maxStorageConfigurations)
                 XCTAssertNil(systemCapabilities.geoLocationEntries)
                 XCTAssertNil(systemCapabilities.autoGeo)
@@ -228,6 +210,8 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
                     switch profile {
                     case let .S(alt):
                         XCTAssertEqual("Streaming", alt)
+                    case let .Q(alt):
+                        XCTAssertEqual("Q/Operational", alt)
                     case let .G(alt):
                         XCTAssertEqual("G", alt)
                     default:
@@ -235,11 +219,17 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
                     }
                     XCTAssertFalse(scope.isConfigurable)
                 } else if case let RVS_ONVIF_Core.Scope.Category.Hardware(hardware) = scope.category {
-                    XCTAssertEqual("M5525-E", hardware)
+                    XCTAssertEqual("IMP321-1ES", hardware)
                     XCTAssertFalse(scope.isConfigurable)
                 } else if case let RVS_ONVIF_Core.Scope.Category.Name(name) = scope.category {
-                    XCTAssertEqual("AXIS M5525-E", name)
+                    XCTAssertEqual("PelcoCameraSide", name)
                     XCTAssertFalse(scope.isConfigurable)
+                } else if case let RVS_ONVIF_Core.Scope.Category.Custom(name, value) = scope.category, name == "Type", value == "basic" {
+                    ()
+                } else if case let RVS_ONVIF_Core.Scope.Category.Custom(name, value) = scope.category, name == "Type", value == "audio_encoder" {
+                    ()
+                } else if case let RVS_ONVIF_Core.Scope.Category.Custom(name, value) = scope.category, name == "Type", value == "video_encoder" {
+                    ()
                 } else {
                     XCTFail("Unknown Category")
                 }
@@ -261,7 +251,7 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
                 XCTAssertEqual(networkInterface.token, "")
                 XCTAssertTrue(networkInterface.isEnabled)
                 XCTAssertEqual(networkInterface.info.name, "eth0")
-                XCTAssertEqual(networkInterface.info.hwAddress, "AC:CC:8E:BE:CC:EA")
+                XCTAssertEqual(networkInterface.info.hwAddress, "00:04:7d:36:a5:4e")
                 XCTAssertEqual(networkInterface.info.mtu, 1500)
                 XCTAssertEqual(networkInterface.link.interfaceType, .ethernetCsmacd)
                 XCTAssertEqual(networkInterface.link.adminSettings.owner, testTarget)
@@ -283,27 +273,28 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
     func evaluateGetCapabilities() {
         if let capabilities = testTarget.capabilities {
             XCTAssertEqual(capabilities.owner, testTarget)
+            
             XCTAssertEqual(capabilities.deviceCapabilities.owner, testTarget)
-            XCTAssertEqual(capabilities.deviceCapabilities.xAddr, URL(string: "http://192.168.4.12/onvif/device_service"))
+            XCTAssertEqual(capabilities.deviceCapabilities.xAddr, URL(string: "http://192.168.4.18:80/onvif/device_service"))
             
             XCTAssertEqual(capabilities.deviceCapabilities.networkCapabilities.owner, testTarget)
             XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isIPFilter)
             XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isZeroConfiguration)
-            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isIPVersion6)
-            XCTAssertTrue(capabilities.deviceCapabilities.networkCapabilities.isDynDNS)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isIPVersion6)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isDynDNS)
             XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isDot11Configuration)
-            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isHostnameFromDHCP)
             XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isDHCPv6)
-            XCTAssertNil(capabilities.deviceCapabilities.networkCapabilities.ntp)
+            XCTAssertFalse(capabilities.deviceCapabilities.networkCapabilities.isHostnameFromDHCP)
             XCTAssertNil(capabilities.deviceCapabilities.networkCapabilities.dot1XConfiguration)
+            XCTAssertNil(capabilities.deviceCapabilities.networkCapabilities.ntp)
             
             XCTAssertEqual(capabilities.deviceCapabilities.systemCapabilities.owner, testTarget)
-            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isDiscoveryResolve)
+            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isDiscoveryResolve)
             XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isDiscoveryBye)
-            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isSystemLogging)
             XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isRemoteDiscovery)
-            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isSystemBackup)
-            XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isFirmwareUpgrade)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isSystemBackup)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isSystemLogging)
+            XCTAssertTrue(capabilities.deviceCapabilities.systemCapabilities.isFirmwareUpgrade)
             XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpFirmwareUpgrade)
             XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpSystemBackup)
             XCTAssertFalse(capabilities.deviceCapabilities.systemCapabilities.isHttpSystemLogging)
@@ -315,16 +306,16 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
             XCTAssertNil(capabilities.deviceCapabilities.systemCapabilities.storageTypesSupported)
             
             XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.owner, testTarget)
-            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.inputConnectors, 4)
-            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.relayOutputs, 0)
+            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.inputConnectors, 1)
+            XCTAssertEqual(capabilities.deviceCapabilities.ioCapabilities.relayOutputs, 1)
             XCTAssertNil(capabilities.deviceCapabilities.ioCapabilities.auxiliary)
             
             XCTAssertEqual(capabilities.deviceCapabilities.securityCapabilities.owner, testTarget)
-            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isTLS11)
-            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isTLS12)
-            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isOnboardKeyGeneration)
-            XCTAssertTrue(capabilities.deviceCapabilities.securityCapabilities.isAccessPolicyConfig)
             XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isTLS10)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isTLS11)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isTLS12)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isOnboardKeyGeneration)
+            XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isAccessPolicyConfig)
             XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isDefaultAccessPolicy)
             XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isDot1X)
             XCTAssertFalse(capabilities.deviceCapabilities.securityCapabilities.isRemoteUserHandling)
@@ -340,8 +331,8 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
             XCTAssertNil(capabilities.deviceCapabilities.securityCapabilities.maxPasswordLength)
             
             XCTAssertEqual(capabilities.eventsCapabilities.owner, testTarget)
-            XCTAssertFalse(capabilities.eventsCapabilities.isWSSubscriptionPolicySupport)
-            XCTAssertFalse(capabilities.eventsCapabilities.isWSPullPointSupport)
+            XCTAssertTrue(capabilities.eventsCapabilities.isWSSubscriptionPolicySupport)
+            XCTAssertTrue(capabilities.eventsCapabilities.isWSPullPointSupport)
             XCTAssertFalse(capabilities.eventsCapabilities.isWSPausableSubscriptionManagerInterfaceSupport)
             XCTAssertNil(capabilities.eventsCapabilities.xAddr)
 

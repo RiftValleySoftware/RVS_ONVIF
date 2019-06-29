@@ -177,6 +177,7 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
                 XCTAssertFalse(securityCapabilities.isX509Token)
                 XCTAssertFalse(securityCapabilities.isSAMLToken)
                 XCTAssertFalse(securityCapabilities.isKerberosToken)
+                XCTAssertFalse(securityCapabilities.isDot1X)
                 XCTAssertFalse(securityCapabilities.isRELToken)
                 XCTAssertNil(securityCapabilities.supportedEAPMethods)
                 XCTAssertNil(securityCapabilities.maxUsers)
