@@ -587,7 +587,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         ret.isHostnameFromDHCP = owner._parseBoolean(networkCapabilities, key: "HostnameFromDHCP")
         ret.ntp = owner._parseInteger(networkCapabilities, key: "NTP")
         ret.isDHCPv6 = owner._parseBoolean(networkCapabilities, key: "DHCPv6")
-        
+        if let ext = _parseNetworkInterfaceExtension(networkCapabilities) {
+            print("Extension: \(String(describing: ext))")
+        }
+
         return ret
     }
     
@@ -804,10 +807,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                         let xAddr = element["XAddr"] as? String,
                         let uri = URL(string: xAddr),
                         let namespace = element["Namespace"] as? String {
-                        var capabilities: ServiceCapabilities!
+                        var capabilities: [String: Any]!
                         
                         if let capabilitiesAny = element["Capabilities"] as? [String: Any] {  // This is optional, so we check for it seperately.
-                            capabilities = _parseServiceCapabilitiesDictionary(["GetServiceCapabilitiesResponse": capabilitiesAny])
+                            capabilities = capabilitiesAny
                         }
                         
                         ret.append(Service(owner: self.owner, namespace: namespace, xAddr: uri, version: String(format: "%d.%02d", major, minor), capabilities: capabilities))
@@ -1106,6 +1109,8 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             if let interfaceTypeInt = owner._parseInteger(networkInterfaceExtension, key: "InterfaceType"), let interfaceType = RVS_ONVIF_Core.IANA_Types(rawValue: interfaceTypeInt) {
                 
                 return NetworkInterfaceExtension(interfaceType: interfaceType, dot3Configuration: networkInterfaceExtension["Dot3"], dot11: _parseNetworkInterfaceDot11Configuration(networkInterfaceExtension["Dot11"] as? [String: Any]), networkInterfaceSetConfigurationExtension2: networkInterfaceExtension["NetworkInterfaceSetConfigurationExtension2"])
+            } else {
+                return NetworkInterfaceExtension(interfaceType: .other, dot3Configuration: networkInterfaceExtension["Dot3"], dot11: _parseNetworkInterfaceDot11Configuration(networkInterfaceExtension["Dot11"] as? [String: Any]), networkInterfaceSetConfigurationExtension2: networkInterfaceExtension["NetworkInterfaceSetConfigurationExtension2"])
             }
         }
         
@@ -1120,7 +1125,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - returns: a Dot11Configuration instance, or nil (if none)
      */
     internal func _parseNetworkInterfaceDot11Configuration(_ inResponseDictionary: [String: Any]!) -> Dot11Configuration! {
-        if let ssid = inResponseDictionary["SSID"] as? String, let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11StationMode(rawValue: modeStr) {
+        if nil != inResponseDictionary, let ssid = inResponseDictionary["SSID"] as? String, let modeStr = owner._parseString(inResponseDictionary, key: "Mode"), let mode = Dot11Configuration.Dot11StationMode(rawValue: modeStr) {
             let alias = owner._parseString(inResponseDictionary, key: "Alias") ?? ""
             let priority = owner._parseInteger(inResponseDictionary, key: "Priority") ?? 0
             let securityConfiguration = _parseNetworkInterfaceDot11SecurityConfiguration(inResponseDictionary["Security"] as? [String: Any])

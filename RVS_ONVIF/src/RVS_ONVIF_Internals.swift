@@ -263,8 +263,12 @@ extension RVS_ONVIF {
     internal func _parseString(_ inDictionary: [String: Any], key inKey: String) -> String! {
         if let valStr = inDictionary[inKey] as? String {
             return valStr
-        } else if let valContainer = inDictionary[inKey] as? [String: Any], let valStr = valContainer["value"] as? String {
-            return valStr
+        } else if let valContainer = inDictionary[inKey] as? [String: Any] {
+            if let valStr = valContainer["value"] as? String {
+                return valStr
+            }
+        } else if let valStr = inDictionary[inKey] as? [String], 1 == valStr.count {
+            return valStr[0]
         }
         
         return nil

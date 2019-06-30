@@ -43,7 +43,7 @@ open class RVS_ONVIF_TestTarget_MockDevice {
     class func downTheRabbithole(_ inParsedXML: SWXMLHash.XMLElement) -> Any? {
         var ret: Any? = nil
         
-        if !inParsedXML.text.isEmpty {
+        if !(inParsedXML.text).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             ret = inParsedXML.text
         } else {
             
@@ -61,35 +61,36 @@ open class RVS_ONVIF_TestTarget_MockDevice {
             
             var children: Any? = nil
             
-            if let chilluns = inParsedXML.children as? [XMLElement] {
-                var retArray: [[String: Any]] = []
-                for child in chilluns {
-                    if let val = downTheRabbithole(child) {
-                        retArray.append([child.name: val])
-                    }
+            let chilluns = inParsedXML.children
+            var retArray: [[String: Any]] = []
+            for child in chilluns {
+                if let childElement = child as? XMLElement, let val = downTheRabbithole(childElement) {
+                    retArray.append([childElement.name: val])
+                } else if let child = child as? String {
+                    retArray.append(["value": child])
                 }
-                
-                // Now, check to see if we have any dupes. If not, we can just use the Dictionary. If so, then we strip the names and use the values as just Array elements.
-                let retDict = retArray.reduce(into: [String: Any]()) { (current: inout [String: Any], next) in
+            }
+            
+            // Now, check to see if we have any dupes. If not, we can just use the Dictionary. If so, then we strip the names and use the values as just Array elements.
+            let retDict = retArray.reduce(into: [String: Any]()) { (current: inout [String: Any], next) in
+                for (key, value) in next {
+                    current[key] = value
+                }
+            }
+            
+            if retDict.count != retArray.count {
+                var tempDict: [String: [Any]] = [:]
+                tempDict = retArray.reduce(into: [String: [Any]]()) { (current: inout [String: [Any]], next) in
                     for (key, value) in next {
-                        current[key] = value
-                    }
-                }
-                
-                if retDict.count != retArray.count {
-                    var tempDict: [String: [Any]] = [:]
-                    tempDict = retArray.reduce(into: [String: [Any]]()) { (current: inout [String: [Any]], next) in
-                        for (key, value) in next {
-                            if nil == current[key] {
-                                current[key] = []
-                            }
-                            current[key]?.append(value)
+                        if nil == current[key] {
+                            current[key] = []
                         }
+                        current[key]?.append(value)
                     }
-                    children = tempDict
-                } else {
-                    children = retDict
                 }
+                children = tempDict
+            } else {
+                children = retDict
             }
             
             if nil != children && nil == attributes {

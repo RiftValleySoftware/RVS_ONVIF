@@ -277,9 +277,9 @@ extension RVS_ONVIF_Core {
         public let version: String!
         /* ############################################################## */
         /**
-         This is the Capabilities. It is optional, and may be nil.
+         This is the Capabilities. It is optional, and may be nil. If supplied, we return it as a simple Dictionary, to be interpreted by the caller.
          */
-        public let capabilities: ServiceCapabilities!
+        public let capabilities: [String: Any]!
     }
 
     /* ###################################################################################################################################### */
