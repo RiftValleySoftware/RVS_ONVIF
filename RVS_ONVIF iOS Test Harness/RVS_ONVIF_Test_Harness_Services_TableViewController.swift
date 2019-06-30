@@ -75,6 +75,15 @@ class RVS_ONVIF_Test_Harness_Services_TableViewController: RVS_ONVIF_Test_Harnes
                         text += "\nLocal Path: \(xAddr.path)"
                     }
                     
+                    if let capabilities = service.capabilities, 0 < capabilities.count {
+                        for (key, value) in capabilities {
+                            if let value = value as? String {
+                                numberOfLines += 1
+                                text += "\n\t\(key): \(value)"
+                            }
+                        }
+                    }
+                    
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
                     cell.textLabel?.numberOfLines = numberOfLines
                     cell.textLabel?.text = text

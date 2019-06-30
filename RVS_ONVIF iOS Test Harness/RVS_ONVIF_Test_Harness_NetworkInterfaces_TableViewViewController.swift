@@ -140,7 +140,7 @@ class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVI
         var section: [String: String] = [:]
         section["Enabled"] = ipv6.isEnabled ? "YES" : "NO"
         section["DHCP"] = ipv6.configuration.isDHCP ? "YES" : "NO"
-        section["Can Accept Router Advert"] = ipv6.configuration.isAbleToAcceptRouterAdvert ? "YES" : "NO"
+        section["Can Accept Router Advert"] = (ipv6.configuration.isAbleToAcceptRouterAdvert ?? false) ? "YES" : "NO"
         if let list = ipv6.configuration.manual {
             for i in list.enumerated() {
                 if let addr = i.element.address {

@@ -96,7 +96,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
          in `getProfiles` to retrieve the token: `<Profiles token="MediaProfile000" fixed="true">`
          */
         var isRetrieveAttributes: Bool {
-            return .GetServiceCapabilities == self || .GetCapabilities == self
+            return .GetServiceCapabilities == self || .GetCapabilities == self || .GetServices == self
         }
     }
     
@@ -800,21 +800,50 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     print("Services List: \(String(describing: servicesList))")
                 #endif
                 servicesList.forEach { [unowned self] (element) in
-                    if  let version = element["Version"] as? [String: String],
-                        let major = Int(version["Major"] ?? "0"),
-                        // Weird rule for versioning. If the major version is over 15, then the minor is a leading-zero month index (https://www.onvif.org/ver10/device/wsdl/devicemgmt.wsdl).
-                        let minor = Int(version["Minor"] ?? "0"),
-                        let xAddr = element["XAddr"] as? String,
-                        let uri = URL(string: xAddr),
-                        let namespace = element["Namespace"] as? String {
-                        var capabilities: [String: Any]!
-                        
-                        if let capabilitiesAny = element["Capabilities"] as? [String: Any] {  // This is optional, so we check for it seperately.
+                    var version: String = ""
+                    var namespace: String = ""
+                    var xAddr = URL(string: "")
+                    var capabilities: [String: Any]!
+
+                    if let v = element["Version"] as? [String: Any], let major = owner._parseInteger(v, key: "Major"), let minor = owner._parseInteger(v, key: "Minor") {
+                        version = String(format: "%d.%02d", major, minor)
+                    }
+                    
+                    if  let value = owner._parseString(element, key: "XAddr") {
+                        xAddr = URL(string: value)
+                    }
+                    
+                    if  let value = owner._parseString(element, key: "Namespace") {
+                        namespace = value
+                    }
+                
+                    // We do all this weirdness, because manufacturers can pick and choose how they return their capabilities.
+                    if let capabilitiesAny = element["Capabilities"] as? [String: Any], 0 < capabilitiesAny.count {
+                        if let capabilitiesAsAttributes = capabilitiesAny["attributes"] as? [String: Any], 0 < capabilitiesAsAttributes.count {
+                            capabilities = capabilitiesAsAttributes
+                        } else if let capabilitiesAsValues = capabilitiesAny["value"] as? [String: Any], 0 < capabilitiesAsValues.count {
+                            if let internalAttributes = capabilitiesAsValues["attributes"] as? [String: Any], 0 < internalAttributes.count {
+                                capabilities = internalAttributes
+                            } else if let internalValues = capabilitiesAsValues["value"] as? [String: Any], 0 < internalValues.count {
+                                capabilities = internalValues
+                            } else if 0 < capabilitiesAsValues.count {
+                                capabilities = capabilitiesAsValues
+                            }
+                        } else if let capabilitiesAsValues = capabilitiesAny["Capabilities"] as? [String: Any], 0 < capabilitiesAsValues.count {
+                            print(String(describing: capabilitiesAsValues))
+                            if let internalAttributes = capabilitiesAsValues["attributes"] as? [String: Any], 0 < internalAttributes.count {
+                                capabilities = internalAttributes
+                            } else if let internalValues = capabilitiesAsValues["value"] as? [String: Any], 0 < internalValues.count {
+                                capabilities = internalValues
+                            } else if 0 < capabilitiesAsValues.count {
+                                capabilities = capabilitiesAsValues
+                            }
+                        } else {
                             capabilities = capabilitiesAny
                         }
-                        
-                        ret.append(Service(owner: self.owner, namespace: namespace, xAddr: uri, version: String(format: "%d.%02d", major, minor), capabilities: capabilities))
                     }
+                        
+                    ret.append(Service(owner: self.owner, namespace: namespace, xAddr: xAddr, version: version, capabilities: capabilities))
                 }
             }
         }

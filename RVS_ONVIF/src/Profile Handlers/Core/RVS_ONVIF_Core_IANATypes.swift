@@ -18,6 +18,7 @@ extension RVS_ONVIF_Core {
      The possible values of the interfaceType property.
      */
     public enum IANA_Types: Int {
+        case undefined = 0
         /// none of the following
         case other = 1
         case regular1822 = 2

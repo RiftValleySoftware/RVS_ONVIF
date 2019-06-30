@@ -40,18 +40,9 @@ class RVS_ONVIF_Mac_Test_Harness_Services_ViewController: RVS_ONVIF_Mac_Test_Har
                             tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Local Path", value: String(xAddr.relativePath)))
                         }
                         if let capabilities = $0.value.capabilities {
-                            if nil != capabilities.networkCapabilities {
-                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Network Capabilities", value: "√"))
-                            }
-                            if nil != capabilities.securityCapabilities {
-                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Security Capabilities", value: "√"))
-                            }
-                            if nil != capabilities.systemCapabilities {
-                                tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "System Capabilities", value: "√"))
-                           }
-                            if let auxiliaryCommands = capabilities.auxiliaryCommands {
-                                auxiliaryCommands.forEach {
-                                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Auxiliary Command", value: String($0)))
+                            capabilities.forEach {
+                                if let value = $0.value as? String {
+                                    tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: $0.key, value: value))
                                 }
                             }
                         }
