@@ -18,6 +18,16 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
     var owner: RVS_ONVIF!
     
     /* ############################################################################################################################## */
+    // MARK: - Evaluation Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func evaluateProfiles(_ inProfiles: [RVS_ONVIF_Profile_S.Profile]) {
+        XCTAssertEqual(inProfiles.count, 2)
+    }
+    
+    /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
@@ -30,11 +40,17 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
      */
     @discardableResult func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params: Any!) -> Bool {
         if "trt:GetProfiles" == inCommand.soapAction {
-            print(String(describing: params))
+            if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
+                evaluateProfiles(params)
+            }
+            
             expectation.fulfill()
             return true
+        } else {
+            XCTFail("Unknown Response!")
+            expectation.fulfill()
+            return false
         }
-        return false
     }
     
     /* ############################################################################################################################## */
