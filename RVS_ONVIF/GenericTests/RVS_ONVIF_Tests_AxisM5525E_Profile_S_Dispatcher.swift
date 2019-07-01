@@ -25,6 +25,37 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
      */
     func evaluateProfiles(_ inProfiles: [RVS_ONVIF_Profile_S.Profile]) {
         XCTAssertEqual(inProfiles.count, 2)
+        
+        let profile = inProfiles[0]
+        XCTAssertEqual(profile.owner, testTarget)
+        XCTAssertEqual("profile_1_h264", profile.token)
+        
+        XCTAssertEqual(profile.videoSourceConfiguration.owner, testTarget)
+        XCTAssertEqual("0", profile.videoSourceConfiguration.token)
+        XCTAssertEqual("0", profile.videoSourceConfiguration.sourceToken)
+        XCTAssertEqual("user0", profile.videoSourceConfiguration.name)
+        XCTAssertEqual(2, profile.videoSourceConfiguration.useCount)
+        XCTAssertEqual(CGRect(x: 0, y: 0, width: 1920, height: 1080), profile.videoSourceConfiguration.bounds)
+
+        XCTAssertEqual(profile.videoEncoderConfiguration.owner, testTarget)
+        XCTAssertEqual("default_1 h264", profile.videoEncoderConfiguration.name)
+        XCTAssertEqual("default_1_h264", profile.videoSourceConfiguration.token)
+        XCTAssertEqual(1, profile.videoEncoderConfiguration.useCount)
+        XCTAssertEqual(.h264, profile.videoEncoderConfiguration.encoding)
+        XCTAssertEqual(CGSize(width: 1920, height: 1080), profile.videoEncoderConfiguration.resolution)
+        XCTAssertEqual(70, profile.videoEncoderConfiguration.quality)
+        XCTAssertEqual(60, profile.videoEncoderConfiguration.timeoutInSeconds)
+
+        XCTAssertEqual(profile.videoEncoderConfiguration.rateControl.owner, testTarget)
+        XCTAssertEqual(30, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
+        XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
+        XCTAssertEqual(2147483647, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+
+        if 1 < inProfiles.count {
+            let profile = inProfiles[1]
+            XCTAssertEqual(profile.owner, testTarget)
+            XCTAssertEqual("profile_1_jpeg", profile.token)
+        }
     }
     
     /* ############################################################################################################################## */

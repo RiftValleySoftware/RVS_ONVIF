@@ -187,7 +187,12 @@ extension RVS_ONVIF_Profile_S {
          This is the video encoder configuration.
          */
         public let videoEncoderConfiguration: VideoEncoderConfiguration!
-        
+        /* ############################################################## */
+        /**
+         This is the video source configuration.
+         */
+        public let videoSourceConfiguration: VideoSourceConfiguration!
+
         /* ############################################################## */
         /**
          This method fetches the streaming URI for this profile. The delegate will be called with the URI, when it is received.
@@ -403,6 +408,11 @@ extension RVS_ONVIF_Profile_S {
         public let token: String
         /* ############################################################## */
         /**
+         The source token string.
+         */
+        public let sourceToken: String
+        /* ############################################################## */
+        /**
          How many instances use this.
          */
         public let useCount: Int
@@ -416,11 +426,12 @@ extension RVS_ONVIF_Profile_S {
         /**
          Default initializer (lets us leave out a few).
          */
-        public init(owner inOwner: RVS_ONVIF, name inName: String, useCount inUseCount: Int = 0, token inToken: String = "", bounds inBounds: CGRect = CGRect.zero) {
+        public init(owner inOwner: RVS_ONVIF, name inName: String, useCount inUseCount: Int = 0, token inToken: String = "", sourceToken inSourceToken: String = "", bounds inBounds: CGRect = CGRect.zero) {
             owner = inOwner
             name = inName
             useCount = inUseCount
             token = inToken
+            sourceToken = inSourceToken
             bounds = inBounds
         }
     }

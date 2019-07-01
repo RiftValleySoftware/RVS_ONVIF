@@ -237,6 +237,30 @@ extension RVS_ONVIF {
     /* ################################################################################################################################## */    
     /* ################################################################## */
     /**
+     This parses a generic Dictionary with a bunch of "value" parameters.
+     
+     It "cleans" the Dictionary, so the value is the actual entry value, not one a couple of steps removed.
+     
+     - parameter inValueDict: The raw Dictionary. If the entries don't have a "value" member, they will not be included.
+     
+     - returns: A Dictionary, with the "value" fetched and set as the main entry value. No other interpretation is done.
+     */
+    internal func _parseValueDict(_ inValueDict: [String: Any]) -> [String: Any] {
+        var ret: [String: Any] = [:]
+        
+        inValueDict.forEach {
+            if let valueItem = $0.value as? [String: Any], let value = valueItem["value"] {
+                ret[$0.key] = value
+            } else {    // Just a straight copy, if no "value" member.
+                ret[$0.key] = $0.value
+            }
+        }
+        
+        return ret
+    }
+
+    /* ################################################################## */
+    /**
      This parses a duration out of the given Dictionary.
      
      - parameter inDictionary: The Dictionary, partially parsed by SOAPEngine.
@@ -286,7 +310,7 @@ extension RVS_ONVIF {
      - returns: An instance of RVS_IPAddress, set to the type of IP address.
      */
     internal func _parseIPAddress(_ inDictionary: [String: Any]) -> RVS_IPAddress! {
-        if let ipAddressString = (inDictionary["IPv6Address"] ?? inDictionary["IPv6Address"] ?? inDictionary["Address"]) as? String {
+        if let ipAddressString = (inDictionary["IPv6Address"] ?? inDictionary["IPv4Address"] ?? inDictionary["Address"]) as? String {
             return ipAddressString.ipAddress
         } else if let ipAddressStringWrapper = (inDictionary["IPv6Address"] ?? inDictionary["IPv4Address"] ?? inDictionary["Address"]) as? [String: Any],
             let ipAddressString = ipAddressStringWrapper["value"] as? String {
@@ -324,6 +348,40 @@ extension RVS_ONVIF {
     internal func _parseInteger(_ inDictionary: [String: Any], key inKey: String) -> Int! {
         if let valStr = _parseString(inDictionary, key: inKey) {
             return Int(valStr)
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses a floating-point number from the given Dictionary.
+     
+     - parameter inDictionary: The Dictionary, partially parsed by SOAPEngine.
+     - parameter key: The key for the Dictionary element we'll be parsing.
+     
+     - returns: The parsed float. Nil, if the parse failed.
+     */
+    internal func _parseFloat(_ inDictionary: [String: Any], key inKey: String) -> Float! {
+        if let valStr = _parseString(inDictionary, key: inKey) {
+            return (valStr as NSString).floatValue
+        }
+        
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses a size from the given Dictionary.
+     
+     - parameter inDictionary: The Dictionary, partially parsed by SOAPEngine.
+     - parameter key: The key for the Dictionary element we'll be parsing.
+     
+     - returns: The parsed size. Nil, if the parse failed.
+     */
+    internal func _parseSize(_ inDictionary: [String: Any], key inKey: String) -> CGSize! {
+        if let wrapper = inDictionary[inKey] as? [String: Any], let width = _parseFloat(wrapper, key: "Width"), let height = _parseFloat(wrapper, key: "Height") {
+            return CGSize(width: CGFloat(width), height: CGFloat(height))
         }
         
         return nil

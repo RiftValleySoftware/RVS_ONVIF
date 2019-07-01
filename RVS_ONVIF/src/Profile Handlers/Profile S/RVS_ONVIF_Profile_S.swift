@@ -141,7 +141,8 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                 if let name = owner._parseString($0, key: "Name"), let token = owner._parseString($0, key: "token") { // Name and token are required.
                     var ptzConfiguration: PTZConfiguration!
                     var videoEncoderConfiguration: VideoEncoderConfiguration!
-                    
+                    var videoSourceConfiguration: VideoSourceConfiguration!
+
                     if let ptzConfig = $0["PTZConfiguration"] as? [String: Any], let name = owner._parseString(ptzConfig, key: "Name") {
                         var panTiltLimits: PanTiltLimits!
                         var zoomLimits: ZoomLimits!
@@ -162,7 +163,12 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                         videoEncoderConfiguration = _parseVideoEncoderConfiguration(vcConfig)
                     }
                     
-                    let newProfile = RVS_ONVIF_Profile_S.Profile(owner: owner, name: name, token: token, ptzConfiguration: ptzConfiguration, videoEncoderConfiguration: videoEncoderConfiguration)
+                    if let sConfig = $0["VideoSourceConfiguration"] as? [String: Any] {
+                        videoSourceConfiguration = _parseVideoSourceConfigurationsInternal(sConfig)
+                    }
+
+                    let newProfile = RVS_ONVIF_Profile_S.Profile(owner: owner, name: name, token: token, ptzConfiguration: ptzConfiguration, videoEncoderConfiguration: videoEncoderConfiguration, videoSourceConfiguration: videoSourceConfiguration)
+                    
                     ret.append(newProfile)
                 }
             }
@@ -192,44 +198,35 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
             
             let quality: Int! = owner._parseInteger(inVideoEncoderConfiguration, key: "Quality")
             
-            var token: String! = owner._parseString(inVideoEncoderConfiguration, key: "token")
-        
-            if nil == token, let attributes = inVideoEncoderConfiguration["attributes"] as? [String: String] {
-                token = owner._parseString(attributes, key: "token")
-            }
+            let token: String! = owner._parseString(inVideoEncoderConfiguration, key: "token")
 
-            if let multicastDict = inVideoEncoderConfiguration["Multicast"] as? [String: Any] {
-                multicast = _parseMulticastConfiguration(multicastDict)
-            }
-            
             if let rateControlDict = inVideoEncoderConfiguration["RateControl"] as? [String: Any] {
                 rateControl = _parseRateControlConfiguration(rateControlDict)
+            }
+            
+            if let multicastDict = inVideoEncoderConfiguration["Multicast"] as? [String: Any] {
+                multicast = _parseMulticastConfiguration(multicastDict)
             }
             
             if let encVal = EncodingTypes(rawValue: owner._parseString(inVideoEncoderConfiguration, key: "Encoding")?.lowercased() ?? "error") {
                 encoding = encVal
             }
             
-            if let timeoutDict = inVideoEncoderConfiguration["SessionTimeout"] as? [String: Any], let attributes = timeoutDict["attributes"] as? [String: Any], let timeoutStr = attributes["value"] as? String {
-                let numFormatter = NumberFormatter()
-                numFormatter.numberStyle = .decimal
-                if let tmInt = numFormatter.number(from: timeoutStr)?.intValue {
-                    timeoutInSeconds = tmInt
-                }
+            if let timeoutDur = owner._parseString(inVideoEncoderConfiguration, key: "SessionTimeout")?.asXMLDuration {
+                var timeoutInSecondsTmp = (timeoutDur.second ?? 0)
+                timeoutInSecondsTmp += ((timeoutDur.minute ?? 0) * 60)
+                timeoutInSecondsTmp += ((timeoutDur.hour ?? 0) * 3600)
+                
+                timeoutInSeconds = timeoutInSecondsTmp
             }
             
-            if let encParameters = inVideoEncoderConfiguration[encoding.rawValue.uppercased()] as? [String: Any] {
-                encodingParameters = _parseValueDict(encParameters)
+            let encodingKey = encoding.rawValue.uppercased()
+            
+            if let encParameters = inVideoEncoderConfiguration[encodingKey] as? [String: Any] {
+                encodingParameters = owner._parseValueDict(encParameters)
             }
             
-            if let rDict = inVideoEncoderConfiguration["Resolution"] as? [String: Any] {
-                if let widthDict = rDict["Width"] as? [String: Any],
-                    let widthVal = (widthDict["value"] as? NSString)?.floatValue,
-                    let heightDict = rDict["Height"] as? [String: Any],
-                    let heightVal = (heightDict["value"] as? NSString)?.floatValue {
-                    resolution = CGSize(width: CGFloat(widthVal), height: CGFloat(heightVal))
-                }
-            }
+            resolution = owner._parseSize(inVideoEncoderConfiguration, key: "Resolution")
             
             if nil != useCount || nil != token || nil != rateControl || nil != multicast || nil != encodingParameters || nil != quality {
                 return VideoEncoderConfiguration(owner: owner, name: name, useCount: useCount, token: token, encoding: encoding, timeoutInSeconds: timeoutInSeconds, rateControl: rateControl, multicast: multicast, quality: quality, resolution: resolution, encodingParameters: encodingParameters)
@@ -237,28 +234,6 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
         }
         
         return nil
-    }
-    
-    /* ################################################################## */
-    /**
-     This parses a generic Dictionary with a bunch of "value" parameters.
-     
-     It "cleans" the Dictionary, so the value is the actual entry value, not one a couple of steps removed.
-     
-     - parameter inValueDict: The raw Dictionary. If the entries don't have a "value" member, they will not be included.
-     
-     - returns: A Dictionary, with the "value" fetched and set as the main entry value. No other interpretation is done.
-     */
-    internal func _parseValueDict(_ inValueDict: [String: Any]) -> [String: Any] {
-        var ret: [String: Any] = [:]
-        
-        inValueDict.forEach {
-            if let valueItem = $0.value as? [String: Any], let value = valueItem["value"] {
-                ret[$0.key] = value
-            }
-        }
-        
-        return ret
     }
     
     /* ################################################################## */
@@ -271,24 +246,10 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      */
     internal func _parseMulticastConfiguration(_ inMulticastConfiguration: [String: Any]) -> Multicast! {
         if let addressDict = inMulticastConfiguration["Address"] as? [String: Any] {
-            var ipAddress: RVS_IPAddress!
-            var autoStart: Bool = false
-            var port: Int = 0
-            var ttl = DateComponents()
-            
-            if let asString = owner._parseString(addressDict, key: "AutoStart") {
-                autoStart = "true" == asString.lowercased()
-            }
-            
-            if let portInt = owner._parseInteger(addressDict, key: "Port") {
-                port = portInt
-            }
-            
-            if let ttlInt = owner._parseDuration(addressDict, key: "TTL") {
-                ttl = ttlInt
-            }
-            
-            ipAddress = owner._parseIPAddress(addressDict)
+            let port = owner._parseInteger(inMulticastConfiguration, key: "Port") ?? 0
+            let autoStart = owner._parseBoolean(inMulticastConfiguration, key: "AutoStart")
+            let ttl = owner._parseDuration(inMulticastConfiguration, key: "TTL") ?? DateComponents()
+            let ipAddress = owner._parseIPAddress(addressDict)
             
             return Multicast(owner: owner, ipAddress: ipAddress, autoStart: autoStart, port: port, ttl: ttl)
         }
@@ -305,21 +266,9 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - returns: A populated RateControl instance. Nil, if there was an issue.
      */
     internal func _parseRateControlConfiguration(_ inRateControlConfiguration: [String: Any]) -> RateControl! {
-        var frameRateLimit: Float!
-        var encodingInterval: Float!
-        var bitRateLimit: Int!
-        
-        if let frameRateLimitDict = inRateControlConfiguration["FrameRateLimit"] as? [String: Any], let frameRateLimitFloat = (frameRateLimitDict["value"] as? NSString)?.floatValue {
-            frameRateLimit = frameRateLimitFloat
-        }
-        
-        if let encodingIntervalDict = inRateControlConfiguration["EncodingInterval"] as? [String: Any], let encodingIntervalFloat = (encodingIntervalDict["value"] as? NSString)?.floatValue {
-            encodingInterval = encodingIntervalFloat
-        }
-        
-        if let bitRateLimitDict = inRateControlConfiguration["BitrateLimit"] as? [String: Any], let bitRateLimitInt = (bitRateLimitDict["value"] as? NSString)?.integerValue {
-            bitRateLimit = bitRateLimitInt
-        }
+        let frameRateLimit = owner._parseFloat(inRateControlConfiguration, key: "FrameRateLimit")
+        let encodingInterval = owner._parseFloat(inRateControlConfiguration, key: "EncodingInterval")
+        let bitRateLimit = owner._parseInteger(inRateControlConfiguration, key: "BitrateLimit")
         
         return RateControl(owner: owner, frameRateLimit: frameRateLimit, encodingInterval: encodingInterval, bitRateLimit: bitRateLimit)
     }
@@ -334,26 +283,15 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      */
     internal func _parsePanTiltLimits(_ inPanTiltLimits: [String: Any]) -> PanTiltLimits! {
         if let range = inPanTiltLimits["Range"] as? [String: Any],
-            let uriDict = range["URI"] as? [String: Any],
-            let uriStr = uriDict["value"] as? String,
+            let uriStr = owner._parseString(range, key: "URI"),
             let uri = URL(string: uriStr),
             let xRange = range["XRange"] as? [String: Any],
-            let yRange = range["YRange"] as? [String: Any] {
-            if let xRangeMin = xRange["Min"] as? [String: Any],
-                let xMin = (xRangeMin["value"] as? NSString)?.floatValue,
-                let xRangeMax = xRange["Max"] as? [String: Any],
-                let xMax = (xRangeMax["value"] as? NSString)?.floatValue,
-                let yRangeMin = yRange["Min"] as? [String: Any],
-                let yMin = (yRangeMin["value"] as? NSString)?.floatValue,
-                let yRangeMax = yRange["Max"] as? [String: Any],
-                let yMax = (yRangeMax["value"] as? NSString)?.floatValue {
-                return PanTiltLimits(owner: owner, xRange: xMin...xMax, yRange: yMin...yMax, uri: uri)
-            } else if let xMin = (xRange["Min"] as? NSString)?.floatValue,  // If the device sent back simple values without a "value" component.
-                      let xMax = (xRange["Max"] as? NSString)?.floatValue,
-                      let yMin = (yRange["Min"] as? NSString)?.floatValue,
-                      let yMax = (yRange["Max"]  as? NSString)?.floatValue {
-                return PanTiltLimits(owner: owner, xRange: xMin...xMax, yRange: yMin...yMax, uri: uri)
-            }
+            let xMin = owner._parseFloat(xRange, key: "Min"),
+            let xMax = owner._parseFloat(xRange, key: "Max"),
+            let yRange = range["YRange"] as? [String: Any],
+            let yMin = owner._parseFloat(yRange, key: "Min"),
+            let yMax = owner._parseFloat(yRange, key: "Max") {
+            return PanTiltLimits(owner: owner, xRange: xMin...xMax, yRange: yMin...yMax, uri: uri)
         }
         return nil
     }
@@ -368,21 +306,14 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      */
     internal func _parseZoomLimits(_ inZoomLimits: [String: Any]) -> ZoomLimits! {
         if let range = inZoomLimits["Range"] as? [String: Any],
-            let uriDict = range["URI"] as? [String: Any],
-            let uriStr = uriDict["value"] as? String,
+            let uriStr = owner._parseString(range, key: "URI"),
             let uri = URL(string: uriStr),
-            let xRange = range["XRange"] as? [String: Any] {
-            if let xRangeMin = xRange["Min"] as? [String: Any],
-                let xMin = (xRangeMin["value"] as? NSString)?.floatValue,
-                let xRangeMax = xRange["Max"] as? [String: Any],
-                let xMax = (xRangeMax["value"] as? NSString)?.floatValue {
-                return ZoomLimits(owner: owner, xRange: xMin...xMax, uri: uri)
-            } else if let xMin = (xRange["Min"] as? NSString)?.floatValue,  // If the device sent back simple values without a "value" component.
-                      let xMax = (xRange["Max"] as? NSString)?.floatValue {
-                return ZoomLimits(owner: owner, xRange: xMin...xMax, uri: uri)
-            }
+            let xRange = range["XRange"] as? [String: Any],
+            let xMin = owner._parseFloat(xRange, key: "Min"),
+            let xMax = owner._parseFloat(xRange, key: "Max") {
+            return ZoomLimits(owner: owner, xRange: xMin...xMax, uri: uri)
         }
-        
+    
         return nil
     }
 
@@ -510,24 +441,46 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                 configurations = [configSingle]
             }
         }
-
+        
         // Loop through the configurations, building our object.
         configurations.forEach {
-            if let name = owner._parseString($0, key: "Name") { // A name is required.
+            if let newConfig = _parseVideoSourceConfigurationsInternal($0) {
+                ret.append(newConfig)
+            }
+        }
+        
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     This parses the response to the profile request, and builds up a list of profiles for the device.
+     
+     - parameter inResponseBody: The Dictionary ([String: Any]) of the response body data (for one configuration).
+     - returns: An optional VideoSourceConfiguration struct instance, created from the response data. Nil if an error.
+     */
+    internal func _parseVideoSourceConfigurationsInternal(_ inResponseBody: [String: Any]) -> VideoSourceConfiguration? {
+        var ret: VideoSourceConfiguration!
+            if let name = owner._parseString(inResponseBody, key: "Name") { // A name is required.
+                var sourceToken: String = ""
                 var token: String = ""
                 var useCount: Int = 0
                 var bounds: CGRect = CGRect.zero
                 
-                if let uCount = owner._parseInteger($0, key: "UseCount") {
+                if let uCount = owner._parseInteger(inResponseBody, key: "UseCount") {
                     useCount = uCount
                 }
                 
-                if let tk = owner._parseString($0, key: "SourceToken") {
+                if let tk = owner._parseString(inResponseBody, key: "token") {
                     token = tk
                 }
                 
+                if let tk = owner._parseString(inResponseBody, key: "SourceToken") {
+                    sourceToken = tk
+                }
+
                 // We convert the bounds to a CGRect.
-                if let bnds = $0["Bounds"] as? [String: Any], let boundsAttr = bnds["attributes"] as? [String: Any] {
+                if let bnds = inResponseBody["Bounds"] as? [String: Any], let boundsAttr = bnds["attributes"] as? [String: Any] {
                     if let left = owner._parseInteger(boundsAttr, key: "x") {
                         bounds.origin.x = CGFloat(left)
                     }
@@ -542,11 +495,9 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                     }
                 }
                 
-                let newConfig = VideoSourceConfiguration(owner: owner, name: name, useCount: useCount, token: token, bounds: bounds)
-                ret.append(newConfig)
+                ret = VideoSourceConfiguration(owner: owner, name: name, useCount: useCount, token: token, sourceToken: sourceToken, bounds: bounds)
             }
-        }
-
+        
         return ret
     }
     
