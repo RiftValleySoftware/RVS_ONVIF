@@ -138,41 +138,32 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
         
         if let profileResponse = inResponseBody["GetProfilesResponse"] as? [String: Any], let profiles = profileResponse["Profiles"] as? [[String: Any]] {
             profiles.forEach {
-                if let nameDict = $0["Name"] as? [String: Any], let name = nameDict["value"] as? String {
-                    if let attributes = $0["attributes"] as? [String: Any], let token = attributes["token"] as? String {
-                        var ptzConfiguration: PTZConfiguration!
-                        var videoEncoderConfiguration: VideoEncoderConfiguration!
-                        
-                        if let ptzConfig = $0["PTZConfiguration"] as? [String: Any], let nameDict = ptzConfig["Name"] as? [String: Any], let name = nameDict["value"] as? String {
-                            var panTiltLimits: PanTiltLimits!
-                            var zoomLimits: ZoomLimits!
-                            var token: String!
-                            
-                            if let panTilt = ptzConfig["PanTiltLimits"] as? [String: Any] {
-                                panTiltLimits = _parsePanTiltLimits(panTilt)
-                            }
-                            
-                            if let zoom = ptzConfig["ZoomLimits"] as? [String: Any] {
-                                zoomLimits = _parseZoomLimits(zoom)
-                            }
-                            
-                            if let attributes = ptzConfig["attributes"] as? [String: Any], let tokenStr = attributes["token"] as? String {
-                                token = tokenStr
-                            }
-                            
-                            ptzConfiguration = PTZConfiguration(owner: owner, name: name, token: token, panTiltLimits: panTiltLimits, zoomLimits: zoomLimits)
+                if let name = owner._parseString($0, key: "Name"), let token = owner._parseString($0, key: "token") { // Name and token are required.
+                    var ptzConfiguration: PTZConfiguration!
+                    var videoEncoderConfiguration: VideoEncoderConfiguration!
+                    
+                    if let ptzConfig = $0["PTZConfiguration"] as? [String: Any], let name = owner._parseString(ptzConfig, key: "Name") {
+                        var panTiltLimits: PanTiltLimits!
+                        var zoomLimits: ZoomLimits!
+                        let token: String! = owner._parseString($0, key: "token")
+
+                        if let panTilt = ptzConfig["PanTiltLimits"] as? [String: Any] {
+                            panTiltLimits = _parsePanTiltLimits(panTilt)
                         }
                         
-                        if let vcConfig = $0["VideoEncoderConfiguration"] as? [String: Any] {
-                            #if DEBUG
-                            print(vcConfig)
-                            #endif
-                            videoEncoderConfiguration = _parseVideoEncoderConfiguration(vcConfig)
+                        if let zoom = ptzConfig["ZoomLimits"] as? [String: Any] {
+                            zoomLimits = _parseZoomLimits(zoom)
                         }
                         
-                        let newProfile = RVS_ONVIF_Profile_S.Profile(owner: owner, name: name, token: token, ptzConfiguration: ptzConfiguration, videoEncoderConfiguration: videoEncoderConfiguration)
-                        ret.append(newProfile)
+                        ptzConfiguration = PTZConfiguration(owner: owner, name: name, token: token, panTiltLimits: panTiltLimits, zoomLimits: zoomLimits)
                     }
+                    
+                    if let vcConfig = $0["VideoEncoderConfiguration"] as? [String: Any] {
+                        videoEncoderConfiguration = _parseVideoEncoderConfiguration(vcConfig)
+                    }
+                    
+                    let newProfile = RVS_ONVIF_Profile_S.Profile(owner: owner, name: name, token: token, ptzConfiguration: ptzConfiguration, videoEncoderConfiguration: videoEncoderConfiguration)
+                    ret.append(newProfile)
                 }
             }
         }
@@ -189,68 +180,60 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - returns: A populated VideoEncoderConfiguration instance. Nil, if there was an issue.
      */
     internal func _parseVideoEncoderConfiguration(_ inVideoEncoderConfiguration: [String: Any]) -> VideoEncoderConfiguration! {
-        var name: String!
-        var useCount: Int!
-        var token: String!
-        var rateControl: RateControl!
-        var multicast: Multicast!
-        var quality: Int!
-        var encodingParameters: [String: Any]!
-        var encoding: EncodingTypes = .error
-        var resolution: CGSize = CGSize.zero
-        var timeoutInSeconds: Int = 0
+        if let name = owner._parseString(inVideoEncoderConfiguration, key: "Name") { // A name is required.
+            var rateControl: RateControl!
+            var multicast: Multicast!
+            var encodingParameters: [String: Any]!
+            var encoding: EncodingTypes = .error
+            var resolution: CGSize = CGSize.zero
+            var timeoutInSeconds: Int = 0
+            
+            let useCount: Int! = owner._parseInteger(inVideoEncoderConfiguration, key: "UseCount")
+            
+            let quality: Int! = owner._parseInteger(inVideoEncoderConfiguration, key: "Quality")
+            
+            var token: String! = owner._parseString(inVideoEncoderConfiguration, key: "token")
         
-        if let nameDict = inVideoEncoderConfiguration["Name"] as? [String: Any], let nameStr = nameDict["value"] as? String {
-            name = nameStr
-        }
-        
-        if let ucDict = inVideoEncoderConfiguration["UseCount"] as? [String: Any], let useCountInt = (ucDict["value"] as? NSString)?.integerValue {
-            useCount = useCountInt
-        }
-        
-        if let attributes = inVideoEncoderConfiguration["attributes"] as? [String: Any], let tokenStr = attributes["token"] as? String {
-            token = tokenStr
-        }
-        
-        if let multicastDict = inVideoEncoderConfiguration["Multicast"] as? [String: Any] {
-            multicast = _parseMulticastConfiguration(multicastDict)
-        }
-        
-        if let rateControlDict = inVideoEncoderConfiguration["RateControl"] as? [String: Any] {
-            rateControl = _parseRateControlConfiguration(rateControlDict)
-        }
-        
-        if let qDict = inVideoEncoderConfiguration["Quality"] as? [String: Any], let qInt = (qDict["value"] as? NSString)?.integerValue {
-            quality = qInt
-        }
-        
-        if let encDict = inVideoEncoderConfiguration["Encoding"] as? [String: Any], let encVal = EncodingTypes(rawValue: (encDict["value"] as? String)?.lowercased() ?? "error") {
-            encoding = encVal
-        }
-        
-        if let timeoutDict = inVideoEncoderConfiguration["SessionTimeout"] as? [String: Any], let attributes = timeoutDict["attributes"] as? [String: Any], let timeoutStr = attributes["value"] as? String {
-            let numFormatter = NumberFormatter()
-            numFormatter.numberStyle = .decimal
-            if let tmInt = numFormatter.number(from: timeoutStr)?.intValue {
-                timeoutInSeconds = tmInt
+            if nil == token, let attributes = inVideoEncoderConfiguration["attributes"] as? [String: String] {
+                token = owner._parseString(attributes, key: "token")
             }
-        }
-        
-        if let encParameters = inVideoEncoderConfiguration[encoding.rawValue.uppercased()] as? [String: Any] {
-            encodingParameters = _parseValueDict(encParameters)
-        }
-        
-        if let rDict = inVideoEncoderConfiguration["Resolution"] as? [String: Any] {
-            if let widthDict = rDict["Width"] as? [String: Any],
-                let widthVal = (widthDict["value"] as? NSString)?.floatValue,
-                let heightDict = rDict["Height"] as? [String: Any],
-                let heightVal = (heightDict["value"] as? NSString)?.floatValue {
-                resolution = CGSize(width: CGFloat(widthVal), height: CGFloat(heightVal))
+
+            if let multicastDict = inVideoEncoderConfiguration["Multicast"] as? [String: Any] {
+                multicast = _parseMulticastConfiguration(multicastDict)
             }
-        }
-        
-        if nil != name || nil != useCount || nil != token || nil != rateControl || nil != multicast || nil != encodingParameters || nil != quality {
-            return VideoEncoderConfiguration(owner: owner, name: name, useCount: useCount, token: token, encoding: encoding, timeoutInSeconds: timeoutInSeconds, rateControl: rateControl, multicast: multicast, quality: quality, resolution: resolution, encodingParameters: encodingParameters)
+            
+            if let rateControlDict = inVideoEncoderConfiguration["RateControl"] as? [String: Any] {
+                rateControl = _parseRateControlConfiguration(rateControlDict)
+            }
+            
+            if let encVal = EncodingTypes(rawValue: owner._parseString(inVideoEncoderConfiguration, key: "Encoding")?.lowercased() ?? "error") {
+                encoding = encVal
+            }
+            
+            if let timeoutDict = inVideoEncoderConfiguration["SessionTimeout"] as? [String: Any], let attributes = timeoutDict["attributes"] as? [String: Any], let timeoutStr = attributes["value"] as? String {
+                let numFormatter = NumberFormatter()
+                numFormatter.numberStyle = .decimal
+                if let tmInt = numFormatter.number(from: timeoutStr)?.intValue {
+                    timeoutInSeconds = tmInt
+                }
+            }
+            
+            if let encParameters = inVideoEncoderConfiguration[encoding.rawValue.uppercased()] as? [String: Any] {
+                encodingParameters = _parseValueDict(encParameters)
+            }
+            
+            if let rDict = inVideoEncoderConfiguration["Resolution"] as? [String: Any] {
+                if let widthDict = rDict["Width"] as? [String: Any],
+                    let widthVal = (widthDict["value"] as? NSString)?.floatValue,
+                    let heightDict = rDict["Height"] as? [String: Any],
+                    let heightVal = (heightDict["value"] as? NSString)?.floatValue {
+                    resolution = CGSize(width: CGFloat(widthVal), height: CGFloat(heightVal))
+                }
+            }
+            
+            if nil != useCount || nil != token || nil != rateControl || nil != multicast || nil != encodingParameters || nil != quality {
+                return VideoEncoderConfiguration(owner: owner, name: name, useCount: useCount, token: token, encoding: encoding, timeoutInSeconds: timeoutInSeconds, rateControl: rateControl, multicast: multicast, quality: quality, resolution: resolution, encodingParameters: encodingParameters)
+            }
         }
         
         return nil
@@ -479,37 +462,27 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      - returns: A populated VideoEncoderConfigurationOptions instance. Nil, if there was an issue.
      */
     internal func _parseVideoEncoderConfigurationOptions(_ inVideoEncoderConfigurationOptions: [String: Any]) -> VideoEncoderConfigurationOptions! {
-        var name: String!
-        var useCount: Int!
-        var token: String!
-        var qualityRange: ClosedRange<Int>!
-        
-        if let nameDict = inVideoEncoderConfigurationOptions["Name"] as? [String: Any], let nameStr = nameDict["value"] as? String {
-            name = nameStr
-        }
-        
-        if let ucDict = inVideoEncoderConfigurationOptions["UseCount"] as? [String: Any], let useCountInt = (ucDict["value"] as? NSString)?.integerValue {
-            useCount = useCountInt
-        }
-        
-        if let attributes = inVideoEncoderConfigurationOptions["attributes"] as? [String: Any], let tokenStr = attributes["token"] as? String {
-            token = tokenStr
-        }
-        
-        if let qRDict = inVideoEncoderConfigurationOptions["QualityRange"] as? [String: Any] {
-            if let qRangeMin = qRDict["Min"] as? [String: Any],
-                let qMin = (qRangeMin["value"] as? NSString)?.integerValue,
-                let qRangeMax = qRDict["Max"] as? [String: Any],
-                let qMax = (qRangeMax["value"] as? NSString)?.integerValue {
-                qualityRange = qMin...qMax
-            } else if let qMin = (qRDict["Min"] as? NSString)?.integerValue,
-                      let qMax = (qRDict["Max"] as? NSString)?.integerValue {
-                qualityRange = qMin...qMax
+        if let name = owner._parseString(inVideoEncoderConfigurationOptions, key: "Name") { // A name is required.
+            var qualityRange: ClosedRange<Int>!
+            
+            let useCount: Int! = owner._parseInteger(inVideoEncoderConfigurationOptions, key: "token")
+            let token: String! = owner._parseString(inVideoEncoderConfigurationOptions, key: "token")
+
+            if let qRDict = inVideoEncoderConfigurationOptions["QualityRange"] as? [String: Any] {
+                if let qRangeMin = qRDict["Min"] as? [String: Any],
+                    let qMin = (qRangeMin["value"] as? NSString)?.integerValue,
+                    let qRangeMax = qRDict["Max"] as? [String: Any],
+                    let qMax = (qRangeMax["value"] as? NSString)?.integerValue {
+                    qualityRange = qMin...qMax
+                } else if let qMin = (qRDict["Min"] as? NSString)?.integerValue,
+                          let qMax = (qRDict["Max"] as? NSString)?.integerValue {
+                    qualityRange = qMin...qMax
+                }
             }
-        }
-        
-        if nil != name || nil != useCount || nil != token || nil != qualityRange {
-            return VideoEncoderConfigurationOptions(owner: owner, name: name, useCount: useCount, token: token, qualityRange: qualityRange)
+            
+            if nil != useCount || nil != token || nil != qualityRange {
+                return VideoEncoderConfigurationOptions(owner: owner, name: name, useCount: useCount, token: token, qualityRange: qualityRange)
+            }
         }
         
         return nil

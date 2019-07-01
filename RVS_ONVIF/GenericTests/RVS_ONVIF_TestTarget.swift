@@ -17,6 +17,7 @@ import XCTest
  Unfortunately, we can't inject into SOAPEngine, so these tests exclude it. However, we have to assume that SOAPEngine is solid. Good bet.
  */
 class RVS_ONVIF_TestTarget: RVS_ONVIF {
+    /// The mock device being used to test this.
     var targetMock: RVS_ONVIF_TestTarget_MockDevice!
     
     /* ################################################################## */
@@ -25,13 +26,15 @@ class RVS_ONVIF_TestTarget: RVS_ONVIF {
      
      - parameter mock: This is an instance of a subclass of RVS_ONVIF_TestTarget_MockDevice. It's the "device" that we'll test with.
      - parameter delegate: This is an optional (default is nil) parameter that allows you to specify a delegate up front. If it is provided, the instance will be immediately initialized.
+     - parameter dispatchers: This is an optional (default is empty) Array of dispatchers.
      */
-    internal init(mock inMock: RVS_ONVIF_TestTarget_MockDevice, delegate inDelegate: RVS_ONVIFDelegate! = nil) {
+    internal init(mock inMock: RVS_ONVIF_TestTarget_MockDevice, delegate inDelegate: RVS_ONVIFDelegate! = nil, dispatchers inDispatchers: [RVS_ONVIF_Dispatcher] = []) {
         super.init()
         targetMock = inMock
         ipAddressAndPort = "127.0.0.1:80"
         loginCredentials = RVS_ONVIF.LoginCredentialTuple(login: "test", password: "test")
         _testingSetup = true    // By setting this to true, we intercept communications to a device, allowing us to inject our own data.
+        dispatchers = inDispatchers
         defer { // We do this, to make sure that didSet gets called.
             let core = (RVS_ONVIF_Core(owner: self))
             core.supportedNamespaces = type(of: core).namespaces

@@ -267,6 +267,8 @@ extension RVS_ONVIF {
             if let valStr = valContainer["value"] as? String {
                 return valStr
             }
+        } else if let attributes = inDictionary["attributes"] as? [String: String], let valStr = attributes[inKey] {
+            return valStr
         } else if let valStr = inDictionary[inKey] as? [String], 1 == valStr.count {
             return valStr[0]
         }

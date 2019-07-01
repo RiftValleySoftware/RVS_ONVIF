@@ -15,7 +15,7 @@ import XCTest
  This is a base class, used for specific tests. It implements a RVS_ONVIF-derived test class instance, and logs in with a fictitous ID and IP Address/port.
  This conforms to the RVS_ONVIFDelegate protocol, and registers as the instance delegate, so derived classes can use that.
  It will not work on-device, as this has a nil SOAPEngine key.
- You can change the IP Address/Port and login ID prior to calling this class instance's setup() method.
+ This will ONLY test the bare minimum "Does the Patient Have A Pulse?" bar. It will only act as a reader; writing is not supported.
  */
 class RVS_ONVIF_Generic_TestBaseClass: XCTestCase, RVS_ONVIFDelegate {
     /// This will be used to count expectations.

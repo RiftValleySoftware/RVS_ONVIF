@@ -15,7 +15,9 @@ import SWXMLHash
  This is a ridiculously simple mock "ONVIF device" class. Use this to return data for a given stimulus.
  
  The default is a simple "match stimulus" lookup, but you are free to do what you want.
- */
+ 
+ This will ONLY test the bare minimum "Does the Patient Have A Pulse?" bar. It will only act as a reader; writing is not supported.
+*/
 open class RVS_ONVIF_TestTarget_MockDevice {
     /* ################################################################## */
     /**
@@ -171,7 +173,7 @@ open class RVS_ONVIF_TestTarget_MockDevice {
             "trt:GetDeviceInformation":
             "",
             
-            /// Core GetServices
+            /// Core GetServices (with the include service capabilities parameter set to true).
             "trt:GetServicestrue":
             "",
             
@@ -189,6 +191,10 @@ open class RVS_ONVIF_TestTarget_MockDevice {
             
             /// Core GetCapabilities
             "trt:GetCapabilities":
+            "",
+            
+            /// Get Streaming Profiles
+            "trt:GetProfiles":
             ""
         ]
     }
