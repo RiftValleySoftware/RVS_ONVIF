@@ -83,6 +83,8 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
             XCTFail("No Encoding Parameters")
         }
 
+        profile.fetchURI()
+        
         if 1 < inProfiles.count {
             let profile = inProfiles[1]
             XCTAssertEqual(profile.owner, testTarget)
@@ -134,6 +136,12 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
             XCTAssertEqual(2147483647, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
         }
     }
+    /* ################################################################## */
+    /**
+     */
+    func evaluateStreamURI(_ inStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
+        print("StreamURI: \(String(describing: inStreamURI))")
+    }
     
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
@@ -147,7 +155,12 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
      - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params: Any!) -> Bool {
-        if "trt:GetProfiles" == inCommand.soapAction {
+        if "trt:GetStreamUri" == inCommand.soapAction {
+            if let params = params as? RVS_ONVIF_Profile_S.Stream_URI {
+                evaluateStreamURI(params)
+            }
+            return true
+        } else if "trt:GetProfiles" == inCommand.soapAction {
             if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
                 evaluateProfiles(params)
             }
@@ -195,9 +208,7 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
     
     /* ################################################################## */
     /**
-     Tests simple initialization (actually, not so simple).
-     
-     This is a "brute-force" test to make sure that the read-in responses result in an objct that is properly set up.
+     Tests Getting the profiles. Will also get the stream URIs.
      */
     func testGetProfiles() {
         testTarget = RVS_ONVIF_TestTarget(mock: mockDevice, delegate: self, dispatchers: [self])

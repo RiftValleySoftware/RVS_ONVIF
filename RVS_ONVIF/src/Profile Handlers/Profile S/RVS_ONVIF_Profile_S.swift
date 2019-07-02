@@ -363,6 +363,16 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                 numFormatter.numberStyle = .decimal
                 if let tmInt = numFormatter.number(from: timeoutStr)?.intValue {
                     timeoutInSeconds = tmInt
+                } else if let timeOutFromDuration = owner._parseDuration(resultsList, key: "Timeout"), let seconds = timeOutFromDuration.second {
+                    timeoutInSeconds = seconds
+                    
+                    if let minutes = timeOutFromDuration.minute {
+                        timeoutInSeconds += minutes * 60
+                    }
+                    
+                    if let hours = timeOutFromDuration.minute {
+                        timeoutInSeconds += hours * 3600
+                    }
                 }
             }
         } else if let streamResponseDict = inResponseDictionary["GetStreamUriResponse"] as? [String: String] {
@@ -384,6 +394,16 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                 numFormatter.numberStyle = .decimal
                 if let tmInt = numFormatter.number(from: timeoutStr)?.intValue {
                     timeoutInSeconds = tmInt
+                } else if let timeOutFromDuration = owner._parseDuration(streamResponseDict, key: "Timeout"), let seconds = timeOutFromDuration.second {
+                    timeoutInSeconds = seconds
+                    
+                    if let minutes = timeOutFromDuration.minute {
+                        timeoutInSeconds += minutes * 60
+                    }
+                    
+                    if let hours = timeOutFromDuration.minute {
+                        timeoutInSeconds += hours * 3600
+                    }
                 }
             }
         }

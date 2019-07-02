@@ -219,9 +219,7 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
     
     /* ################################################################## */
     /**
-     Tests simple initialization (actually, not so simple).
-     
-     This is a "brute-force" test to make sure that the read-in responses result in an objct that is properly set up.
+     Tests Getting the profiles.
      */
     func testGetProfiles() {
         testTarget = RVS_ONVIF_TestTarget(mock: mockDevice, delegate: self, dispatchers: [self])

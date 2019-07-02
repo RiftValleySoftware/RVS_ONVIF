@@ -185,9 +185,7 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_Tes
     
     /* ################################################################## */
     /**
-     Tests simple initialization (actually, not so simple).
-     
-     This is a "brute-force" test to make sure that the read-in responses result in an objct that is properly set up.
+     Tests Getting the profiles.
      */
     func testGetProfiles() {
         testTarget = RVS_ONVIF_TestTarget(mock: mockDevice, delegate: self, dispatchers: [self])
