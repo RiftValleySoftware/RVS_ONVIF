@@ -254,13 +254,13 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer: RVS_ONVIF_Generic_TestB
             XCTAssertEqual(1, networkInterfaces.count)
             for networkInterface in networkInterfaces {
                 XCTAssertEqual(networkInterface.owner, testTarget)
-                XCTAssertEqual(networkInterface.token, "")
+                XCTAssertEqual(networkInterface.token, "eth0")
                 XCTAssertTrue(networkInterface.isEnabled)
                 XCTAssertEqual(networkInterface.info.name, "eth0")
                 XCTAssertEqual(networkInterface.info.hwAddress, "58:03:fb:8a:57:9b")
                 XCTAssertEqual(networkInterface.info.mtu, 1500)
                 
-                XCTAssertEqual(networkInterface.link.interfaceType, .other)
+                XCTAssertEqual(networkInterface.link.interfaceType, .undefined)
                 
                 XCTAssertEqual(networkInterface.link.adminSettings.owner, testTarget)
                 XCTAssertTrue(networkInterface.link.adminSettings.autoNegotiation)

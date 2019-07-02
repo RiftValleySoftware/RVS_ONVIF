@@ -1387,7 +1387,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     /**
      This is an overflow handler, to reduce CC.
      
-     This contains simple response handlers to "set" commands.
+     This contains simple response handlers to "set" commands, as well as a couple more "get" commands.
      
      - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
      - parameter soapRequest: The SOAP request object call, as a String

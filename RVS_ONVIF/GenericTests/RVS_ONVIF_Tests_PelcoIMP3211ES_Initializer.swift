@@ -248,7 +248,7 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer: RVS_ONVIF_Generic_TestBaseClas
             XCTAssertEqual(1, networkInterfaces.count)
             for networkInterface in networkInterfaces {
                 XCTAssertEqual(networkInterface.owner, testTarget)
-                XCTAssertEqual(networkInterface.token, "")
+                XCTAssertEqual(networkInterface.token, "1")
                 XCTAssertTrue(networkInterface.isEnabled)
                 XCTAssertEqual(networkInterface.info.name, "eth0")
                 XCTAssertEqual(networkInterface.info.hwAddress, "00:04:7d:36:a5:4e")

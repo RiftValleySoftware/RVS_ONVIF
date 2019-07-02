@@ -259,7 +259,7 @@ class RVS_ONVIF_Tests_AxisM5525E_Initializer: RVS_ONVIF_Generic_TestBaseClass {
             XCTAssertEqual(1, networkInterfaces.count)
             for networkInterface in networkInterfaces {
                 XCTAssertEqual(networkInterface.owner, testTarget)
-                XCTAssertEqual(networkInterface.token, "")
+                XCTAssertEqual(networkInterface.token, "eth0")
                 XCTAssertTrue(networkInterface.isEnabled)
                 XCTAssertEqual(networkInterface.info.name, "eth0")
                 XCTAssertEqual(networkInterface.info.hwAddress, "AC:CC:8E:BE:CC:EA")
