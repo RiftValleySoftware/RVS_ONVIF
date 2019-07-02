@@ -234,14 +234,46 @@ extension RVS_ONVIF {
 
     /* ################################################################################################################################## */
     // MARK: - Internal Instance Methods
-    /* ################################################################################################################################## */    
+    /* ################################################################################################################################## */
+    /* ################################################################################################################################## */
+    // MARK: - Robust Leaf Parsers
+    /* ################################################################################################################################## */
+    /**
+     The following few methods are used to provide robust parsing for "leaf" values (at the end of parse trees).
+     These will attempt numerous ways to decipher the value, as they can be presented in more than one way.
+     */
+    /* ################################################################## */
+    /**
+     This parses a simple string.
+     
+     - parameter inDictionary: The Dictionary, partially parsed by SOAPEngine.
+     - parameter key: The key for the Dictionary element we'll be parsing.
+     
+     - returns: The String that was parsed. Nil, if the parse failed.
+     */
+    internal func _parseString(_ inDictionary: [String: Any], key inKey: String) -> String! {
+        if let valStr = inDictionary[inKey] as? String {
+            return valStr
+        } else if let valContainer = inDictionary[inKey] as? [String: Any] {
+            if let valStr = valContainer["value"] as? String {
+                return valStr
+            }
+        } else if let attributes = inDictionary["attributes"] as? [String: String], let valStr = attributes[inKey] {
+            return valStr
+        } else if let valStr = inDictionary[inKey] as? [String], 1 == valStr.count {
+            return valStr[0]
+        }
+        
+        return nil
+    }
+
     /* ################################################################## */
     /**
      This parses a generic Dictionary with a bunch of "value" parameters.
      
      It "cleans" the Dictionary, so the value is the actual entry value, not one a couple of steps removed.
      
-     - parameter inValueDict: The raw Dictionary. If the entries don't have a "value" member, they will not be included.
+     - parameter inValueDict: The raw Dictionary. If the entries don't have a "value" member, they will simply be copied verbatim.
      
      - returns: A Dictionary, with the "value" fetched and set as the main entry value. No other interpretation is done.
      */
@@ -272,31 +304,6 @@ extension RVS_ONVIF {
         if let target = _parseString(inDictionary, key: inKey) {
             return target.asXMLDuration
         }
-        return nil
-    }
-
-    /* ################################################################## */
-    /**
-     This parses a simple string.
-     
-     - parameter inDictionary: The Dictionary, partially parsed by SOAPEngine.
-     - parameter key: The key for the Dictionary element we'll be parsing.
-     
-     - returns: The String that was parsed. Nil, if the parse failed.
-     */
-    internal func _parseString(_ inDictionary: [String: Any], key inKey: String) -> String! {
-        if let valStr = inDictionary[inKey] as? String {
-            return valStr
-        } else if let valContainer = inDictionary[inKey] as? [String: Any] {
-            if let valStr = valContainer["value"] as? String {
-                return valStr
-            }
-        } else if let attributes = inDictionary["attributes"] as? [String: String], let valStr = attributes[inKey] {
-            return valStr
-        } else if let valStr = inDictionary[inKey] as? [String], 1 == valStr.count {
-            return valStr[0]
-        }
-        
         return nil
     }
  
@@ -387,6 +394,9 @@ extension RVS_ONVIF {
         return nil
     }
 
+    /* ################################################################################################################################## */
+    // MARK: - Connection Lifecycle Methods
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This is called to initialize the connection.
@@ -422,6 +432,9 @@ extension RVS_ONVIF {
         }
     }
     
+    /* ################################################################################################################################## */
+    // MARK: - Internal SOAPEngine Caller
+    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
      This may be called in non-main threads.
