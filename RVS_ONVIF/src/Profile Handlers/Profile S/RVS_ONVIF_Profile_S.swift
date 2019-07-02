@@ -212,12 +212,15 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
                 encoding = encVal
             }
             
+            // Some manufacturers like to use integers directly, instead of the proper XML Duration format.
             if let timeoutDur = owner._parseString(inVideoEncoderConfiguration, key: "SessionTimeout")?.asXMLDuration {
                 var timeoutInSecondsTmp = (timeoutDur.second ?? 0)
                 timeoutInSecondsTmp += ((timeoutDur.minute ?? 0) * 60)
                 timeoutInSecondsTmp += ((timeoutDur.hour ?? 0) * 3600)
                 
                 timeoutInSeconds = timeoutInSecondsTmp
+            } else if let asInt = owner._parseInteger(inVideoEncoderConfiguration, key: "SessionTimeout") {
+                timeoutInSeconds = asInt
             }
             
             let encodingKey = encoding.rawValue.uppercased()
@@ -248,7 +251,14 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
         if let addressDict = inMulticastConfiguration["Address"] as? [String: Any] {
             let port = owner._parseInteger(inMulticastConfiguration, key: "Port") ?? 0
             let autoStart = owner._parseBoolean(inMulticastConfiguration, key: "AutoStart")
-            let ttl = owner._parseDuration(inMulticastConfiguration, key: "TTL") ?? DateComponents()
+            var ttl = DateComponents()
+            
+            // Some manufacturers like to use integers directly, instead of the proper XML Duration format.
+            if let extractedDate = owner._parseDuration(inMulticastConfiguration, key: "TTL") {
+                ttl = extractedDate
+            } else if let asInt = owner._parseInteger(inMulticastConfiguration, key: "TTL") {
+                ttl = DateComponents(second: asInt)
+            }
             let ipAddress = owner._parseIPAddress(addressDict)
             
             return Multicast(owner: owner, ipAddress: ipAddress, autoStart: autoStart, port: port, ttl: ttl)

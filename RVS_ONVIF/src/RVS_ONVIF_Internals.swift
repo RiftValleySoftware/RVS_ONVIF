@@ -354,7 +354,7 @@ extension RVS_ONVIF {
      */
     internal func _parseInteger(_ inDictionary: [String: Any], key inKey: String) -> Int! {
         if let valStr = _parseString(inDictionary, key: inKey) {
-            return Int(valStr)
+            return (valStr as NSString).integerValue
         }
         
         return nil

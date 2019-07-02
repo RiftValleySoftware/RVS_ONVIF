@@ -154,6 +154,9 @@
 		D4BA0F5622454C1800963285 /* RVS_ParseXMLDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */; };
 		D4BAF3ED2260E87500C971D8 /* SOAPEngine64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BAF3EF2260E89A00C971D8 /* SOAPEngineOSX.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4BBD10A22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */; };
+		D4BBD10B22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */; };
+		D4BBD10C22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */; };
 		D4BC7062223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */; };
 		D4C69ED522C7D6930054675E /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */; };
 		D4C8A8BC22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */; };
@@ -356,6 +359,7 @@
 		D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift; sourceTree = "<group>"; };
 		D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ParseXMLDuration.swift; sourceTree = "<group>"; };
 		D4BAF3E82260E0D100C971D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift; sourceTree = "<group>"; };
 		D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift; sourceTree = "<group>"; };
 		D4C02AEAA5BAC511BE993CF4 /* Pods-RVS_ONVIF_iOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF_iOS_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF_iOS_Tests/Pods-RVS_ONVIF_iOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4C8A8BA22C38F240054F52F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -743,6 +747,7 @@
 				D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */,
 				D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */,
 				D4603EFC22CA398A00AED39E /* RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher.swift */,
+				D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */,
 				D4E5721722C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift */,
 				D492FCD522C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift */,
 			);
@@ -1343,6 +1348,7 @@
 				D4E5721C22C8DB3400521315 /* PelcoIMP3211ESCameraMock.swift in Sources */,
 				D492FCBB22C7846200B73C63 /* RVS_ONVIF_Core_IANATypes.swift in Sources */,
 				D492FCBF22C7846200B73C63 /* RVS_ParseXMLDuration.swift in Sources */,
+				D4BBD10A22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */,
 				D4E5721B22C8DB3400521315 /* AxisM5525ECameraMock.swift in Sources */,
 				D4E5721822C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift in Sources */,
 				D492FCD622C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift in Sources */,
@@ -1417,6 +1423,7 @@
 				D4E5722022C8DB3600521315 /* PelcoIMP3211ESCameraMock.swift in Sources */,
 				D49EA23822C69C8E004AE619 /* RVS_ONVIF_Generic_TestBaseClass.swift in Sources */,
 				D49EA23322C69C7E004AE619 /* RVS_String_Extensions.swift in Sources */,
+				D4BBD10C22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */,
 				D4E5721F22C8DB3600521315 /* AxisM5525ECameraMock.swift in Sources */,
 				D4E5721A22C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift in Sources */,
 				D492FCD822C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift in Sources */,
@@ -1464,6 +1471,7 @@
 				D4E5721E22C8DB3500521315 /* PelcoIMP3211ESCameraMock.swift in Sources */,
 				D492FCC622C7846300B73C63 /* RVS_ONVIF_Core_IANATypes.swift in Sources */,
 				D492FCCA22C7846300B73C63 /* RVS_ParseXMLDuration.swift in Sources */,
+				D4BBD10B22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */,
 				D4E5721D22C8DB3500521315 /* AxisM5525ECameraMock.swift in Sources */,
 				D4E5721922C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift in Sources */,
 				D492FCD722C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift in Sources */,
