@@ -12,9 +12,9 @@ import XCTest
 
 /* ###################################################################################################################################### */
 /**
- Runs tests on a mock AXIS camera.
+ Runs tests on a mock Pelco camera.
  */
-class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBaseClass, RVS_ONVIF_Profile_SDispatcher {
+class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBaseClass, RVS_ONVIF_Profile_SDispatcher {
     var owner: RVS_ONVIF!
     
     /* ############################################################################################################################## */
@@ -28,57 +28,48 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
         
         let profile = inProfiles[0]
         XCTAssertEqual(profile.owner, testTarget)
-        XCTAssertEqual("profile_1 h264", profile.name)
-        XCTAssertEqual("profile_1_h264", profile.token)
+        XCTAssertEqual("Profile 0", profile.name)
+        XCTAssertEqual("0", profile.token)
+        XCTAssertNil(profile.ptzConfiguration)
 
         XCTAssertEqual(profile.videoSourceConfiguration.owner, testTarget)
-        XCTAssertEqual("0", profile.videoSourceConfiguration.token)
-        XCTAssertEqual("0", profile.videoSourceConfiguration.sourceToken)
-        XCTAssertEqual("user0", profile.videoSourceConfiguration.name)
+        XCTAssertEqual("VideoSource 1", profile.videoSourceConfiguration.name)
+        XCTAssertEqual("1", profile.videoSourceConfiguration.token)
+        XCTAssertEqual("1", profile.videoSourceConfiguration.sourceToken)
         XCTAssertEqual(2, profile.videoSourceConfiguration.useCount)
-        XCTAssertEqual(CGRect(x: 0, y: 0, width: 1920, height: 1080), profile.videoSourceConfiguration.bounds)
+        XCTAssertEqual(CGRect(x: 0, y: 0, width: 4000, height: 3000), profile.videoSourceConfiguration.bounds)
 
         XCTAssertEqual(profile.videoEncoderConfiguration.owner, testTarget)
-        XCTAssertEqual("default_1 h264", profile.videoEncoderConfiguration.name)
-        XCTAssertEqual("default_1_h264", profile.videoEncoderConfiguration.token)
+        XCTAssertEqual("VideoEncoder 1", profile.videoEncoderConfiguration.name)
+        XCTAssertEqual("1", profile.videoEncoderConfiguration.token)
         XCTAssertEqual(1, profile.videoEncoderConfiguration.useCount)
         XCTAssertEqual(.h264, profile.videoEncoderConfiguration.encoding)
-        XCTAssertEqual(CGSize(width: 1920, height: 1080), profile.videoEncoderConfiguration.resolution)
-        XCTAssertEqual(70, profile.videoEncoderConfiguration.quality)
+        XCTAssertEqual(CGSize(width: 2048, height: 1536), profile.videoEncoderConfiguration.resolution)
         XCTAssertEqual(60, profile.videoEncoderConfiguration.timeoutInSeconds)
-
-        XCTAssertEqual(profile.videoEncoderConfiguration.rateControl.owner, testTarget)
-        XCTAssertEqual(30, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
-        XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
-        XCTAssertEqual(2147483647, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
-
-        XCTAssertEqual(profile.ptzConfiguration.owner, testTarget)
-        XCTAssertEqual("user0", profile.ptzConfiguration.name)
-        XCTAssertEqual("profile_1_h264", profile.ptzConfiguration.token)
-        XCTAssertEqual(profile.ptzConfiguration.panTiltLimits.owner, testTarget)
-        XCTAssertEqual(-1...1, profile.ptzConfiguration.panTiltLimits.xRange)
-        XCTAssertEqual(-1...1, profile.ptzConfiguration.panTiltLimits.yRange)
-        XCTAssertEqual(URL(string: "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"), profile.ptzConfiguration.panTiltLimits.uri)
-        XCTAssertEqual(profile.ptzConfiguration.zoomLimits.owner, testTarget)
-        XCTAssertEqual(0...0.499949992, profile.ptzConfiguration.zoomLimits.xRange)
+        XCTAssertEqual(57, profile.videoEncoderConfiguration.quality)
 
         if let multicast = profile.videoEncoderConfiguration.multicast {
             XCTAssertEqual(multicast.owner, testTarget)
-            XCTAssertEqual("0.0.0.0", multicast.ipAddress.address)
+            XCTAssertEqual("239.168.4.18", multicast.ipAddress.address)
             XCTAssertFalse(multicast.autoStart)
-            XCTAssertEqual(0, multicast.port)
+            XCTAssertEqual(3586, multicast.port)
             XCTAssertNotNil(multicast.ttl)
-            XCTAssertEqual(5, multicast.ttl.second)
+            XCTAssertEqual(10, multicast.ttl.second)
             XCTAssertNil(multicast.ttl.minute)
             XCTAssertNil(multicast.ttl.hour)
         } else {
             XCTFail("NoMulticast")
         }
 
+        XCTAssertEqual(profile.videoEncoderConfiguration.rateControl.owner, testTarget)
+        XCTAssertEqual(10, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
+        XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
+        XCTAssertEqual(7000, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+        
         if let encodingParameters = profile.videoEncoderConfiguration.encodingParameters as? [String:String] {
             XCTAssertEqual(2, encodingParameters.count)
-            XCTAssertEqual("Main", encodingParameters["H264Profile"])
-            XCTAssertEqual("32", encodingParameters["GovLength"])
+            XCTAssertEqual("High", encodingParameters["H264Profile"])
+            XCTAssertEqual("10", encodingParameters["GovLength"])
         } else {
             XCTFail("No Encoding Parameters")
         }
@@ -86,52 +77,51 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
         if 1 < inProfiles.count {
             let profile = inProfiles[1]
             XCTAssertEqual(profile.owner, testTarget)
-            XCTAssertEqual("profile_1 jpeg", profile.name)
-            XCTAssertEqual("profile_1_jpeg", profile.token)
-
+            XCTAssertEqual("Profile 1", profile.name)
+            XCTAssertEqual("1", profile.token)
+            XCTAssertNil(profile.ptzConfiguration)
+            
             XCTAssertEqual(profile.videoSourceConfiguration.owner, testTarget)
-            XCTAssertEqual("0", profile.videoSourceConfiguration.token)
-            XCTAssertEqual("0", profile.videoSourceConfiguration.sourceToken)
-            XCTAssertEqual("user0", profile.videoSourceConfiguration.name)
+            XCTAssertEqual("VideoSource 1", profile.videoSourceConfiguration.name)
+            XCTAssertEqual("1", profile.videoSourceConfiguration.token)
+            XCTAssertEqual("1", profile.videoSourceConfiguration.sourceToken)
             XCTAssertEqual(2, profile.videoSourceConfiguration.useCount)
-            XCTAssertEqual(CGRect(x: 0, y: 0, width: 1920, height: 1080), profile.videoSourceConfiguration.bounds)
+            XCTAssertEqual(CGRect(x: 0, y: 0, width: 4000, height: 3000), profile.videoSourceConfiguration.bounds)
             
             XCTAssertEqual(profile.videoEncoderConfiguration.owner, testTarget)
-            XCTAssertEqual("default_1 jpeg", profile.videoEncoderConfiguration.name)
-            XCTAssertEqual("default_1_jpeg", profile.videoEncoderConfiguration.token)
+            XCTAssertEqual("VideoEncoder 2", profile.videoEncoderConfiguration.name)
+            XCTAssertEqual("2", profile.videoEncoderConfiguration.token)
             XCTAssertEqual(1, profile.videoEncoderConfiguration.useCount)
-            XCTAssertEqual(.jpeg, profile.videoEncoderConfiguration.encoding)
-            XCTAssertEqual(CGSize(width: 1920, height: 1080), profile.videoEncoderConfiguration.resolution)
-            XCTAssertEqual(70, profile.videoEncoderConfiguration.quality)
+            XCTAssertEqual(.h264, profile.videoEncoderConfiguration.encoding)
+            XCTAssertEqual(CGSize(width: 800, height: 600), profile.videoEncoderConfiguration.resolution)
             XCTAssertEqual(60, profile.videoEncoderConfiguration.timeoutInSeconds)
-
-            XCTAssertEqual(profile.ptzConfiguration.owner, testTarget)
-            XCTAssertEqual("user0", profile.ptzConfiguration.name)
-            XCTAssertEqual("profile_1_jpeg", profile.ptzConfiguration.token)
-            XCTAssertEqual(profile.ptzConfiguration.panTiltLimits.owner, testTarget)
-            XCTAssertEqual(-1...1, profile.ptzConfiguration.panTiltLimits.xRange)
-            XCTAssertEqual(-1...1, profile.ptzConfiguration.panTiltLimits.yRange)
-            XCTAssertEqual(URL(string: "http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace"), profile.ptzConfiguration.panTiltLimits.uri)
-            XCTAssertEqual(profile.ptzConfiguration.zoomLimits.owner, testTarget)
-            XCTAssertEqual(0...0.499949992, profile.ptzConfiguration.zoomLimits.xRange)
-
+            XCTAssertEqual(24, profile.videoEncoderConfiguration.quality)
+            
             if let multicast = profile.videoEncoderConfiguration.multicast {
                 XCTAssertEqual(multicast.owner, testTarget)
-                XCTAssertEqual("0.0.0.0", multicast.ipAddress.address)
+                XCTAssertEqual("239.168.4.18", multicast.ipAddress.address)
                 XCTAssertFalse(multicast.autoStart)
-                XCTAssertEqual(0, multicast.port)
+                XCTAssertEqual(2538, multicast.port)
                 XCTAssertNotNil(multicast.ttl)
-                XCTAssertEqual(5, multicast.ttl.second)
+                XCTAssertEqual(10, multicast.ttl.second)
                 XCTAssertNil(multicast.ttl.minute)
                 XCTAssertNil(multicast.ttl.hour)
             } else {
                 XCTFail("NoMulticast")
             }
-
+            
             XCTAssertEqual(profile.videoEncoderConfiguration.rateControl.owner, testTarget)
-            XCTAssertEqual(30, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
+            XCTAssertEqual(20, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
             XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
-            XCTAssertEqual(2147483647, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+            XCTAssertEqual(3000, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+            
+            if let encodingParameters = profile.videoEncoderConfiguration.encodingParameters as? [String:String] {
+                XCTAssertEqual(2, encodingParameters.count)
+                XCTAssertEqual("High", encodingParameters["H264Profile"])
+                XCTAssertEqual("20", encodingParameters["GovLength"])
+            } else {
+                XCTFail("No Encoding Parameters")
+            }
         }
     }
     
@@ -188,7 +178,7 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
      Just setting up our basic structure.
      */
     override func setUp() {
-        mockDevice = AxisM5525ECameraMock()
+        mockDevice = PelcoIMP3211ESCameraMock()
         expectation = XCTestExpectation()
         expectation.expectedFulfillmentCount = 2
     }
