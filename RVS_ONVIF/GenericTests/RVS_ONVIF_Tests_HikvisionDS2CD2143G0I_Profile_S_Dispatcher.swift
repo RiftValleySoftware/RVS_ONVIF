@@ -16,7 +16,8 @@ import XCTest
  */
 class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBaseClass, RVS_ONVIF_Profile_SDispatcher {
     var owner: RVS_ONVIF!
-    
+    var profileTag: String = "Profile_1"
+
     /* ############################################################################################################################## */
     // MARK: - Evaluation Methods
     /* ############################################################################################################################## */
@@ -74,6 +75,8 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
             XCTFail("No Encoding Parameters")
         }
 
+        profile.fetchURI()
+
         if 1 < inProfiles.count {
             let profile = inProfiles[1]
             XCTAssertEqual(profile.owner, testTarget)
@@ -114,6 +117,8 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
             XCTAssertEqual(10, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
             XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
             XCTAssertEqual(768, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+
+            profile.fetchURI()
         }
 
         if 2 < inProfiles.count {
@@ -156,9 +161,23 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
             XCTAssertEqual(10, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
             XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
             XCTAssertEqual(768, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+
+            profile.fetchURI()
         }
     }
     
+    /* ################################################################## */
+    /**
+     */
+    func evaluateStreamURI(_ inStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
+        XCTAssertEqual(inStreamURI.owner, testTarget)
+        XCTAssertEqual(inStreamURI.uri, URL(string: "rtsp://192.168.4.13:554/Streaming/Channels/101?transportmode=unicast&profile=\(profileTag)"))
+        profileTag = (profileTag == "Profile_1") ? "Profile_2" : "Profile_3"
+        XCTAssertFalse(inStreamURI.invalidAfterConnect)
+        XCTAssertFalse(inStreamURI.invalidAfterReboot)
+        XCTAssertEqual(inStreamURI.timeoutInSeconds, 60)
+    }
+
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
     /* ############################################################################################################################## */
@@ -171,7 +190,12 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
      - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params: Any!) -> Bool {
-        if "trt:GetProfiles" == inCommand.soapAction {
+        if "trt:GetStreamUri" == inCommand.soapAction {
+            if let params = params as? RVS_ONVIF_Profile_S.Stream_URI {
+                evaluateStreamURI(params)
+            }
+            return true
+        } else if "trt:GetProfiles" == inCommand.soapAction {
             if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
                 evaluateProfiles(params)
             }

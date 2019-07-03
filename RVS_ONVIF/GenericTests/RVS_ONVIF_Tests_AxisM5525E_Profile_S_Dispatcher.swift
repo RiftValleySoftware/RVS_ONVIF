@@ -16,6 +16,7 @@ import XCTest
  */
 class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBaseClass, RVS_ONVIF_Profile_SDispatcher {
     var owner: RVS_ONVIF!
+    var profileTag: String = "h264"
     
     /* ############################################################################################################################## */
     // MARK: - Evaluation Methods
@@ -134,13 +135,21 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
             XCTAssertEqual(30, profile.videoEncoderConfiguration.rateControl.frameRateLimit)
             XCTAssertEqual(1, profile.videoEncoderConfiguration.rateControl.encodingInterval)
             XCTAssertEqual(2147483647, profile.videoEncoderConfiguration.rateControl.bitRateLimit)
+
+            profile.fetchURI()
         }
     }
+    
     /* ################################################################## */
     /**
      */
     func evaluateStreamURI(_ inStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
-        print("StreamURI: \(String(describing: inStreamURI))")
+        XCTAssertEqual(inStreamURI.owner, testTarget)
+        XCTAssertEqual(inStreamURI.uri, URL(string: "rtsp://192.168.4.12/onvif-media/media.amp?profile=profile_1_\(profileTag)&sessiontimeout=60&streamtype=unicast"))
+        profileTag = "jpeg" // The reason I do this here, is because the callback can happen before the call to the second URI has been processed. This makes sure it happens afterwards.
+        XCTAssertFalse(inStreamURI.invalidAfterConnect)
+        XCTAssertFalse(inStreamURI.invalidAfterReboot)
+        XCTAssertEqual(inStreamURI.timeoutInSeconds, 0)
     }
     
     /* ############################################################################################################################## */

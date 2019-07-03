@@ -146,17 +146,22 @@ open class RVS_ONVIF_TestTarget_MockDevice {
      - returns: A Dictionary, containing the parsed response.
      */
     internal func makeTransaction(_ inCommand: [String: Any]) -> [String: Any]? {
-        if let action = inCommand["action"] as? String {
+        var command = inCommand
+        if let action = command["action"] as? String {
+            command.removeValue(forKey: "action")
             var key: String = ""
-            if let stringy = inCommand as? [String: String] {
+            if let stringy = command as? [String: String] {
                 key = stringy.values.sorted().joined()
             } else {
-                inCommand.values.forEach {
+                var paramsArray: [String] = []
+                command.values.forEach {
                     if let value = $0 as? String {
-                        key += value
+                        paramsArray.append(value)
                     }
                 }
+                key = paramsArray.sorted().joined()
             }
+            key = action + key
             if let xml = lookupTable[key] {
                 return parseXML(xml, action: action)
             }

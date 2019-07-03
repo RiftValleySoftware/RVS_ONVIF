@@ -16,7 +16,8 @@ import XCTest
  */
 class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBaseClass, RVS_ONVIF_Profile_SDispatcher {
     var owner: RVS_ONVIF!
-    
+    var profileTag: String = "stream1"
+
     /* ############################################################################################################################## */
     // MARK: - Evaluation Methods
     /* ############################################################################################################################## */
@@ -74,6 +75,8 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_Tes
             XCTFail("No Encoding Parameters")
         }
 
+        profile.fetchURI()
+
         if 1 < inProfiles.count {
             let profile = inProfiles[1]
             XCTAssertEqual(profile.owner, testTarget)
@@ -122,9 +125,23 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_Tes
             } else {
                 XCTFail("No Encoding Parameters")
             }
+
+            profile.fetchURI()
         }
     }
     
+    /* ################################################################## */
+    /**
+     */
+    func evaluateStreamURI(_ inStreamURI: RVS_ONVIF_Profile_S.Stream_URI) {
+        XCTAssertEqual(inStreamURI.owner, testTarget)
+        XCTAssertEqual(inStreamURI.uri, URL(string: "rtsp://192.168.4.18:554/\(profileTag)"))
+        profileTag = "stream2" // The reason I do this here, is because the callback can happen before the call to the second URI has been processed. This makes sure it happens afterwards.
+        XCTAssertFalse(inStreamURI.invalidAfterConnect)
+        XCTAssertFalse(inStreamURI.invalidAfterReboot)
+        XCTAssertEqual(inStreamURI.timeoutInSeconds, 0)
+    }
+
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
     /* ############################################################################################################################## */
@@ -137,7 +154,12 @@ class RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher: RVS_ONVIF_Generic_Tes
      - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params: Any!) -> Bool {
-        if "trt:GetProfiles" == inCommand.soapAction {
+        if "trt:GetStreamUri" == inCommand.soapAction {
+            if let params = params as? RVS_ONVIF_Profile_S.Stream_URI {
+                evaluateStreamURI(params)
+            }
+            return true
+        } else if "trt:GetProfiles" == inCommand.soapAction {
             if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
                 evaluateProfiles(params)
             }

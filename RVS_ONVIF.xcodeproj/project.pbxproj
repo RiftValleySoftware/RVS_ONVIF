@@ -751,8 +751,8 @@
 				D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */,
 				D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */,
 				D4603EFC22CA398A00AED39E /* RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher.swift */,
-				D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */,
 				D4F641FC22CBA1C000BEF255 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher.swift */,
+				D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */,
 				D4E5721722C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift */,
 				D492FCD522C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift */,
 			);
