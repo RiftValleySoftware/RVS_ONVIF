@@ -14,6 +14,9 @@
       location = "group:.swift-version">
    </FileRef>
    <FileRef
+      location = "group:Cartfile">
+   </FileRef>
+   <FileRef
       location = "group:RVS_ONVIF.xcodeproj">
    </FileRef>
    <FileRef

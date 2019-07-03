@@ -7,26 +7,26 @@ def shared_pods_ios
     shared_pods
 end
 
-def shared_pods_tvos
-    platform :tvos, '12.0'
-    shared_pods
-end
-
 def shared_pods_macos
     platform :macos, '10.14'
     shared_pods
+end
+
+def shared_pods_tvos
+  platform :tvos, '12.0'
+  shared_pods
 end
 
 target 'RVS_ONVIF_iOS' do
     shared_pods_ios
 end
 
-target 'RVS_ONVIF_tvOS' do
-    shared_pods_tvos
-end
-
 target 'RVS_ONVIF_MacOS' do
     shared_pods_macos
+end
+
+target 'RVS_ONVIF_tvOS' do
+  shared_pods_tvos
 end
 
 target 'RVS_ONVIF_iOS_Tests' do
@@ -34,22 +34,25 @@ target 'RVS_ONVIF_iOS_Tests' do
     shared_pods_ios
 end
 
+target 'RVS_ONVIF_MacOS_Tests' do
+  pod 'SWXMLHash', '~> 4.7.0'
+  shared_pods_macos
+end
+
 target 'RVS_ONVIF_tvOS_Tests' do
     pod 'SWXMLHash', '~> 4.7.0'
     shared_pods_tvos
 end
 
-target 'RVS_ONVIF_MacOS_Tests' do
-    pod 'SWXMLHash', '~> 4.7.0'
-    shared_pods_macos
-end
-
 target 'RVS_ONVIF iOS Test Harness' do
-    pod 'MobileVLCKit'
-    shared_pods_ios
+  pod 'MobileVLCKit'
+  shared_pods_ios
 end
 
 target 'RVS_ONVIF Mac Test Harness' do
-    pod 'VLCKit'
     shared_pods_macos
+end
+
+target 'RVS_ONVIF tvOS Test Harness' do
+  shared_pods_tvos
 end

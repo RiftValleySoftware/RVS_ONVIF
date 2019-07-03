@@ -1,0 +1,20 @@
+{
+  "properties" : {
+    "canvasSize" : {
+      "height" : 768,
+      "width" : 1280
+    }
+  },
+  "layers" : [
+    {
+      "filename" : "Background.imagestacklayer"
+    },
+    {
+      "filename" : "Logo.imagestacklayer"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
