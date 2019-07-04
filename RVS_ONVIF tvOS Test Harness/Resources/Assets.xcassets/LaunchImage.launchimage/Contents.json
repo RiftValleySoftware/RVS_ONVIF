@@ -1,24 +1,24 @@
 {
-  "images" : [
-    {
-      "orientation" : "landscape",
-      "idiom" : "tv",
-      "filename" : "tvOSLaunchImage@2x.png",
-      "extent" : "full-screen",
-      "minimum-system-version" : "11.0",
-      "scale" : "2x"
-    },
-    {
-      "orientation" : "landscape",
-      "idiom" : "tv",
-      "filename" : "tvOSLaunchImage.png",
-      "extent" : "full-screen",
-      "minimum-system-version" : "9.0",
-      "scale" : "1x"
-    }
-  ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  }
+  },
+  "images" : [
+    {
+      "filename" : "tvOSLaunchImage.png",
+      "idiom" : "tv",
+      "minimum-system-version" : "9.0",
+      "scale" : "1x",
+      "orientation" : "landscape",
+      "extent" : "full-screen"
+    },
+    {
+      "orientation" : "landscape",
+      "scale" : "2x",
+      "idiom" : "tv",
+      "extent" : "full-screen",
+      "minimum-system-version" : "11.0",
+      "filename" : "tvOSLaunchImage@2x.png"
+    }
+  ]
 }
