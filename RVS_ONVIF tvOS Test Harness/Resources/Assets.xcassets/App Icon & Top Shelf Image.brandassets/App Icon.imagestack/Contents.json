@@ -1,20 +1,23 @@
 {
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
   "properties" : {
     "canvasSize" : {
       "height" : 240,
       "width" : 400
     }
   },
-  "info" : {
-    "version" : 1,
-    "author" : "xcode"
-  },
   "layers" : [
     {
-      "filename" : "Cropped5To3AppIcon.imagestacklayer"
+      "filename" : "Mask53.imagestacklayer"
     },
     {
-      "filename" : "Cropped5To3AppIcon1.imagestacklayer"
+      "filename" : "Logo53.imagestacklayer"
+    },
+    {
+      "filename" : "Background53.imagestacklayer"
     }
   ]
 }
