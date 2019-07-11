@@ -17,6 +17,9 @@
       location = "group:Cartfile">
    </FileRef>
    <FileRef
+      location = "group:Warnings.xcconfig">
+   </FileRef>
+   <FileRef
       location = "group:RVS_ONVIF.xcodeproj">
    </FileRef>
    <FileRef
