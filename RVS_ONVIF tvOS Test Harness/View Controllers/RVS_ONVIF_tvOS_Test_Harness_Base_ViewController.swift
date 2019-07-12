@@ -9,17 +9,78 @@
  */
 
 import UIKit
+import RVS_ONVIF_tvOS
 
 /* ################################################################################################################################## */
 // MARK: - Main Base Class for Test Harness View Controllers
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_Base_ViewController: UIViewController {
+class RVS_ONVIF_tvOS_Test_Harness_Base_ViewController: UIViewController, RVS_ONVIF_tvOS_Test_Harness_ViewProtocol {    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    var persistentPrefs: RVS_PersistentPrefs! {
+        get {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                return tabBarController.persistentPrefs
+            }
+            
+            return nil
+        }
+        
+        set {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                tabBarController.persistentPrefs = newValue
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    var onvifInstance: RVS_ONVIF! {
+        get {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                return tabBarController.onvifInstance
+            }
+            
+            return nil
+        }
+        
+        set {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                tabBarController.onvifInstance = newValue
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    var isConnected: Bool {
+        get {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                return tabBarController.isConnected
+            }
+            return false
+        }
+        
+        set {
+            if let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController {
+                return tabBarController.isConnected = newValue
+            }
+        }
+    }
+
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
+    func updateUI() {}
     
     /* ############################################################################################################################## */
     // MARK: - Internal Base Class Override Methods
