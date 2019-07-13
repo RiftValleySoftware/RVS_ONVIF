@@ -80,6 +80,9 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" enabled="NO" title="INFO" id="PX0-wa-7OD"/>
+                    <connections>
+                        <outlet property="tableView" destination="D4Q-UG-Okq" id="YCU-gs-UNa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YO9-Ry-7He" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,6 +158,9 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" enabled="NO" title="SCOPES" id="EbF-NE-Ya3"/>
+                    <connections>
+                        <outlet property="tableView" destination="YLu-2S-EKv" id="063-at-Rxz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpt-mS-hww" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -172,20 +178,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2kM-RR-jDR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
                                 <rect key="frame" x="90" y="60" width="1740" height="960"/>
-                            </stackView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="2kM-RR-jDR" firstAttribute="top" secondItem="lRs-zp-KfI" secondAttribute="top" id="E05-0f-sHP"/>
-                            <constraint firstItem="2kM-RR-jDR" firstAttribute="leading" secondItem="lRs-zp-KfI" secondAttribute="leading" id="uKB-lm-rcA"/>
-                            <constraint firstItem="lRs-zp-KfI" firstAttribute="trailing" secondItem="2kM-RR-jDR" secondAttribute="trailing" id="uVc-8L-KOD"/>
-                            <constraint firstItem="lRs-zp-KfI" firstAttribute="bottom" secondItem="2kM-RR-jDR" secondAttribute="bottom" id="wEr-Uf-aLI"/>
+                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="leading" secondItem="lRs-zp-KfI" secondAttribute="leading" id="A2w-IZ-GmI"/>
+                            <constraint firstItem="lRs-zp-KfI" firstAttribute="trailing" secondItem="Vo1-Mx-OeQ" secondAttribute="trailing" id="F5Z-XX-a3G"/>
+                            <constraint firstItem="lRs-zp-KfI" firstAttribute="bottom" secondItem="Vo1-Mx-OeQ" secondAttribute="bottom" id="tWX-Uy-0ei"/>
+                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="top" secondItem="lRs-zp-KfI" secondAttribute="top" id="wHX-0o-78u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lRs-zp-KfI"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" enabled="NO" title="SERVICES" id="bip-Gt-yyb"/>
+                    <connections>
+                        <outlet property="tableView" destination="Vo1-Mx-OeQ" id="eOC-5I-ZpA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gQ-QB-Vqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -469,7 +479,7 @@
                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.25038512323943662" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="lVS-h9-Q4a" firstAttribute="centerX" secondItem="Tp4-rH-me8" secondAttribute="centerX" id="Ag6-g2-rUZ"/>
                                     <constraint firstItem="lVS-h9-Q4a" firstAttribute="centerY" secondItem="Tp4-rH-me8" secondAttribute="centerY" id="bm3-g2-lYg"/>

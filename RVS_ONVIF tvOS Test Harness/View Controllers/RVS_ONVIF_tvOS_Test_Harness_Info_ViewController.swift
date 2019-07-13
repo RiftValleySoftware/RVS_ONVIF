@@ -21,34 +21,10 @@ class RVS_ONVIF_tvOS_Test_Harness_Info_ViewController_ValueTableCellView: UITabl
 /* ################################################################################################################################## */
 // MARK: - Main Class for the Info Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_Info_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_ViewController, UITableViewDelegate, UITableViewDataSource {
+class RVS_ONVIF_tvOS_Test_Harness_Info_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
     /* ############################################################################################################################## */
-    // MARK: - Internal Instance Properties
+    // MARK: - UITableViewDelegate Methods
     /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    
-    /* ############################################################################################################################## */
-    // MARK: - Internal Base Class Override Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    /* ############################################################################################################################## */
-    // MARK: - UITableViewDataSource Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
-        return onvifInstance?.core?.deviceInformation.count ?? 0
-    }
-    
     /* ################################################################## */
     /**
      */
@@ -62,11 +38,21 @@ class RVS_ONVIF_tvOS_Test_Harness_Info_ViewController: RVS_ONVIF_tvOS_Test_Harne
         
         return 0
     }
+
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDataSource Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
+        return onvifInstance?.core?.deviceInformation.count ?? 0
+    }
     
     /* ################################################################## */
     /**
      */
-    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         if let dictKeys = onvifInstance?.core?.deviceInformation.keys.sorted() {
             let key = dictKeys[inIndexPath.row]
             if let value = onvifInstance?.core?.deviceInformation[key] as? String {

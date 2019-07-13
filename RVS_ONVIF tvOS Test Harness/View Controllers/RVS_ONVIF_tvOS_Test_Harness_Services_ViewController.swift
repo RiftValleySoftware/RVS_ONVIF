@@ -13,7 +13,7 @@ import UIKit
 /* ################################################################################################################################## */
 // MARK: - Main Class for the Info Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_ViewController {
+class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Properties
     /* ############################################################################################################################## */
@@ -29,5 +29,32 @@ class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_H
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDelegate Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
+        return 0
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDataSource Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
+        return 0
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
     }
 }

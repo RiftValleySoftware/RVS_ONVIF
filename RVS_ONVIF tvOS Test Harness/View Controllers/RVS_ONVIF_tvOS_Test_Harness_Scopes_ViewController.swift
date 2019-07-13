@@ -21,34 +21,10 @@ class RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController_ValueTableCellView: UITa
 /* ################################################################################################################################## */
 // MARK: - Main Class for the Info Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_ViewController, UITableViewDelegate, UITableViewDataSource {
+class RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
     /* ############################################################################################################################## */
-    // MARK: - Internal Instance Properties
+    // MARK: - UITableViewDelegate Methods
     /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    
-    /* ############################################################################################################################## */
-    // MARK: - Internal Base Class Override Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    /* ############################################################################################################################## */
-    // MARK: - UITableViewDataSource Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
-        return onvifInstance?.core?.scopes.count ?? 0
-    }
-    
     /* ################################################################## */
     /**
      */
@@ -82,14 +58,24 @@ class RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController: RVS_ONVIF_tvOS_Test_Har
                 return inTableView.rowHeight
             }
         }
-
+        
         return 0
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDataSource Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
+        return onvifInstance?.core?.scopes.count ?? 0
     }
 
     /* ################################################################## */
     /**
      */
-    func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         if let scope = onvifInstance?.core?.scopes[inIndexPath.row] {
             var labelString = "ERROR"
             var valueString = "ERROR"

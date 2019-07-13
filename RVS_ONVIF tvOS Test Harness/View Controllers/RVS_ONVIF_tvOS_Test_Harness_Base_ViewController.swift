@@ -92,3 +92,41 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_ViewController: UIViewController, RVS_ONV
         super.viewDidLoad()
     }
 }
+
+/* ################################################################################################################################## */
+// MARK: - Main Base Class for Test Harness View Controllers that Have a Table
+/* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController: RVS_ONVIF_tvOS_Test_Harness_Base_ViewController, UITableViewDataSource, UITableViewDelegate {
+    /* ############################################################################################################################## */
+    // MARK: - IBOutlet Properties
+    /* ############################################################################################################################## */
+    @IBOutlet var tableView: UITableView!
+    
+    /* ############################################################################################################################## */
+    // MARK: - Base Class Override Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func updateUI() {
+        super.updateUI()
+        tableView?.reloadData()
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDataSource Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+}
