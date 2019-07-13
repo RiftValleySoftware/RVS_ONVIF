@@ -66,7 +66,6 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="b6y-7q-cKL" id="vGh-IA-SgU"/>
-                                    <outlet property="delegate" destination="b6y-7q-cKL" id="pkv-o7-aLI"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -85,6 +84,81 @@
             </objects>
             <point key="canvasLocation" x="592" y="2283"/>
         </scene>
+        <!--SCOPES-->
+        <scene sceneID="oYh-Ze-nWK">
+            <objects>
+                <viewController title="SCOPES" id="6hE-kh-skU" customClass="RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BqB-je-PnT"/>
+                        <viewControllerLayoutGuide type="bottom" id="oN3-WN-hdI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x0q-wz-pjQ">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="YLu-2S-EKv">
+                                <rect key="frame" x="110" y="60" width="1700" height="952"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfoValueCell" id="cih-vk-sd3" customClass="RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController_ValueTableCellView" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="66" width="1700" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cih-vk-sd3" id="RP3-Nu-fcF">
+                                            <rect key="frame" x="0.0" y="0.0" width="1700" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rz-W3-ryD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="Zc5-Bm-QyS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSC-eE-Be6">
+                                                    <rect key="frame" x="408" y="0.0" width="1202" height="66"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="40"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rSC-eE-Be6" firstAttribute="top" secondItem="RP3-Nu-fcF" secondAttribute="top" id="9iw-qW-uKx"/>
+                                                <constraint firstItem="5rz-W3-ryD" firstAttribute="top" secondItem="RP3-Nu-fcF" secondAttribute="top" id="Eez-06-S8P"/>
+                                                <constraint firstAttribute="bottom" secondItem="5rz-W3-ryD" secondAttribute="bottom" id="FUz-I3-q4c"/>
+                                                <constraint firstItem="5rz-W3-ryD" firstAttribute="leading" secondItem="RP3-Nu-fcF" secondAttribute="leading" id="Jc7-ad-kYT"/>
+                                                <constraint firstAttribute="trailing" secondItem="rSC-eE-Be6" secondAttribute="trailing" id="S2B-Yd-QC6"/>
+                                                <constraint firstAttribute="bottom" secondItem="rSC-eE-Be6" secondAttribute="bottom" id="aoU-1t-hCD"/>
+                                                <constraint firstItem="rSC-eE-Be6" firstAttribute="leading" secondItem="5rz-W3-ryD" secondAttribute="trailing" constant="8" id="m8n-kf-8YW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="rowLabel" destination="5rz-W3-ryD" id="08v-JI-ZhB"/>
+                                            <outlet property="valueLabel" destination="rSC-eE-Be6" id="jvF-Uw-czt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6hE-kh-skU" id="9kz-L2-Ux6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="YLu-2S-EKv" firstAttribute="leading" secondItem="kDE-Pu-Si8" secondAttribute="leading" constant="20" id="U9G-RX-PyU"/>
+                            <constraint firstItem="kDE-Pu-Si8" firstAttribute="trailing" secondItem="YLu-2S-EKv" secondAttribute="trailing" constant="20" id="UZu-j3-3mJ"/>
+                            <constraint firstItem="YLu-2S-EKv" firstAttribute="top" secondItem="kDE-Pu-Si8" secondAttribute="top" id="ltJ-lR-PEs"/>
+                            <constraint firstItem="kDE-Pu-Si8" firstAttribute="bottom" secondItem="YLu-2S-EKv" secondAttribute="bottom" constant="8" id="ze8-bV-Fmk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kDE-Pu-Si8"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="SCOPES" id="EbF-NE-Ya3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jpt-mS-hww" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="3568"/>
+        </scene>
         <!--NAMESPACES-->
         <scene sceneID="pMc-9C-pQB">
             <objects>
@@ -102,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJP-bw-YCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="3566"/>
+            <point key="canvasLocation" x="592" y="4871"/>
         </scene>
         <!--NAMESPACES-->
         <scene sceneID="izB-8d-pYM">
@@ -119,7 +193,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXe-ud-GHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1559" y="3566"/>
+            <point key="canvasLocation" x="-1676" y="4871"/>
         </scene>
         <!--CONNECT-->
         <scene sceneID="u7Y-nO-zVV">
@@ -395,12 +469,13 @@
                     <connections>
                         <segue destination="X1W-o8-26M" kind="relationship" relationship="viewControllers" id="bSA-W7-gda"/>
                         <segue destination="b6y-7q-cKL" kind="relationship" relationship="viewControllers" id="f1X-bC-pRf"/>
+                        <segue destination="6hE-kh-skU" kind="relationship" relationship="viewControllers" id="zTm-rh-Eky"/>
                         <segue destination="Mvk-pT-Hq9" kind="relationship" relationship="viewControllers" id="LzD-9R-WWX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuV-jo-cnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1559" y="1675"/>
+            <point key="canvasLocation" x="-1676" y="2973"/>
         </scene>
     </scenes>
 </document>
