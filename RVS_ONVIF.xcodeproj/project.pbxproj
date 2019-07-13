@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D401C7EF22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401C7EE22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift */; };
 		D40AB9E2228F4B8400FC3AB4 /* RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40AB9E1228F4B8400FC3AB4 /* RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController.swift */; };
 		D40DB0C122D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40DB0BF22D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift */; };
 		D40E203E226A4E4500B4A392 /* RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40E203D226A4E4400B4A392 /* RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift */; };
@@ -20,12 +21,6 @@
 		D40F033B22C7E40300ECC76A /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40F033A22C7E40200ECC76A /* VLCKit.framework */; };
 		D40F033D22C7E42100ECC76A /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D40F033C22C7E42100ECC76A /* MobileVLCKit.framework */; };
 		D4192F3622C6A0540068EEE0 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; };
-		D4192F4622C6A2CC0068EEE0 /* SOAPEngineTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4422C6A2CC0068EEE0 /* SOAPEngineTV.framework */; };
-		D4192F4722C6A2DA0068EEE0 /* SOAPEngineTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4422C6A2CC0068EEE0 /* SOAPEngineTV.framework */; };
-		D4192F4822C6A2E70068EEE0 /* SOAPEngineTV.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4422C6A2CC0068EEE0 /* SOAPEngineTV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4192F4A22C6A35A0068EEE0 /* libSWXMLHash-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4922C6A35A0068EEE0 /* libSWXMLHash-tvOS.a */; };
-		D4192F4C22C6A3660068EEE0 /* libSWXMLHash-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4B22C6A3660068EEE0 /* libSWXMLHash-macOS.a */; };
-		D4192F4E22C6A3740068EEE0 /* libSWXMLHash-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4192F4D22C6A3740068EEE0 /* libSWXMLHash-iOS.a */; };
 		D41A2D9F2267D0C1002DD485 /* RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41A2D9E2267D0C1002DD485 /* RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift */; };
 		D421B6B9227CBA1800CED3E0 /* RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D421B6B7227CBA1800CED3E0 /* RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift */; };
 		D42367EB22DA320900CD54F5 /* RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42367EA22DA320900CD54F5 /* RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController.swift */; };
@@ -158,10 +153,13 @@
 		D4B2B45E22D92110005E7BFC /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; };
 		D4B2B46F22D924EE005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; };
 		D4B2B47122D92543005E7BFC /* RVS_ONVIF_tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4B2B47522D925C8005E7BFC /* SOAPEngineTV.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4B2B47422D925C8005E7BFC /* SOAPEngineTV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4B2B47622D925D0005E7BFC /* libxml2.2.tbd in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D4B9EB382268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */; };
 		D4BA0F5622454C1800963285 /* RVS_ParseXMLDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */; };
+		D4BAA84822DA41BF001F5FF9 /* SOAPEngineTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */; };
+		D4BAA84922DA41BF001F5FF9 /* SOAPEngineTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */; };
+		D4BAA84A22DA41E9001F5FF9 /* SOAPEngineTV.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4BAA84B22DA4205001F5FF9 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; };
 		D4BAF3ED2260E87500C971D8 /* SOAPEngine64.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BAF3EF2260E89A00C971D8 /* SOAPEngineOSX.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4BBD10A22CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */; };
@@ -232,7 +230,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D4B2B45D22D920FF005E7BFC /* libxml2.2.tbd in Copy Frameworks */,
-				D4192F4822C6A2E70068EEE0 /* SOAPEngineTV.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,8 +262,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D4BAA84A22DA41E9001F5FF9 /* SOAPEngineTV.framework in Embed Frameworks */,
 				D4B2B47622D925D0005E7BFC /* libxml2.2.tbd in Embed Frameworks */,
-				D4B2B47522D925C8005E7BFC /* SOAPEngineTV.framework in Embed Frameworks */,
 				D4B2B47122D92543005E7BFC /* RVS_ONVIF_tvOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -312,6 +309,7 @@
 		BF61A2F1554B896C05777940 /* Pods-RVS_ONVIF_MacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF_MacOS.release.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF_MacOS/Pods-RVS_ONVIF_MacOS.release.xcconfig"; sourceTree = "<group>"; };
 		C36D96600519A025C8275761 /* Pods-RVS_ONVIF_tvOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF_tvOS_Tests.release.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF_tvOS_Tests/Pods-RVS_ONVIF_tvOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CFC8D4CD2E9C251BBDB8E671 /* Pods-RVS_ONVIF_tvOS_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF_tvOS_Tests.debug.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF_tvOS_Tests/Pods-RVS_ONVIF_tvOS_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D401C7EE22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift; sourceTree = "<group>"; };
 		D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RVS_ONVIF Mac Test Harness.entitlements"; sourceTree = "<group>"; };
 		D40AB9E1228F4B8400FC3AB4 /* RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController.swift; sourceTree = "<group>"; };
 		D40DB0BF22D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift; sourceTree = "<group>"; };
@@ -323,10 +321,6 @@
 		D40F033A22C7E40200ECC76A /* VLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VLCKit.framework; path = Pods/VLCKit/VLCKit.framework; sourceTree = "<group>"; };
 		D40F033C22C7E42100ECC76A /* MobileVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileVLCKit.framework; path = Pods/MobileVLCKit/MobileVLCKit.framework; sourceTree = "<group>"; };
 		D414C91022A68F6400453E64 /* RVS_ONVIF Mac Test Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RVS_ONVIF Mac Test Harness.entitlements"; sourceTree = "<group>"; };
-		D4192F4422C6A2CC0068EEE0 /* SOAPEngineTV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SOAPEngineTV.framework; path = SOAPEngine/SOAPEngineTV.framework; sourceTree = "<group>"; };
-		D4192F4922C6A35A0068EEE0 /* libSWXMLHash-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libSWXMLHash-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4192F4B22C6A3660068EEE0 /* libSWXMLHash-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libSWXMLHash-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4192F4D22C6A3740068EEE0 /* libSWXMLHash-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libSWXMLHash-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41A2D9E2267D0C1002DD485 /* RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Base_ViewController.swift; sourceTree = "<group>"; };
 		D41E2D13227CD65D006BB481 /* RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h"; sourceTree = "<group>"; };
 		D421B6B7227CBA1800CED3E0 /* RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController.swift; sourceTree = "<group>"; };
@@ -364,7 +358,6 @@
 		D463695022899D2300A487D4 /* RVS_ONVIF_Test_Harness_ProfileSDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileSDispatcher.swift; sourceTree = "<group>"; };
 		D463A72F223BC3FA003F5F5E /* RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController.swift; sourceTree = "<group>"; };
 		D4656A262278AFE4007FEE79 /* RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Dispatcher.swift; sourceTree = "<group>"; };
-		D46969DB22CD74B700DE8A81 /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVVLCKit.framework; path = Carthage/Build/tvOS/TVVLCKit.framework; sourceTree = "<group>"; };
 		D46AD0C4228DCAE400A82ECC /* RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController.swift; sourceTree = "<group>"; };
 		D46C97C1226DDD8F00D45FCB /* RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_CoreDispatcher.swift; sourceTree = "<group>"; };
 		D46F71B4221743760009B01B /* RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_ServiceCapabilities_TableViewController.swift; sourceTree = "<group>"; };
@@ -398,10 +391,9 @@
 		D49EA21F22C69C53004AE619 /* RVS_ONVIF_tvOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_ONVIF_tvOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49EA22322C69C53004AE619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4AE4E972218DE2F00E39BDA /* RVS_ONVIF_Test_Harness_Connect_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Connect_ViewController.swift; sourceTree = "<group>"; };
-		D4B2B47222D92552005E7BFC /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVVLCKit.framework; path = Carthage/Build/tvOS/TVVLCKit.framework; sourceTree = "<group>"; };
-		D4B2B47422D925C8005E7BFC /* SOAPEngineTV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SOAPEngineTV.framework; path = SOAPEngine/SOAPEngineTV.framework; sourceTree = "<group>"; };
 		D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift; sourceTree = "<group>"; };
 		D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ParseXMLDuration.swift; sourceTree = "<group>"; };
+		D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SOAPEngineTV.framework; path = SOAPEngine/SOAPEngineTV.framework; sourceTree = "<group>"; };
 		D4BAF3E82260E0D100C971D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4BBD10922CB88D500D9CFE2 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher.swift; sourceTree = "<group>"; };
 		D4BC7061223A613F00F0CE70 /* RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Scopes_TableViewController.swift; sourceTree = "<group>"; };
@@ -467,7 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4B2B45E22D92110005E7BFC /* libxml2.2.tbd in Frameworks */,
-				D4192F4722C6A2DA0068EEE0 /* SOAPEngineTV.framework in Frameworks */,
+				D4BAA84822DA41BF001F5FF9 /* SOAPEngineTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,9 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4192F4A22C6A35A0068EEE0 /* libSWXMLHash-tvOS.a in Frameworks */,
 				D4192F3622C6A0540068EEE0 /* libxml2.2.tbd in Frameworks */,
-				D4192F4622C6A2CC0068EEE0 /* SOAPEngineTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,7 +477,6 @@
 			files = (
 				D492FCCE22C784A800B73C63 /* SOAPEngineOSX.framework in Frameworks */,
 				D492FCCD22C7849200B73C63 /* libxml2.2.tbd in Frameworks */,
-				D4192F4C22C6A3660068EEE0 /* libSWXMLHash-macOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,7 +486,6 @@
 			files = (
 				D492FCD022C784C900B73C63 /* SOAPEngine64.framework in Frameworks */,
 				D492FCCF22C784BC00B73C63 /* libxml2.2.tbd in Frameworks */,
-				D4192F4E22C6A3740068EEE0 /* libSWXMLHash-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +503,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4BAA84B22DA4205001F5FF9 /* libxml2.2.tbd in Frameworks */,
 				D4B2B46F22D924EE005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */,
+				D4BAA84922DA41BF001F5FF9 /* SOAPEngineTV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,18 +515,14 @@
 		52084A5422B0F7EE8046CFE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D46969DB22CD74B700DE8A81 /* TVVLCKit.framework */,
+				D496B47422610E7600E206F5 /* libxml2.2.tbd */,
+				D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */,
+				D496B4782261100C00E206F5 /* libxml2.2.tbd */,
 				D40F033C22C7E42100ECC76A /* MobileVLCKit.framework */,
 				D40F033A22C7E40200ECC76A /* VLCKit.framework */,
-				D4192F4D22C6A3740068EEE0 /* libSWXMLHash-iOS.a */,
-				D4192F4B22C6A3660068EEE0 /* libSWXMLHash-macOS.a */,
-				D4192F4922C6A35A0068EEE0 /* libSWXMLHash-tvOS.a */,
 				D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */,
-				D496B47422610E7600E206F5 /* libxml2.2.tbd */,
 				D499F5992209B53E0056EBAB /* SOAPEngine64.framework */,
-				D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */,
-				D4192F4422C6A2CC0068EEE0 /* SOAPEngineTV.framework */,
-				D496B4782261100C00E206F5 /* libxml2.2.tbd */,
+				D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -549,6 +535,7 @@
 				D443D3F122D4BD490089764A /* RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController.swift */,
 				D443D3F322D4BDAE0089764A /* RVS_ONVIF_tvOS_Test_Harness_Info_ViewController.swift */,
 				D42367EA22DA320900CD54F5 /* RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController.swift */,
+				D401C7EE22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift */,
 				D443D3F522D4BDFF0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift */,
 				D443D3F722D4BEFC0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift */,
 			);
@@ -769,8 +756,6 @@
 		D4DF78A821FF2A7C00E9CB70 = {
 			isa = PBXGroup;
 			children = (
-				D4B2B47422D925C8005E7BFC /* SOAPEngineTV.framework */,
-				D4B2B47222D92552005E7BFC /* TVVLCKit.framework */,
 				D44369C522C7D81F00E6A200 /* RVS_ONVIF */,
 				D4BAF3E62260E0D100C971D8 /* RVS_ONVIF_iOS */,
 				D4869F7822ABF4DD00521845 /* RVS_ONVIF_iOS_Tests */,
@@ -1561,6 +1546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D401C7EF22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift in Sources */,
 				D443D3F622D4BE000089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift in Sources */,
 				D443D3F022D4BA7D0089764A /* RVS_ONVIF_tvOS_Test_Harness_Base_ViewController.swift in Sources */,
 				D4EA1BDC22CE3C6D00E323BF /* RVS_ONVIF_tvOS_Test_Harness_AppDelegate.swift in Sources */,
@@ -2265,6 +2251,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/SOAPEngine",
 				);
 				INFOPLIST_FILE = "RVS_ONVIF tvOS Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2293,6 +2280,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/SOAPEngine",
 				);
 				INFOPLIST_FILE = "RVS_ONVIF tvOS Test Harness/Misc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
