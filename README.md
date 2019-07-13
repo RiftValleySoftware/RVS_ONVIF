@@ -7,7 +7,7 @@ BUILD DEPENDENCIES
 For testing, we depend upon [SWXMLHash](https://github.com/drmohundro/SWXMLHash), written by [David Mohundro](https://mohundro.com/) to parse mock XML data.
 **NOTE:** For whatever reason, the CocoaPods project sets the Swift version of the SWXMLHash project to 3.0. Set it to 5. It will work.
 For code LINTing, we use [SwiftLint](https://github.com/realm/SwiftLint), written by the fine folks at [Realm.io](https://realm.io/).
-For video display in our test harneses, we depend on [VLCKit](https://code.videolan.org/videolan/VLCKit).
+For video display in our test harneses, we depend on variations of [VLCKit](https://code.videolan.org/videolan/VLCKit).
 
 NOTE ABOUT TESTING:
 -

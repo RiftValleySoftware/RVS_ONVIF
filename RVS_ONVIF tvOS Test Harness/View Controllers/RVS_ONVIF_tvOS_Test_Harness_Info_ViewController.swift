@@ -52,11 +52,25 @@ class RVS_ONVIF_tvOS_Test_Harness_Info_ViewController: RVS_ONVIF_tvOS_Test_Harne
     /* ################################################################## */
     /**
      */
+    func tableView(_ inTableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
+        if let dictKeys = onvifInstance?.core?.deviceInformation.keys.sorted() {
+            let key = dictKeys[inIndexPath.row]
+            if let value = onvifInstance?.core?.deviceInformation[key] as? String, !value.isEmpty {
+                return inTableView.rowHeight
+            }
+        }
+        
+        return 0
+    }
+    
+    /* ################################################################## */
+    /**
+     */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         if let dictKeys = onvifInstance?.core?.deviceInformation.keys.sorted() {
             let key = dictKeys[inIndexPath.row]
             if let value = onvifInstance?.core?.deviceInformation[key] as? String {
-                if let ret = inTableView.dequeueReusableCell(withIdentifier: "InfoValueCell") as? RVS_ONVIF_tvOS_Test_Harness_Info_ViewController_ValueTableCellView {
+                if !value.isEmpty, let ret = inTableView.dequeueReusableCell(withIdentifier: "InfoValueCell") as? RVS_ONVIF_tvOS_Test_Harness_Info_ViewController_ValueTableCellView {
                     ret.keyLabel?.text = key + ":"
                     ret.valueLabel?.text = value
                     

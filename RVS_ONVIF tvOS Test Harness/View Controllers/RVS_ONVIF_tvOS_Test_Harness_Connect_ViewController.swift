@@ -25,6 +25,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController: RVS_ONVIF_tvOS_Test_Ha
     @IBOutlet weak var soapKeyTextEntry: UITextField!
     @IBOutlet weak var authTypeSegmentedSwitch: UISegmentedControl!
     @IBOutlet weak var connectButton: UIButton!
+    @IBOutlet weak var connectingActivityContainerView: UIView!
     
     var isConnecting: Bool = false
     
@@ -122,7 +123,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController: RVS_ONVIF_tvOS_Test_Ha
         if isConnected {
             isConnecting = false
         }
-        
+        connectingActivityContainerView.isHidden = !isConnecting
         ipAddressTextEntry?.isEnabled = !isConnected && !isConnecting
         tcpPortTextEntry?.isEnabled = !isConnected && !isConnecting
         loginIDTextEntry?.isEnabled = !isConnected && !isConnecting

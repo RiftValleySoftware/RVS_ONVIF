@@ -52,34 +52,71 @@ class RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController: RVS_ONVIF_tvOS_Test_Har
     /* ################################################################## */
     /**
      */
+    func tableView(_ inTableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
+        if let scope = onvifInstance?.core?.scopes[inIndexPath.row] {
+            var labelString = ""
+            var valueString = ""
+            switch scope.category {
+            case .Name(let nameVal):
+                labelString = "Name"
+                valueString = nameVal
+                
+            case .Hardware(let hardwareVal):
+                labelString = "Hardware"
+                valueString = hardwareVal
+                
+            case .Location(let locationVal):
+                labelString = "Location"
+                valueString = locationVal
+                
+            case .Profile(let profileVal):
+                labelString = "Profile"
+                valueString = String(describing: profileVal)
+                
+            case .Custom(let customName, let customVal):
+                labelString = "\(customName)"
+                valueString = customVal
+            }
+            
+            if !labelString.isEmpty, !valueString.isEmpty {
+                return inTableView.rowHeight
+            }
+        }
+
+        return 0
+    }
+
+    /* ################################################################## */
+    /**
+     */
     func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
         if let scope = onvifInstance?.core?.scopes[inIndexPath.row] {
-            if let ret = inTableView.dequeueReusableCell(withIdentifier: "InfoValueCell") as? RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController_ValueTableCellView {
-                var labelString = "ERROR"
-                var valueString = "ERROR"
-                switch scope.category {
-                case .Name(let nameVal):
-                    labelString = "Name"
-                    valueString = nameVal
-                    
-                case .Hardware(let hardwareVal):
-                    labelString = "Hardware"
-                    valueString = hardwareVal
-                    
-                case .Location(let locationVal):
-                    labelString = "Location"
-                    valueString = locationVal
-                    
-                case .Profile(let profileVal):
-                    labelString = "Profile"
-                    valueString = String(describing: profileVal)
-                    
-                case .Custom(let customName, let customVal):
-                    labelString = "\(customName)"
-                    valueString = customVal
-                }
+            var labelString = "ERROR"
+            var valueString = "ERROR"
+            switch scope.category {
+            case .Name(let nameVal):
+                labelString = "Name"
+                valueString = nameVal
+                
+            case .Hardware(let hardwareVal):
+                labelString = "Hardware"
+                valueString = hardwareVal
+                
+            case .Location(let locationVal):
+                labelString = "Location"
+                valueString = locationVal
+                
+            case .Profile(let profileVal):
+                labelString = "Profile"
+                valueString = String(describing: profileVal)
+                
+            case .Custom(let customName, let customVal):
+                labelString = "\(customName)"
+                valueString = customVal
+            }
 
-                ret.rowLabel?.text = labelString
+            if !valueString.isEmpty, let ret = inTableView.dequeueReusableCell(withIdentifier: "InfoValueCell") as? RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController_ValueTableCellView {
+                ret.rowLabel?.text = labelString + ":"
                 ret.valueLabel?.text = valueString
 
                 return ret
