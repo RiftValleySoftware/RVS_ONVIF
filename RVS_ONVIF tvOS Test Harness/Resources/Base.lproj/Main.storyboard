@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YO9-Ry-7He" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="2283"/>
+            <point key="canvasLocation" x="-1676" y="8894"/>
         </scene>
         <!--SCOPES-->
         <scene sceneID="oYh-Ze-nWK">
@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpt-mS-hww" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="3568"/>
+            <point key="canvasLocation" x="-1676" y="10206"/>
         </scene>
         <!--SERVICES-->
         <scene sceneID="5I2-Wa-4dk">
@@ -175,11 +175,11 @@
                         <viewControllerLayoutGuide type="bottom" id="c02-Vw-5VQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aKR-Bs-tvI">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
-                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Lc5-1m-wwZ" id="1sb-Z3-oAq"/>
@@ -188,22 +188,21 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="leading" secondItem="lRs-zp-KfI" secondAttribute="leading" id="A2w-IZ-GmI"/>
-                            <constraint firstItem="lRs-zp-KfI" firstAttribute="trailing" secondItem="Vo1-Mx-OeQ" secondAttribute="trailing" id="F5Z-XX-a3G"/>
-                            <constraint firstItem="lRs-zp-KfI" firstAttribute="bottom" secondItem="Vo1-Mx-OeQ" secondAttribute="bottom" id="tWX-Uy-0ei"/>
-                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="top" secondItem="lRs-zp-KfI" secondAttribute="top" id="wHX-0o-78u"/>
+                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="trailing" secondItem="lRs-zp-KfI" secondAttribute="trailing" id="0wn-OV-Kxg"/>
+                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="leading" secondItem="lRs-zp-KfI" secondAttribute="leading" id="Wjo-we-gLP"/>
+                            <constraint firstItem="lRs-zp-KfI" firstAttribute="bottom" secondItem="Vo1-Mx-OeQ" secondAttribute="bottom" id="hGK-Zl-rr0"/>
+                            <constraint firstItem="Vo1-Mx-OeQ" firstAttribute="top" secondItem="lRs-zp-KfI" secondAttribute="top" id="yJA-N3-uEK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lRs-zp-KfI"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="SERVICES" id="bip-Gt-yyb"/>
                     <connections>
                         <outlet property="tableView" destination="Vo1-Mx-OeQ" id="IXb-8e-vwx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gQ-QB-Vqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="4886"/>
+            <point key="canvasLocation" x="2860" y="7596"/>
         </scene>
         <!--NAMESPACES-->
         <scene sceneID="pMc-9C-pQB">
@@ -223,7 +222,88 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJP-bw-YCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="8787"/>
+            <point key="canvasLocation" x="592" y="12878"/>
+        </scene>
+        <!--FUNCTIONS-->
+        <scene sceneID="Adu-Ma-kEm">
+            <objects>
+                <viewController title="FUNCTIONS" id="sNr-YR-z08" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RE4-JM-lSW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xju-Bu-1sg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pYD-am-a9V">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uU0-qd-a0m">
+                                <rect key="frame" x="90" y="145" width="1740" height="875"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-a1-SaV">
+                                        <rect key="frame" x="0.0" y="0.0" width="1740" height="211"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="SERVICES"/>
+                                        <connections>
+                                            <segue destination="Lc5-1m-wwZ" kind="show" id="Rth-8A-eme"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og1-Vz-vR4">
+                                        <rect key="frame" x="0.0" y="221" width="1740" height="212"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="CAPABILITIES"/>
+                                        <connections>
+                                            <segue destination="oit-Ap-3H5" kind="show" id="Jku-ys-QSA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgv-wM-Xa9">
+                                        <rect key="frame" x="0.0" y="443" width="1740" height="211"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="SERVICE CAPABILITIES"/>
+                                        <connections>
+                                            <segue destination="yHH-Ec-jaR" kind="show" id="l2y-fZ-yuf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ6-Rv-xj5">
+                                        <rect key="frame" x="0.0" y="664" width="1740" height="211"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="NETWORK INTERFACES"/>
+                                        <connections>
+                                            <segue destination="LAA-5G-oy8" kind="show" id="k12-8G-Gnz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wEY-Qb-pRm" firstAttribute="bottom" secondItem="uU0-qd-a0m" secondAttribute="bottom" id="4TA-QL-yzI"/>
+                            <constraint firstItem="wEY-Qb-pRm" firstAttribute="trailing" secondItem="uU0-qd-a0m" secondAttribute="trailing" id="HI1-Ww-dMv"/>
+                            <constraint firstItem="uU0-qd-a0m" firstAttribute="top" secondItem="wEY-Qb-pRm" secondAttribute="top" id="ox5-w0-evN"/>
+                            <constraint firstItem="uU0-qd-a0m" firstAttribute="leading" secondItem="wEY-Qb-pRm" secondAttribute="leading" id="qLP-ef-Ru7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wEY-Qb-pRm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yth-JN-Yy5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8n7-sp-264" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="11528"/>
+        </scene>
+        <!--FUNCTIONS-->
+        <scene sceneID="ra4-73-9zR">
+            <objects>
+                <navigationController title="FUNCTIONS" id="W1R-Lm-yJ0" customClass="RVS_ONVIF_tvOS_Test_Harness_Dispatcher_NavigationController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" enabled="NO" title="FUNCTIONS" id="ron-iB-qwL"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FfM-gM-EK8">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="145"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sNr-YR-z08" kind="relationship" relationship="rootViewController" id="wLF-p1-LBq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dP5-Ud-OVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1676" y="11528"/>
         </scene>
         <!--NAMESPACES-->
         <scene sceneID="izB-8d-pYM">
@@ -241,7 +321,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXe-ud-GHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="8787"/>
+            <point key="canvasLocation" x="-1676" y="12878"/>
         </scene>
         <!--CONNECT-->
         <scene sceneID="u7Y-nO-zVV">
@@ -255,8 +335,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-eW-05Y">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-eW-05Y">
                                 <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="uGY-zE-xHJ">
@@ -492,18 +573,14 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="Tp4-rH-me8" firstAttribute="leading" secondItem="zDw-F2-wiE" secondAttribute="leading" id="60f-Ae-fyr"/>
-                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="leading" secondItem="ycu-eW-05Y" secondAttribute="leading" id="6NV-OV-vfo"/>
                             <constraint firstItem="y9Z-7k-bdD" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="8dx-Of-jHu"/>
-                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="bottom" secondItem="ycu-eW-05Y" secondAttribute="bottom" id="CEZ-jI-fre"/>
                             <constraint firstItem="uGY-zE-xHJ" firstAttribute="top" secondItem="dZU-Xs-tfM" secondAttribute="top" id="GFS-U7-nh8"/>
-                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="NDw-yE-axA"/>
+                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="NDw-yE-axA"/>
                             <constraint firstItem="uGY-zE-xHJ" firstAttribute="leading" secondItem="dZU-Xs-tfM" secondAttribute="leading" id="O76-Q4-weV"/>
                             <constraint firstItem="Z7w-zQ-5yV" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="Qvg-hu-VXc"/>
                             <constraint firstItem="J9h-C2-Kwf" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="Vpd-JX-sX3"/>
-                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="trailing" secondItem="ycu-eW-05Y" secondAttribute="trailing" id="Yk8-RX-bWe"/>
                             <constraint firstItem="KKr-NC-jkc" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="bxF-tL-h1B"/>
                             <constraint firstItem="uGY-zE-xHJ" firstAttribute="bottom" secondItem="dZU-Xs-tfM" secondAttribute="bottom" id="fup-cn-kVY"/>
-                            <constraint firstItem="uGY-zE-xHJ" firstAttribute="top" secondItem="ycu-eW-05Y" secondAttribute="top" id="k0c-6Q-66f"/>
                             <constraint firstItem="Tp4-rH-me8" firstAttribute="top" secondItem="zDw-F2-wiE" secondAttribute="top" id="mNa-U6-wa2"/>
                             <constraint firstItem="0dU-ZS-R7N" firstAttribute="trailing" secondItem="dZU-Xs-tfM" secondAttribute="trailing" id="npX-xC-MVQ"/>
                             <constraint firstAttribute="trailing" secondItem="Tp4-rH-me8" secondAttribute="trailing" id="rWT-JH-djS"/>
@@ -526,30 +603,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Xi-nN-xav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="1031"/>
+            <point key="canvasLocation" x="-1676" y="7596"/>
         </scene>
         <!--tvOS Test HarnessUI Tab Bar Controller-->
         <scene sceneID="dCN-cR-omT">
             <objects>
                 <tabBarController id="t9H-8u-pk4" customClass="RVS_ONVIF_tvOS_Test_Harness_UITabBarController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="D70-Li-9ox">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="D70-Li-9ox">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="X1W-o8-26M" kind="relationship" relationship="viewControllers" id="bSA-W7-gda"/>
-                        <segue destination="b6y-7q-cKL" kind="relationship" relationship="viewControllers" id="f1X-bC-pRf"/>
-                        <segue destination="6hE-kh-skU" kind="relationship" relationship="viewControllers" id="zTm-rh-Eky"/>
-                        <segue destination="Lc5-1m-wwZ" kind="relationship" relationship="viewControllers" id="13v-RB-LHZ"/>
-                        <segue destination="oit-Ap-3H5" kind="relationship" relationship="viewControllers" id="KSB-rb-s0A"/>
-                        <segue destination="LAA-5G-oy8" kind="relationship" relationship="viewControllers" id="0Vr-Si-STO"/>
+                        <segue destination="X1W-o8-26M" kind="relationship" relationship="viewControllers" id="QV9-C0-KFR"/>
+                        <segue destination="b6y-7q-cKL" kind="relationship" relationship="viewControllers" id="dGZ-Y5-ggo"/>
+                        <segue destination="6hE-kh-skU" kind="relationship" relationship="viewControllers" id="KOY-hw-NGa"/>
+                        <segue destination="W1R-Lm-yJ0" kind="relationship" relationship="viewControllers" id="lnl-wU-1B6"/>
                         <segue destination="Mvk-pT-Hq9" kind="relationship" relationship="viewControllers" id="LzD-9R-WWX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuV-jo-cnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="7499"/>
+            <point key="canvasLocation" x="-3942" y="12166"/>
         </scene>
         <!--CAPABILITIES-->
         <scene sceneID="YQs-cW-2Wp">
@@ -560,11 +634,11 @@
                         <viewControllerLayoutGuide type="bottom" id="HGy-0e-km3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NZW-Ot-uae">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-Ql-KK7">
-                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oit-Ap-3H5" id="iUB-rR-hHz"/>
@@ -573,37 +647,36 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="XSX-Hs-FDB" firstAttribute="bottom" secondItem="5T4-Ql-KK7" secondAttribute="bottom" id="CXJ-Vd-S6v"/>
-                            <constraint firstItem="XSX-Hs-FDB" firstAttribute="trailing" secondItem="5T4-Ql-KK7" secondAttribute="trailing" id="DXR-CO-3vw"/>
-                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="top" secondItem="XSX-Hs-FDB" secondAttribute="top" id="HdT-1R-QOb"/>
-                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="leading" secondItem="XSX-Hs-FDB" secondAttribute="leading" id="gcr-8U-aj3"/>
+                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="leading" secondItem="XSX-Hs-FDB" secondAttribute="leading" id="IPr-f8-ePg"/>
+                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="top" secondItem="XSX-Hs-FDB" secondAttribute="top" id="SSo-TO-ls9"/>
+                            <constraint firstItem="XSX-Hs-FDB" firstAttribute="bottom" secondItem="5T4-Ql-KK7" secondAttribute="bottom" id="W9K-vm-Djz"/>
+                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="trailing" secondItem="XSX-Hs-FDB" secondAttribute="trailing" id="oit-yi-zCz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XSX-Hs-FDB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="CAPABILITIES" id="RFk-RE-j6p"/>
                     <connections>
                         <outlet property="tableView" destination="5T4-Ql-KK7" id="Stu-ub-u46"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="caq-dk-guq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="6184"/>
+            <point key="canvasLocation" x="2860" y="8894"/>
         </scene>
-        <!--SERVICE CAPABILITIES-->
+        <!--NETWORK INTERFACES-->
         <scene sceneID="KtF-IL-3gs">
             <objects>
-                <viewController title="SERVICE CAPABILITIES" id="LAA-5G-oy8" customClass="RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="NETWORK INTERFACES" id="LAA-5G-oy8" customClass="RVS_ONVIF_tvOS_Test_Harness_NetworkInterfaces_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0p0-fX-cjY"/>
                         <viewControllerLayoutGuide type="bottom" id="lb4-u2-j66"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pqa-YK-FVp">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-3X-Qs1">
-                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="LAA-5G-oy8" id="Nuy-nP-tND"/>
@@ -612,22 +685,59 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="83B-Jz-r8n" firstAttribute="bottom" secondItem="zz2-3X-Qs1" secondAttribute="bottom" id="RFo-3i-mqm"/>
-                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="leading" secondItem="83B-Jz-r8n" secondAttribute="leading" id="b2O-Ur-VSw"/>
-                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="top" secondItem="83B-Jz-r8n" secondAttribute="top" id="cgi-5L-7SJ"/>
-                            <constraint firstItem="83B-Jz-r8n" firstAttribute="trailing" secondItem="zz2-3X-Qs1" secondAttribute="trailing" id="ztj-EJ-NTx"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="trailing" secondItem="83B-Jz-r8n" secondAttribute="trailing" id="3jx-Wo-Rqx"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="leading" secondItem="83B-Jz-r8n" secondAttribute="leading" id="97X-EV-IAN"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="top" secondItem="83B-Jz-r8n" secondAttribute="top" id="AHw-SB-gIS"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="bottom" secondItem="83B-Jz-r8n" secondAttribute="bottom" id="Q4Q-dc-5fG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="83B-Jz-r8n"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" enabled="NO" title="SERVICE CAPABILITIES" id="4MS-Gc-Vj8"/>
                     <connections>
                         <outlet property="tableView" destination="zz2-3X-Qs1" id="Km9-nS-a3m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCg-QM-f2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="7499"/>
+            <point key="canvasLocation" x="2860" y="11528"/>
+        </scene>
+        <!--SERVICE CAPABILITIES-->
+        <scene sceneID="owW-3y-H9S">
+            <objects>
+                <viewController title="SERVICE CAPABILITIES" id="yHH-Ec-jaR" customClass="RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="15J-va-UwB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hcs-QZ-rBg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wqA-Ja-4yo">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Pzq-Uy-hlj">
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="yHH-Ec-jaR" id="jBT-wy-JGr"/>
+                                    <outlet property="delegate" destination="yHH-Ec-jaR" id="LXY-2K-tpb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Pzq-Uy-hlj" firstAttribute="trailing" secondItem="r7S-9U-pnG" secondAttribute="trailing" id="LcK-IV-2No"/>
+                            <constraint firstItem="Pzq-Uy-hlj" firstAttribute="top" secondItem="r7S-9U-pnG" secondAttribute="top" id="QEl-gO-Jn3"/>
+                            <constraint firstItem="Pzq-Uy-hlj" firstAttribute="bottom" secondItem="r7S-9U-pnG" secondAttribute="bottom" id="kUe-nB-j8O"/>
+                            <constraint firstItem="Pzq-Uy-hlj" firstAttribute="leading" secondItem="r7S-9U-pnG" secondAttribute="leading" id="rdx-GX-5jI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="r7S-9U-pnG"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="Pzq-Uy-hlj" id="wbj-I0-KDc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tni-q5-q6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2860" y="10206"/>
         </scene>
     </scenes>
 </document>

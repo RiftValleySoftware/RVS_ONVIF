@@ -26,6 +26,20 @@ protocol RVS_ONVIF_tvOS_Test_Harness_ViewProtocol {
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ONVIF_tvOS_Test_Harness_ViewProtocol, RVS_ONVIFDelegate {
     /* ############################################################################################################################## */
+    // MARK: - Overridden Superclass Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        if !isConnected, let tab = viewControllers?[0] as? RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController {
+            return [tab]
+        }
+        
+        return super.preferredFocusEnvironments
+    }
+    
+    /* ############################################################################################################################## */
     // MARK: - Internal Instance Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
@@ -64,10 +78,17 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
             if let vc = $0 as? RVS_ONVIF_tvOS_Test_Harness_Base_ViewController {
                 vc.updateUI()
                 vc.tabBarItem.isEnabled = vc is RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController ? true : isConnected
+            } else if let vc = $0 as? RVS_ONVIF_tvOS_Test_Harness_Dispatcher_NavigationController {
+                vc.updateUI()
+                vc.tabBarItem.isEnabled = isConnected
             } else if let vc = $0 as? RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController {
                 vc.updateUI()
                 vc.tabBarItem.isEnabled = isConnected
             }
+        }
+        
+        if !isConnected {
+            selectedIndex = 0
         }
     }
 
@@ -85,6 +106,16 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
         persistentPrefs = RVS_PersistentPrefs(tag: "TestONVIFSettings", values: defaultPrefs)
     }
     
+    /* ################################################################## */
+    /**
+     */
+    override func shouldUpdateFocus(in inContext: UIFocusUpdateContext) -> Bool {
+        if !isConnected, !(inContext.nextFocusedItem is UITextField || inContext.nextFocusedItem is UIButton || inContext.nextFocusedItem is UISegmentedControl) {
+            return false
+        }
+        return super.shouldUpdateFocus(in: inContext)
+    }
+
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIFDelegate Methods
     /* ############################################################################################################################## */

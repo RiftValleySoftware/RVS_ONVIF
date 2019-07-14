@@ -136,10 +136,13 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController: RVS_ONVIF_tvOS_Test_
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
     let heightOfOneLabel: CGFloat = 40.0
+    let doneLabelText = "DONE"
+    
     var cachedCells: [UITableViewCell] = []
+    var lastCell: UITableViewCell!
     
     /* ############################################################################################################################## */
-    // MARK: - Internal Instance Properties
+    // MARK: - Internal Instance Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
@@ -194,15 +197,24 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvO
         labelBounds.origin.y = frame.size.height - labelBounds.size.height
         let label = UILabel(frame: labelBounds)
         label.text = inText
+        
         if 0 == offset {
             label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
         } else {
             label.font = UIFont.italicSystemFont(ofSize: heightOfOneLabel - 10)
         }
+        
         inContainer.addSubview(label)
         inContainer.frame = frame
     }
     
+    /* ################################################################## */
+    /**
+     */
+    func backToHomeBase() {
+        navigationController?.popViewController(animated: true)
+    }
+
     /* ################################################################## */
     /**
      */
@@ -217,35 +229,14 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvO
     override func updateUI() {
         cachedCells = []
         buildCache()
+        lastCell = UITableViewCell()
+        let doneLabel = UILabel()
+        doneLabel.text = doneLabelText
+        doneLabel.textAlignment = .center
+        doneLabel.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel)
+        doneLabel.textColor = traitCollection.userInterfaceStyle == .light ? UIColor.black : UIColor.white
+        lastCell.addContainedView(doneLabel)
         super.updateUI()
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        super.didUpdateFocus(in: context, with: coordinator)
-        if let nextFocus = context.nextFocusedView {
-            nextFocus.backgroundColor = UIColor.black
-            for cell in cachedCells where cell == nextFocus {
-                cell.subviews.forEach {
-                    if let label = $0 as? UILabel {
-                        label.textColor = UIColor.white
-                    }
-                }
-            }
-        }
-        
-        if let prevFocus = context.previouslyFocusedView {
-            for cell in cachedCells where cell == prevFocus {
-                prevFocus.backgroundColor = UIColor.clear
-                cell.subviews.forEach {
-                    if let label = $0 as? UILabel {
-                        label.textColor = UIColor.black
-                    }
-                }
-            }
-        }
     }
     
     /* ############################################################################################################################## */
@@ -262,14 +253,14 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvO
     /**
      */
     func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
-        return nil
+        return inIndexPath.row < cachedCells.count ? nil : inIndexPath
     }
     
     /* ################################################################## */
     /**
      */
-    func tableView(_ inTableView: UITableView, canFocusRowAt inIndexPath: IndexPath) -> Bool {
-        return inIndexPath.row < cachedCells.count  // Can't focus that last row, however.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        backToHomeBase()
     }
     
     /* ############################################################################################################################## */
@@ -279,13 +270,17 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvO
     /**
      */
     override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
-        return cachedCells.count + 1    // We add one row at the end, because we want to make sure the table can scroll all the way.
+        return cachedCells.count + 1
     }
     
     /* ################################################################## */
     /**
      */
     override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        return inIndexPath.row < cachedCells.count ? cachedCells[inIndexPath.row] : UITableViewCell()   // Last row is empty.
+        if inIndexPath.row < cachedCells.count {
+            return cachedCells[inIndexPath.row]
+        } else {
+            return lastCell
+        }
     }
 }
