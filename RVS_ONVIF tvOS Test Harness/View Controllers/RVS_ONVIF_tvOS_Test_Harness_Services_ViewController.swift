@@ -53,6 +53,30 @@ class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_H
                 if let version = $0.value.version {
                     addLabel(toContainer: tableCellContainer, withText: "Version: \(version)")
                 }
+                // Yeah, this is a pathetic lash-up, but this is a simple test harness. No need to get more efficient.
+                if let capabilities = $0.value.capabilities, !capabilities.isEmpty {
+                    for capability in capabilities {
+                        if let value = capability.value as? String {
+                            addLabel(toContainer: tableCellContainer, withText: "\(capability.key): \(value)")
+                        } else if let values = capability.value as? [String: Any] {
+                            addLabel(toContainer: tableCellContainer, withText: "\(capability.key):")
+                            for singleInstance in values {
+                                if let value = singleInstance.value as? String {
+                                    addLabel(toContainer: tableCellContainer, withText: "\(singleInstance.key): \(value)", offsetBy: 80)
+                                    // We only go in one level. This all could be done much more slickly.
+                                } else if let valuesDeeper = singleInstance.value as? [String: Any] {
+                                    for valueDeep in valuesDeeper {
+                                        addLabel(toContainer: tableCellContainer, withText: "\(valueDeep.key): \(String(describing: valueDeep.value))", offsetBy: 80)
+                                    }
+                                } else {
+                                    addLabel(toContainer: tableCellContainer, withText: "\(singleInstance.key): \(String(describing: singleInstance.value))", offsetBy: 80)
+                                }
+                            }
+                        } else {
+                            addLabel(toContainer: tableCellContainer, withText: "\(capability.key): \(String(describing: capability.value))")
+                        }
+                    }
+                }
                 cachedCells.append(tableCellContainer)
             }
         }
@@ -67,20 +91,6 @@ class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_H
     override func updateUI() {
         buildCache()
         super.updateUI()
-    }
-    
-    /* ############################################################################################################################## */
-    // MARK: - UITableViewDelegate Methods
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    func tableView(_ inTableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
-        return cachedCells[inIndexPath.row].frame.size.height
-    }
-    
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
     }
     
     /* ################################################################## */
@@ -112,19 +122,43 @@ class RVS_ONVIF_tvOS_Test_Harness_Services_ViewController: RVS_ONVIF_tvOS_Test_H
     }
 
     /* ############################################################################################################################## */
+    // MARK: - UITableViewDelegate Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
+        return inIndexPath.row < cachedCells.count ? cachedCells[inIndexPath.row].frame.size.height : inTableView.rowHeight
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, canFocusRowAt inIndexPath: IndexPath) -> Bool {
+        return inIndexPath.row < cachedCells.count  // Can't focus that last row, however.
+    }
+
+    /* ############################################################################################################################## */
     // MARK: - UITableViewDataSource Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
     override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
-        return cachedCells.count
+        return cachedCells.count + 1    // We add one row at the end, because we want to make sure the table can scroll all the way.
     }
     
     /* ################################################################## */
     /**
      */
     override func tableView(_ inTableView: UITableView, cellForRowAt inIndexPath: IndexPath) -> UITableViewCell {
-        return cachedCells[inIndexPath.row]
+        return inIndexPath.row < cachedCells.count ? cachedCells[inIndexPath.row] : UITableViewCell()   // Last row is empty.
     }
 }
