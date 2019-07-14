@@ -30,21 +30,21 @@ class RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController: RVS_ONVIF_
                 if let capabilities = allCapabilities.securityCapabilities {
                     let tableCellContainer = UITableViewCell()
                     tableCellContainer.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0)
-                    addLabel(toContainer: tableCellContainer, withText: "Network", offsetBy: 0)
+                    addLabel(toContainer: tableCellContainer, withText: "Security", offsetBy: 0)
                     addHierarchyTo(tableCellContainer, from: capabilities, withIndent: heightOfOneLabel)
                     cachedCells.append(tableCellContainer)
                 }
                 if let capabilities = allCapabilities.systemCapabilities {
                     let tableCellContainer = UITableViewCell()
                     tableCellContainer.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0)
-                    addLabel(toContainer: tableCellContainer, withText: "Network", offsetBy: 0)
+                    addLabel(toContainer: tableCellContainer, withText: "System", offsetBy: 0)
                     addHierarchyTo(tableCellContainer, from: capabilities, withIndent: heightOfOneLabel)
                     cachedCells.append(tableCellContainer)
                 }
                 if let capabilities = allCapabilities.auxiliaryCommands {
                     let tableCellContainer = UITableViewCell()
                     tableCellContainer.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0)
-                    addLabel(toContainer: tableCellContainer, withText: "Network", offsetBy: 0)
+                    addLabel(toContainer: tableCellContainer, withText: "Auxiliary", offsetBy: 0)
                     addHierarchyTo(tableCellContainer, from: capabilities, withIndent: heightOfOneLabel)
                     cachedCells.append(tableCellContainer)
                 }
