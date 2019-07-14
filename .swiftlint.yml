@@ -10,6 +10,7 @@ disabled_rules:
 - todo
 - inert_defer
 - reduce_boolean
+- syntactic_sugar
 
 opt_in_rules:
 - control_statement

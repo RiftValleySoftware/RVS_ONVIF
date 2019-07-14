@@ -223,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJP-bw-YCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="6287"/>
+            <point key="canvasLocation" x="592" y="7472"/>
         </scene>
         <!--NAMESPACES-->
         <scene sceneID="izB-8d-pYM">
@@ -241,7 +241,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXe-ud-GHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="6287"/>
+            <point key="canvasLocation" x="-1676" y="7472"/>
         </scene>
         <!--CONNECT-->
         <scene sceneID="u7Y-nO-zVV">
@@ -542,12 +542,52 @@
                         <segue destination="b6y-7q-cKL" kind="relationship" relationship="viewControllers" id="f1X-bC-pRf"/>
                         <segue destination="6hE-kh-skU" kind="relationship" relationship="viewControllers" id="zTm-rh-Eky"/>
                         <segue destination="Lc5-1m-wwZ" kind="relationship" relationship="viewControllers" id="13v-RB-LHZ"/>
+                        <segue destination="oit-Ap-3H5" kind="relationship" relationship="viewControllers" id="KSB-rb-s0A"/>
                         <segue destination="Mvk-pT-Hq9" kind="relationship" relationship="viewControllers" id="LzD-9R-WWX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuV-jo-cnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="4886"/>
+            <point key="canvasLocation" x="-1676" y="6184"/>
+        </scene>
+        <!--CAPABILITIES-->
+        <scene sceneID="YQs-cW-2Wp">
+            <objects>
+                <viewController title="CAPABILITIES" id="oit-Ap-3H5" customClass="RVS_ONVIF_tvOS_Test_Harness_Capabilities_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4lP-10-yee"/>
+                        <viewControllerLayoutGuide type="bottom" id="HGy-0e-km3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NZW-Ot-uae">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-Ql-KK7">
+                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="oit-Ap-3H5" id="iUB-rR-hHz"/>
+                                    <outlet property="delegate" destination="oit-Ap-3H5" id="6D4-jk-qyE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="XSX-Hs-FDB" firstAttribute="bottom" secondItem="5T4-Ql-KK7" secondAttribute="bottom" id="CXJ-Vd-S6v"/>
+                            <constraint firstItem="XSX-Hs-FDB" firstAttribute="trailing" secondItem="5T4-Ql-KK7" secondAttribute="trailing" id="DXR-CO-3vw"/>
+                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="top" secondItem="XSX-Hs-FDB" secondAttribute="top" id="HdT-1R-QOb"/>
+                            <constraint firstItem="5T4-Ql-KK7" firstAttribute="leading" secondItem="XSX-Hs-FDB" secondAttribute="leading" id="gcr-8U-aj3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XSX-Hs-FDB"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="CAPABILITIES" id="RFk-RE-j6p"/>
+                    <connections>
+                        <outlet property="tableView" destination="5T4-Ql-KK7" id="Stu-ub-u46"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="caq-dk-guq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="6184"/>
         </scene>
     </scenes>
 </document>
