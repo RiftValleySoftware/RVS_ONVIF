@@ -178,9 +178,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
                                 <rect key="frame" x="90" y="60" width="1740" height="960"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Lc5-1m-wwZ" id="1sb-Z3-oAq"/>
+                                    <outlet property="delegate" destination="Lc5-1m-wwZ" id="mvK-gl-YrG"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <constraints>
@@ -194,7 +198,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" enabled="NO" title="SERVICES" id="bip-Gt-yyb"/>
                     <connections>
-                        <outlet property="tableView" destination="Vo1-Mx-OeQ" id="eOC-5I-ZpA"/>
+                        <outlet property="tableView" destination="Vo1-Mx-OeQ" id="IXb-8e-vwx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gQ-QB-Vqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
