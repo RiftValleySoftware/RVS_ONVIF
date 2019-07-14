@@ -17,40 +17,6 @@ class RVS_ONVIF_tvOS_Test_Harness_Capabilities_ViewController: RVS_ONVIF_tvOS_Te
     /* ################################################################## */
     /**
      */
-    func addHierarchyTo(_ inContainerObject: UITableViewCell, from inObject: Any, withIndent inIndent: CGFloat) {
-        let mirrored_object = Mirror(reflecting: inObject)
-        
-        mirrored_object.children.forEach {
-            if let propertyName = $0.label, "owner" != propertyName, case Optional<Any>.some = $0.value {
-                if let urlValue = $0.value as? URL {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(urlValue.absoluteString)", offsetBy: inIndent)
-                } else if let boolVal = $0.value as? Bool {
-                    if boolVal {
-                        addLabel(toContainer: inContainerObject, withText: "\(propertyName): true", offsetBy: inIndent)
-                    }
-                } else if let intVal = $0.value as? Int {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(intVal))", offsetBy: inIndent)
-                } else if let floatVal = $0.value as? Float {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(floatVal))", offsetBy: inIndent)
-                } else if let stringVal = $0.value as? String, "false" != stringVal {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(stringVal)", offsetBy: inIndent)
-                } else if !Mirror(reflecting: $0.value).children.isEmpty {
-                    var indent = inIndent
-                    if "some" != propertyName {
-                        addLabel(toContainer: inContainerObject, withText: "\(propertyName):", offsetBy: inIndent)
-                        indent += heightOfOneLabel
-                    }
-                    addHierarchyTo(inContainerObject, from: $0.value, withIndent: indent)
-                } else {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(reflecting: $0.value))", offsetBy: inIndent)
-                }
-            }
-        }
-    }
-    
-    /* ################################################################## */
-    /**
-     */
     override func buildCache() {
         if nil != tableView {
             if let allCapabilities = onvifInstance?.core?.capabilities {
@@ -58,7 +24,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Capabilities_ViewController: RVS_ONVIF_tvOS_Te
                     let tableCellContainer = UITableViewCell()
                     tableCellContainer.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0)
                     addLabel(toContainer: tableCellContainer, withText: "Analytics", offsetBy: 0)
-                    print(String(reflecting: capabilities))
+                    addHierarchyTo(tableCellContainer, from: capabilities, withIndent: heightOfOneLabel)
                     cachedCells.append(tableCellContainer)
                 }
                 if let capabilities = allCapabilities.analyticsDeviceCapabilities {

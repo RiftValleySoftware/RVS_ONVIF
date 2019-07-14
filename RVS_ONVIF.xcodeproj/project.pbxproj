@@ -38,6 +38,17 @@
 		D44B592A22202AFE00F663E9 /* RVS_ONVIF_Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44B592922202AFE00F663E9 /* RVS_ONVIF_Core.swift */; };
 		D44D99CB224107D50071B02E /* RVS_IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D99CA224107D50071B02E /* RVS_IPAddress.swift */; };
 		D45844422216F23C0075F2E8 /* RVS_ONVIF_Profile_S.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45844412216F23C0075F2E8 /* RVS_ONVIF_Profile_S.swift */; };
+		D459764C22DB8EB700BD4FCE /* libxml2.2.tbd in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D459764D22DB8EC800BD4FCE /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; };
+		D459764E22DB8EF500BD4FCE /* libxml2.2.tbd in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D459764F22DB8F0200BD4FCE /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
+		D459765022DB8F1B00BD4FCE /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
+		D459765122DB8F3300BD4FCE /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
+		D459765222DB8F4400BD4FCE /* libxml2.2.tbd in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D459765322DB8F4F00BD4FCE /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D40F033A22C7E40200ECC76A /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D459765422DB8F7700BD4FCE /* SOAPEngineTV.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D459765622DB8FA300BD4FCE /* SOAPEngineTV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4BAA84722DA41BF001F5FF9 /* SOAPEngineTV.framework */; };
+		D459765822DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D459765722DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift */; };
 		D45A2AB322286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45A2AB222286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift */; };
 		D45B82F621FF2CA800DE26EF /* RVS_ONVIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45B82F521FF2CA800DE26EF /* RVS_ONVIF.swift */; };
 		D45DFCEA2260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45DFCE92260C5FE00E486B7 /* RVS_ONVIF_Mac_Test_Harness_AppDelegate.swift */; };
@@ -106,7 +117,6 @@
 		D492FCCA22C7846300B73C63 /* RVS_ParseXMLDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BA0F5522454C1800963285 /* RVS_ParseXMLDuration.swift */; };
 		D492FCCB22C7846300B73C63 /* RVS_String_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4745099220722800038B694 /* RVS_String_Extensions.swift */; };
 		D492FCCC22C7846300B73C63 /* RVS_IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44D99CA224107D50071B02E /* RVS_IPAddress.swift */; };
-		D492FCCD22C7849200B73C63 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
 		D492FCCE22C784A800B73C63 /* SOAPEngineOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D45DFD162260C8F900E486B7 /* SOAPEngineOSX.framework */; };
 		D492FCCF22C784BC00B73C63 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; };
 		D492FCD022C784C900B73C63 /* SOAPEngine64.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; };
@@ -114,7 +124,6 @@
 		D492FCD722C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492FCD522C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift */; };
 		D492FCD822C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492FCD522C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift */; };
 		D495F3692215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D495F3682215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift */; };
-		D496B47D226112E400E206F5 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B47422610E7600E206F5 /* libxml2.2.tbd */; };
 		D4996A362288971E004489C9 /* RVS_ONVIF_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; };
 		D4996A372288971E004489C9 /* RVS_ONVIF_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D499F59A2209B53E0056EBAB /* SOAPEngine64.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D499F5992209B53E0056EBAB /* SOAPEngine64.framework */; };
@@ -149,8 +158,6 @@
 		D4B2B45722D90691005E7BFC /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40F032F22C7DC3300ECC76A /* RVS_PersistentPrefs.swift */; };
 		D4B2B45822D9204D005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; };
 		D4B2B45922D92061005E7BFC /* RVS_ONVIF_tvOS.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4B2B45B22D92095005E7BFC /* libxml2.2.tbd in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D4B2B45C22D920AE005E7BFC /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D496B4782261100C00E206F5 /* libxml2.2.tbd */; };
 		D4B2B45D22D920FF005E7BFC /* libxml2.2.tbd in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D4B2B45E22D92110005E7BFC /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */; };
 		D4B2B46F22D924EE005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; };
@@ -231,6 +238,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D459765422DB8F7700BD4FCE /* SOAPEngineTV.framework in Copy Frameworks */,
 				D4B2B45D22D920FF005E7BFC /* libxml2.2.tbd in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -242,6 +250,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D459765322DB8F4F00BD4FCE /* VLCKit.framework in Embed Frameworks */,
+				D459765222DB8F4400BD4FCE /* libxml2.2.tbd in Embed Frameworks */,
 				D45DFD072260C82B00E486B7 /* RVS_ONVIF_MacOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -277,7 +287,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D4B2B45B22D92095005E7BFC /* libxml2.2.tbd in Copy Frameworks */,
+				D459764C22DB8EB700BD4FCE /* libxml2.2.tbd in Copy Frameworks */,
 				D4B2B45922D92061005E7BFC /* RVS_ONVIF_tvOS.framework in Copy Frameworks */,
 				D4BAF3ED2260E87500C971D8 /* SOAPEngine64.framework in Copy Frameworks */,
 			);
@@ -290,6 +300,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D459764E22DB8EF500BD4FCE /* libxml2.2.tbd in Copy Frameworks */,
 				D4BAF3EF2260E89A00C971D8 /* SOAPEngineOSX.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -343,6 +354,7 @@
 		D44D99CA224107D50071B02E /* RVS_IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_IPAddress.swift; sourceTree = "<group>"; };
 		D4531C4822CE3DA600151E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D45844412216F23C0075F2E8 /* RVS_ONVIF_Profile_S.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Profile_S.swift; sourceTree = "<group>"; };
+		D459765722DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift; sourceTree = "<group>"; };
 		D45A2AB222286CF6000A7555 /* RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Namespaces_TableViewController.swift; sourceTree = "<group>"; };
 		D45B82F521FF2CA800DE26EF /* RVS_ONVIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF.swift; sourceTree = "<group>"; };
 		D45DFCE72260C5FE00E486B7 /* RVS_ONVIF Mac Test Harness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RVS_ONVIF Mac Test Harness.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -434,6 +446,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D459765122DB8F3300BD4FCE /* libxml2.2.tbd in Frameworks */,
 				D40F033B22C7E40300ECC76A /* VLCKit.framework in Frameworks */,
 				D45DFD062260C82B00E486B7 /* RVS_ONVIF_MacOS.framework in Frameworks */,
 			);
@@ -443,7 +456,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D496B47D226112E400E206F5 /* libxml2.2.tbd in Frameworks */,
+				D459764F22DB8F0200BD4FCE /* libxml2.2.tbd in Frameworks */,
 				D45DFD172260C8F900E486B7 /* SOAPEngineOSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +483,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D459765622DB8FA300BD4FCE /* SOAPEngineTV.framework in Frameworks */,
 				D4192F3622C6A0540068EEE0 /* libxml2.2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,8 +492,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D459765022DB8F1B00BD4FCE /* libxml2.2.tbd in Frameworks */,
 				D492FCCE22C784A800B73C63 /* SOAPEngineOSX.framework in Frameworks */,
-				D492FCCD22C7849200B73C63 /* libxml2.2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +510,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B2B45C22D920AE005E7BFC /* libxml2.2.tbd in Frameworks */,
+				D459764D22DB8EC800BD4FCE /* libxml2.2.tbd in Frameworks */,
 				D4B2B45822D9204D005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */,
 				D499F59A2209B53E0056EBAB /* SOAPEngine64.framework in Frameworks */,
 			);
@@ -540,6 +554,7 @@
 				D42367EA22DA320900CD54F5 /* RVS_ONVIF_tvOS_Test_Harness_Scopes_ViewController.swift */,
 				D401C7EE22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift */,
 				D461AA7C22DB68F7004FC63E /* RVS_ONVIF_tvOS_Test_Harness_Capabilities_ViewController.swift */,
+				D459765722DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift */,
 				D443D3F522D4BDFF0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift */,
 				D443D3F722D4BEFC0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift */,
 			);
@@ -881,12 +896,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D45DFCF42260C5FF00E486B7 /* Build configuration list for PBXNativeTarget "RVS_ONVIF Mac Test Harness" */;
 			buildPhases = (
-				0F56AF91AC8062A0272E0C48 /* [CP] Check Pods Manifest.lock */,
 				D45DFCE32260C5FE00E486B7 /* Sources */,
 				D45DFCE42260C5FE00E486B7 /* Frameworks */,
 				D45DFCE52260C5FE00E486B7 /* Resources */,
 				D45DFD0B2260C82B00E486B7 /* Embed Frameworks */,
-				60DC3FC3EA4926249F18DD35 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -902,7 +915,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D45DFD082260C82B00E486B7 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_MacOS" */;
 			buildPhases = (
-				2ABD0C6B2906744E1CF7D350 /* [CP] Check Pods Manifest.lock */,
 				D4BAF3E92260E72200C971D8 /* SwiftLINT */,
 				D45DFCFB2260C82B00E486B7 /* Sources */,
 				D45DFCFC2260C82B00E486B7 /* Frameworks */,
@@ -921,7 +933,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4869F7F22ABF4DD00521845 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_iOS_Tests" */;
 			buildPhases = (
-				61DF96F4C7AB38F1BF5C9C71 /* [CP] Check Pods Manifest.lock */,
 				D4869F7322ABF4DD00521845 /* Sources */,
 				D4AE507A22C634740082AD0B /* Frameworks */,
 			);
@@ -938,7 +949,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4908A0A21FF61A60089AEC4 /* Build configuration list for PBXNativeTarget "RVS_ONVIF iOS Test Harness" */;
 			buildPhases = (
-				1DEA219067CFBFF44C9EDC51 /* [CP] Check Pods Manifest.lock */,
 				D49089F521FF61A50089AEC4 /* Sources */,
 				D49089F721FF61A50089AEC4 /* Resources */,
 				D49089F621FF61A50089AEC4 /* Frameworks */,
@@ -976,7 +986,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D49EA22722C69C53004AE619 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_tvOS_Tests" */;
 			buildPhases = (
-				5C056DAE8CFBE7DE8F296509 /* [CP] Check Pods Manifest.lock */,
 				D49EA21B22C69C53004AE619 /* Sources */,
 				D49EA21C22C69C53004AE619 /* Frameworks */,
 			);
@@ -993,7 +1002,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4DF78C621FF2A7C00E9CB70 /* Build configuration list for PBXNativeTarget "RVS_ONVIF_iOS" */;
 			buildPhases = (
-				5268190A37DEA4E9ED211244 /* [CP] Check Pods Manifest.lock */,
 				D44FBE9921FF692B004D60C1 /* SwiftLINT */,
 				D4DF78AE21FF2A7C00E9CB70 /* Sources */,
 				D4DF78AF21FF2A7C00E9CB70 /* Frameworks */,
@@ -1031,7 +1039,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4EE9A2722C62E3B005B8B7C /* Build configuration list for PBXNativeTarget "RVS_ONVIF_MacOS_Tests" */;
 			buildPhases = (
-				8B9823124F013182A1911E31 /* [CP] Check Pods Manifest.lock */,
 				D4EE9A1B22C62E3B005B8B7C /* Sources */,
 				D4AE506B22C632C90082AD0B /* Frameworks */,
 			);
@@ -1150,177 +1157,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F56AF91AC8062A0272E0C48 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF Mac Test Harness-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1DEA219067CFBFF44C9EDC51 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF iOS Test Harness-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2ABD0C6B2906744E1CF7D350 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_MacOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5268190A37DEA4E9ED211244 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_iOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5C056DAE8CFBE7DE8F296509 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_tvOS_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		60DC3FC3EA4926249F18DD35 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF Mac Test Harness/Pods-RVS_ONVIF Mac Test Harness-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF Mac Test Harness/Pods-RVS_ONVIF Mac Test Harness-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RVS_ONVIF Mac Test Harness/Pods-RVS_ONVIF Mac Test Harness-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61DF96F4C7AB38F1BF5C9C71 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_iOS_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B9823124F013182A1911E31 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RVS_ONVIF_MacOS_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D4192F3C22C6A0F40068EEE0 /* SwiftLINT */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1553,6 +1389,7 @@
 				D401C7EF22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift in Sources */,
 				D443D3F622D4BE000089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift in Sources */,
 				D443D3F022D4BA7D0089764A /* RVS_ONVIF_tvOS_Test_Harness_Base_ViewController.swift in Sources */,
+				D459765822DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift in Sources */,
 				D4EA1BDC22CE3C6D00E323BF /* RVS_ONVIF_tvOS_Test_Harness_AppDelegate.swift in Sources */,
 				D40DB0C122D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift in Sources */,
 				D443D3F822D4BEFD0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift in Sources */,

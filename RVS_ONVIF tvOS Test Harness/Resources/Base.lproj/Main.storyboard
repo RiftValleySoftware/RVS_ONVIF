@@ -223,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJP-bw-YCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="592" y="7472"/>
+            <point key="canvasLocation" x="592" y="8787"/>
         </scene>
         <!--NAMESPACES-->
         <scene sceneID="izB-8d-pYM">
@@ -241,7 +241,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXe-ud-GHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="7472"/>
+            <point key="canvasLocation" x="-1676" y="8787"/>
         </scene>
         <!--CONNECT-->
         <scene sceneID="u7Y-nO-zVV">
@@ -543,12 +543,13 @@
                         <segue destination="6hE-kh-skU" kind="relationship" relationship="viewControllers" id="zTm-rh-Eky"/>
                         <segue destination="Lc5-1m-wwZ" kind="relationship" relationship="viewControllers" id="13v-RB-LHZ"/>
                         <segue destination="oit-Ap-3H5" kind="relationship" relationship="viewControllers" id="KSB-rb-s0A"/>
+                        <segue destination="LAA-5G-oy8" kind="relationship" relationship="viewControllers" id="0Vr-Si-STO"/>
                         <segue destination="Mvk-pT-Hq9" kind="relationship" relationship="viewControllers" id="LzD-9R-WWX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuV-jo-cnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1676" y="6184"/>
+            <point key="canvasLocation" x="-1676" y="7499"/>
         </scene>
         <!--CAPABILITIES-->
         <scene sceneID="YQs-cW-2Wp">
@@ -588,6 +589,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="caq-dk-guq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="592" y="6184"/>
+        </scene>
+        <!--SERVICE CAPABILITIES-->
+        <scene sceneID="KtF-IL-3gs">
+            <objects>
+                <viewController title="SERVICE CAPABILITIES" id="LAA-5G-oy8" customClass="RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0p0-fX-cjY"/>
+                        <viewControllerLayoutGuide type="bottom" id="lb4-u2-j66"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pqa-YK-FVp">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-3X-Qs1">
+                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LAA-5G-oy8" id="Nuy-nP-tND"/>
+                                    <outlet property="delegate" destination="LAA-5G-oy8" id="E6n-Ic-AXq"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="83B-Jz-r8n" firstAttribute="bottom" secondItem="zz2-3X-Qs1" secondAttribute="bottom" id="RFo-3i-mqm"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="leading" secondItem="83B-Jz-r8n" secondAttribute="leading" id="b2O-Ur-VSw"/>
+                            <constraint firstItem="zz2-3X-Qs1" firstAttribute="top" secondItem="83B-Jz-r8n" secondAttribute="top" id="cgi-5L-7SJ"/>
+                            <constraint firstItem="83B-Jz-r8n" firstAttribute="trailing" secondItem="zz2-3X-Qs1" secondAttribute="trailing" id="ztj-EJ-NTx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="83B-Jz-r8n"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="SERVICE CAPABILITIES" id="4MS-Gc-Vj8"/>
+                    <connections>
+                        <outlet property="tableView" destination="zz2-3X-Qs1" id="Km9-nS-a3m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCg-QM-f2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="7499"/>
         </scene>
     </scenes>
 </document>

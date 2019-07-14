@@ -144,6 +144,40 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvO
     /* ################################################################## */
     /**
      */
+    func addHierarchyTo(_ inContainerObject: UITableViewCell, from inObject: Any, withIndent inIndent: CGFloat) {
+        let mirrored_object = Mirror(reflecting: inObject)
+        
+        mirrored_object.children.forEach {
+            if let propertyName = $0.label, "owner" != propertyName, case Optional<Any>.some = $0.value {
+                if let urlValue = $0.value as? URL {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(urlValue.absoluteString)", offsetBy: inIndent)
+                } else if let boolVal = $0.value as? Bool {
+                    if boolVal {
+                        addLabel(toContainer: inContainerObject, withText: "\(propertyName): true", offsetBy: inIndent)
+                    }
+                } else if let intVal = $0.value as? Int {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(intVal))", offsetBy: inIndent)
+                } else if let floatVal = $0.value as? Float {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(floatVal))", offsetBy: inIndent)
+                } else if let stringVal = $0.value as? String, "false" != stringVal {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(stringVal)", offsetBy: inIndent)
+                } else if !Mirror(reflecting: $0.value).children.isEmpty {
+                    var indent = inIndent
+                    if "some" != propertyName {
+                        addLabel(toContainer: inContainerObject, withText: "\(propertyName):", offsetBy: inIndent)
+                        indent += heightOfOneLabel
+                    }
+                    addHierarchyTo(inContainerObject, from: $0.value, withIndent: indent)
+                } else {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(reflecting: $0.value))", offsetBy: inIndent)
+                }
+            }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
     func addLabel(toContainer inContainer: UITableViewCell, withText inText: String, offsetBy inOffset: CGFloat! = nil) {
         var offset: CGFloat = inOffset ?? 0
         
