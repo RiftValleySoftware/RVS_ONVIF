@@ -151,28 +151,34 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController: RVS_ONVIF_tvOS
         let mirrored_object = Mirror(reflecting: inObject)
         
         mirrored_object.children.forEach {
-            if let propertyName = $0.label, "owner" != propertyName, case Optional<Any>.some = $0.value {
-                if let urlValue = $0.value as? URL {
+            let value = $0.value
+            
+            if let propertyName = $0.label, "owner" != propertyName, case Optional<Any>.some = value {
+                if let urlValue = value as? URL {
                     addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(urlValue.absoluteString)", offsetBy: inIndent)
-                } else if let boolVal = $0.value as? Bool {
-                    if boolVal {
-                        addLabel(toContainer: inContainerObject, withText: "\(propertyName): true", offsetBy: inIndent)
-                    }
-                } else if let intVal = $0.value as? Int {
+                } else if let boolVal = value as? Bool {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(boolVal ? "true" : "false")", offsetBy: inIndent)
+                } else if let intVal = value as? Int {
                     addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(intVal))", offsetBy: inIndent)
-                } else if let floatVal = $0.value as? Float {
+                } else if let floatVal = value as? Float {
                     addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(floatVal))", offsetBy: inIndent)
-                } else if let stringVal = $0.value as? String, "false" != stringVal {
+                } else if let ipAddress = value as? RVS_IPAddress {
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(ipAddress.address)", offsetBy: inIndent)
+                } else if let stringVal = value as? String {
                     addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(stringVal)", offsetBy: inIndent)
-                } else if !Mirror(reflecting: $0.value).children.isEmpty {
+                } else if let arrVal = value as? [Any] {
+                    arrVal.forEach { val in
+                        addHierarchyTo(inContainerObject, from: val, withIndent: inIndent)
+                    }
+                } else if !Mirror(reflecting: value).children.isEmpty {
                     var indent = inIndent
                     if "some" != propertyName {
                         addLabel(toContainer: inContainerObject, withText: "\(propertyName):", offsetBy: inIndent)
                         indent += heightOfOneLabel
                     }
-                    addHierarchyTo(inContainerObject, from: $0.value, withIndent: indent)
+                    addHierarchyTo(inContainerObject, from: value, withIndent: indent)
                 } else {
-                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(reflecting: $0.value))", offsetBy: inIndent)
+                    addLabel(toContainer: inContainerObject, withText: "\(propertyName): \(String(reflecting: value))", offsetBy: inIndent)
                 }
             }
         }

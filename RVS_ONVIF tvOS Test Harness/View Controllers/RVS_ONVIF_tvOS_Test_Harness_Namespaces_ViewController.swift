@@ -15,7 +15,7 @@ typealias RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement = (
 // MARK: - Main Class for the Namespaces NavigationController
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController {
-    var sectionCache:[RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement] = []
+    var sectionCache: [RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement] = []
     
     /* ############################################################################################################################## */
     // MARK: - Internal Base Class Override Methods
@@ -25,7 +25,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
      */
     override func buildCache() {
         if nil != tableView {
-            onvifInstance.profilesAsArray.forEach {
+            onvifInstance?.profilesAsArray.forEach {
                 let sectionLabel = $0.profileName
                 let sectionCommands = $0.availableCommandsAsStrings
                 var cells: [UITableViewCell] = []
@@ -72,5 +72,35 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
         } else {
             return UITableViewCell()
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func addLabel(toContainer inContainer: UITableViewCell, withText inText: String, offsetBy inOffset: CGFloat! = nil) {
+        var offset: CGFloat = inOffset ?? 0
+        
+        if nil == inOffset {
+            offset = heightOfOneLabel
+        }
+        
+        var frame = inContainer.frame
+        var labelBounds = inContainer.bounds
+        labelBounds.size.height = heightOfOneLabel
+        labelBounds.size.width -= offset
+        labelBounds.origin.x = offset
+        frame.size.height += heightOfOneLabel
+        labelBounds.origin.y = frame.size.height - labelBounds.size.height
+        let label = UILabel(frame: labelBounds)
+        label.text = inText
+        
+        if 0 == offset {
+            label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
+        } else {
+            label.font = UIFont.italicSystemFont(ofSize: heightOfOneLabel - 10)
+        }
+        
+        inContainer.addContainedView(label)
+        inContainer.frame = frame
     }
 }
