@@ -9,8 +9,14 @@
  */
 
 import UIKit
+import RVS_ONVIF_tvOS
+
+class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_AssociatedCommand_TableViewCell: UITableViewCell {
+    var associatedCommand: RVS_ONVIF_DeviceRequestProtocol!
+}
 
 typealias RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement = (label: String, values: [UITableViewCell])
+
 /* ################################################################################################################################## */
 // MARK: - Main Class for the Namespaces NavigationController
 /* ################################################################################################################################## */
@@ -24,14 +30,28 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
     /**
      */
     override func buildCache() {
+        sectionCache = []
         if nil != tableView {
             onvifInstance?.profilesAsArray.forEach {
-                let sectionLabel = $0.profileName
-                let sectionCommands = $0.availableCommandsAsStrings
                 var cells: [UITableViewCell] = []
-                sectionCommands.forEach { commandString in
-                    let cell = UITableViewCell()
-                    addLabel(toContainer: cell, withText: commandString)
+                let nameSpaces = type(of: $0).namespaces
+                let supportedNamespaces = $0.supportedNamespaces
+                
+                for namespace in nameSpaces {
+                    if supportedNamespaces.contains(namespace) {
+                        let cell = UITableViewCell()
+                        addLabel(toContainer: cell, withText: "Namespace: \(namespace)")
+                        cells.append(cell)
+                    }
+                    
+                }
+
+                let sectionLabel = $0.profileName
+                let sectionCommands = $0.availableCommands
+                for i in sectionCommands.enumerated() {
+                    let cell = RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_AssociatedCommand_TableViewCell()
+                    cell.associatedCommand = $0.availableCommands[i.offset]
+                    addLabel(toContainer: cell, withText: i.element.rawValue)
                     cells.append(cell)
                 }
                 let section = RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement(label: sectionLabel, values: cells)
@@ -40,6 +60,39 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
         }
     }
     
+    /* ################################################################## */
+    /**
+     */
+    override func addLabel(toContainer inContainer: UITableViewCell, withText inText: String, offsetBy inOffset: CGFloat! = nil) {
+        var offset: CGFloat = inOffset ?? 0
+        
+        if nil == inOffset {
+            offset = heightOfOneLabel
+        }
+        
+        var frame = inContainer.frame
+        var labelBounds = inContainer.bounds
+        labelBounds.size.height = heightOfOneLabel
+        labelBounds.size.width -= offset
+        labelBounds.origin.x = offset
+        frame.size.height += heightOfOneLabel
+        labelBounds.origin.y = frame.size.height - labelBounds.size.height
+        let label = UILabel(frame: labelBounds)
+        label.text = inText
+        
+        if 0 == offset {
+            label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
+        } else {
+            label.font = UIFont.italicSystemFont(ofSize: heightOfOneLabel - 10)
+        }
+        
+        inContainer.addContainedView(label)
+        inContainer.frame = frame
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDataSource Methods
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
@@ -74,33 +127,39 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
         }
     }
     
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDelegate Methods
+    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    override func addLabel(toContainer inContainer: UITableViewCell, withText inText: String, offsetBy inOffset: CGFloat! = nil) {
-        var offset: CGFloat = inOffset ?? 0
-        
-        if nil == inOffset {
-            offset = heightOfOneLabel
+    override func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        let section = sectionCache[inIndexPath.section]
+        if  inIndexPath.row < section.values.count,
+            let cellItem = section.values[inIndexPath.row].subviews[0] as? UILabel,
+            let text = cellItem.text,
+            nil == text.index(of: "Namespace:") {
+            return inIndexPath
         }
         
-        var frame = inContainer.frame
-        var labelBounds = inContainer.bounds
-        labelBounds.size.height = heightOfOneLabel
-        labelBounds.size.width -= offset
-        labelBounds.origin.x = offset
-        frame.size.height += heightOfOneLabel
-        labelBounds.origin.y = frame.size.height - labelBounds.size.height
-        let label = UILabel(frame: labelBounds)
-        label.text = inText
-        
-        if 0 == offset {
-            label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
-        } else {
-            label.font = UIFont.italicSystemFont(ofSize: heightOfOneLabel - 10)
+        return nil
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, didSelectRowAt inIndexPath: IndexPath) {
+        let section = sectionCache[inIndexPath.section]
+        if  inIndexPath.row < section.values.count,
+            let cell = section.values[inIndexPath.row] as? RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_AssociatedCommand_TableViewCell,
+            let cellItem = cell.subviews[0] as? UILabel,
+            let text = cellItem.text,
+            nil == text.index(of: "Namespace:") {
+            for dispatcher in onvifInstance.dispatchers {
+                if let disp = dispatcher as? RVS_ONVIF_tvOS_Test_Harness_Dispatcher {
+                    disp.setupCommandParameters(cell.associatedCommand)
+                }
+            }
         }
-        
-        inContainer.addContainedView(label)
-        inContainer.frame = frame
     }
 }
