@@ -25,6 +25,8 @@ protocol RVS_ONVIF_tvOS_Test_Harness_ViewProtocol {
 // MARK: - Main Tab Bar Controller Class
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ONVIF_tvOS_Test_Harness_ViewProtocol, RVS_ONVIFDelegate {
+    var preferredF: [UIFocusEnvironment] = []
+    
     /* ############################################################################################################################## */
     // MARK: - Overridden Superclass Calculated Properties
     /* ############################################################################################################################## */
@@ -32,6 +34,13 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
     /**
      */
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        if !preferredF.isEmpty {
+            let ret = preferredF
+            preferredF = []
+            selectedIndex = 1
+            return ret
+        }
+        
         if !isConnected, let tab = viewControllers?[0] as? RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController {
             return [tab]
         }
@@ -50,7 +59,16 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
     /* ################################################################## */
     /**
      */
-    var onvifInstance: RVS_ONVIF!
+    var onvifInstance: RVS_ONVIF! {
+        didSet {
+            if !isConnected {
+                selectedIndex = 0
+            }
+            
+            setNeedsFocusUpdate()
+            updateUI()
+        }
+    }
     
     /* ################################################################## */
     /**
@@ -74,6 +92,10 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
     /**
      */
     func updateUI() {
+        if !isConnected {
+            selectedIndex = 0
+        }
+        
         viewControllers?.forEach {
             if let vc = $0 as? RVS_ONVIF_tvOS_Test_Harness_Base_ViewController {
                 vc.updateUI()
@@ -85,10 +107,6 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
                 vc.updateUI()
                 vc.tabBarItem.isEnabled = isConnected
             }
-        }
-        
-        if !isConnected {
-            selectedIndex = 0
         }
     }
 
@@ -129,8 +147,7 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
      - parameter failureWithReason: An enumeration, with associated values that refine the issue.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
-        onvifInstance = nil
-        updateUI()
+        onvifInstanceDeinitialized(inONVIFInstance)
     }
     
     /* ################################################################## */
@@ -140,8 +157,8 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
      - parameter instance: The RVS_ONVIF instance that is calling the delegate.
      */
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
+        preferredF = [tabBar]
         onvifInstance = inONVIFInstance
-        updateUI()
     }
     
     /* ################################################################## */
@@ -152,6 +169,5 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
      */
     func onvifInstanceDeinitialized(_ inONVIFInstance: RVS_ONVIF) {
         onvifInstance = nil
-        updateUI()
     }
 }

@@ -132,9 +132,9 @@ class RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController: RVS_ONVIF_tvOS_Test_
 }
 
 /* ################################################################################################################################## */
-// MARK: - Base Class for Screens With Cached Tables
+// MARK: - Base Class for Screens With Cached Tables and Modal Behavior (Has A "Done" Row).
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
+class RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController: RVS_ONVIF_tvOS_Test_Harness_Base_TableViewController {
     let heightOfOneLabel: CGFloat = 40.0
     let doneLabelText = "DONE"
     

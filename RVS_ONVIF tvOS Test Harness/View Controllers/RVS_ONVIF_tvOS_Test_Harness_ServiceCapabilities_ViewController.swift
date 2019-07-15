@@ -13,7 +13,7 @@ import UIKit
 /* ################################################################################################################################## */
 // MARK: - Main Class for the Service Capabilities Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Cached_TableViewController {
+class RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController {
     /* ################################################################## */
     /**
      */

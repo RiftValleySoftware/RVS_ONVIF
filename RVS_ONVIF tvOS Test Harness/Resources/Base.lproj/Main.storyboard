@@ -215,10 +215,29 @@
                     <view key="view" contentMode="scaleToFill" id="YF3-eC-wYo">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="7" sectionFooterHeight="7" translatesAutoresizingMaskIntoConstraints="NO" id="0Js-50-5sP">
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hIB-De-oTZ" id="pFa-Fu-zUK"/>
+                                    <outlet property="delegate" destination="hIB-De-oTZ" id="ea1-Hd-Ud2"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="C9B-Ep-Ntn" firstAttribute="bottom" secondItem="0Js-50-5sP" secondAttribute="bottom" id="QYt-av-dUH"/>
+                            <constraint firstItem="0Js-50-5sP" firstAttribute="top" secondItem="C9B-Ep-Ntn" secondAttribute="top" id="dWN-A7-5M5"/>
+                            <constraint firstItem="C9B-Ep-Ntn" firstAttribute="trailing" secondItem="0Js-50-5sP" secondAttribute="trailing" id="fX0-Ow-DWh"/>
+                            <constraint firstItem="0Js-50-5sP" firstAttribute="leading" secondItem="C9B-Ep-Ntn" secondAttribute="leading" id="gf7-n4-cLn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="C9B-Ep-Ntn"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="RnC-WU-B2j"/>
+                    <connections>
+                        <outlet property="tableView" destination="0Js-50-5sP" id="DnA-BB-kBS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJP-bw-YCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
