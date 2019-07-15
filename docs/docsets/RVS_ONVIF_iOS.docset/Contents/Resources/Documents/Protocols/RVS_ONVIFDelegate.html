@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RVS_ONVIFDelegate Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Protocol/RVS_ONVIFDelegate" class="dashAnchor"></a>
+
+    <a title="RVS_ONVIFDelegate Protocol Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RVS_ONVIF_iOS Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/RiftValleySoftware/RVS_ONVIF">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">RVS_ONVIF_iOS Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      RVS_ONVIFDelegate Protocol Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF/SOAPAuthMethod.html">– SOAPAuthMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF/RVS_Fault.html">– RVS_Fault</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core.html">RVS_ONVIF_Core</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Scope.html">– Scope</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/DNSRecord.html">– DNSRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/DynamicDNSRecord.html">– DynamicDNSRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NTPRecord.html">– NTPRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Service.html">– Service</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/ServiceCapabilities.html">– ServiceCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkCapabilities.html">– NetworkCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/SecurityCapabilities.html">– SecurityCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/SystemCapabilities.html">– SystemCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Capabilities.html">– Capabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/AnalyticsCapabilities.html">– AnalyticsCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/AnalyticsDeviceCapabilities.html">– AnalyticsDeviceCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/DeviceCapabilities.html">– DeviceCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/DeviceIOCapabilities.html">– DeviceIOCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/DisplayCapabilities.html">– DisplayCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/EventsCapabilities.html">– EventsCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/ImagingCapabilities.html">– ImagingCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/InternalDeviceIOCapabilities.html">– InternalDeviceIOCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/MediaCapabilities.html">– MediaCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/PTZCapabilities.html">– PTZCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/ReceiverCapabilities.html">– ReceiverCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/RecordingCapabilities.html">– RecordingCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/ReplayCapabilities.html">– ReplayCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/SearchCapabilities.html">– SearchCapabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterface.html">– NetworkInterface</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceInfo.html">– NetworkInterfaceInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceLink.html">– NetworkInterfaceLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceExtension.html">– NetworkInterfaceExtension</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Dot11Configuration.html">– Dot11Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/IPAddressEntry.html">– IPAddressEntry</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/IPConfiguration.html">– IPConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/IPNetworkInterface.html">– IPNetworkInterface</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceConnectionSetting.html">– NetworkInterfaceConnectionSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S.html">RVS_ONVIF_Profile_S</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/EncodingTypes.html">– EncodingTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/H264EncodingParameters.html">– H264EncodingParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/MPEG4EncodingParameters.html">– MPEG4EncodingParameters</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/StreamingProtocol.html">– StreamingProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/TransportProtocol.html">– TransportProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/PTZConfiguration.html">– PTZConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/PanTiltLimits.html">– PanTiltLimits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/ZoomLimits.html">– ZoomLimits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/Profile.html">– Profile</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/Stream_URI.html">– Stream_URI</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/VideoEncoderConfiguration.html">– VideoEncoderConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/Multicast.html">– Multicast</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/RateControl.html">– RateControl</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/VideoEncoderConfigurationOptions.html">– VideoEncoderConfigurationOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Profile_S/VideoSourceConfiguration.html">– VideoSourceConfiguration</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/DateComponents.html">DateComponents</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Sequence.html">Sequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/StringProtocol.html">StringProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Functions.html#/s:13RVS_ONVIF_iOS0a17_IPAddressExtractD0_8isPaddedAA0a1_D0_pSgSS_SbtF">RVS_IPAddressExtractIPAddress(_:isPadded:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Functions.html#/s:13RVS_ONVIF_iOS0a17_IPAddressExtractD05array4port8isPaddedAA0a1_D0_pSgSaySiG_SiSbtF">RVS_IPAddressExtractIPAddress(array:port:isPadded:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ConfigurationProtocol.html">ConfigurationProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/OwnedInstanceProtocol.html">OwnedInstanceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ProfileHandlerProtocol.html">ProfileHandlerProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_IPAddress.html">RVS_IPAddress</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_ONVIFDelegate.html">RVS_ONVIFDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_CoreDispatcher.html">RVS_ONVIF_CoreDispatcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_DeviceRequestProtocol.html">RVS_ONVIF_DeviceRequestProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_Dispatcher.html">RVS_ONVIF_Dispatcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_IPAddressV4.html">RVS_IPAddressV4</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RVS_IPAddressV6.html">RVS_IPAddressV6</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>RVS_ONVIFDelegate</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_ONVIFDelegate</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>This is the delegate protocol for use with the RVS_ONVIF framework. It has all required methods.</p>
+
+<p>This is a <q>pure</q> Swift protocol, requiring that it be applied to a class.</p>
+
+<p>These methods are all called in the main thread.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_14rawDataPreview13deviceRequestSbAA0a1_B0C_SDySSypGSgAA0a1_b7_DeviceK8Protocol_pSgtF"></a>
+                    <a name="//apple_ref/swift/Method/onvifInstance(_:rawDataPreview:deviceRequest:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_14rawDataPreview13deviceRequestSbAA0a1_B0C_SDySSypGSgAA0a1_b7_DeviceK8Protocol_pSgtF">onvifInstance(_:rawDataPreview:deviceRequest:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a <q>general purpose</q> callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
+It contains the information that would be sent to the following specialized callback, but as the initial partially-parsed dictionary from SOAPEngine.
+This is not called for errors.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This is a <q>general purpose</q> callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
+It contains the information that would be sent to the following specialized callback, but as the initial partially-parsed dictionary from SOAPEngine.
+This is not called for errors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onvifInstance</span><span class="p">(</span><span class="n">_</span> <span class="nv">instance</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="p">,</span> <span class="nv">rawDataPreview</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span><span class="o">!</span><span class="p">,</span> <span class="nv">deviceRequest</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_ONVIF_DeviceRequestProtocol.html">RVS_ONVIF_DeviceRequestProtocol</a></span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instance</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The RVS_ONVIF instance that is calling the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawDataPreview</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The partially-parsed data to be sent for specific parsing in the next callback (can be nil).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceRequest</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request object (can be nil).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>false, if the following specialized callback should be made. If true, then the following callback will not be made.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_17failureWithReasonyAA0a1_B0C_AG0A6_FaultVSgtF"></a>
+                    <a name="//apple_ref/swift/Method/onvifInstance(_:failureWithReason:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_17failureWithReasonyAA0a1_B0C_AG0A6_FaultVSgtF">onvifInstance(_:failureWithReason:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called whenever an error is encountered by the RVS_ONVIF framework.</p>
+
+<p>This is not required, but you&rsquo;d be well-advised to implement it.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This is called whenever an error is encountered by the RVS_ONVIF framework.</p>
+
+<p>This is not required, but you&rsquo;d be well-advised to implement it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onvifInstance</span><span class="p">(</span><span class="n">_</span> <span class="nv">instance</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="p">,</span> <span class="nv">failureWithReason</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="o">.</span><span class="kt">RVS_Fault</span><span class="o">!</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instance</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The RVS_ONVIF instance that is calling the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failureWithReason</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An enumeration, with associated values that refine the issue.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_23simpleResponseToRequestyAA0a1_B0C_AA0a1_b7_DeviceJ8Protocol_pSgtF"></a>
+                    <a name="//apple_ref/swift/Method/onvifInstance(_:simpleResponseToRequest:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP13onvifInstance_23simpleResponseToRequestyAA0a1_B0C_AA0a1_b7_DeviceJ8Protocol_pSgtF">onvifInstance(_:simpleResponseToRequest:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called when a response is a simple empty packet. It is a simple <q>ack.</q></p>
+
+<p>This is not required, but it&rsquo;s a good idea to implement it, as many responses use it.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This is called when a response is a simple empty packet. It is a simple <q>ack.</q></p>
+
+<p>This is not required, but it&rsquo;s a good idea to implement it, as many responses use it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onvifInstance</span><span class="p">(</span><span class="n">_</span> <span class="nv">instance</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="p">,</span> <span class="nv">simpleResponseToRequest</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RVS_ONVIF_DeviceRequestProtocol.html">RVS_ONVIF_DeviceRequestProtocol</a></span><span class="o">!</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instance</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The RVS_ONVIF instance that is calling the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>simpleResponseToRequest</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An enumeration, with the request that is being satisfied by this response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP24onvifInstanceInitializedyyAA0a1_B0CF"></a>
+                    <a name="//apple_ref/swift/Method/onvifInstanceInitialized(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP24onvifInstanceInitializedyyAA0a1_B0CF">onvifInstanceInitialized(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called if the instance is completely initialized. It is optional.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This is called if the instance is completely initialized. It is optional.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onvifInstanceInitialized</span><span class="p">(</span><span class="n">_</span> <span class="nv">instance</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instance</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The RVS_ONVIF instance that is calling the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP26onvifInstanceDeinitializedyyAA0a1_B0CF"></a>
+                    <a name="//apple_ref/swift/Method/onvifInstanceDeinitialized(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A14_ONVIFDelegateP26onvifInstanceDeinitializedyyAA0a1_B0CF">onvifInstanceDeinitialized(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is called if the instance is <q>deinitialized.</q> It is optional.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>This is called if the instance is <q>deinitialized.</q> It is optional.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">onvifInstanceDeinitialized</span><span class="p">(</span><span class="n">_</span> <span class="nv">instance</span><span class="p">:</span> <span class="kt"><a href="../Classes/RVS_ONVIF.html">RVS_ONVIF</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>instance</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The RVS_ONVIF instance that is calling the delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

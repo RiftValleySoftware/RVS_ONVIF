@@ -19,6 +19,9 @@ extension RVS_ONVIF_Core {
     /* ################################################################################################################################## */
     // MARK: - Public Structs
     /* ################################################################################################################################## */
+    /**
+     This protocol will allow scopes to hold ancillary information, which is used when parsing them.
+     */
     public struct Scope: OwnedInstanceProtocol {
         /* ###################################################################################################################################### */
         /**
@@ -139,9 +142,18 @@ extension RVS_ONVIF_Core {
      This struct is the response from the GetDynamicDNS command.
      */
     public struct DynamicDNSRecord: OwnedInstanceProtocol {
+        /**
+         An internal enum that is used to define the type of dynamic DNS service.
+         */
         public enum DynDNSType: Equatable {
+            /// There will be no DynDNS updates from either the client or the server.
             case NoUpdate
+            /// The server updates.
+            /// - parameter ttl: The time to live, as a DateComponents object.
             case ServerUpdates(ttl: DateComponents!)
+            /// The client updtaes.
+            /// - parameter name: The name the client will send.
+            /// - parameter ttl: The time to live, as a DateComponents object.
             case ClientUpdates(name: String, ttl: DateComponents!)
 
             /* ############################################################## */
@@ -1343,18 +1355,27 @@ extension RVS_ONVIF_Core {
             
             /// The network security mode.
             public enum Dot11SecurityMode: String {
+                /// No Dot11 security
                 case none = "None"
+                /// Standard Wired Equivalent Privacy
                 case wep = "WEP"
+                /// Pre-Shared Key
                 case psk = "PSK"
+                /// Dot1X Encryption
                 case dot1x = "Dot1X"
+                /// Extra Extension
                 case extended = "Extended"
             }
             
             /// The encryption type.
             public enum Dot11Cipher: String {
+                /// Counter Mode Cipher Block Chaining Message Authentication
                 case ccmp = "CCMP"
+                /// Temporal Key Integrity Protocol
                 case tkip = "TKIP"
+                /// Any (Undefined) Protocol
                 case any = "Any"
+                /// Extra Extension
                 case extended = "Extended"
             }
             
@@ -1376,9 +1397,13 @@ extension RVS_ONVIF_Core {
         
        /// The connection mode for this network.
         public enum Dot11StationMode: String {
+            /// Ad-Hoc Network
             case adHoc = "Ad-hoc"
+            /// Infrastructure Network Mode
             case infrastructure = "Infrastructure"
+            /// Extra Extension
             case extended = "Extended"
+            /// Error
             case error
         }
         
@@ -1489,7 +1514,10 @@ extension RVS_ONVIF_Core {
          This enum describes the duplex type (Half or Full).
          */
         public enum Duplex: String {
-            case Half, Full
+            /// Half Duplex Mode
+            case Half
+            /// Full Duplex Mode
+            case Full
         }
         
         /* ############################################################## */
@@ -1521,6 +1549,9 @@ extension RVS_ONVIF_Core {
 /* ################################################################################################################################## */
 // MARK: - Dispatch Core Functions
 /* ################################################################################################################################## */
+/**
+ This is the protocol that defines the dispatcher for the Core ONVIF Profile.
+ */
 public protocol RVS_ONVIF_CoreDispatcher: RVS_ONVIF_Dispatcher {
     /* ################################################################## */
     /**

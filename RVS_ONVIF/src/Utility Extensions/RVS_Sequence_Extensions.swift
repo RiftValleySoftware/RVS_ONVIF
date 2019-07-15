@@ -21,6 +21,14 @@ import Foundation
  This cool little extension comes straight from here: https://stackoverflow.com/a/55796671/879365
  */
 public extension Sequence {
+    /* ################################################################## */
+    /**
+     This allows us to sort through a sequence container of various instances,
+     looking for ones that match a given protocol.
+     
+     - parameter of: The type that we are filtering for.
+     - returns: An Array of elements that conform to the given type.
+     */
     func filterForInstances<T>(of: T.Type) -> [T] {
         return self.compactMap { $0 as? T }
     }

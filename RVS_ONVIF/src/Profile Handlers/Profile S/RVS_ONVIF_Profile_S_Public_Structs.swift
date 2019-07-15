@@ -23,11 +23,17 @@ extension RVS_ONVIF_Profile_S {
      These are the video encoding types available.
      */
     public enum EncodingTypes: String {
+        /// Error
         case error
+        /// H264
         case h264
+        /// H265
         case h265
+        /// HEVC
         case hevc
+        /// Motion JPEG
         case jpeg
+        /// MPEG/MP4
         case mpeg = "mpeg-4"
     }
 
@@ -36,10 +42,15 @@ extension RVS_ONVIF_Profile_S {
      These are the type parameter values for H.264
      */
     public enum H264EncodingParameters: String {
+        /// Error
         case error
+        /// H264 Baseline
         case baseline
+        /// H264 Main
         case main
+        /// H264 Extended
         case extended
+        /// H24 High
         case high
     }
 
@@ -48,8 +59,11 @@ extension RVS_ONVIF_Profile_S {
      These are the type parameters for MPEG-4
      */
     public enum MPEG4EncodingParameters: String {
+        /// Error
         case error
+        /// Simple
         case simple
+        /// Advanced
         case advanced
     }
 
@@ -58,9 +72,13 @@ extension RVS_ONVIF_Profile_S {
      These are the streaming protocol types.
      */
     public enum StreamingProtocol: String {
+        /// Error
         case error
+        /// RTSP
         case RTSP
+        /// RTP (unicast)
         case RTP_Unicast = "RTP-Unicast"
+        /// RTP (multicast)
         case RTP_Multicast = "RTP-Multicast"
     }
 
@@ -69,8 +87,11 @@ extension RVS_ONVIF_Profile_S {
      These are the basic IP transport protocols.
      */
     public enum TransportProtocol: String {
+        /// Error
         case error
+        /// TCP
         case TCP
+        /// UDP
         case UDP
     }
 
@@ -440,6 +461,9 @@ extension RVS_ONVIF_Profile_S {
 /* ################################################################################################################################## */
 // MARK: - Dispatch Profile S Functions
 /* ################################################################################################################################## */
+/**
+ This protocol covers Profile S (Streaming) dispatcher expectations.
+ */
 public protocol RVS_ONVIF_Profile_SDispatcher: RVS_ONVIF_Dispatcher {
 }
 

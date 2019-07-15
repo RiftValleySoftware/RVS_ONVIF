@@ -159,6 +159,17 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
     func onvifInstanceInitialized(_ inONVIFInstance: RVS_ONVIF) {
         preferredF = [tabBar]
         onvifInstance = inONVIFInstance
+        inONVIFInstance.profiles.forEach {
+            switch $0.key {
+            case "RVS_ONVIF_Core":
+                inONVIFInstance.dispatchers.append(RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher(owner: inONVIFInstance))
+            case "RVS_ONVIF_Profile_S":
+                inONVIFInstance.dispatchers.append(RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher(owner: inONVIFInstance))
+            default:
+                break
+            }
+        }
+        onvifInstance = inONVIFInstance
     }
     
     /* ################################################################## */

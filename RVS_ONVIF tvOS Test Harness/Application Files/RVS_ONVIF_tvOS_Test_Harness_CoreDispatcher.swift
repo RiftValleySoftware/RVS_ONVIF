@@ -230,6 +230,37 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
     /**
      */
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
+        sendParameters = [:]
+        if inCommand.isRequiresParameters {
+            var dataEntryDialog: RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController!
+            
+            switch inCommand.rawValue {
+            case "SetHostname":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["Name": .textEntry(defaultValue: "", callback: nameCallback)], command: inCommand, dispatcher: self)
+                
+            case "SetHostnameFromDHCP":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["FromDHCP": .pickOne(values: ["false", "true"], selectedIndex: 0, callback: fromDHCPCallback)], command: inCommand, dispatcher: self)
+                
+            case "SetNTP":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["FromDHCP": .pickOne(values: ["false", "true"], selectedIndex: 0, callback: fromDHCPCallback), "NTPManual": .textEntry(defaultValue: "", callback: ntpIPAddressListCallback)], command: inCommand, dispatcher: self)
+                
+            case "SetDNS":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["SearchDomain": .textEntry(defaultValue: "", callback: dnsSearchDomainCallback), "FromDHCP": .pickOne(values: ["false", "true"], selectedIndex: 0, callback: fromDHCPCallback), "DNSManual": .textEntry(defaultValue: "", callback: dnsIPAddressListCallback)], command: inCommand, dispatcher: self)
+                
+            case "SetDynamicDNS":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["Type": .pickOne(values: ["NoUpdate", "ServerUpdates", "ClientUpdates"], selectedIndex: 0, callback: dynDNSTypeCallback), "Name": .textEntry(defaultValue: "", callback: nameCallback), "TTL": .textEntry(defaultValue: "", callback: ttlCallback)], command: inCommand, dispatcher: self)
+                
+            default:
+                ()
+            }
+            
+            if  nil != dataEntryDialog,
+                let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openNamespaceHandlerScreen {
+                windowViewController.present(dataEntryDialog, animated: true, completion: nil)
+            }
+        } else {
+            sendRequest(inCommand)
+        }
     }
     
     /* ################################################################## */

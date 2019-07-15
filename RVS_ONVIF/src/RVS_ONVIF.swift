@@ -637,11 +637,11 @@ import SOAPEngine64
         
         /* ############################################################## */
         /**
-         Sender and Receiver subcodes (ter namespace)
+         Sender and Receiver subcodes (per namespace)
          */
         public enum Subcode: String, Error {
             
-            /************* SENDER ENUMS *************/
+            /* ############# SENDER ENUMS ############# */
             
             /// XML Well-formed violation occurred.
             case WellFormed
@@ -671,7 +671,7 @@ import SOAPEngine64
             /// The action requested requires authorization and the sender is not authorized.
             case NotAuthorized
             
-            /************* RECEIVER ENUMS *************/
+            /* ############# RECEIVER ENUMS ############# */
             
             /// The requested action is optional and is not implemented by the device.
             case ActionNotSupported

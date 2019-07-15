@@ -43,22 +43,38 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      These use ONVIF TitleCase, as opposed to the standard Swift camelCase, in order to match the SOAP request.
      */
     internal enum _DeviceRequest: String, RVS_ONVIF_DeviceRequestProtocol, CaseIterable {
+        /// Get Basic Device Information
         case GetDeviceInformation
+        /// Get the Hostname
         case GetHostname
+        /// Get the Various ONVIF Services Available
         case GetServices
+        /// Get Service Capabilities
         case GetServiceCapabilities
+        /// Get All ONVIF Capabilities
         case GetCapabilities
+        /// Get the WSDL URI for the Device
         case GetWsdlUrl
+        /// Get the Scopes Available From the Device
         case GetScopes
+        /// Get the Device DNS Settings
         case GetDNS
+        /// Get the Device NTP (Time Server) Settings
         case GetNTP
+        /// Get the Device Dynamic DNS Service Settings
         case GetDynamicDNS
+        /// Get Information About the Device Network Interfaces
         case GetNetworkInterfaces
         
+        /// Set a New Hostname for the Device
         case SetHostname
+        /// Enable Hostname From DHCP Server
         case SetHostnameFromDHCP
+        /// Set the Device DNS Settings
         case SetDNS
+        /// Set the Device NTP Settings
         case SetNTP
+        /// Set the Dynamic DNS Service Settings.
         case SetDynamicDNS
         
         /* ############################################################## */

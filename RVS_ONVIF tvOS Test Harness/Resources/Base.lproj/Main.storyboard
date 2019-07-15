@@ -720,6 +720,102 @@
             </objects>
             <point key="canvasLocation" x="2860" y="11528"/>
         </scene>
+        <!--tvOS Test Harness Function Data View Controller-->
+        <scene sceneID="NJz-Q2-qpA">
+            <objects>
+                <viewController storyboardIdentifier="dynamicDataEntry" id="J37-NC-cja" customClass="RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tl7-jC-HRJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="dD9-vN-rJG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WR9-bD-izr">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dBC-fa-tiB">
+                                <rect key="frame" x="90" y="60" width="1740" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="3X3-zb-2YY"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Generic Command"/>
+                                    <segment title="Specific Command"/>
+                                </segments>
+                            </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXO-IL-bjm">
+                                <rect key="frame" x="90" y="956" width="1740" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-7k-7RQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="227" height="64"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="CANCEL"/>
+                                        <connections>
+                                            <action selector="cancelButtonHit:" destination="J37-NC-cja" eventType="primaryActionTriggered" id="4a8-Ie-Ty6"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXA-Cr-C6j">
+                                        <rect key="frame" x="227" y="0.0" width="1334" height="64"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5X4-dl-sgk">
+                                                <rect key="frame" x="8" y="0.0" width="1318" height="64"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="5X4-dl-sgk" firstAttribute="leading" secondItem="zXA-Cr-C6j" secondAttribute="leading" constant="8" id="QRs-39-BAI"/>
+                                            <constraint firstItem="5X4-dl-sgk" firstAttribute="top" secondItem="zXA-Cr-C6j" secondAttribute="top" id="c85-bn-p0M"/>
+                                            <constraint firstAttribute="trailing" secondItem="5X4-dl-sgk" secondAttribute="trailing" constant="8" id="g2c-2N-tPx"/>
+                                            <constraint firstAttribute="bottom" secondItem="5X4-dl-sgk" secondAttribute="bottom" id="pDf-Kp-laO"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPn-Eo-sy6">
+                                        <rect key="frame" x="1561" y="0.0" width="179" height="64"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="SEND"/>
+                                        <connections>
+                                            <action selector="sendButtonHit:" destination="J37-NC-cja" eventType="primaryActionTriggered" id="QoT-Rz-YA9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="VTE-AB-mfJ"/>
+                                </constraints>
+                            </stackView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1O-zm-TrZ">
+                                <rect key="frame" x="90" y="137" width="1740" height="811"/>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="UXO-IL-bjm" firstAttribute="top" secondItem="a1O-zm-TrZ" secondAttribute="bottom" constant="8" id="07y-h9-QJ1"/>
+                            <constraint firstItem="dBC-fa-tiB" firstAttribute="top" secondItem="oj3-7j-qfV" secondAttribute="top" id="1Lv-Cx-y4L"/>
+                            <constraint firstItem="dBC-fa-tiB" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="1fU-dP-mg3"/>
+                            <constraint firstItem="oj3-7j-qfV" firstAttribute="trailing" secondItem="UXO-IL-bjm" secondAttribute="trailing" id="D8J-0h-VUa"/>
+                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="top" secondItem="dBC-fa-tiB" secondAttribute="bottom" constant="8" id="KlR-EU-IYN"/>
+                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="trailing" secondItem="oj3-7j-qfV" secondAttribute="trailing" id="T2r-Kd-hvc"/>
+                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="Ulf-LO-Kp2"/>
+                            <constraint firstItem="oj3-7j-qfV" firstAttribute="bottom" secondItem="UXO-IL-bjm" secondAttribute="bottom" id="VyM-mC-71o"/>
+                            <constraint firstItem="UXO-IL-bjm" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="poi-zI-RyB"/>
+                            <constraint firstItem="oj3-7j-qfV" firstAttribute="trailing" secondItem="dBC-fa-tiB" secondAttribute="trailing" id="syA-Lv-Y1B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oj3-7j-qfV"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="eM8-7k-7RQ" id="3Yx-8l-kN5"/>
+                        <outlet property="scrollView" destination="a1O-zm-TrZ" id="iWX-In-s93"/>
+                        <outlet property="selectorSwitch" destination="dBC-fa-tiB" id="jDw-x3-9Dw"/>
+                        <outlet property="sendButton" destination="TPn-Eo-sy6" id="bfn-Wp-vTH"/>
+                        <outlet property="titleLabel" destination="5X4-dl-sgk" id="Cpo-Ti-DPR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O0H-9R-ZAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2860" y="12878"/>
+        </scene>
         <!--SERVICE CAPABILITIES-->
         <scene sceneID="owW-3y-H9S">
             <objects>

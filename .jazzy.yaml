@@ -1,0 +1,6 @@
+xcodebuild_arguments:
+    - "-project"
+    - "RVS_ONVIF.xcodeproj"
+    - "-scheme"
+    - "RVS_ONVIF_iOS"
+    

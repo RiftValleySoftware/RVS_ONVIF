@@ -20,6 +20,12 @@
       location = "group:Warnings.xcconfig">
    </FileRef>
    <FileRef
+      location = "group:.jazzy.yaml">
+   </FileRef>
+   <FileRef
+      location = "group:jazzy.sh">
+   </FileRef>
+   <FileRef
       location = "group:RVS_ONVIF.xcodeproj">
    </FileRef>
    <FileRef

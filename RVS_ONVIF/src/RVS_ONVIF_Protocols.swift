@@ -431,6 +431,9 @@ public extension ConfigurationProtocol {
 /* ################################################################################################################################## */
 // MARK: - This is a special protocol for developing "dispatcher" handlers for RVS_ONVIF instances.
 /* ################################################################################################################################## */
+/**
+ This protocol describes the expectations for generic ONVIF Dispatchers.
+ */
 public protocol RVS_ONVIF_Dispatcher {
     /* ################################################################## */
     /**

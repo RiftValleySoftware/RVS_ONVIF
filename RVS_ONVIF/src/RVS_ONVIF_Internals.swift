@@ -108,9 +108,11 @@ extension RVS_ONVIF {
      This is a class that we use to manage a basic HTTP probe of the device, in order to trigger an authentication challenge.
      */
     internal class _AuthorizationSetup: NSObject, URLSessionTaskDelegate, URLSessionDelegate {
+        /// This will hold the active URLSession
         private var _session: URLSession!
+        /// This will hold the Dispatch Group we are using to synchronize the threads.
         private var _group: DispatchGroup!
-
+        /// This will hold the authorization credentials.
         private var _authCred: [String: String] = [:]
         
         /* ############################################################## */

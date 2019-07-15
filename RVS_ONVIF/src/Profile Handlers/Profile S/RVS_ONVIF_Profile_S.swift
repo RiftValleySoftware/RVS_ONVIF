@@ -40,8 +40,11 @@ open class RVS_ONVIF_Profile_S: ProfileHandlerProtocol {
      These use ONVIF TitleCase, as opposed to the standard Swift camelCase, in order to match the SOAP request.
      */
     internal enum _DeviceRequest: String, RVS_ONVIF_DeviceRequestProtocol, CaseIterable {
+        /// Get Streaming Profiles
         case GetProfiles
+        /// Get Video Stream URI
         case GetStreamUri
+        /// Get Configurations for Video Sources
         case GetVideoSourceConfigurations
         
         /* ########################################################################################################################## */
