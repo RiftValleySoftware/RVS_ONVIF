@@ -11,14 +11,28 @@
 import UIKit
 import RVS_ONVIF_tvOS
 
+typealias RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement = (label: String, values: [UITableViewCell])
+
+/* ################################################################################################################################## */
+// MARK: - Class for A Specialized TableView Cell That Carries An Associated Command Enum.
+/* ################################################################################################################################## */
+/**
+ */
 class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_AssociatedCommand_TableViewCell: UITableViewCell {
     var associatedCommand: RVS_ONVIF_DeviceRequestProtocol!
 }
 
-typealias RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement = (label: String, values: [UITableViewCell])
+/* ################################################################################################################################## */
+// MARK: - Class for A Specialized TableView Cell That Is Used to Fetch A Streaming URI
+/* ################################################################################################################################## */
+/**
+ */
+class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_StreamingURI_TableViewCell: UITableViewCell {
+    var associatedCommand: RVS_ONVIF_DeviceRequestProtocol!
+}
 
 /* ################################################################################################################################## */
-// MARK: - Main Class for the Namespaces NavigationController
+// MARK: - Main Class for the Namespaces ViewController
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController {
     var sectionCache: [RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement] = []
@@ -54,8 +68,25 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
                     addLabel(toContainer: cell, withText: i.element.rawValue)
                     cells.append(cell)
                 }
-                let section = RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement(label: sectionLabel, values: cells)
-                sectionCache.append(section)
+                
+                if "PROFILE-S" == $0.profileName {
+                    let cell = RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_StreamingURI_TableViewCell()
+                    var frame = cell.frame
+                    var labelBounds = cell.bounds
+                    labelBounds.size.height = heightOfOneLabel
+                    frame.size.height += heightOfOneLabel
+                    labelBounds.origin.y = frame.size.height - labelBounds.size.height
+                    let label = UILabel(frame: labelBounds)
+                    label.text = "GET STREAMING URI"
+                    label.textAlignment = .center
+                    label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
+                    
+                    cell.addContainedView(label)
+                    cell.frame = frame
+                    cells.append(cell)
+                }
+                
+                sectionCache.append(RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement(label: sectionLabel, values: cells))
             }
         }
     }
@@ -112,7 +143,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
      */
     override func tableView(_ inTableView: UITableView, numberOfRowsInSection inSection: Int) -> Int {
         let section = sectionCache[inSection]
-        return section.values.count + 1
+        return section.values.count
     }
     
     /* ################################################################## */
@@ -122,9 +153,9 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
         let section = sectionCache[inIndexPath.section]
         if inIndexPath.row < section.values.count {
             return section.values[inIndexPath.row]
-        } else {
-            return UITableViewCell()
         }
+        
+        return UITableViewCell()
     }
     
     /* ############################################################################################################################## */
@@ -161,5 +192,19 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
                 }
             }
         }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func tableView(_ inTableView: UITableView, canFocusRowAt inIndexPath: IndexPath) -> Bool {
+        let section = sectionCache[inIndexPath.section]
+        if  inIndexPath.row < section.values.count,
+            (section.values[inIndexPath.row] is RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_AssociatedCommand_TableViewCell
+                || section.values[inIndexPath.row] is RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_StreamingURI_TableViewCell) {
+            return true
+        }
+        
+        return false
     }
 }
