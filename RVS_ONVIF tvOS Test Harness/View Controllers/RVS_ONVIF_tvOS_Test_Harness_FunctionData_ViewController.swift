@@ -151,7 +151,7 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navItem.title = command.soapAction + "Request"
+        titleLabel.text = command.soapAction + "Request"
         let label = UILabel()
         label.text = command.rawValue
         label.textAlignment = .center
