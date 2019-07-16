@@ -37,6 +37,12 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_StreamingURI_TableVi
 class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController {
     var sectionCache: [RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement] = []
     
+    /* ################################################################## */
+    /**
+     */
+    func displayResult(header inHeader: String, data inData: String) {
+    }
+
     /* ############################################################################################################################## */
     // MARK: - Internal Base Class Override Methods
     /* ############################################################################################################################## */

@@ -35,7 +35,7 @@ class RVS_ONVIF_Test_Harness_Namespaces_TableViewController: RVS_ONVIF_Test_Harn
     /* ################################################################## */
     /**
      */
-    func displayResult (header inHeader: String, data inData: String) {
+    func displayResult(header inHeader: String, data inData: String) {
         performSegue(withIdentifier: displayDataSegueID, sender: (header: inHeader, data: inData))
     }
     

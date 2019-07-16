@@ -36,7 +36,7 @@ extension RVS_ONVIF_Test_Harness_Dispatcher {
      */
     @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
         #if DEBUG
-            print("RVS_ONVIF_Mac_Test_Harness_Dispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
+            print("RVS_ONVIF_iOS_Test_Harness_Dispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
         #endif
         
         let header = "\(inCommand.rawValue)Response:"

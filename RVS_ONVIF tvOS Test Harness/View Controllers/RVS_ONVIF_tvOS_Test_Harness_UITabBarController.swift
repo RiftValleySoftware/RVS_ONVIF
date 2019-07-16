@@ -129,6 +129,7 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
      - parameter failureWithReason: An enumeration, with associated values that refine the issue.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
+        RVS_ONVIF_tvOS_Test_Harness_AppDelegate.displayAlert("ERROR!", message: inReason.debugDescription)
         onvifInstanceDeinitialized(inONVIFInstance)
     }
     
