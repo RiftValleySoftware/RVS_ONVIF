@@ -559,7 +559,6 @@
 		D40DB0BE22D3E40700DEB086 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D48F143122DCDFEF001EA337 /* RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.swift */,
 				D40DB0BF22D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift */,
 				D443D3EF22D4BA7D0089764A /* RVS_ONVIF_tvOS_Test_Harness_Base_ViewController.swift */,
 				D443D3F122D4BD490089764A /* RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController.swift */,
@@ -572,6 +571,7 @@
 				D459765922DB949500BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_NetworkInterfaces_ViewController.swift */,
 				D443D3F522D4BDFF0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift */,
 				D443D3F722D4BEFC0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift */,
+				D48F143122DCDFEF001EA337 /* RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

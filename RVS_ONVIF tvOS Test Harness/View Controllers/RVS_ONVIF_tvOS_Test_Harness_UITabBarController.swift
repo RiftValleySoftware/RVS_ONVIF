@@ -40,11 +40,7 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
             selectedIndex = 1
             return ret
         }
-        
-        if !isConnected, let tab = viewControllers?[0] as? RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController {
-            return [tab]
-        }
-        
+
         return super.preferredFocusEnvironments
     }
     
@@ -92,10 +88,6 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
     /**
      */
     func updateUI() {
-        if !isConnected {
-            selectedIndex = 0
-        }
-        
         viewControllers?.forEach {
             if let vc = $0 as? RVS_ONVIF_tvOS_Test_Harness_Base_ViewController {
                 vc.updateUI()
@@ -122,16 +114,6 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
         let defaultPrefs: [String: Any] = ["ip_address": "", "tcp_port": 0, "login_id": "", "password": "", "soap_key": "", "auth_method": 0]
 
         persistentPrefs = RVS_PersistentPrefs(tag: "TestONVIFSettings", values: defaultPrefs)
-    }
-    
-    /* ################################################################## */
-    /**
-     */
-    override func shouldUpdateFocus(in inContext: UIFocusUpdateContext) -> Bool {
-        if !isConnected, !(inContext.nextFocusedItem is UITextField || inContext.nextFocusedItem is UIButton || inContext.nextFocusedItem is UISegmentedControl) {
-            return false
-        }
-        return super.shouldUpdateFocus(in: inContext)
     }
 
     /* ############################################################################################################################## */
