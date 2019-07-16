@@ -624,10 +624,10 @@
             </objects>
             <point key="canvasLocation" x="-1676" y="7596"/>
         </scene>
-        <!--tvOS Test HarnessUI Tab Bar Controller-->
+        <!--TAB CONTROLLER-->
         <scene sceneID="dCN-cR-omT">
             <objects>
-                <tabBarController id="t9H-8u-pk4" customClass="RVS_ONVIF_tvOS_Test_Harness_UITabBarController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="TAB CONTROLLER" id="t9H-8u-pk4" customClass="RVS_ONVIF_tvOS_Test_Harness_UITabBarController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="D70-Li-9ox">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -720,10 +720,10 @@
             </objects>
             <point key="canvasLocation" x="2860" y="11528"/>
         </scene>
-        <!--tvOS Test Harness Function Data View Controller-->
+        <!--FUNCTION BUILDER-->
         <scene sceneID="NJz-Q2-qpA">
             <objects>
-                <viewController storyboardIdentifier="dynamicDataEntry" id="J37-NC-cja" customClass="RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="dynamicDataEntry" title="FUNCTION BUILDER" id="J37-NC-cja" customClass="RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tl7-jC-HRJ"/>
                         <viewControllerLayoutGuide type="bottom" id="dD9-vN-rJG"/>
@@ -822,10 +822,10 @@
             </objects>
             <point key="canvasLocation" x="2860" y="12878"/>
         </scene>
-        <!--tvOS Test Harness Display Response View Controller-->
+        <!--DISPLAY RESULTS-->
         <scene sceneID="Nmk-NP-27K">
             <objects>
-                <viewController storyboardIdentifier="displayResponseScreen" id="1Oi-Fq-zej" customClass="RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="displayResponseScreen" title="DISPLAY RESULTS" id="1Oi-Fq-zej" customClass="RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8dA-F8-xMH"/>
                         <viewControllerLayoutGuide type="bottom" id="P7h-QZ-CyK"/>
