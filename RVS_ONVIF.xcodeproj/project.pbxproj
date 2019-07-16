@@ -183,6 +183,7 @@
 		D4D793702210C9F6008022FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D7936F2210C9F6008022FC /* Default-568h@2x.png */; };
 		D4DC121A22C7DA18004D30F9 /* RVS_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F424BB2206540800729C0F /* RVS_Extensions.swift */; };
 		D4E0095A220C4A490089B914 /* RVS_ONVIF_Internals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E00959220C4A490089B914 /* RVS_ONVIF_Internals.swift */; };
+		D4E4C3DB22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E4C3DA22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift */; };
 		D4E5721422C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5721322C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift */; };
 		D4E5721522C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5721322C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift */; };
 		D4E5721622C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5721322C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift */; };
@@ -428,6 +429,7 @@
 		D4DF78B221FF2A7C00E9CB70 /* RVS_ONVIF_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_ONVIF_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E00959220C4A490089B914 /* RVS_ONVIF_Internals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Internals.swift; sourceTree = "<group>"; };
 		D4E0A8E3226E183D007049B6 /* RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher.swift; sourceTree = "<group>"; };
+		D4E4C3DA22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift; sourceTree = "<group>"; };
 		D4E5721322C8D96F00521315 /* HikvisionDS2CD2143G0IMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HikvisionDS2CD2143G0IMock.swift; sourceTree = "<group>"; };
 		D4E5721722C8DACB00521315 /* RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer.swift; sourceTree = "<group>"; };
 		D4E66AF3229DBC5300032A4A /* RVS_ONVIF_Core_IANATypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core_IANATypes.swift; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 				D443D3F522D4BDFF0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_NavigationController.swift */,
 				D443D3F722D4BEFC0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift */,
 				D48F143122DCDFEF001EA337 /* RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.swift */,
+				D4E4C3DA22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1412,6 +1415,7 @@
 				D4F8755F22DCD3B000462066 /* RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher.swift in Sources */,
 				D459765C22DB9AD600BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_Dispatcher_NavigationController.swift in Sources */,
 				D4EA1BDC22CE3C6D00E323BF /* RVS_ONVIF_tvOS_Test_Harness_AppDelegate.swift in Sources */,
+				D4E4C3DB22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift in Sources */,
 				D40DB0C122D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift in Sources */,
 				D443D3F822D4BEFD0089764A /* RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController.swift in Sources */,
 				D443D3F422D4BDAE0089764A /* RVS_ONVIF_tvOS_Test_Harness_Info_ViewController.swift in Sources */,

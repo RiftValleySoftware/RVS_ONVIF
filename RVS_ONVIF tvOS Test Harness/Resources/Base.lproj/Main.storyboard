@@ -746,11 +746,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXO-IL-bjm">
                                 <rect key="frame" x="90" y="956" width="1740" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-7k-7RQ">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-7k-7RQ">
                                         <rect key="frame" x="0.0" y="0.0" width="227" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="227" id="HZd-xt-yUO"/>
-                                            <constraint firstAttribute="width" constant="227" id="tfW-Ce-s8J"/>
+                                            <constraint firstAttribute="width" constant="227" placeholder="YES" id="tfW-Ce-s8J"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="CANCEL"/>
@@ -776,10 +775,10 @@
                                             <constraint firstAttribute="bottom" secondItem="5X4-dl-sgk" secondAttribute="bottom" id="pDf-Kp-laO"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPn-Eo-sy6">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPn-Eo-sy6">
                                         <rect key="frame" x="1561" y="0.0" width="179" height="64"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="179" id="qgd-Vz-zx2"/>
+                                            <constraint firstAttribute="width" constant="179" placeholder="YES" id="qgd-Vz-zx2"/>
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="SEND"/>
@@ -822,6 +821,68 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0H-9R-ZAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2860" y="12878"/>
+        </scene>
+        <!--tvOS Test Harness Display Response View Controller-->
+        <scene sceneID="Nmk-NP-27K">
+            <objects>
+                <viewController storyboardIdentifier="displayResponseScreen" id="1Oi-Fq-zej" customClass="RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8dA-F8-xMH"/>
+                        <viewControllerLayoutGuide type="bottom" id="P7h-QZ-CyK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sjh-wO-7gn">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1U-S2-MW4">
+                                <rect key="frame" x="90" y="60" width="1740" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="xiQ-T0-qPU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErZ-GJ-n5n">
+                                <rect key="frame" x="90" y="130" width="1740" height="826"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ps5-cV-cF0">
+                                <rect key="frame" x="90" y="956" width="1740" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="W9H-Bi-Q9m"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="DONE"/>
+                                <connections>
+                                    <action selector="closeButtonHit:" destination="1Oi-Fq-zej" eventType="primaryActionTriggered" id="2hq-dD-Ggd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ErZ-GJ-n5n" firstAttribute="top" secondItem="f1U-S2-MW4" secondAttribute="bottom" id="3ni-LL-Aeo"/>
+                            <constraint firstItem="ErZ-GJ-n5n" firstAttribute="bottom" secondItem="Ps5-cV-cF0" secondAttribute="top" id="COM-xg-j1E"/>
+                            <constraint firstItem="ErZ-GJ-n5n" firstAttribute="trailing" secondItem="IHo-Mm-22j" secondAttribute="trailing" id="Dey-mc-NY7"/>
+                            <constraint firstItem="Ps5-cV-cF0" firstAttribute="trailing" secondItem="IHo-Mm-22j" secondAttribute="trailing" id="XTQ-zG-JKz"/>
+                            <constraint firstItem="f1U-S2-MW4" firstAttribute="leading" secondItem="IHo-Mm-22j" secondAttribute="leading" id="XYb-rg-8Fh"/>
+                            <constraint firstItem="Ps5-cV-cF0" firstAttribute="leading" secondItem="IHo-Mm-22j" secondAttribute="leading" id="aw4-fd-1To"/>
+                            <constraint firstItem="f1U-S2-MW4" firstAttribute="top" secondItem="IHo-Mm-22j" secondAttribute="top" id="dVE-Dm-dsV"/>
+                            <constraint firstItem="Ps5-cV-cF0" firstAttribute="bottom" secondItem="IHo-Mm-22j" secondAttribute="bottom" id="s7e-Bp-mzK"/>
+                            <constraint firstItem="ErZ-GJ-n5n" firstAttribute="leading" secondItem="IHo-Mm-22j" secondAttribute="leading" id="tDH-84-dez"/>
+                            <constraint firstItem="IHo-Mm-22j" firstAttribute="trailing" secondItem="f1U-S2-MW4" secondAttribute="trailing" id="upi-1L-LcO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IHo-Mm-22j"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentLabel" destination="ErZ-GJ-n5n" id="yO2-Dz-yk0"/>
+                        <outlet property="titleLabel" destination="f1U-S2-MW4" id="fdX-aH-5sv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bmd-8O-Iuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2860" y="14252"/>
         </scene>
         <!--SERVICE CAPABILITIES-->
         <scene sceneID="owW-3y-H9S">

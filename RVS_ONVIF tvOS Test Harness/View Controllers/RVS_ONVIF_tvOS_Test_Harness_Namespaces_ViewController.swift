@@ -75,23 +75,6 @@ class RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController: RVS_ONVIF_tvOS_Test
                     cells.append(cell)
                 }
                 
-                if "PROFILE-S" == $0.profileName {
-                    let cell = RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_StreamingURI_TableViewCell()
-                    var frame = cell.frame
-                    var labelBounds = cell.bounds
-                    labelBounds.size.height = heightOfOneLabel
-                    frame.size.height += heightOfOneLabel
-                    labelBounds.origin.y = frame.size.height - labelBounds.size.height
-                    let label = UILabel(frame: labelBounds)
-                    label.text = "GET STREAMING URI"
-                    label.textAlignment = .center
-                    label.font = UIFont.boldSystemFont(ofSize: heightOfOneLabel - 4)
-                    
-                    cell.addContainedView(label)
-                    cell.frame = frame
-                    cells.append(cell)
-                }
-                
                 sectionCache.append(RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController_CacheElement(label: sectionLabel, values: cells))
             }
         }

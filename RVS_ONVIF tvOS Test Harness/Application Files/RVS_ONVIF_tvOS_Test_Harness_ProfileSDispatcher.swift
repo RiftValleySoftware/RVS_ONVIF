@@ -50,20 +50,6 @@ class RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher: RVS_ONVIF_tvOS_Test_Harnes
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
         sendRequest(inCommand)
     }
-
-    /* ################################################################## */
-    /**
-     This method is implemented by the final dispatcher, and is used to fetch the parameters for the given command. This implementation returns an empty command.
-     
-     - parameter inCommand: The command being sent.
-     - returns: an empty Dictionary<String, Any>.
-     */
-    public func getParametersForCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) -> [String: Any]! {
-        if "GetStreamUri" == inCommand.rawValue {
-        }
-        
-        return [:]
-    }
     
     /* ################################################################## */
     /**
@@ -74,6 +60,13 @@ class RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher: RVS_ONVIF_tvOS_Test_Harnes
      - returns: true, if the response was consumed. Can be ignored.
      */
     @discardableResult public func deliverResponse(_ inCommand: RVS_ONVIF_DeviceRequestProtocol, params inParams: Any!) -> Bool {
-        return true
+        #if DEBUG
+            print("RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher::deliverResponse:\(String(describing: inCommand)), params: \(String(describing: inParams))")
+        #endif
+        if "GetProfiles" == inCommand.rawValue {
+            return true
+        } else {
+            return deliverResponseHandler(inCommand, params: inParams)
+        }
     }
 }

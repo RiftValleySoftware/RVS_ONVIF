@@ -54,7 +54,7 @@ class RVS_ONVIF_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             if nil != presentedBy {
-                let alertController = UIAlertController(title: inTitle, message: inMessage, preferredStyle: .alert)
+                let alertController = UIAlertController(title: inTitle, message: inMessage, preferredStyle: .actionSheet)
                 
                 let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
                 
