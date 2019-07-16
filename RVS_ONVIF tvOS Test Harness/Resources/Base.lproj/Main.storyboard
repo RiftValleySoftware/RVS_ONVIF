@@ -746,8 +746,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXO-IL-bjm">
                                 <rect key="frame" x="90" y="956" width="1740" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-7k-7RQ">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-7k-7RQ">
                                         <rect key="frame" x="0.0" y="0.0" width="227" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="227" id="HZd-xt-yUO"/>
+                                            <constraint firstAttribute="width" constant="227" id="tfW-Ce-s8J"/>
+                                        </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="CANCEL"/>
                                         <connections>
@@ -774,6 +778,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPn-Eo-sy6">
                                         <rect key="frame" x="1561" y="0.0" width="179" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="179" id="qgd-Vz-zx2"/>
+                                        </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="SEND"/>
                                         <connections>
@@ -785,19 +792,19 @@
                                     <constraint firstAttribute="height" constant="64" id="VTE-AB-mfJ"/>
                                 </constraints>
                             </stackView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1O-zm-TrZ">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q9P-RM-Vjl">
                                 <rect key="frame" x="90" y="137" width="1740" height="811"/>
-                            </scrollView>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="UXO-IL-bjm" firstAttribute="top" secondItem="a1O-zm-TrZ" secondAttribute="bottom" constant="8" id="07y-h9-QJ1"/>
                             <constraint firstItem="dBC-fa-tiB" firstAttribute="top" secondItem="oj3-7j-qfV" secondAttribute="top" id="1Lv-Cx-y4L"/>
                             <constraint firstItem="dBC-fa-tiB" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="1fU-dP-mg3"/>
                             <constraint firstItem="oj3-7j-qfV" firstAttribute="trailing" secondItem="UXO-IL-bjm" secondAttribute="trailing" id="D8J-0h-VUa"/>
-                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="top" secondItem="dBC-fa-tiB" secondAttribute="bottom" constant="8" id="KlR-EU-IYN"/>
-                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="trailing" secondItem="oj3-7j-qfV" secondAttribute="trailing" id="T2r-Kd-hvc"/>
-                            <constraint firstItem="a1O-zm-TrZ" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="Ulf-LO-Kp2"/>
+                            <constraint firstItem="oj3-7j-qfV" firstAttribute="trailing" secondItem="Q9P-RM-Vjl" secondAttribute="trailing" id="Kgg-ft-DIe"/>
+                            <constraint firstItem="Q9P-RM-Vjl" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="L1J-pX-4Yy"/>
+                            <constraint firstItem="Q9P-RM-Vjl" firstAttribute="top" secondItem="dBC-fa-tiB" secondAttribute="bottom" constant="8" id="OAj-ON-GUL"/>
                             <constraint firstItem="oj3-7j-qfV" firstAttribute="bottom" secondItem="UXO-IL-bjm" secondAttribute="bottom" id="VyM-mC-71o"/>
+                            <constraint firstItem="UXO-IL-bjm" firstAttribute="top" secondItem="Q9P-RM-Vjl" secondAttribute="bottom" constant="8" id="agd-wl-zEF"/>
                             <constraint firstItem="UXO-IL-bjm" firstAttribute="leading" secondItem="oj3-7j-qfV" secondAttribute="leading" id="poi-zI-RyB"/>
                             <constraint firstItem="oj3-7j-qfV" firstAttribute="trailing" secondItem="dBC-fa-tiB" secondAttribute="trailing" id="syA-Lv-Y1B"/>
                         </constraints>
@@ -806,9 +813,9 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="cancelButton" destination="eM8-7k-7RQ" id="3Yx-8l-kN5"/>
-                        <outlet property="scrollView" destination="a1O-zm-TrZ" id="iWX-In-s93"/>
                         <outlet property="selectorSwitch" destination="dBC-fa-tiB" id="jDw-x3-9Dw"/>
                         <outlet property="sendButton" destination="TPn-Eo-sy6" id="bfn-Wp-vTH"/>
+                        <outlet property="stackView" destination="Q9P-RM-Vjl" id="FVG-WH-5Vj"/>
                         <outlet property="titleLabel" destination="5X4-dl-sgk" id="Cpo-Ti-DPR"/>
                     </connections>
                 </viewController>

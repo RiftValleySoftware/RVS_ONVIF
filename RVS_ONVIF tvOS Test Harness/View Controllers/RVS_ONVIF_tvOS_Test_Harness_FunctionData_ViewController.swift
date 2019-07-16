@@ -108,7 +108,7 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var stackView: UIStackView!
     
     /* ################################################################## */
     /**
@@ -151,12 +151,15 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = command.soapAction + "Request"
+        if let colonIndex = command.soapAction.firstIndex(of: ":") {
+            let nameString = command.soapAction[command.soapAction.index(after: colonIndex)...]
+            titleLabel.text = nameString + "Request"
+        }
         let label = UILabel()
         label.text = command.rawValue
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        type(of: self).insertSpecialView(label, into: scrollView, topConstraint: selectorSwitch.bottomAnchor)
+        type(of: self).insertSpecialView(label, into: stackView, topConstraint: selectorSwitch.bottomAnchor)
         
         var previousAnchor: NSLayoutYAxisAnchor = label.bottomAnchor
         
@@ -173,17 +176,19 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
             
             switch item {
             case let .textDisplay(inValue, _):
-                control = UITextView()
-                (control as? UITextView)?.textAlignment = .center
-                (control as? UITextView)?.isSelectable = false
-                (control as? UITextView)?.font = UIFont.systemFont(ofSize: 15)
-                (control as? UITextView)?.text = inValue
+                control = UILabel()
+                (control as? UILabel)?.textAlignment = .center
+                (control as? UILabel)?.font = UIFont.systemFont(ofSize: 15)
+                (control as? UILabel)?.numberOfLines = 0
+                (control as? UILabel)?.text = inValue
+
             case let .textEntry(inDefaultValue, inCallback):
                 callbackHandler = inCallback
                 control = UITextField()
                 (control as? UITextField)?.text = inDefaultValue
                 let events: UIControl.Event = [.touchUpInside, .valueChanged, .editingChanged, .editingDidEnd, .editingDidEndOnExit]
                 (control as? UITextField)?.addTarget(self, action: #selector(callbackDispatcher), for: events)
+                
             case .pickOne(let inValues, let inSelectedIndex, let inCallback):
                 callbackHandler = inCallback
                 control = UISegmentedControl(items: inValues)
@@ -192,8 +197,8 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
             }
             
             if nil != control {
-                type(of: self).insertSpecialView(label, into: scrollView, topConstraint: previousAnchor)
-                type(of: self).insertSpecialView(control, into: scrollView, topConstraint: label.bottomAnchor)
+                type(of: self).insertSpecialView(label, into: stackView, topConstraint: previousAnchor)
+                type(of: self).insertSpecialView(control, into: stackView, topConstraint: label.bottomAnchor)
                 previousAnchor = control!.bottomAnchor
                 if nil != callbackHandler {
                     callbackHash[control!] = callbackHandler
