@@ -185,6 +185,7 @@ class RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController: UIViewController 
             case let .textEntry(inDefaultValue, inCallback):
                 callbackHandler = inCallback
                 control = UITextField()
+                (control as? UITextField)?.font = UIFont.systemFont(ofSize: 15)
                 (control as? UITextField)?.text = inDefaultValue
                 let events: UIControl.Event = [.touchUpInside, .valueChanged, .editingChanged, .editingDidEnd, .editingDidEndOnExit]
                 (control as? UITextField)?.addTarget(self, action: #selector(callbackDispatcher), for: events)

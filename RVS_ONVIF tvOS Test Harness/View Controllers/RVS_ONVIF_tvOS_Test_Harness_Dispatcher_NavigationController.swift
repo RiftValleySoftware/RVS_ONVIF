@@ -12,7 +12,7 @@ import UIKit
 import RVS_ONVIF_tvOS
 
 /* ################################################################################################################################## */
-// MARK: - Main Class for the Namespaces NavigationController
+// MARK: - Main Class for the Dispatcher NavigationController
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_Dispatcher_NavigationController: UINavigationController {
     /* ############################################################################################################################## */
