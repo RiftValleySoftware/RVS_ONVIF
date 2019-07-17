@@ -14,15 +14,15 @@ import RVS_ONVIF_tvOS
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewController {
+class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController: RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController {
     /* ############################################################################################################################## */
     // MARK: - Class Calculated Properties
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    class var storyboardID: String {
-        return "displayResponseScreen"
+    override class var storyboardID: String {
+      return "displayResponseProfileScreen"
     }
     
     /* ############################################################################################################################## */
@@ -31,12 +31,7 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
     /* ################################################################## */
     /**
      */
-    var titleText: String = ""
-
-    /* ################################################################## */
-    /**
-     */
-    var contentText: String = ""
+    var profileObject: RVS_ONVIF_Profile_S!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IB Properties
@@ -44,12 +39,12 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
     /* ################################################################## */
     /**
      */
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var tcpStreamButton: UIButton!
     
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var udpStreamButton: UIButton!
     
     /* ############################################################################################################################## */
     // MARK: - Instance IB Actions
@@ -57,8 +52,8 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
     /* ################################################################## */
     /**
      */
-    @IBAction func closeButtonHit(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func streamButtonHit(_ inButton: UIButton) {
+        
     }
     
     /* ############################################################################################################################## */
@@ -69,7 +64,5 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel?.text = titleText
-        contentLabel?.text = contentText
     }
 }

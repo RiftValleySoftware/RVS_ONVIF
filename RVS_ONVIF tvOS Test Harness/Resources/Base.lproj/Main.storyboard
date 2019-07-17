@@ -863,7 +863,6 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="ErZ-GJ-n5n" firstAttribute="top" secondItem="f1U-S2-MW4" secondAttribute="bottom" id="3ni-LL-Aeo"/>
-                            <constraint firstItem="ErZ-GJ-n5n" firstAttribute="bottom" secondItem="Ps5-cV-cF0" secondAttribute="top" id="COM-xg-j1E"/>
                             <constraint firstItem="ErZ-GJ-n5n" firstAttribute="trailing" secondItem="IHo-Mm-22j" secondAttribute="trailing" id="Dey-mc-NY7"/>
                             <constraint firstItem="Ps5-cV-cF0" firstAttribute="trailing" secondItem="IHo-Mm-22j" secondAttribute="trailing" id="XTQ-zG-JKz"/>
                             <constraint firstItem="f1U-S2-MW4" firstAttribute="leading" secondItem="IHo-Mm-22j" secondAttribute="leading" id="XYb-rg-8Fh"/>
@@ -871,6 +870,7 @@
                             <constraint firstItem="f1U-S2-MW4" firstAttribute="top" secondItem="IHo-Mm-22j" secondAttribute="top" id="dVE-Dm-dsV"/>
                             <constraint firstItem="Ps5-cV-cF0" firstAttribute="bottom" secondItem="IHo-Mm-22j" secondAttribute="bottom" id="s7e-Bp-mzK"/>
                             <constraint firstItem="ErZ-GJ-n5n" firstAttribute="leading" secondItem="IHo-Mm-22j" secondAttribute="leading" id="tDH-84-dez"/>
+                            <constraint firstItem="Ps5-cV-cF0" firstAttribute="top" secondItem="ErZ-GJ-n5n" secondAttribute="bottom" id="trd-rx-cQz"/>
                             <constraint firstItem="IHo-Mm-22j" firstAttribute="trailing" secondItem="f1U-S2-MW4" secondAttribute="trailing" id="upi-1L-LcO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IHo-Mm-22j"/>
@@ -921,6 +921,138 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tni-q5-q6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2860" y="10206"/>
+        </scene>
+        <!--DISPLAY PROFILE-->
+        <scene sceneID="sJG-XE-CGW">
+            <objects>
+                <viewController storyboardIdentifier="displayResponseProfileScreen" title="DISPLAY PROFILE" id="5nN-wo-20a" customClass="RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HDJ-sf-Yvk"/>
+                        <viewControllerLayoutGuide type="bottom" id="0u7-5P-AoO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bex-tH-Js9">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aS-5z-kdK">
+                                <rect key="frame" x="90" y="60" width="1740" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="gbL-2n-z0n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn6-gF-xNs">
+                                <rect key="frame" x="90" y="130" width="1740" height="742"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-EW-sBl">
+                                <rect key="frame" x="90" y="956" width="1740" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="aGC-Mq-jOC"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="DONE"/>
+                                <connections>
+                                    <action selector="closeButtonHit:" destination="5nN-wo-20a" eventType="primaryActionTriggered" id="ASS-pI-lfI"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5W4-N1-49F">
+                                <rect key="frame" x="90" y="872" width="1740" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-Oy-6tf">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="T6s-TC-ncb"/>
+                                            <constraint firstAttribute="width" constant="400" placeholder="YES" id="sRA-aS-w47"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="TCP STREAM"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-EM-xHh">
+                                        <rect key="frame" x="1340" y="0.0" width="400" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="64" id="jqd-Ec-3ZH"/>
+                                            <constraint firstAttribute="width" constant="400" placeholder="YES" id="qc2-5D-meT"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="UDP STREAM"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="96l-iD-Mm5"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="tp4-EW-sBl" firstAttribute="trailing" secondItem="ZtQ-8p-e6H" secondAttribute="trailing" id="2T8-Gb-2u7"/>
+                            <constraint firstItem="nn6-gF-xNs" firstAttribute="trailing" secondItem="ZtQ-8p-e6H" secondAttribute="trailing" id="3Em-Jb-AeR"/>
+                            <constraint firstItem="tp4-EW-sBl" firstAttribute="leading" secondItem="ZtQ-8p-e6H" secondAttribute="leading" id="JX2-j6-fL0"/>
+                            <constraint firstItem="nn6-gF-xNs" firstAttribute="leading" secondItem="ZtQ-8p-e6H" secondAttribute="leading" id="KgF-NX-7C8"/>
+                            <constraint firstItem="5W4-N1-49F" firstAttribute="top" secondItem="nn6-gF-xNs" secondAttribute="bottom" id="LoL-TS-wdI"/>
+                            <constraint firstItem="1aS-5z-kdK" firstAttribute="top" secondItem="ZtQ-8p-e6H" secondAttribute="top" id="S0M-No-OSw"/>
+                            <constraint firstItem="5W4-N1-49F" firstAttribute="leading" secondItem="ZtQ-8p-e6H" secondAttribute="leading" id="Y3p-Us-j9i"/>
+                            <constraint firstItem="1aS-5z-kdK" firstAttribute="leading" secondItem="ZtQ-8p-e6H" secondAttribute="leading" id="Zne-2g-u2y"/>
+                            <constraint firstItem="tp4-EW-sBl" firstAttribute="bottom" secondItem="ZtQ-8p-e6H" secondAttribute="bottom" id="hkc-PL-87i"/>
+                            <constraint firstItem="5W4-N1-49F" firstAttribute="trailing" secondItem="ZtQ-8p-e6H" secondAttribute="trailing" id="r7B-69-Lb0"/>
+                            <constraint firstItem="ZtQ-8p-e6H" firstAttribute="trailing" secondItem="1aS-5z-kdK" secondAttribute="trailing" id="rlq-uo-bej"/>
+                            <constraint firstItem="tp4-EW-sBl" firstAttribute="top" secondItem="5W4-N1-49F" secondAttribute="bottom" constant="20" id="sOY-5F-pfP"/>
+                            <constraint firstItem="nn6-gF-xNs" firstAttribute="top" secondItem="1aS-5z-kdK" secondAttribute="bottom" id="tai-fa-WhU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZtQ-8p-e6H"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentLabel" destination="nn6-gF-xNs" id="hYg-pD-p3J"/>
+                        <outlet property="tcpStreamButton" destination="gJ2-Oy-6tf" id="z0O-z0-5Fk"/>
+                        <outlet property="titleLabel" destination="1aS-5z-kdK" id="UGx-ED-uO1"/>
+                        <outlet property="udpStreamButton" destination="ReY-EM-xHh" id="xQ2-oX-bi5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mL3-7V-QmB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="15619"/>
+        </scene>
+        <!--PROFILES-->
+        <scene sceneID="bV3-Dq-uDw">
+            <objects>
+                <viewController storyboardIdentifier="displayResponseProfileListScreen" title="PROFILES" id="EFD-aA-aN9" customClass="RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qwp-ck-ykg"/>
+                        <viewControllerLayoutGuide type="bottom" id="sFf-OO-kRJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ncb-zB-sfg">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="7" sectionFooterHeight="7" translatesAutoresizingMaskIntoConstraints="NO" id="Hdo-3r-ZRz">
+                                <rect key="frame" x="90" y="60" width="1740" height="960"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EFD-aA-aN9" id="Cim-VC-J6C"/>
+                                    <outlet property="delegate" destination="EFD-aA-aN9" id="fut-E7-HhU"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Hdo-3r-ZRz" firstAttribute="top" secondItem="CDm-9y-Nbl" secondAttribute="top" id="DMm-he-e3L"/>
+                            <constraint firstItem="CDm-9y-Nbl" firstAttribute="bottom" secondItem="Hdo-3r-ZRz" secondAttribute="bottom" id="I6E-0V-lXT"/>
+                            <constraint firstItem="Hdo-3r-ZRz" firstAttribute="leading" secondItem="CDm-9y-Nbl" secondAttribute="leading" id="ads-80-Hij"/>
+                            <constraint firstItem="CDm-9y-Nbl" firstAttribute="trailing" secondItem="Hdo-3r-ZRz" secondAttribute="trailing" id="pds-3R-pzW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CDm-9y-Nbl"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="dv5-kO-fO8"/>
+                    <connections>
+                        <outlet property="tableView" destination="Hdo-3r-ZRz" id="7rN-1m-Uhy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tnM-YC-LSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="592" y="14252"/>
         </scene>
     </scenes>
 </document>

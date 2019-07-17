@@ -12,9 +12,9 @@ import UIKit
 import RVS_ONVIF_tvOS
 
 /* ################################################################################################################################## */
-// MARK: - Main View Controller Class
+// MARK: - Main Class for the Namespaces ViewController
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewController {
+class RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController: RVS_ONVIF_tvOS_Test_Harness_Base_Modal_TableViewController {
     /* ############################################################################################################################## */
     // MARK: - Class Calculated Properties
     /* ############################################################################################################################## */
@@ -22,7 +22,7 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
     /**
      */
     class var storyboardID: String {
-        return "displayResponseScreen"
+        return "displayResponseProfileListScreen"
     }
     
     /* ############################################################################################################################## */
@@ -31,45 +31,26 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController: UIViewControll
     /* ################################################################## */
     /**
      */
-    var titleText: String = ""
+    var profileObjects: [RVS_ONVIF_Profile_S] = []
 
-    /* ################################################################## */
-    /**
-     */
-    var contentText: String = ""
-    
     /* ############################################################################################################################## */
-    // MARK: - Instance IB Properties
+    // MARK: - Internal Base Class Override Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    @IBOutlet var titleLabel: UILabel!
-    
-    /* ################################################################## */
-    /**
-     */
-    @IBOutlet weak var contentLabel: UILabel!
-    
-    /* ############################################################################################################################## */
-    // MARK: - Instance IB Actions
-    /* ############################################################################################################################## */
-    /* ################################################################## */
-    /**
-     */
-    @IBAction func closeButtonHit(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    override func buildCache() {
+        if nil != tableView {
+        }
     }
     
     /* ############################################################################################################################## */
-    // MARK: - Base Class Override Methods
+    // MARK: - UITableViewDelegate Methods
     /* ############################################################################################################################## */
+    
     /* ################################################################## */
     /**
      */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        titleLabel?.text = titleText
-        contentLabel?.text = contentText
+    override func tableView(_ inTableView: UITableView, didSelectRowAt inIndexPath: IndexPath) {
     }
 }
