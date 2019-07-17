@@ -425,6 +425,7 @@
 		D4908A0B21FF67970089AEC4 /* RVS_ONVIF_Test_Harness_NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_NavigationController.swift; sourceTree = "<group>"; };
 		D492FCD122C7889100B73C63 /* PelcoIMP3211ESCameraMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PelcoIMP3211ESCameraMock.swift; sourceTree = "<group>"; };
 		D492FCD522C78BC500B73C63 /* RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer.swift; sourceTree = "<group>"; };
+		D493BDCF22DFB8A000A8CC0C /* RVS_ONVIF_tvOS_Test_Harness-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RVS_ONVIF_tvOS_Test_Harness-Bridging-Header.h"; sourceTree = "<group>"; };
 		D495F3682215BDDD0058A10B /* RVS_ONVIF_Test_Harness_Services_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Test_Harness_Services_TableViewController.swift; sourceTree = "<group>"; };
 		D496B47422610E7600E206F5 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/lib/libxml2.2.tbd; sourceTree = DEVELOPER_DIR; };
 		D496B4782261100C00E206F5 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -447,7 +448,6 @@
 		D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Generic_TestBaseClass.swift; sourceTree = "<group>"; };
 		D4D08F5122DFA05E0066B600 /* RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.swift; path = "RVS_ONVIF tvOS Test Harness/View Controllers/RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.swift"; sourceTree = SOURCE_ROOT; };
 		D4D08F5322DFA41D0066B600 /* TVVLCKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVVLCKit.framework; path = Carthage/Build/tvOS/TVVLCKit.framework; sourceTree = "<group>"; };
-		D4D08F5B22DFA7D90066B600 /* RVS_ONVIF_Test_Harness-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RVS_ONVIF_Test_Harness-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		D4D08F5F22DFA9C80066B600 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/usr/lib/libc++abi.tbd"; sourceTree = DEVELOPER_DIR; };
 		D4D08F6122DFA9DB0066B600 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/usr/lib/libc++.1.tbd"; sourceTree = DEVELOPER_DIR; };
 		D4D08F6522DFAA940066B600 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
@@ -935,7 +935,7 @@
 		D4EA1BE322CE3D1700E323BF /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				D4D08F5B22DFA7D90066B600 /* RVS_ONVIF_Test_Harness-Bridging-Header.h */,
+				D493BDCF22DFB8A000A8CC0C /* RVS_ONVIF_tvOS_Test_Harness-Bridging-Header.h */,
 				D4531C4822CE3DA600151E7C /* Info.plist */,
 			);
 			path = Misc;
@@ -2220,7 +2220,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-tvOS-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF_Test_Harness-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF tvOS Test Harness/Misc/RVS_ONVIF_tvOS_Test_Harness-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
@@ -2251,7 +2251,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-ONVIF-tvOS-Test-Harness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF_Test_Harness-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/RVS_ONVIF tvOS Test Harness/Misc/RVS_ONVIF_tvOS_Test_Harness-Bridging-Header.h";
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
