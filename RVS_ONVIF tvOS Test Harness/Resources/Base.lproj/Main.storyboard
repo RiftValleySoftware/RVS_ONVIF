@@ -892,11 +892,37 @@
                         <viewControllerLayoutGuide type="top" id="bwv-H6-As0"/>
                         <viewControllerLayoutGuide type="bottom" id="os1-Jl-9lO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2j8-zP-W5F">
+                    <view key="view" contentMode="scaleToFill" id="7ui-oV-kGm">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="VtT-jL-KIa"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTa-Xt-RD5">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XK4-aO-yt0">
+                                <rect key="frame" x="928" y="508" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XK4-aO-yt0" secondAttribute="height" multiplier="1:1" id="Tm4-tX-1OI"/>
+                                    <constraint firstAttribute="width" constant="64" id="wtS-I2-lMy"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vTa-Xt-RD5" secondAttribute="trailing" id="8PX-fD-Dx9"/>
+                            <constraint firstAttribute="bottom" secondItem="vTa-Xt-RD5" secondAttribute="bottom" id="F4P-vD-IAj"/>
+                            <constraint firstItem="vTa-Xt-RD5" firstAttribute="leading" secondItem="7ui-oV-kGm" secondAttribute="leading" id="KAv-Mq-2HR"/>
+                            <constraint firstItem="XK4-aO-yt0" firstAttribute="centerX" secondItem="7ui-oV-kGm" secondAttribute="centerX" id="hlI-aT-HaW"/>
+                            <constraint firstItem="vTa-Xt-RD5" firstAttribute="top" secondItem="7ui-oV-kGm" secondAttribute="top" id="ybb-OY-yzd"/>
+                            <constraint firstItem="XK4-aO-yt0" firstAttribute="centerY" secondItem="7ui-oV-kGm" secondAttribute="centerY" id="zlj-PJ-YqT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GnN-Py-K5x"/>
                     </view>
+                    <connections>
+                        <outlet property="throbber" destination="XK4-aO-yt0" id="4Vq-OK-c1u"/>
+                        <outlet property="videoDisplayView" destination="vTa-Xt-RD5" id="1eq-h3-tAG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsz-WA-DCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

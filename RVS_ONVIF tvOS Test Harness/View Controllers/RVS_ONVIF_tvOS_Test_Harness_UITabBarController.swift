@@ -114,6 +114,8 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
         let defaultPrefs: [String: Any] = ["ip_address": "", "tcp_port": 0, "login_id": "", "password": "", "soap_key": "", "auth_method": 0]
 
         persistentPrefs = RVS_PersistentPrefs(tag: "TestONVIFSettings", values: defaultPrefs)
+        
+        RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.prefs = persistentPrefs
     }
 
     /* ############################################################################################################################## */

@@ -55,8 +55,13 @@ class RVS_ONVIF_tvOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegat
     /* ################################################################## */
     /**
      */
-    var openNamespaceHandlerScreen: RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController!
+    var prefs: RVS_PersistentPrefs!
     
+    /* ################################################################## */
+    /**
+     */
+    var openNamespaceHandlerScreen: RVS_ONVIF_tvOS_Test_Harness_Namespaces_ViewController!
+
     /* ################################################################## */
     /**
      */

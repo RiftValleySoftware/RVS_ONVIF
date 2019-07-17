@@ -43,6 +43,9 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
      */
     var streamingURL: URL!
     
+    @IBOutlet weak var throbber: UIActivityIndicatorView!
+    @IBOutlet weak var videoDisplayView: UIView!
+    
     /* ############################################################################################################################## */
     // MARK: - Base Class Override Methods
     /* ############################################################################################################################## */
@@ -51,31 +54,41 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        mediaPlayer.delegate = self
-        mediaPlayer.drawable = view
-        media = nil
-        displayStreamingURI(streamingURL)
+        throbber?.startAnimating()
+        displayStreamingURI()
     }
     
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear(_ animated: Bool) {
+        mediaPlayer.stop()
+        media = nil
+        super.viewWillDisappear(animated)
+    }
+
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    func displayStreamingURI(_ inURI: URL!) {
-        if let uri = inURI {
+    func displayStreamingURI() {
+        if let uri = streamingURL {
+            mediaPlayer.delegate = self
+            mediaPlayer.drawable = videoDisplayView
+            
             var login_id: String = ""
             var password: String = ""
             
-            if  let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController,
-                let login_id_string = tabBarController.persistentPrefs["login_id"] as? String,
-                let password_string = tabBarController.persistentPrefs["password"] as? String {
+            if  let login_id_string = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.prefs["login_id"] as? String,
+                let password_string = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.prefs["password"] as? String {
                 login_id = login_id_string
                 password = password_string
             }
             
             media = VLCMedia(url: uri)
+            
             media.addOptions([
                 "network-caching": 0,
                 "network-synchronisation": true,
@@ -88,8 +101,21 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
                 "rtsp-user": login_id,
                 "rtsp-pwd": password
                 ])
+            
             mediaPlayer.media = media
             mediaPlayer.play()
+        }
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - VLCMediaPlayerDelegate Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if nil != mediaPlayer.time.value {
+            throbber?.stopAnimating()
         }
     }
 }
