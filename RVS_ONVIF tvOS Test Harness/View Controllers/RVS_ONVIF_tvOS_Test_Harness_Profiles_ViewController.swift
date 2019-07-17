@@ -31,7 +31,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController: RVS_ONVIF_tvOS_Test_H
     /* ################################################################## */
     /**
      */
-    var profileObjects: [RVS_ONVIF_Profile_S] = []
+    var profileObjects: [RVS_ONVIF_Profile_S.Profile] = []
 
     /* ############################################################################################################################## */
     // MARK: - Internal Base Class Override Methods
@@ -40,17 +40,44 @@ class RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController: RVS_ONVIF_tvOS_Test_H
     /**
      */
     override func buildCache() {
-        if nil != tableView {
+        if nil != tableView, 0 < profileObjects.count {
+            profileObjects.forEach {
+                let tableCellContainer = UITableViewCell()
+                tableCellContainer.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 0)
+                addLabel(toContainer: tableCellContainer, withText: $0.name, offsetBy: 0)
+                cachedCells.append(tableCellContainer)
+            }
         }
     }
-    
-    /* ############################################################################################################################## */
-    // MARK: - UITableViewDelegate Methods
-    /* ############################################################################################################################## */
     
     /* ################################################################## */
     /**
      */
+    override func backToHomeBase() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    /* ############################################################################################################################## */
+    // MARK: - UITableViewDelegate Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func tableView(_ inTableView: UITableView, willSelectRowAt inIndexPath: IndexPath) -> IndexPath? {
+        return inIndexPath
+    }
+
+    /* ################################################################## */
+    /**
+     */
     override func tableView(_ inTableView: UITableView, didSelectRowAt inIndexPath: IndexPath) {
+        if inIndexPath.row < profileObjects.count {
+            if let profileScreen = storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController {
+                profileScreen.profileObject = profileObjects[inIndexPath.row]
+                present(profileScreen, animated: true, completion: nil)
+            }
+        } else {
+            super.tableView(inTableView, didSelectRowAt: inIndexPath)
+        }
     }
 }

@@ -835,16 +835,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1U-S2-MW4">
-                                <rect key="frame" x="90" y="60" width="1740" height="70"/>
+                                <rect key="frame" x="90" y="60" width="1740" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="xiQ-T0-qPU"/>
+                                    <constraint firstAttribute="height" constant="100" id="xiQ-T0-qPU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErZ-GJ-n5n">
-                                <rect key="frame" x="90" y="130" width="1740" height="826"/>
+                                <rect key="frame" x="90" y="160" width="1740" height="796"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -935,16 +935,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aS-5z-kdK">
-                                <rect key="frame" x="90" y="60" width="1740" height="70"/>
+                                <rect key="frame" x="90" y="60" width="1740" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="gbL-2n-z0n"/>
+                                    <constraint firstAttribute="height" constant="100" id="gbL-2n-z0n"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn6-gF-xNs">
-                                <rect key="frame" x="90" y="130" width="1740" height="742"/>
+                                <rect key="frame" x="90" y="160" width="1740" height="712"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

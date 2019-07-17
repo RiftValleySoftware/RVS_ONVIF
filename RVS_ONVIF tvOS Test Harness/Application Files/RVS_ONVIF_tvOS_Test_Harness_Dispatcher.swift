@@ -34,7 +34,7 @@ extension RVS_ONVIF_tvOS_Test_Harness_Dispatcher {
      */
     func getHierarchyAsString(_ inInitialString: String = "", from inObject: Any! = nil, withIndent inIndent: Int = 0) -> String {
         #if DEBUG
-            print("RVS_ONVIF_tvOS_Test_Harness_Dispatcher::getHierarchyAsString:\(String(describing: inInitialString)), from: \(String(describing: inObject)), indent: \(inIndent)")
+            print("RVS_ONVIF_tvOS_Test_Harness_Dispatcher::getHierarchyAsString:\(String(describing: inInitialString)), from: \(String(describing: inObject)), withIndent: \(inIndent)")
         #endif
         
         var ret = inInitialString
