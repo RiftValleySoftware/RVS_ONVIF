@@ -971,8 +971,11 @@
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="TCP STREAM"/>
+                                        <connections>
+                                            <action selector="streamButtonHit:" destination="5nN-wo-20a" eventType="primaryActionTriggered" id="1Id-S4-Qwj"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-EM-xHh">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-EM-xHh">
                                         <rect key="frame" x="1340" y="0.0" width="400" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="jqd-Ec-3ZH"/>
@@ -980,6 +983,9 @@
                                         </constraints>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="UDP STREAM"/>
+                                        <connections>
+                                            <action selector="streamButtonHit:" destination="5nN-wo-20a" eventType="primaryActionTriggered" id="F4Y-Ln-FHX"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

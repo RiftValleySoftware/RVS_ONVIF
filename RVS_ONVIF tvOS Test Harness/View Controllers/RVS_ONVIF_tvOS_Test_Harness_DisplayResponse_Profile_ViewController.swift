@@ -53,7 +53,11 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController: RVS_ON
     /**
      */
     @IBAction func streamButtonHit(_ inButton: UIButton) {
-        
+        if inButton == udpStreamButton {
+            profileObject.fetchURI(streamType: "RTP-Unicast", andProtocol: "UDP")
+        } else {
+            profileObject.fetchURI(streamType: "RTP-Unicast", andProtocol: "TCP")
+        }
     }
     
     /* ############################################################################################################################## */
