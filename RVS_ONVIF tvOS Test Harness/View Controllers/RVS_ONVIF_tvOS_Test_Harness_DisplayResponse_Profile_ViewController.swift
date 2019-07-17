@@ -114,4 +114,20 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController: RVS_ON
         }
         super.viewDidLoad()
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openProfileScreen = self
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openProfileScreen = nil
+    }
 }

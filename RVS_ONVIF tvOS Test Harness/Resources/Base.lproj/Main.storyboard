@@ -884,6 +884,24 @@
             </objects>
             <point key="canvasLocation" x="2860" y="14252"/>
         </scene>
+        <!--DISPLAY STREAM-->
+        <scene sceneID="vOh-tU-JqW">
+            <objects>
+                <viewController storyboardIdentifier="displayStreamScreen" title="DISPLAY STREAM" id="iwZ-IK-GO5" customClass="RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bwv-H6-As0"/>
+                        <viewControllerLayoutGuide type="bottom" id="os1-Jl-9lO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2j8-zP-W5F">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VtT-jL-KIa"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rsz-WA-DCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2860" y="15619"/>
+        </scene>
         <!--SERVICE CAPABILITIES-->
         <scene sceneID="owW-3y-H9S">
             <objects>
