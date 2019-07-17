@@ -90,9 +90,9 @@ class RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher: RVS_ONVIF_tvOS_Test_Harnes
         
         if let params = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
             if  let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openProfileScreen,
-                let dataEntryDialog = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController {
-                print(params)
-                windowViewController.present(dataEntryDialog, animated: true, completion: nil)
+                let streamDisplayDialog = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController {
+                streamDisplayDialog.streamingURL = params.uri
+                windowViewController.present(streamDisplayDialog, animated: true, completion: nil)
             }
         }
         

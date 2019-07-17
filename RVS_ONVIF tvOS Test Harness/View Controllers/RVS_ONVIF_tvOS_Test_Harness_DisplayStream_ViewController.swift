@@ -14,7 +14,7 @@ import RVS_ONVIF_tvOS
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
-class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController {
+class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController, VLCMediaPlayerDelegate {
     /* ############################################################################################################################## */
     // MARK: - Class Calculated Properties
     /* ############################################################################################################################## */
@@ -26,6 +26,24 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
     }
     
     /* ############################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    var mediaPlayer = VLCMediaPlayer()
+
+    /* ################################################################## */
+    /**
+     */
+    var media: VLCMedia!
+    
+    /* ################################################################## */
+    /**
+     */
+    var streamingURL: URL!
+    
+    /* ############################################################################################################################## */
     // MARK: - Base Class Override Methods
     /* ############################################################################################################################## */
     /* ################################################################## */
@@ -33,5 +51,45 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        mediaPlayer.delegate = self
+        mediaPlayer.drawable = view
+        media = nil
+        displayStreamingURI(streamingURL)
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - Internal Instance Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    func displayStreamingURI(_ inURI: URL!) {
+        if let uri = inURI {
+            var login_id: String = ""
+            var password: String = ""
+            
+            if  let tabBarController = tabBarController as? RVS_ONVIF_tvOS_Test_Harness_UITabBarController,
+                let login_id_string = tabBarController.persistentPrefs["login_id"] as? String,
+                let password_string = tabBarController.persistentPrefs["password"] as? String {
+                login_id = login_id_string
+                password = password_string
+            }
+            
+            media = VLCMedia(url: uri)
+            media.addOptions([
+                "network-caching": 0,
+                "network-synchronisation": true,
+                "sout-x264-preset": "ultrafast",
+                "sout-x264-tune": "zerolatency",
+                "sout-x264-lookahead": 15,
+                "sout-x264-keyint": 10,
+                "sout-x264-intra-refresh": true,
+                "sout-x264-mvrange-thread": -1,
+                "rtsp-user": login_id,
+                "rtsp-pwd": password
+                ])
+            mediaPlayer.media = media
+            mediaPlayer.play()
+        }
     }
 }
