@@ -43,7 +43,7 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
      */
     var streamingURL: URL!
     
-    @IBOutlet weak var throbber: UIActivityIndicatorView!
+    @IBOutlet weak var throbberView: UIView!
     @IBOutlet weak var videoDisplayView: UIView!
     
     /* ############################################################################################################################## */
@@ -54,7 +54,6 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        throbber?.startAnimating()
         displayStreamingURI()
     }
     
@@ -113,9 +112,10 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController: UIViewController
     /* ################################################################## */
     /**
      */
-    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+    func mediaPlayerStateChanged(_ inNotification: Notification!) {
         if nil != mediaPlayer.time.value {
-            throbber?.stopAnimating()
+            throbberView?.isHidden = true
+            videoDisplayView?.isHidden = false
         }
     }
 }

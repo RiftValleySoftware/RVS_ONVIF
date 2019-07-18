@@ -111,6 +111,9 @@ class RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController: RVS_ON
         if let profileObject = profileObject {
             titleText = profileObject.name
             contentText = getHierarchyAsString(from: profileObject)
+            if (profileObject.owner?.capabilities?.mediaCapabilities?.isRTP_TCP ?? false) || (profileObject.owner?.capabilities?.mediaCapabilities?.isRTP_RTSP_TCP ?? false) {
+                tcpStreamButton.isHidden = false
+            }
         }
         super.viewDidLoad()
     }
