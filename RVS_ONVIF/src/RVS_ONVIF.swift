@@ -583,6 +583,9 @@ import SOAPEngine64
                 case .HTTPError(let httpError):
                     ret += "-\(httpError)"
                     
+                case .NoDeviceAtIPAddress(let addressString):
+                    ret += "-\(addressString)"
+                    
                 case .Sender(let subcode, let extraSubcode):
                     ret += "-\(subcode.localizedDescription)"
                     if let extraSubcode = extraSubcode {
