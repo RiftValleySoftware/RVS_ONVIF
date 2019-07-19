@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Display ONVIF Responses View Controller
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_DisplayResponse_ViewController: UIViewController {
+class RVS_ONVIF_iOS_Test_Harness_DisplayResponse_ViewController: UIViewController {
     @IBOutlet var headingLabel: UILabel!
     @IBOutlet var bodyDisplayText: UITextView!
     

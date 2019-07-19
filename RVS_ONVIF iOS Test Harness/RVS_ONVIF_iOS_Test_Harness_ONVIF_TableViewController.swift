@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Main TableView Controller Class for the Profile List Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ONVIF_TableViewController: UITableViewController {
+class RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController: UITableViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Properties
     /* ############################################################################################################################## */
@@ -288,7 +288,7 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         _saveState()
         if let onvifInstance = onvifInstance {
-            if let destination = segue.destination as? RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+            if let destination = segue.destination as? RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController {
                 destination.onvifInstance = onvifInstance
             }
         }
@@ -374,9 +374,9 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
         activityIndicatorView.isHidden = true
         if let reason = inReason {
-            RVS_ONVIF_Test_Harness_AppDelegate.displayAlert("ERROR!", inMessage: reason.fault.localizedFullDescription + "-" + reason.reason)
+            RVS_ONVIF_iOS_Test_Harness_AppDelegate.displayAlert("ERROR!", inMessage: reason.fault.localizedFullDescription + "-" + reason.reason)
         } else {
-            RVS_ONVIF_Test_Harness_AppDelegate.displayAlert("UNKNOWN ERROR!", inMessage: "WTF Just Happened?")
+            RVS_ONVIF_iOS_Test_Harness_AppDelegate.displayAlert("UNKNOWN ERROR!", inMessage: "WTF Just Happened?")
         }
         _setUIState()
     }
@@ -400,10 +400,10 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
         inONVIFInstance.profiles.forEach {
             switch $0.key {
             case "RVS_ONVIF_Core":
-                let dispatcher = RVS_ONVIF_Test_Harness_CoreDispatcher(owner: onvifInstance)
+                let dispatcher = RVS_ONVIF_iOS_Test_Harness_CoreDispatcher(owner: onvifInstance)
                 inONVIFInstance.dispatchers.append(dispatcher)
             case "RVS_ONVIF_Profile_S":
-                inONVIFInstance.dispatchers.append(RVS_ONVIF_Test_Harness_ProfileSDispatcher(owner: onvifInstance))
+                inONVIFInstance.dispatchers.append(RVS_ONVIF_iOS_Test_Harness_ProfileSDispatcher(owner: onvifInstance))
             default:
                 break
             }

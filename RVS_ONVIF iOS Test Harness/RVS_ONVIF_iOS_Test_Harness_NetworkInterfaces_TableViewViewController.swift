@@ -10,6 +10,10 @@
 
 import UIKit
 import RVS_ONVIF_iOS
+
+/* ################################################################################################################################## */
+// MARK: -
+/* ################################################################################################################################## */
 fileprivate extension UIView {
     /* ################################################################## */
     /**
@@ -24,14 +28,14 @@ fileprivate extension UIView {
         }
         inSubView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         inSubView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        inSubView.heightAnchor.constraint(equalToConstant: RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight).isActive = true
+        inSubView.heightAnchor.constraint(equalToConstant: RVS_ONVIF_iOS_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight).isActive = true
     }
 }
 
 /* ################################################################################################################################## */
 // MARK: - 
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+class RVS_ONVIF_iOS_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController {
     static let rowHeight: CGFloat = 30
     let basicCellID = "basic-cell"
     var keyArray: [String] = ["Info", "Link", "IPv4", "IPv6", "Extension"]
@@ -285,7 +289,7 @@ class RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController: RVS_ONVI
      */
     override func tableView(_ tableView: UITableView, heightForRowAt inIndexPath: IndexPath) -> CGFloat {
         if let section = _networkInterfaceDictionaryArray[inIndexPath.section] as? [String: [String: String]], let subArray = section[keyArray[inIndexPath.row]] {
-            let height = CGFloat(subArray.count) * RVS_ONVIF_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight
+            let height = CGFloat(subArray.count) * RVS_ONVIF_iOS_Test_Harness_NetworkInterfaces_TableViewViewController.rowHeight
             return height
         }
         

@@ -120,15 +120,16 @@ extension RVS_ONVIF {
          This is a basic "post and parse" method. It sends the SOAP request, then parses the Www-Authenticate header.
          
          - parameter urlString: The URI to check, as a String
-         
+         - parameter onvifInstance: The ONVIF handler that "owns" this instance.
+
          - returns: a String, with the realm. Nil, if there was a problem.
          */
-        private func _post(urlString inURIString: String) -> [String: String]? {
+        private func _post(urlString inURIString: String, onvifInstance inONVIFInstance: RVS_ONVIF) -> [String: String]? {
             if let url = URL(string: inURIString) {
                 // We use a dispatch group, even though we have only one thread, because we want to make sure we wait until it's done.
                 _group = DispatchGroup()
                 _group.enter()
-                var request = URLRequest(url: url)
+                var request = URLRequest(url: url, timeoutInterval: TimeInterval(1.0))
                 request.httpMethod = "POST"
                 
                 // What we do, is "poke" the device, and expect to get a challenge in response, with a Www-Authenticate header, containing the SOAP realm for authentication.
@@ -137,49 +138,70 @@ extension RVS_ONVIF {
                 request.httpBody = xmlString.data(using: .utf8)
                 
                 let sessionConfig = URLSessionConfiguration.ephemeral   // We use an ephemeral session in order to avoid having the realm cached.
-                sessionConfig.timeoutIntervalForRequest = 1             // Short timeout to catch naughty Digest responses.
+                sessionConfig.timeoutIntervalForRequest = 1.0           // Short timeout to catch naughty Digest responses.
+                sessionConfig.timeoutIntervalForResource = 1.0          // Short timeout to catch naughty Digest responses.
 
                 _session = URLSession(configuration: sessionConfig)
-                
-                let task = _session.downloadTask(with: request) { [unowned self] (_ inURL: URL?, _ inResponse: URLResponse?, _ inError: Error?) in
+                var error: Error!
+
+                let task = _session.downloadTask(with: request) { [weak self] (_ inURL: URL?, _ inResponse: URLResponse?, _ inError: Error?) in
                     #if DEBUG
                         print("Data: \(String(describing: inURL))")
                         print("Response: \(String(describing: inResponse))")
                         print("Error: \(String(describing: inError))")
                         print("HTTP Response: \(String(describing: inResponse))")
                     #endif
-                    // Upon return, we should have a response that can be parsed. We ignore errors, if the header is there.
-                    if let httpStatus = inResponse as? HTTPURLResponse, httpStatus.statusCode == 401, let authenticateHeader = httpStatus.allHeaderFields["Www-Authenticate"] as? String {
-                        // Get the realm and other params from the authentication challenge.
-                        self._authCred = self._extractAuthenticateParams(authenticateHeader: authenticateHeader).reduce(into: [String: String](), { (reductionBase, elem) in
-                            let key = elem.key.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                            var value = elem.value.trimmingCharacters(in: .whitespacesAndNewlines)
-                            switch key {
-                            case "stale":
-                                // Make sure that we have something in the stale flag.
-                                value = "true" == value.lowercased() ? "true" : "false"
-                            case "url":
-                                value = url.relativePath    // This is the path that applies to the auth header. It is server-relative.
-                            case "method":
-                                value = "POST" // We always ring twice (We always POST).
-                            default:
-                                ()
-                            }
-                            
-                            reductionBase[key] = value
-                        })
-                    }
                     
-                    // Make sure that we wrap everything up.
-                    self._session.invalidateAndCancel()
-                    self._group.leave()
+                    if nil != inResponse, let httpStatus = inResponse as? HTTPURLResponse {
+                        error = inError
+                        
+                        // Upon return, we should have a response that can be parsed. We ignore errors, if the header is there.
+                        if httpStatus.statusCode == 401, let authenticateHeader = httpStatus.allHeaderFields["Www-Authenticate"] as? String {
+                            error = nil
+                            // Get the realm and other params from the authentication challenge.
+                            self?._authCred = (self?._extractAuthenticateParams(authenticateHeader: authenticateHeader).reduce(into: [String: String](), { (reductionBase, elem) in
+                                let key = elem.key.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                                var value = elem.value.trimmingCharacters(in: .whitespacesAndNewlines)
+                                switch key {
+                                case "stale":
+                                    // Make sure that we have something in the stale flag.
+                                    value = "true" == value.lowercased() ? "true" : "false"
+                                case "url":
+                                    value = url.relativePath    // This is the path that applies to the auth header. It is server-relative.
+                                case "method":
+                                    value = "POST" // We always ring twice (We always POST).
+                                default:
+                                    ()
+                                }
+                                
+                                reductionBase[key] = value
+                            }))!
+                        }
+                        
+                        // Make sure that we wrap everything up.
+                        self?._session.invalidateAndCancel()
+                    } else if nil == inResponse {
+                        self?._authCred = [:]
+                        inONVIFInstance._badIPAddress = true
+                        self?._session.invalidateAndCancel()
+                   }
+                    self?._group.leave()
                 }
 
                 task.resume()
                 
                 _group.wait()
-                _group = nil
+                
+                // In case of an error, we call the main delegate's error reporter.
+                if nil != error {
+                    self._authCred = [:]
+                    DispatchQueue.main.async {  // Delegate calls are always in the main thread.
+                        inONVIFInstance.delegate?.onvifInstance(inONVIFInstance, failureWithReason: RVS_ONVIF.RVS_Fault(faultCode: .UnknownONVIFError(error: error)))
+                    }
+                }
+                
                 _session = nil
+                _group = nil
             }
             
             return _authCred.isEmpty ? nil : _authCred
@@ -215,11 +237,13 @@ extension RVS_ONVIF {
         /**
          This is actually just an internal accessor for the private method.
          
-         - parameter for: The URI, as a String, that we are fetching a realm for.
-         - returns: The Digest auth data, in a Dictionary.
+             - parameter for: The URI, as a String, that we are fetching a realm for.
+             - parameter onvifInstance: The ONVIF handler that "owns" this instance.
+
+             - returns: The Digest auth data, in a Dictionary.
          */
-        internal func authCreds(for inURL: String) -> [String: String]? {
-            return _post(urlString: inURL)
+        internal func authCreds(for inURL: String, onvifInstance inONVIFInstance: RVS_ONVIF) -> [String: String]? {
+            return _post(urlString: inURL, onvifInstance: inONVIFInstance)
         }
     }
     

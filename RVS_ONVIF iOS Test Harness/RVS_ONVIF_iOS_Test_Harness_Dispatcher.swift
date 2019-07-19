@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: -
 /* ################################################################################################################################## */
-public protocol RVS_ONVIF_Test_Harness_Dispatcher {
+public protocol RVS_ONVIF_iOS_Test_Harness_Dispatcher {
     var sendParameters: [String: Any]! { get set }
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
     func sendSpecificCommand(_ inCommand: RVS_ONVIF_DeviceRequestProtocol)
@@ -25,7 +25,7 @@ public protocol RVS_ONVIF_Test_Harness_Dispatcher {
 /* ################################################################################################################################## */
 // MARK: -
 /* ################################################################################################################################## */
-extension RVS_ONVIF_Test_Harness_Dispatcher {
+extension RVS_ONVIF_iOS_Test_Harness_Dispatcher {
     /* ################################################################## */
     /**
      This method is required to be implemented by the final dispatcher. This method is called to deliver the response from the device.
@@ -44,7 +44,7 @@ extension RVS_ONVIF_Test_Harness_Dispatcher {
         if let params = inParams {
             body = String(reflecting: params)
         }
-        RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.displayResult(header: header, data: body)
+        RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.displayResult(header: header, data: body)
         return true
     }
 }

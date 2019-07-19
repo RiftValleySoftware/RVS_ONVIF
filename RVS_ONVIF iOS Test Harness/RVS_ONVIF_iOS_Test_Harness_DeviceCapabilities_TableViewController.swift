@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Main TableView Controller Class for the Device Capabilities List Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_DeviceCapabilities_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+class RVS_ONVIF_iOS_Test_Harness_DeviceCapabilities_TableViewController: RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Properties
     /* ############################################################################################################################## */

@@ -123,6 +123,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController: RVS_ONVIF_tvOS_Test_Ha
         if isConnected {
             isConnecting = false
         }
+        
         connectingActivityContainerView.isHidden = !isConnecting
         ipAddressTextEntry?.isEnabled = !isConnected && !isConnecting
         tcpPortTextEntry?.isEnabled = !isConnected && !isConnecting
@@ -143,7 +144,7 @@ class RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController: RVS_ONVIF_tvOS_Test_Ha
                 !loginID.isEmpty,
                 let password = passwordTextEntry?.text,
                 !password.isEmpty {
-                    connectButton?.isEnabled = true
+                connectButton?.isEnabled = true
             } else {
                 connectButton?.isEnabled = false
             }

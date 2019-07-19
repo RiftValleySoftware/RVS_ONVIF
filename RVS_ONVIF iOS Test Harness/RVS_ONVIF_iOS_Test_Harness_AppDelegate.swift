@@ -11,17 +11,17 @@
 import UIKit
 
 @UIApplicationMain
-class RVS_ONVIF_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
+class RVS_ONVIF_iOS_Test_Harness_AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var openNamespaceHandlerScreen: RVS_ONVIF_Test_Harness_Namespaces_TableViewController!
-    var openProfileSProfilesScreen: RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController!
+    var openNamespaceHandlerScreen: RVS_ONVIF_iOS_Test_Harness_Namespaces_TableViewController!
+    var openProfileSProfilesScreen: RVS_ONVIF_iOS_Test_Harness_ProfileSProfiles_TableViewController!
     
     /* ################################################################## */
     /**
      This is a quick way to get this object instance (it's a SINGLETON), cast as the correct class.
      */
-    static var appDelegateObject: RVS_ONVIF_Test_Harness_AppDelegate {
-        return (UIApplication.shared.delegate as? RVS_ONVIF_Test_Harness_AppDelegate)!
+    static var appDelegateObject: RVS_ONVIF_iOS_Test_Harness_AppDelegate {
+        return (UIApplication.shared.delegate as? RVS_ONVIF_iOS_Test_Harness_AppDelegate)!
     }
 
     /* ################################################################## */

@@ -100,6 +100,10 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
                 vc.tabBarItem.isEnabled = isConnected
             }
         }
+        
+        if !isConnected {
+            selectedIndex = 0
+        }
     }
 
     /* ############################################################################################################################## */
@@ -116,6 +120,7 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
         persistentPrefs = RVS_PersistentPrefs(tag: "TestONVIFSettings", values: defaultPrefs)
         
         RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.prefs = persistentPrefs
+        RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.mainTabController = self
     }
 
     /* ############################################################################################################################## */
@@ -131,8 +136,11 @@ class RVS_ONVIF_tvOS_Test_Harness_UITabBarController: UITabBarController, RVS_ON
      - parameter failureWithReason: An enumeration, with associated values that refine the issue.
      */
     func onvifInstance(_ inONVIFInstance: RVS_ONVIF, failureWithReason inReason: RVS_ONVIF.RVS_Fault!) {
+        if let connectViewController = viewControllers?[0] as? RVS_ONVIF_tvOS_Test_Harness_Connect_ViewController {
+            connectViewController.isConnecting = false  // Make sure we hide the throbber.
+        }
+        onvifInstance = nil
         RVS_ONVIF_tvOS_Test_Harness_AppDelegate.displayAlert("ERROR!", message: inReason.debugDescription)
-        onvifInstanceDeinitialized(inONVIFInstance)
     }
     
     /* ################################################################## */

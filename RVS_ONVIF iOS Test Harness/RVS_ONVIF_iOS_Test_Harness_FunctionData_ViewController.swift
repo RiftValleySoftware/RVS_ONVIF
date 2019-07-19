@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Enum, for defining dialog components.
 /* ################################################################################################################################## */
-enum RVS_ONVIF_Test_Harness_DialogComponents {
+enum RVS_ONVIF_iOS_Test_Harness_DialogComponents {
     typealias CallbackHandler = (UIView?) -> Void
     case textEntry(defaultValue: String, callback: CallbackHandler)
     case textDisplay(value: String, callback: CallbackHandler)
@@ -24,7 +24,7 @@ enum RVS_ONVIF_Test_Harness_DialogComponents {
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
+class RVS_ONVIF_iOS_Test_Harness_FunctionData_ViewController: UIViewController {
     /* ############################################################################################################################## */
     // MARK: - Static Properties
     /* ############################################################################################################################## */
@@ -52,9 +52,9 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
     /* ################################################################## */
     /**
      */
-    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_Test_Harness_DialogComponents], command inCommand: RVS_ONVIF_DeviceRequestProtocol, dispatcher inDispatcher: RVS_ONVIF_Test_Harness_Dispatcher!) -> RVS_ONVIF_Test_Harness_FunctionData_ViewController! {
-        if  let windowViewController = RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen,
-            let ret = windowViewController.storyboard?.instantiateViewController(withIdentifier: parameterScreenStoryBoardID) as? RVS_ONVIF_Test_Harness_FunctionData_ViewController {
+    class func dialogFactory(_ inCustomerOrder: [String: RVS_ONVIF_iOS_Test_Harness_DialogComponents], command inCommand: RVS_ONVIF_DeviceRequestProtocol, dispatcher inDispatcher: RVS_ONVIF_iOS_Test_Harness_Dispatcher!) -> RVS_ONVIF_iOS_Test_Harness_FunctionData_ViewController! {
+        if  let windowViewController = RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen,
+            let ret = windowViewController.storyboard?.instantiateViewController(withIdentifier: parameterScreenStoryBoardID) as? RVS_ONVIF_iOS_Test_Harness_FunctionData_ViewController {
             ret.command = inCommand
             ret.customerOrder = inCustomerOrder
             ret.dispatcher = inDispatcher
@@ -70,7 +70,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
     /* ################################################################## */
     /**
      */
-    var callbackHash: [AnyHashable: RVS_ONVIF_Test_Harness_DialogComponents.CallbackHandler] = [:]
+    var callbackHash: [AnyHashable: RVS_ONVIF_iOS_Test_Harness_DialogComponents.CallbackHandler] = [:]
     
     /* ################################################################## */
     /**
@@ -80,12 +80,12 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
     /* ################################################################## */
     /**
      */
-    var dispatcher: RVS_ONVIF_Test_Harness_Dispatcher!
+    var dispatcher: RVS_ONVIF_iOS_Test_Harness_Dispatcher!
 
     /* ################################################################## */
     /**
      */
-    var customerOrder: [String: RVS_ONVIF_Test_Harness_DialogComponents] = [:]
+    var customerOrder: [String: RVS_ONVIF_iOS_Test_Harness_DialogComponents] = [:]
     
     /* ############################################################################################################################## */
     // MARK: - Instance IB Properties
@@ -169,7 +169,7 @@ class RVS_ONVIF_Test_Harness_FunctionData_ViewController: UIViewController {
             let control: UIView!    // OK for it to be let. We'll only initialize it once.
             
             let item = $0.value
-            var callbackHandler: RVS_ONVIF_Test_Harness_DialogComponents.CallbackHandler!
+            var callbackHandler: RVS_ONVIF_iOS_Test_Harness_DialogComponents.CallbackHandler!
             
             switch item {
             case let .textDisplay(inValue, _):

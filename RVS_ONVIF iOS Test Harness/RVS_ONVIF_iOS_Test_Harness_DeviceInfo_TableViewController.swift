@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Main TableView Controller Class for the Device Information Inspector Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_DeviceInfo_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+class RVS_ONVIF_iOS_Test_Harness_DeviceInfo_TableViewController: RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Override UITableViewDataSource Methods
     /* ############################################################################################################################## */

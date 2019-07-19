@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController: UIViewController, VLCMediaPlayerDelegate {
+class RVS_ONVIF_iOS_Test_Harness_ProfileSProfile_Viewer_ViewController: UIViewController, VLCMediaPlayerDelegate {
     var rtpURI: URL!
     var onvifInstance: RVS_ONVIF!
     var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()

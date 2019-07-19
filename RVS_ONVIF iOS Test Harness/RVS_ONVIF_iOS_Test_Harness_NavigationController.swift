@@ -10,5 +10,5 @@
 
 import UIKit
 
-class RVS_ONVIF_Test_Harness_NavigationController: UINavigationController {
+class RVS_ONVIF_iOS_Test_Harness_NavigationController: UINavigationController {
 }

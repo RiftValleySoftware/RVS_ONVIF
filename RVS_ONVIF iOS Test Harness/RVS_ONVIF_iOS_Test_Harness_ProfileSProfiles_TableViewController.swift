@@ -14,14 +14,14 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Holds a Profile Instance
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ProfileButton: UIButton {
+class RVS_ONVIF_iOS_Test_Harness_ProfileButton: UIButton {
     var associatedProfile: RVS_ONVIF_Profile_S.Profile!
 }
 
 /* ################################################################################################################################## */
 // MARK: - Standard Data Cell View
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_StandardCell: UITableViewCell {
+class RVS_ONVIF_iOS_Test_Harness_StandardCell: UITableViewCell {
     @IBOutlet var labelView: UILabel!
     @IBOutlet var dataView: UILabel!
 }
@@ -29,20 +29,20 @@ class RVS_ONVIF_Test_Harness_StandardCell: UITableViewCell {
 /* ################################################################################################################################## */
 // MARK: - Callout Button Cell View
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ButtonCell: UITableViewCell {
-    @IBOutlet var udpButton: RVS_ONVIF_Test_Harness_ProfileButton!
-    @IBOutlet var tcpButton: RVS_ONVIF_Test_Harness_ProfileButton!
+class RVS_ONVIF_iOS_Test_Harness_ButtonCell: UITableViewCell {
+    @IBOutlet var udpButton: RVS_ONVIF_iOS_Test_Harness_ProfileButton!
+    @IBOutlet var tcpButton: RVS_ONVIF_iOS_Test_Harness_ProfileButton!
 }
 
 /* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewController {
+class RVS_ONVIF_iOS_Test_Harness_ProfileSProfiles_TableViewController: UITableViewController {
     static let standardTextReuseID = "standard-text"
     static let calloutButtonsReuseID = "callout-buttons"
     static let displayVideoSegueID = "display-video"
 
-    typealias RVS_ONVIF_Test_Harness_ProfileSVideoCall = (uri: URL, onvifInstance: RVS_ONVIF)
+    typealias RVS_ONVIF_iOS_Test_Harness_ProfileSVideoCall = (uri: URL, onvifInstance: RVS_ONVIF)
     
     /* ################################################################## */
     /**
@@ -126,7 +126,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     /* ################################################################## */
     /**
      */
-    @objc func streamButtonUDPHit(_ inButton: RVS_ONVIF_Test_Harness_ProfileButton) {
+    @objc func streamButtonUDPHit(_ inButton: RVS_ONVIF_iOS_Test_Harness_ProfileButton) {
         #if DEBUG
             print("Stream UDP")
         #endif
@@ -136,7 +136,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     /* ################################################################## */
     /**
      */
-    @objc func streamButtonTCPHit(_ inButton: RVS_ONVIF_Test_Harness_ProfileButton) {
+    @objc func streamButtonTCPHit(_ inButton: RVS_ONVIF_iOS_Test_Harness_ProfileButton) {
         #if DEBUG
             print("Stream TCP")
         #endif
@@ -151,7 +151,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
             print("Displaying RTP URI: \(inURI.absoluteString)")
         #endif
         
-        let sender = RVS_ONVIF_Test_Harness_ProfileSVideoCall(uri: inURI, onvifInstance: inONVIFInstance)
+        let sender = RVS_ONVIF_iOS_Test_Harness_ProfileSVideoCall(uri: inURI, onvifInstance: inONVIFInstance)
         performSegue(withIdentifier: type(of: self).displayVideoSegueID, sender: sender)
     }
     
@@ -161,7 +161,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen = self
+        RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen = self
     }
     
     /* ################################################################## */
@@ -170,14 +170,14 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen = nil
+        RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen = nil
     }
 
     /* ################################################################## */
     /**
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? RVS_ONVIF_Test_Harness_ProfileSProfile_Viewer_ViewController, let sender = sender as? RVS_ONVIF_Test_Harness_ProfileSVideoCall {
+        if let destination = segue.destination as? RVS_ONVIF_iOS_Test_Harness_ProfileSProfile_Viewer_ViewController, let sender = sender as? RVS_ONVIF_iOS_Test_Harness_ProfileSVideoCall {
             destination.rtpURI = sender.uri
             destination.onvifInstance = sender.onvifInstance
         }
@@ -214,7 +214,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
         let profile = profiles[inIndexPath.section]
         let profileData = getDataDisplayForProfile(profile)
         
-        if inIndexPath.row == profileData.count, let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).calloutButtonsReuseID, for: inIndexPath) as? RVS_ONVIF_Test_Harness_ButtonCell {
+        if inIndexPath.row == profileData.count, let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).calloutButtonsReuseID, for: inIndexPath) as? RVS_ONVIF_iOS_Test_Harness_ButtonCell {
             
             ret.udpButton?.associatedProfile = profile
             ret.udpButton?.addTarget(self, action: #selector(streamButtonUDPHit), for: .touchUpInside)
@@ -226,7 +226,7 @@ class RVS_ONVIF_Test_Harness_ProfileSProfiles_TableViewController: UITableViewCo
             }
             
             return ret
-        } else if let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).standardTextReuseID, for: inIndexPath) as? RVS_ONVIF_Test_Harness_StandardCell {
+        } else if let ret = inTableView.dequeueReusableCell(withIdentifier: type(of: self).standardTextReuseID, for: inIndexPath) as? RVS_ONVIF_iOS_Test_Harness_StandardCell {
             let data = profileData[inIndexPath.row]
             ret.labelView.text = data.key
             ret.dataView.text = data.value

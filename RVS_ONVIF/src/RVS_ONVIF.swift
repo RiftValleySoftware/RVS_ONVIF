@@ -73,6 +73,12 @@ import SOAPEngine64
     
     /* ################################################################## */
     /**
+     This flag will indicate if a given IP address/port combo is bad. If true, it short-circuits everything.
+     */
+    internal var _badIPAddress: Bool = false
+
+    /* ################################################################## */
+    /**
      This tracks the number of times a nonce has been created.
      */
     internal var _nonceCount: Int = 0
@@ -163,13 +169,8 @@ import SOAPEngine64
      */
     internal func _performSOAPRequest(request inRequest: RVS_ONVIF_DeviceRequestProtocol, params inParams: [String: Any]! = nil, asSSL inAsSSL: Bool = false, path inPath: String = "") {
         let soap = SOAPEngine() // We initialize a new SOAPEngine for each call.
-        soap.retrievesAttributes = inRequest.isRetrieveAttributes
-        soap.delegate = self    // We allow interception of delegate calls.
-        soap.licenseKey = self._soapEngineLicenseKey    // So we can work on devices.
-        soap.version = .VERSION_1_2
         soap.authorizationMethod = .AUTH_CUSTOM
-        soap.envelope = inRequest.headerNamespaceFor(self)
-        
+
         let path = inPath.isEmpty ? inRequest.pathFor(self) : inPath
         
         // See if we need to make this HTTPS.
@@ -190,38 +191,54 @@ import SOAPEngine64
             #endif
             
             // Get the result of a Digest challenge.
-            _authData = _AuthorizationSetup().authCreds(for: reqURLString)
-            _authData?["username"] = self.loginCredentials?.login ?? ""     // Add the username, so we have it all in one place.
-            _authData?["password"] = self.loginCredentials?.password ?? ""  // Add the password, so we have it all in one place.
+            _badIPAddress = false   // HACK ALERT! This is a semaphore to detect whether or not a given IP address failed the sniff test immediately.
+            _authData = _AuthorizationSetup().authCreds(for: reqURLString, onvifInstance: self)
             
-            #if DEBUG   // These are printouts for debug mode.
-                if _authData?.isEmpty ?? false {
-                    if .both == authMethod {
-                        print("No SOAP Authorization Realm (Digest), but Trying Basic Authentication")
-                    } else {
-                        print("No SOAP Authorization Realm (Digest), and We Will Not Allow Basic Authorization.")
-                    }
-                } else {
-                    print("Received SOAP Authorization Realm for Digest: \(String(describing: _authData))")
+            // If the IP address was bad, we immediatey report an error, and exit.
+            if _badIPAddress {
+                _badIPAddress = false
+                DispatchQueue.main.async {  // All callbacks happen in the main queue.
+                    self._errorCallback(RVS_Fault(faultCode: .NilRealm))
                 }
-            #endif
-            
-            // If they didn't play nice, we switch to basic to avoid checking for a realm every call.
-            if nil == _authData && .digest != authMethod {
-                authMethod = .basic
-                soap.authorizationMethod = .AUTH_BASIC
-                #if DEBUG
-                    print("Switching to Basic SOAP Authorization.")
+                return
+            } else {
+                _authData?["username"] = self.loginCredentials?.login ?? ""     // Add the username, so we have it all in one place.
+                _authData?["password"] = self.loginCredentials?.password ?? ""  // Add the password, so we have it all in one place.
+                
+                #if DEBUG   // These are printouts for debug mode.
+                    if _authData?.isEmpty ?? false {
+                        if .both == authMethod {
+                            print("No SOAP Authorization Realm (Digest), but Trying Basic Authentication")
+                        } else {
+                            print("No SOAP Authorization Realm (Digest), and We Will Not Allow Basic Authorization.")
+                        }
+                    } else {
+                        print("Received SOAP Authorization Realm for Digest: \(String(describing: _authData))")
+                    }
                 #endif
+                
+                // If they didn't play nice, we switch to basic to avoid checking for a realm every call.
+                if nil == _authData && .digest != authMethod {
+                    authMethod = .basic
+                    soap.authorizationMethod = .AUTH_BASIC
+                    #if DEBUG
+                        print("Switching to Basic SOAP Authorization.")
+                    #endif
+                }
             }
         }
         
-        soap.username = self.loginCredentials?.login ?? ""
-        soap.password = self.loginCredentials?.password ?? ""
-        soap.responseHeader = true  // If this is not set, you will get an empty dictionary.
-        
         // If we don't have a realm, and we have force digest selected, then we fail. Otherwise, we just blunder on, and hope the device likes us.
         if .digest != authMethod || nil != _authData {
+            soap.retrievesAttributes = inRequest.isRetrieveAttributes
+            soap.delegate = self    // We allow interception of delegate calls.
+            soap.licenseKey = self._soapEngineLicenseKey    // So we can work on devices.
+            soap.version = .VERSION_1_2
+            soap.envelope = inRequest.headerNamespaceFor(self)
+            soap.username = self.loginCredentials?.login ?? ""
+            soap.password = self.loginCredentials?.password ?? ""
+            soap.responseHeader = true  // If this is not set, you will get an empty dictionary.
+            
             soap.realm = _authData?["realm"]
             
             // Set up the parameters for the SOAP call.

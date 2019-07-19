@@ -14,7 +14,7 @@ import RVS_ONVIF_iOS
 /* ################################################################################################################################## */
 // MARK: - Dispatch Profile S Functions
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatcher, RVS_ONVIF_Profile_SDispatcher {
+class RVS_ONVIF_iOS_Test_Harness_ProfileSDispatcher: RVS_ONVIF_iOS_Test_Harness_Dispatcher, RVS_ONVIF_Profile_SDispatcher {
     static let profileDisplaySegueID = "display-profiles-profiles"
     
     /* ################################################################## */
@@ -82,13 +82,13 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
             #if DEBUG
                 print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Profile Array: \(String(reflecting: profileArray))")
             #endif
-            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.performSegue(withIdentifier: type(of: self).profileDisplaySegueID, sender: profileArray)
+            RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.performSegue(withIdentifier: type(of: self).profileDisplaySegueID, sender: profileArray)
             return true
         } else if "GetStreamUri" == inCommand.rawValue, let streamingURI = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
             #if DEBUG
                 print("RVS_ONVIF_Test_Harness_Profile_SDispatcher::deliverResponse Stream URI: \(String(reflecting: streamingURI))")
             #endif
-            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen.displayVideoScreen(streamingURI.uri, onvifInstance: streamingURI.owner)
+            RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openProfileSProfilesScreen.displayVideoScreen(streamingURI.uri, onvifInstance: streamingURI.owner)
             return true
         } else {
             let header = "\(inCommand.rawValue)Response:"
@@ -96,7 +96,7 @@ class RVS_ONVIF_Test_Harness_ProfileSDispatcher: RVS_ONVIF_Test_Harness_Dispatch
             if let params = inParams {
                 body = String(reflecting: params)
             }
-            RVS_ONVIF_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.displayResult(header: header, data: body)
+            RVS_ONVIF_iOS_Test_Harness_AppDelegate.appDelegateObject.openNamespaceHandlerScreen.displayResult(header: header, data: body)
             return true
         }
     }

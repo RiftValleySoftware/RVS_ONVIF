@@ -11,18 +11,24 @@
 import UIKit
 import RVS_ONVIF_iOS
 
-class RVS_ONVIF_Test_Harness_Services_ServiceCapabilitiesButton: UIButton {
+/* ################################################################################################################################## */
+// MARK: - Special Button Class With Associated ONVIF Service
+/* ################################################################################################################################## */
+class RVS_ONVIF_iOS_Test_Harness_Services_ServiceCapabilitiesButton: UIButton {
     var service: RVS_ONVIF_Core.Service!
 }
 
-class RVS_ONVIF_Test_Harness_Services_ServiceWithCapabilityTableViewCell: UITableViewCell {
-    @IBOutlet var capabilitiesButton: RVS_ONVIF_Test_Harness_Services_ServiceCapabilitiesButton!
+/* ################################################################################################################################## */
+// MARK: - Special Table Cell View Class with Associated Capabilities
+/* ################################################################################################################################## */
+class RVS_ONVIF_iOS_Test_Harness_Services_ServiceWithCapabilityTableViewCell: UITableViewCell {
+    @IBOutlet var capabilitiesButton: RVS_ONVIF_iOS_Test_Harness_Services_ServiceCapabilitiesButton!
 }
 
 /* ################################################################################################################################## */
 // MARK: - Main TableView Controller Class for the Profile List Screen
 /* ################################################################################################################################## */
-class RVS_ONVIF_Test_Harness_Services_TableViewController: RVS_ONVIF_Test_Harness_ONVIF_TableViewController {
+class RVS_ONVIF_iOS_Test_Harness_Services_TableViewController: RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController {
     /* ############################################################################################################################## */
     // MARK: - Internal Instance Superclass Override Methods
     /* ############################################################################################################################## */
