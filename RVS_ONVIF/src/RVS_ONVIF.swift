@@ -198,7 +198,7 @@ import SOAPEngine64
             if _badIPAddress {
                 _badIPAddress = false
                 DispatchQueue.main.async {  // All callbacks happen in the main queue.
-                    self._errorCallback(RVS_Fault(faultCode: .NilRealm))
+                    self._errorCallback(RVS_Fault(faultCode: .NoDeviceAtIPAddress(address: reqURLString)))
                 }
                 return
             } else {
@@ -551,6 +551,8 @@ import SOAPEngine64
             case NoFault
             /// This means that we had an HTTP error, and you should look at the embedded HTTP code.
             case HTTPError(httpError: Int)
+            /// There was no response at the given IP address.
+            case NoDeviceAtIPAddress(address: String)
             /// Unable to get a SOAP authentication realm.
             case NilRealm
             /// The device found an invalid element information item instead of the expected Envelope element information item.
@@ -619,6 +621,9 @@ import SOAPEngine64
                 switch self {
                 case .NoFault:
                     ret = "NoFault"
+                    
+                case .NoDeviceAtIPAddress:
+                    ret = "NoDeviceAtIPAddress"
                     
                 case .NilRealm:
                     ret = "NilRealm"
