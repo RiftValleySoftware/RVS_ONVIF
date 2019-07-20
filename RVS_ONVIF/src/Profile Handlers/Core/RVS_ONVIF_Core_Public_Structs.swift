@@ -1854,7 +1854,13 @@ extension RVS_ONVIF_Core {
          Returns the parameters in a fashion suitable for sending to the device.
          */
         public var asParameters: [String: Any]! {
-            return [:]
+            var params: [String: Any] = [:]
+            
+            params["AutoNegotiation"] = autoNegotiation ? "true" : "false"
+            params["Speed"] = speed
+            params["Duplex"] = duplex.rawValue
+            
+            return params
         }
     }
 }
