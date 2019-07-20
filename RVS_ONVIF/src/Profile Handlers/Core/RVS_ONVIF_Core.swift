@@ -76,6 +76,8 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case SetNTP
         /// Set the Dynamic DNS Service Settings.
         case SetDynamicDNS
+        /// Set a network interface configuration.
+        case SetNetworkInterfaces
         
         /* ############################################################## */
         /**
@@ -93,7 +95,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             var ret = false
             
             switch self {
-            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS:
+            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS, .SetNetworkInterfaces:
                 ret = true
                 
             default:
@@ -1080,7 +1082,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      */
     internal func _parseNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
         let ipv6ConfigurationExtension = inResponseDictionary["Extension"]
-        var isDHCP: Bool = false
+        var dhcp: IPConfiguration.IPDHCPConfiguration = .Off
         var isAbleToAcceptRouterAdvert: Bool! = nil
         
         var manual: [IPAddressEntry]! = nil
@@ -1088,11 +1090,13 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         var fromDHCP: [IPAddressEntry]! = nil
         var fromRA: [IPAddressEntry]! = nil
 
-        // Have to do this, because IPv6 and IPv4 are different (what a mess).
         if let dhcpStatusStr = inResponseDictionary["DHCP"] as? String {
-            let isDHCPBoolStr = dhcpStatusStr.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            let isDHCPBool = "true" == isDHCPBoolStr || "on" == isDHCPBoolStr
-            isDHCP = isDHCPBool
+            // IPv4 is different from IPv6.
+            if "true" == dhcpStatusStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).lowercased() {
+                dhcp = .On
+            } else {
+                dhcp = IPConfiguration.IPDHCPConfiguration(rawValue: dhcpStatusStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)) ?? .Off
+            }
         }
         
         if let manualArray = inResponseDictionary["Manual"] as? [[String: String]] {
@@ -1135,7 +1139,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             isAbleToAcceptRouterAdvert = owner._parseBoolean(inResponseDictionary, key: "AcceptRouterAdvert")
         }
         
-        return IPConfiguration(isDHCP: isDHCP, manual: manual, linkLocal: linkLocal, fromDHCP: fromDHCP, fromRA: fromRA, isAbleToAcceptRouterAdvert: isAbleToAcceptRouterAdvert, ipv6ConfigurationExtension: ipv6ConfigurationExtension)
+        return IPConfiguration(dhcp: dhcp, manual: manual, linkLocal: linkLocal, fromDHCP: fromDHCP, fromRA: fromRA, isAbleToAcceptRouterAdvert: isAbleToAcceptRouterAdvert, ipv6ConfigurationExtension: ipv6ConfigurationExtension)
     }
 
     /* ################################################################## */
@@ -1450,6 +1454,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
              _DeviceRequest.SetHostnameFromDHCP.soapAction,
              _DeviceRequest.SetDNS.soapAction,
              _DeviceRequest.SetNTP.soapAction,
+             _DeviceRequest.SetNetworkInterfaces.soapAction,
              _DeviceRequest.SetDynamicDNS.soapAction:
             if let request = _DeviceRequest(rawValue: inSOAPRequest), !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: request) ?? false) {
                 owner.dispatchers.forEach {

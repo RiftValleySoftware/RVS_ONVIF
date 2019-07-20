@@ -168,6 +168,17 @@ public extension RVS_ONVIFDelegate {
 public protocol OwnedInstanceProtocol {
     /** This is the RVS_ONVIF instance that "owns" this struct. */
     var owner: RVS_ONVIF! { get }
+    /** This allows conformant protocols to return data as parameters. */
+    var asParameters: [String: Any]! { get }
+}
+
+/* ###################################################################################################################################### */
+/**
+ This is a base protocol for structs returned from the ONVIF object. They can all refer back to their "owner."
+ */
+extension OwnedInstanceProtocol {
+    /** Default is an empty Dictionary. */
+    public var asParameters: [String: Any]! { return [:] }
 }
 
 /* ###################################################################################################################################### */

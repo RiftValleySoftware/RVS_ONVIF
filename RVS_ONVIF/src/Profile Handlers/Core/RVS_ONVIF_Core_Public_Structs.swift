@@ -119,6 +119,33 @@ extension RVS_ONVIF_Core {
          This is an array of IP addresses. They can be either IPv4 or IPv6.
          */
         public let addresses: [RVS_IPAddress]
+        /* ############################################################## */
+        /**
+         This is the structure, as sendable parameters in the appropriate namespace[s].
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["trt:FromDHCP"] = isFromDHCP ? "true" : "false"
+            
+            if !searchDomain.isEmpty {
+                params["trt:SearchDomain"] = searchDomain
+            }
+            
+            if !addresses.isEmpty {
+                var ips: [[String: String]] = []
+                for ip in addresses where ip.isValidAddress {
+                    let type = ip.isV6 ? "IPv6" : "IPv4"
+                    let key = type + "Address"
+                    let val: [String: String] = ["Type": type, key: ip.address]
+                    ips.append(val)
+                }
+                
+                params["trt:DNSManual"] = ips
+            }
+            
+            return params
+        }
 
         /* ############################################################## */
         /**
@@ -204,9 +231,35 @@ extension RVS_ONVIF_Core {
         public let owner: RVS_ONVIF!
         /* ############################################################## */
         /**
+         This is the type of dynamic DNS relationship.
          */
         public let type: DynDNSType
-        
+        /* ############################################################## */
+        /**
+         This returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            switch type {
+            case .ServerUpdates(let ttl):
+                params["trt:Type"] = "ServerUpdates"
+                if nil != ttl {
+                    params["trt:TTL"] = ttl?.asXMLDuration
+                }
+            case .ClientUpdates(let name, let ttl):
+                params["trt:Type"] = "ClientUpdates"
+                if !name.isEmpty {
+                    params["trt:Name"] = name
+                }
+                if nil != ttl {
+                    params["trt:TTL"] = ttl?.asXMLDuration
+                }
+            case .NoUpdate:
+                params["trt:Type"] = "NoUpdate"
+            }
+            return params
+        }
+
         /* ############################################################## */
         /**
          We declare this, because we need it to be public.
@@ -245,6 +298,34 @@ extension RVS_ONVIF_Core {
          This is an array of Names (not IP Addresses). These should be valid DNS names, but they are not vetted.
          */
         public let names: [String]
+        /* ############################################################## */
+        /**
+         This returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["trt:FromDHCP"] = isFromDHCP ? "true" : "false"
+            
+            if !addresses.isEmpty || !names.isEmpty {
+                var ips: [[String: String]] = []
+                for ip in addresses where ip.isValidAddress {
+                    let type = ip.isV6 ? "IPv6" : "IPv4"
+                    let key = type + "Address"
+                    let val: [String: String] = ["Type": type, key: ip.address]
+                    ips.append(val)
+                }
+                
+                for name in names {
+                    let val: [String: String] = ["Type": "DNS", "DNSname": name]
+                    ips.append(val)
+                }
+                
+                params["trt:NTPManual"] = ips
+            }
+            
+            return params
+        }
         
         /* ############################################################## */
         /**
@@ -1219,6 +1300,31 @@ extension RVS_ONVIF_Core {
          The enabled flag. If true, the interface is enabled.
          */
         public var isEnabled: Bool = false
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var networkInterfaceParams: [String: Any] = [:]
+            networkInterfaceParams["token"] = token
+            networkInterfaceParams["Enabled"] = isEnabled ? "true" : "false"
+            
+            if let info = info {
+                networkInterfaceParams["Info"] = info.asParameters
+            }
+            
+            if let link = link {
+                networkInterfaceParams["Link"] = link.asParameters
+            }
+            
+            var params: [String: Any] = [:]
+            
+            params["trt:InterfaceToken"] = token
+            params["trt:NetworkInterface"] = networkInterfaceParams
+            
+            return params
+        }
 
         /* ############################################################## */
         /**
@@ -1273,7 +1379,20 @@ extension RVS_ONVIF_Core {
          The maximum transmission unit (MTU) size. 0 is undefined.
          */
         public var mtu: Int = 0
-    }
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            params["Name"] = name
+            params["HwAddress"] = hwAddress
+            params["MTU"] = mtu
+            
+            return params
+        }
+   }
     
     /* ###################################################################################################################################### */
     /**
@@ -1297,6 +1416,20 @@ extension RVS_ONVIF_Core {
          The interface type.
          */
         public var interfaceType: RVS_ONVIF_Core.IANA_Types
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["InterfaceType"] = interfaceType
+            params["AdminSettings"] = adminSettings.asParameters
+            params["OperSettings"] = operSettings.asParameters
+            
+            return params
+        }
     }
     
     /* ###################################################################################################################################### */
@@ -1327,6 +1460,29 @@ extension RVS_ONVIF_Core {
          Optional extension placeholder.
          */
         public var networkInterfaceSetConfigurationExtension2: Any!
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            params["InterfaceType"] = interfaceType
+
+            if let dot11 = dot11 {
+                params["Dot11"] = dot11.asParameters
+            }
+
+            if let dot3Configuration = dot3Configuration {
+                params["Dot3Configuration"] = dot3Configuration
+            }
+            
+            if let networkInterfaceSetConfigurationExtension2 = networkInterfaceSetConfigurationExtension2 {
+                params["NetworkInterfaceExtension2"] = networkInterfaceSetConfigurationExtension2
+            }
+            
+            return params
+        }
     }
     
     /* ###################################################################################################################################### */
@@ -1351,6 +1507,27 @@ extension RVS_ONVIF_Core {
                 public var passphrase: String = ""
                 /// This is optional, and contains any extension info.
                 public var dot11PSKSetExtension: Any!
+                
+                /* ############################################################## */
+                /**
+                 Returns the parameters in a fashion suitable for sending to the device.
+                 */
+                public var asParameters: [String: Any]! {
+                    var params: [String: Any] = [:]
+                    if !key.isEmpty {
+                        params["Key"] = key
+                    }
+                    
+                    if !passphrase.isEmpty {
+                        params["Passphrase"] = passphrase
+                    }
+                    
+                    if let dot11PSKSetExtension = dot11PSKSetExtension {
+                        params["Extension"] = dot11PSKSetExtension
+                    }
+
+                    return params
+                }
             }
             
             /// The network security mode.
@@ -1393,6 +1570,29 @@ extension RVS_ONVIF_Core {
             
             /// This is optional, and contains any extension info.
             public var dot11SecurityConfigurationExtension: Any!
+            
+            /* ############################################################## */
+            /**
+             Returns the parameters in a fashion suitable for sending to the device.
+             */
+            public var asParameters: [String: Any]! {
+                var params: [String: Any] = [:]
+                params["Mode"] = mode.rawValue
+                if let algorithm = algorithm {
+                    params["Algorithm"] = algorithm.rawValue
+                }
+                if let psk = psk {
+                    params["PSK"] = psk.asParameters
+                }
+                if let dot1XToken = dot1XToken {
+                    params["Dot1X"] = dot1XToken
+                }
+                if let dot11SecurityConfigurationExtension = dot11SecurityConfigurationExtension {
+                    params["Extension"] = dot11SecurityConfigurationExtension
+                }
+                
+                return params
+            }
         }
         
        /// The connection mode for this network.
@@ -1421,6 +1621,23 @@ extension RVS_ONVIF_Core {
         
         /// The security login info for this network.
         public var security: Dot11SecurityConfiguration
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            params["SSID"] = ssid
+            params["Mode"] = mode.rawValue
+            params["Alias"] = alias
+            if let priority = priority {
+                params["Priority"] = priority
+            }
+            params["Security"] = security.asParameters
+            
+            return params
+        }
     }
     
     /* ###################################################################################################################################### */
@@ -1433,6 +1650,20 @@ extension RVS_ONVIF_Core {
         
         /// The length of the address submask.
         public var prefixLength: Int
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            if let address = address {
+                params["Address"] = address
+            }
+            params["PrefixLength"] = prefixLength
+            
+            return params
+        }
     }
     
     /* ###################################################################################################################################### */
@@ -1440,11 +1671,23 @@ extension RVS_ONVIF_Core {
      This struct describes the model for an IPv4 or IPv6 interface configuration. It has a couple of fields which are not filled for IPv4.
      */
     public struct IPConfiguration {
+        public enum IPDHCPConfiguration: String {
+            case On, Off, Auto, Stateful, Stateless
+        }
+        
         /* ############################################################## */
         /**
          This is true, if the interface uses DHCP.
          */
-        public var isDHCP: Bool = false
+        public var isDHCP: Bool {
+            return .Off != dhcp
+        }
+        
+        /* ############################################################## */
+        /**
+         This contains any specific DHCP setup. For IPv4, it is simply "On" or "Off".
+         */
+        public var dhcp: IPDHCPConfiguration = .Off
         
         /* ############################################################## */
         /**
@@ -1484,6 +1727,42 @@ extension RVS_ONVIF_Core {
          This will always be nil for IPv4 interfaces.
          */
         public var ipv6ConfigurationExtension: Any!
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["DHCP"] = dhcp.rawValue
+            
+            if let isAbleToAcceptRouterAdvert = isAbleToAcceptRouterAdvert {
+                params["AcceptRouterAdvert"] = isAbleToAcceptRouterAdvert ? "true" : "false"
+            }
+            
+            if let ipv6ConfigurationExtension = ipv6ConfigurationExtension {
+                params["Extension"] = ipv6ConfigurationExtension
+            }
+            
+            if let array = manual, !array.isEmpty {
+                params["Manual"] = array.compactMap { return $0.asParameters }
+            }
+            
+            if let array = linkLocal, !array.isEmpty {
+                params["LinkLocal"] = array.compactMap { return $0.asParameters }
+            }
+            
+            if let array = fromDHCP, !array.isEmpty {
+                params["FromDHCP"] = array.compactMap { return $0.asParameters }
+            }
+            
+            if let array = fromRA, !array.isEmpty {
+                params["FromRA"] = array.compactMap { return $0.asParameters }
+            }
+
+            return params
+        }
     }
 
     /* ###################################################################################################################################### */
@@ -1543,6 +1822,14 @@ extension RVS_ONVIF_Core {
          The duplex type.
          */
         public var duplex: Duplex
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            return [:]
+        }
     }
 }
 
@@ -1592,6 +1879,14 @@ public protocol RVS_ONVIF_CoreDispatcher: RVS_ONVIF_Dispatcher {
      - parameter inDynDNSEntry: This is the new Dynamic DNS information to send to the device.
      */
     func setDynamicDNS(_ inDynDNSEntry: RVS_ONVIF_Core.DynamicDNSRecord)
+    
+    /* ################################################################## */
+    /**
+     This sends a network interface setting to the device
+     
+     - parameter inNetworkInterfaceRecord: This is the new network interface information to send to the device.
+     */
+    func setNetworkInterfaces(_ inNetworkInterfaceRecord: RVS_ONVIF_Core.NetworkInterface)
 }
 
 /* ################################################################################################################################## */
@@ -1635,27 +1930,7 @@ extension RVS_ONVIF_CoreDispatcher {
      - parameter inDNSEntry: This is the new DNS information to send to the device.
      */
     public func setDNS(_ inDNSEntry: RVS_ONVIF_Core.DNSRecord) {
-        var params: [String: Any] = [:]
-        
-        params["trt:FromDHCP"] = inDNSEntry.isFromDHCP ? "true" : "false"
-        
-        if !inDNSEntry.searchDomain.isEmpty {
-            params["trt:SearchDomain"] = inDNSEntry.searchDomain
-        }
-        
-        if !inDNSEntry.addresses.isEmpty {
-            var ips: [[String: String]] = []
-            for ip in inDNSEntry.addresses where ip.isValidAddress {
-                let type = ip.isV6 ? "IPv6" : "IPv4"
-                let key = "tt:" + type + "Address"
-                let val: [String: String] = ["tt:Type": type, key: ip.address]
-                ips.append(val)
-            }
-            
-            params["trt:DNSManual"] = ips
-        }
-        
-        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDNS, params: params)
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDNS, params: inDNSEntry.asParameters)
     }
     
     /* ################################################################## */
@@ -1665,28 +1940,7 @@ extension RVS_ONVIF_CoreDispatcher {
      - parameter inNTPEntry: This is the new NTP information to send to the device.
      */
     public func setNTP(_ inNTPEntry: RVS_ONVIF_Core.NTPRecord) {
-        var params: [String: Any] = [:]
-        
-        params["trt:FromDHCP"] = inNTPEntry.isFromDHCP ? "true" : "false"
-        
-        if !inNTPEntry.addresses.isEmpty || !inNTPEntry.names.isEmpty {
-            var ips: [[String: String]] = []
-            for ip in inNTPEntry.addresses where ip.isValidAddress {
-                let type = ip.isV6 ? "IPv6" : "IPv4"
-                let key = "tt:" + type + "Address"
-                let val: [String: String] = ["tt:Type": type, key: ip.address]
-                ips.append(val)
-            }
-            
-            for name in inNTPEntry.names {
-                let val: [String: String] = ["tt:Type": "DNS", "tt:DNSname": name]
-                ips.append(val)
-            }
-            
-            params["trt:NTPManual"] = ips
-        }
-        
-        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetNTP, params: params)
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetNTP, params: inNTPEntry.asParameters)
     }
     
     /* ################################################################## */
@@ -1696,26 +1950,16 @@ extension RVS_ONVIF_CoreDispatcher {
      - parameter inDynDNSEntry: This is the new Dynamic DNS information to send to the device.
      */
     public func setDynamicDNS(_ inDynDNSEntry: RVS_ONVIF_Core.DynamicDNSRecord) {
-        var params: [String: Any] = [:]
-        print("Type: \(String(describing: inDynDNSEntry))")
-        switch inDynDNSEntry.type {
-        case .ServerUpdates(let ttl):
-            params["trt:Type"] = "ServerUpdates"
-            if nil != ttl {
-                params["trt:TTL"] = ttl?.asXMLDuration
-            }
-        case .ClientUpdates(let name, let ttl):
-            params["trt:Type"] = "ClientUpdates"
-            if !name.isEmpty {
-                params["trt:Name"] = name
-            }
-            if nil != ttl {
-                params["trt:TTL"] = ttl?.asXMLDuration
-            }
-        case .NoUpdate:
-            params["trt:Type"] = "NoUpdate"
-        }
-        
-        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDynamicDNS, params: params)
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetDynamicDNS, params: inDynDNSEntry.asParameters)
+    }
+    
+    /* ################################################################## */
+    /**
+     This sends a network interface setting to the device
+     
+     - parameter inNetworkInterfaceRecord: This is the new network interface information to send to the device.
+     */
+    public func setNetworkInterfaces(_ inNetworkInterfaceRecord: RVS_ONVIF_Core.NetworkInterface) {
+        owner.performRequest(RVS_ONVIF_Core._DeviceRequest.SetNetworkInterfaces, params: inNetworkInterfaceRecord.asParameters)
     }
 }
