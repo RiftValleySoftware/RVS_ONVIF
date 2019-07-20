@@ -1307,6 +1307,7 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var networkInterfaceParams: [String: Any] = [:]
+            
             networkInterfaceParams["token"] = token
             networkInterfaceParams["Enabled"] = isEnabled ? "true" : "false"
             
@@ -1318,10 +1319,22 @@ extension RVS_ONVIF_Core {
                 networkInterfaceParams["Link"] = link.asParameters
             }
             
+            if let ipV4 = ipV4 {
+                networkInterfaceParams["IPv4"] = ipV4.asParameters
+            }
+            
+            if let ipV6 = ipV4 {
+                networkInterfaceParams["IPv6"] = ipV6.asParameters
+            }
+
+            if let networkInterfaceExtension = networkInterfaceExtension {
+                networkInterfaceParams["Extension"] = networkInterfaceExtension.asParameters
+            }
+            
             var params: [String: Any] = [:]
             
-            params["trt:InterfaceToken"] = token
-            params["trt:NetworkInterface"] = networkInterfaceParams
+            params["InterfaceToken"] = token
+            params["NetworkInterface"] = networkInterfaceParams
             
             return params
         }
@@ -1781,6 +1794,19 @@ extension RVS_ONVIF_Core {
          The IPv4 configuration for this interface.
          */
         public var configuration: IPConfiguration
+        
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["Enabled"] = isEnabled ? "true" : "false"
+            params["Config"] = configuration.asParameters
+            
+            return params
+        }
     }
 
     /* ###################################################################################################################################### */
