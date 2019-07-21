@@ -232,7 +232,7 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
     func setupCommandParameters(_ inCommand: RVS_ONVIF_DeviceRequestProtocol) {
         sendParameters = [:]
         if inCommand.isRequiresParameters {
-            var dataEntryDialog: RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController!
+            var dataEntryDialog: UIViewController!
             
             switch inCommand.rawValue {
             case "SetHostname":
@@ -250,6 +250,16 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
             case "SetDynamicDNS":
                 dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["Type": .pickOne(values: ["NoUpdate", "ServerUpdates", "ClientUpdates"], selectedIndex: 0, callback: dynDNSTypeCallback), "Name": .textEntry(defaultValue: "", callback: nameCallback), "TTL": .textEntry(defaultValue: "", callback: ttlCallback)], command: inCommand, dispatcher: self)
                 
+            case "SetNetworkInterfaces":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController()
+                if  let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openNamespaceHandlerScreen {
+                    if  1 == owner.core.networkInterfaces.count,
+                        let dEntry = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController {
+                        dEntry.networkInterfaceObject = owner.core.networkInterfaces[0]
+                    dataEntryDialog = dEntry
+                    }
+                }
+
             default:
                 ()
             }
