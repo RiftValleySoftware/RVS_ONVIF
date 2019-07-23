@@ -1307,8 +1307,8 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var networkInterfaceParams: [String: Any] = [:]
-            
-            networkInterfaceParams["tt:token"] = token
+// Not writeable.
+//            networkInterfaceParams["tt:token"] = token
             networkInterfaceParams["tt:Enabled"] = isEnabled ? "true" : "false"
             
             if let info = info {
@@ -1323,7 +1323,7 @@ extension RVS_ONVIF_Core {
                 networkInterfaceParams["tt:IPv4"] = ipV4.asParameters
             }
             
-            if let ipV6 = ipV4 {
+            if let ipV6 = ipV6 {
                 networkInterfaceParams["tt:IPv6"] = ipV6.asParameters
             }
 
@@ -1333,8 +1333,8 @@ extension RVS_ONVIF_Core {
             
             var params: [String: Any] = [:]
             
-            params["tt:InterfaceToken"] = token
-            params["tt:NetworkInterface"] = networkInterfaceParams
+            params["trt:InterfaceToken"] = token
+            params["trt:NetworkInterface"] = networkInterfaceParams
             
             return params
         }
@@ -1400,8 +1400,9 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             params["tt:Name"] = name
-            params["tt:HwAddress"] = hwAddress
             params["tt:MTU"] = mtu
+// Not writable.
+//            params["tt:HwAddress"] = hwAddress
             
             return params
         }
@@ -1436,8 +1437,9 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-            
-            params["tt:InterfaceType"] = interfaceType
+
+// Not writeable.
+//            params["tt:InterfaceType"] = interfaceType
             params["tt:AdminSettings"] = adminSettings.asParameters
             params["tt:OperSettings"] = operSettings.asParameters
             
@@ -1480,7 +1482,8 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-            params["tt:InterfaceType"] = interfaceType
+// Not writeable
+//            params["tt:InterfaceType"] = interfaceType
 
             if let dot11 = dot11 {
                 params["tt:Dot11"] = dot11.asParameters
@@ -1671,9 +1674,9 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             if let address = address {
-                params["tt:Address"] = address
+                params["tt:Address"] = address.address
+                params["tt:PrefixLength"] = prefixLength
             }
-            params["tt:PrefixLength"] = prefixLength
             
             return params
         }
@@ -1707,10 +1710,16 @@ extension RVS_ONVIF_Core {
         
         /* ############################################################## */
         /**
+         This is set to true, if this is an IPv6 configuration.
+         */
+        public var isIPv6: Bool = false
+        
+        /* ############################################################## */
+        /**
          This contains any specific DHCP setup. For IPv4, it is simply "On" or "Off".
          */
         public var dhcp: IPDHCPConfiguration = .Off
-        
+
         /* ############################################################## */
         /**
          OPTIONAL -This contains any IP addresses manually entered. It is optional, and can be nil
@@ -1757,7 +1766,7 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             
-            params["tt:DHCP"] = dhcp.rawValue
+            params["tt:DHCP"] = isIPv6 ? dhcp.rawValue : .On == dhcp ? "true" : "false"
             
             if let isAbleToAcceptRouterAdvert = isAbleToAcceptRouterAdvert {
                 params["tt:AcceptRouterAdvert"] = isAbleToAcceptRouterAdvert ? "true" : "false"
@@ -1770,18 +1779,19 @@ extension RVS_ONVIF_Core {
             if let array = manual, !array.isEmpty {
                 params["tt:Manual"] = array.compactMap { return $0.asParameters }
             }
-            
-            if let array = linkLocal, !array.isEmpty {
-                params["tt:LinkLocal"] = array.compactMap { return $0.asParameters }
-            }
-            
-            if let array = fromDHCP, !array.isEmpty {
-                params["tt:FromDHCP"] = array.compactMap { return $0.asParameters }
-            }
-            
-            if let array = fromRA, !array.isEmpty {
-                params["tt:FromRA"] = array.compactMap { return $0.asParameters }
-            }
+
+// Not writeable.
+//            if let array = linkLocal, !array.isEmpty {
+//                params["tt:LinkLocal"] = array.compactMap { return $0.asParameters }
+//            }
+//
+//            if let array = fromDHCP, !array.isEmpty {
+//                params["tt:FromDHCP"] = array.compactMap { return $0.asParameters }
+//            }
+//
+//            if let array = fromRA, !array.isEmpty {
+//                params["tt:FromRA"] = array.compactMap { return $0.asParameters }
+//            }
 
             return params
         }

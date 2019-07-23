@@ -1066,7 +1066,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     internal func _parseNetworkInterfaceIP(_ inResponseDictionary: [String: Any], key inKey: String) -> IPNetworkInterface! {
         if let ipConfig = inResponseDictionary[inKey] as? [String: Any], let configDict = ipConfig["Config"] as? [String: Any] {
             let isEnabled = owner._parseBoolean(ipConfig, key: "Enabled")
-            let config = _parseNetworkInterfaceIPIndividual(configDict)
+            let config = _parseNetworkInterfaceIPIndividual(configDict, isIPv6: "IPv6" == inKey)
             return IPNetworkInterface(isEnabled: isEnabled, configuration: config)
         }
         
@@ -1080,7 +1080,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
      - returns: an IPConfiguration instance (with IPv4/6 info)
      */
-    internal func _parseNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any]) -> IPConfiguration {
+    internal func _parseNetworkInterfaceIPIndividual(_ inResponseDictionary: [String: Any], isIPv6 inIsIPv6: Bool = false) -> IPConfiguration {
         let ipv6ConfigurationExtension = inResponseDictionary["Extension"]
         var dhcp: IPConfiguration.IPDHCPConfiguration = .Off
         var isAbleToAcceptRouterAdvert: Bool! = nil
@@ -1139,7 +1139,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             isAbleToAcceptRouterAdvert = owner._parseBoolean(inResponseDictionary, key: "AcceptRouterAdvert")
         }
         
-        return IPConfiguration(dhcp: dhcp, manual: manual, linkLocal: linkLocal, fromDHCP: fromDHCP, fromRA: fromRA, isAbleToAcceptRouterAdvert: isAbleToAcceptRouterAdvert, ipv6ConfigurationExtension: ipv6ConfigurationExtension)
+        return IPConfiguration(isIPv6: inIsIPv6, dhcp: dhcp, manual: manual, linkLocal: linkLocal, fromDHCP: fromDHCP, fromRA: fromRA, isAbleToAcceptRouterAdvert: isAbleToAcceptRouterAdvert, ipv6ConfigurationExtension: ipv6ConfigurationExtension)
     }
 
     /* ################################################################## */
