@@ -1308,33 +1308,33 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var networkInterfaceParams: [String: Any] = [:]
             
-            networkInterfaceParams["token"] = token
-            networkInterfaceParams["Enabled"] = isEnabled ? "true" : "false"
+            networkInterfaceParams["tt:token"] = token
+            networkInterfaceParams["tt:Enabled"] = isEnabled ? "true" : "false"
             
             if let info = info {
-                networkInterfaceParams["Info"] = info.asParameters
+                networkInterfaceParams["tt:Info"] = info.asParameters
             }
             
             if let link = link {
-                networkInterfaceParams["Link"] = link.asParameters
+                networkInterfaceParams["tt:Link"] = link.asParameters
             }
             
             if let ipV4 = ipV4 {
-                networkInterfaceParams["IPv4"] = ipV4.asParameters
+                networkInterfaceParams["tt:IPv4"] = ipV4.asParameters
             }
             
             if let ipV6 = ipV4 {
-                networkInterfaceParams["IPv6"] = ipV6.asParameters
+                networkInterfaceParams["tt:IPv6"] = ipV6.asParameters
             }
 
             if let networkInterfaceExtension = networkInterfaceExtension {
-                networkInterfaceParams["Extension"] = networkInterfaceExtension.asParameters
+                networkInterfaceParams["tt:Extension"] = networkInterfaceExtension.asParameters
             }
             
             var params: [String: Any] = [:]
             
-            params["InterfaceToken"] = token
-            params["NetworkInterface"] = networkInterfaceParams
+            params["tt:InterfaceToken"] = token
+            params["tt:NetworkInterface"] = networkInterfaceParams
             
             return params
         }
@@ -1399,9 +1399,9 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-            params["Name"] = name
-            params["HwAddress"] = hwAddress
-            params["MTU"] = mtu
+            params["tt:Name"] = name
+            params["tt:HwAddress"] = hwAddress
+            params["tt:MTU"] = mtu
             
             return params
         }
@@ -1437,9 +1437,9 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             
-            params["InterfaceType"] = interfaceType
-            params["AdminSettings"] = adminSettings.asParameters
-            params["OperSettings"] = operSettings.asParameters
+            params["tt:InterfaceType"] = interfaceType
+            params["tt:AdminSettings"] = adminSettings.asParameters
+            params["tt:OperSettings"] = operSettings.asParameters
             
             return params
         }
@@ -1480,18 +1480,18 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-            params["InterfaceType"] = interfaceType
+            params["tt:InterfaceType"] = interfaceType
 
             if let dot11 = dot11 {
-                params["Dot11"] = dot11.asParameters
+                params["tt:Dot11"] = dot11.asParameters
             }
 
             if let dot3Configuration = dot3Configuration {
-                params["Dot3Configuration"] = dot3Configuration
+                params["tt:Dot3Configuration"] = dot3Configuration
             }
             
             if let networkInterfaceSetConfigurationExtension2 = networkInterfaceSetConfigurationExtension2 {
-                params["NetworkInterfaceExtension2"] = networkInterfaceSetConfigurationExtension2
+                params["tt:NetworkInterfaceExtension2"] = networkInterfaceSetConfigurationExtension2
             }
             
             return params
@@ -1528,15 +1528,15 @@ extension RVS_ONVIF_Core {
                 public var asParameters: [String: Any]! {
                     var params: [String: Any] = [:]
                     if !key.isEmpty {
-                        params["Key"] = key
+                        params["tt:Key"] = key
                     }
                     
                     if !passphrase.isEmpty {
-                        params["Passphrase"] = passphrase
+                        params["tt:Passphrase"] = passphrase
                     }
                     
                     if let dot11PSKSetExtension = dot11PSKSetExtension {
-                        params["Extension"] = dot11PSKSetExtension
+                        params["tt:Extension"] = dot11PSKSetExtension
                     }
 
                     return params
@@ -1592,16 +1592,16 @@ extension RVS_ONVIF_Core {
                 var params: [String: Any] = [:]
                 params["Mode"] = mode.rawValue
                 if let algorithm = algorithm {
-                    params["Algorithm"] = algorithm.rawValue
+                    params["tt:Algorithm"] = algorithm.rawValue
                 }
                 if let psk = psk {
-                    params["PSK"] = psk.asParameters
+                    params["tt:PSK"] = psk.asParameters
                 }
                 if let dot1XToken = dot1XToken {
-                    params["Dot1X"] = dot1XToken
+                    params["tt:Dot1X"] = dot1XToken
                 }
                 if let dot11SecurityConfigurationExtension = dot11SecurityConfigurationExtension {
-                    params["Extension"] = dot11SecurityConfigurationExtension
+                    params["tt:Extension"] = dot11SecurityConfigurationExtension
                 }
                 
                 return params
@@ -1641,13 +1641,13 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-            params["SSID"] = ssid
-            params["Mode"] = mode.rawValue
-            params["Alias"] = alias
+            params["tt:SSID"] = ssid
+            params["tt:Mode"] = mode.rawValue
+            params["tt:Alias"] = alias
             if let priority = priority {
-                params["Priority"] = priority
+                params["tt:Priority"] = priority
             }
-            params["Security"] = security.asParameters
+            params["tt:Security"] = security.asParameters
             
             return params
         }
@@ -1671,11 +1671,20 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             if let address = address {
-                params["Address"] = address
+                params["tt:Address"] = address
             }
-            params["PrefixLength"] = prefixLength
+            params["tt:PrefixLength"] = prefixLength
             
             return params
+        }
+        
+        /* ############################################################## */
+        /**
+         We declare this here to make it public.
+         */
+        public init(address inAddress: RVS_IPAddress!, prefixLength inPrefixLength: Int) {
+            address = inAddress
+            prefixLength = inPrefixLength
         }
     }
     
@@ -1748,30 +1757,30 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             
-            params["DHCP"] = dhcp.rawValue
+            params["tt:DHCP"] = dhcp.rawValue
             
             if let isAbleToAcceptRouterAdvert = isAbleToAcceptRouterAdvert {
-                params["AcceptRouterAdvert"] = isAbleToAcceptRouterAdvert ? "true" : "false"
+                params["tt:AcceptRouterAdvert"] = isAbleToAcceptRouterAdvert ? "true" : "false"
             }
             
             if let ipv6ConfigurationExtension = ipv6ConfigurationExtension {
-                params["Extension"] = ipv6ConfigurationExtension
+                params["tt:Extension"] = ipv6ConfigurationExtension
             }
             
             if let array = manual, !array.isEmpty {
-                params["Manual"] = array.compactMap { return $0.asParameters }
+                params["tt:Manual"] = array.compactMap { return $0.asParameters }
             }
             
             if let array = linkLocal, !array.isEmpty {
-                params["LinkLocal"] = array.compactMap { return $0.asParameters }
+                params["tt:LinkLocal"] = array.compactMap { return $0.asParameters }
             }
             
             if let array = fromDHCP, !array.isEmpty {
-                params["FromDHCP"] = array.compactMap { return $0.asParameters }
+                params["tt:FromDHCP"] = array.compactMap { return $0.asParameters }
             }
             
             if let array = fromRA, !array.isEmpty {
-                params["FromRA"] = array.compactMap { return $0.asParameters }
+                params["tt:FromRA"] = array.compactMap { return $0.asParameters }
             }
 
             return params
@@ -1802,8 +1811,8 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             
-            params["Enabled"] = isEnabled ? "true" : "false"
-            params["Config"] = configuration.asParameters
+            params["tt:Enabled"] = isEnabled ? "true" : "false"
+            params["tt:Config"] = configuration.asParameters
             
             return params
         }
@@ -1856,9 +1865,9 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
             
-            params["AutoNegotiation"] = autoNegotiation ? "true" : "false"
-            params["Speed"] = speed
-            params["Duplex"] = duplex.rawValue
+            params["tt:AutoNegotiation"] = autoNegotiation ? "true" : "false"
+            params["tt:Speed"] = speed
+            params["tt:Duplex"] = duplex.rawValue
             
             return params
         }

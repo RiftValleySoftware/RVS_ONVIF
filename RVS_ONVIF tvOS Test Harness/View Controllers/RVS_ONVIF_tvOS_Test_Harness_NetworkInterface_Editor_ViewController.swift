@@ -25,8 +25,91 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
         return "networkInterfaceInput"
     }
     
+    /* ############################################################################################################################## */
+    // MARK: - Instance Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
     var networkInterfaceObject: RVS_ONVIF_Core.NetworkInterface!
     
+    /* ################################################################## */
+    /**
+     */
+    var dispatcher: RVS_ONVIF_tvOS_Test_Harness_Dispatcher!
+    
+    /* ################################################################## */
+    /**
+     */
+    var command: RVS_ONVIF_DeviceRequestProtocol!
+
+    /* ############################################################################################################################## */
+    // MARK: - Instance Calculated Properties
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    var sendParameters: [String: Any] {
+        if var networkInterfaceObject = networkInterfaceObject {
+            networkInterfaceObject.isEnabled = 0 == enabledSegmentedSwitch.selectedSegmentIndex
+            
+            if nil != networkInterfaceObject.info {
+                networkInterfaceObject.info.name = nameTextField.text ?? ""
+                networkInterfaceObject.info.mtu = Int(mtuTextField.text ?? "") ?? 0
+            }
+            
+            if nil != networkInterfaceObject.link {
+                networkInterfaceObject.link.adminSettings.autoNegotiation = 0 == adminAutoNegSegmentedSwitch.selectedSegmentIndex
+                networkInterfaceObject.link.adminSettings.duplex = 0 == adminDuplexSegmentedSwitch.selectedSegmentIndex ? .Full : .Half
+                networkInterfaceObject.link.adminSettings.speed = Int(adminSpeedTextField.text ?? "") ?? 0
+
+                networkInterfaceObject.link.operSettings.autoNegotiation = 0 == operAutoNegSegmentedSwitch.selectedSegmentIndex
+                networkInterfaceObject.link.operSettings.duplex = 0 == operDuplexSegmentedSwitch.selectedSegmentIndex ? .Full : .Half
+                networkInterfaceObject.link.operSettings.speed = Int(operSpeedTextField.text ?? "") ?? 0
+            }
+            
+            if  nil != networkInterfaceObject.ipV4,
+                let address = ipv4ManualAddressEntryTextField?.text?.ipAddress,
+                let prefix = Int(ipv4ManualPrefixLengthTextField.text ?? ""),
+                0 < prefix {
+                networkInterfaceObject.ipV4?.configuration.dhcp = 0 == ipv4DHCPSegmentedSwitch.selectedSegmentIndex ? .On : .Off
+                let manVal = RVS_ONVIF_Core.IPAddressEntry(address: address, prefixLength: prefix)
+                networkInterfaceObject.ipV4?.configuration.manual.append(manVal)
+            }
+            
+            if  nil != networkInterfaceObject.ipV6,
+                let address = ipv6ManualAddressEntryTextField?.text?.ipAddress,
+                let prefix = Int(ipv6ManualPrefixLengthTextField.text ?? ""),
+                0 < prefix {
+                    switch ipv4DHCPSegmentedSwitch.selectedSegmentIndex {
+                    case 0:
+                        networkInterfaceObject.ipV6.configuration.dhcp = .Auto
+                        
+                    case 1:
+                        networkInterfaceObject.ipV6.configuration.dhcp = .Stateful
+
+                    case 2:
+                        networkInterfaceObject.ipV6.configuration.dhcp = .Stateless
+
+                    default:
+                        networkInterfaceObject.ipV6.configuration.dhcp = .Off
+                    }
+                let manVal = RVS_ONVIF_Core.IPAddressEntry(address: address, prefixLength: prefix)
+                networkInterfaceObject.ipV6?.configuration.manual.append(manVal)
+            }
+            
+            if nil != networkInterfaceObject.networkInterfaceExtension {
+            }
+
+            if let asParameters = networkInterfaceObject.asParameters {
+                print(String(reflecting: asParameters))
+                return asParameters
+            }
+        }
+
+        return [:]
+    }
+
     /* ############################################################################################################################## */
     // MARK: - IB Properties
     /* ############################################################################################################################## */
@@ -65,7 +148,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     @IBOutlet weak var ipv6DHCPSegmentedSwitch: UISegmentedControl!
     @IBOutlet weak var ipv6ManualAddressStackView: UIStackView!
     @IBOutlet weak var ipv6ManualAddressEntryTextField: UITextField!
-    @IBOutlet weak var ipv5ManualPrefixLengthTextField: UITextField!
+    @IBOutlet weak var ipv6ManualPrefixLengthTextField: UITextField!
     @IBOutlet weak var ipv6LinkLocalAddressLabel: UILabel!
     @IBOutlet weak var ipv6FromDHCPAddressLabel: UILabel!
     @IBOutlet weak var ipv6FromRAAddressLabel: UILabel!
@@ -88,6 +171,8 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /**
      */
     @IBAction func sendButtonHit(_ sender: Any) {
+        dispatcher?.sendParameters = sendParameters
+        dispatcher?.sendRequest(command)
         dismiss(animated: true, completion: nil)
     }
     
@@ -96,7 +181,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
      */
     @IBAction func extensionButtonHit(_ sender: Any) {
     }
-
+    
     /* ############################################################################################################################## */
     // MARK: - Base Class Override Methods
     /* ############################################################################################################################## */
@@ -127,10 +212,15 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
 
         if let networkInterfaceObject = networkInterfaceObject {
             enabledSegmentedSwitch.selectedSegmentIndex = networkInterfaceObject.isEnabled ? 0 : 1
-            var tokenText = networkInterfaceObject.token.isEmpty ? "NO TOKEN" : networkInterfaceObject.token
+            var tokenText = networkInterfaceObject.token.isEmpty ? "" : networkInterfaceObject.token
             if let info = networkInterfaceObject.info {
-                tokenText += " (Hardware Address: \(info.hwAddress))"
+                if tokenText.isEmpty {
+                    tokenText = "Hardware Address: \(info.hwAddress)"
+                } else {
+                    tokenText += " (Hardware Address: \(info.hwAddress))"
+                }
             }
+            
             tokenHeadlineLabel.text = tokenText
 
             if let info = networkInterfaceObject.info {
@@ -152,39 +242,133 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
             
             if let ipv4 = networkInterfaceObject.ipV4 {
                 ipv4StackView.isHidden = false
-                if let manual = ipv4.configuration.manual {
+                ipv4DHCPSegmentedSwitch.selectedSegmentIndex = ipv4.configuration.isDHCP ? 0 : 1
+                
+                if  let manual = ipv4.configuration.manual,
+                    !manual.isEmpty,
+                    nil != manual[0].address {
                     ipv4ManualAddressStackView.isHidden = false
                     ipv4ManualAddressEntryTextField.text = manual[0].address.address
                     ipv4ManualPrefixLengthTextField.text = String(manual[0].prefixLength)
                 }
                 
-                if nil != ipv4.configuration.linkLocal {
+                if  let linkLocal = ipv4.configuration.linkLocal,
+                    !linkLocal.isEmpty,
+                    nil != linkLocal[0].address {
                     ipv4LinkLocalAddressLabel.isHidden = false
+                    let addresses: String = linkLocal.reduce("") { (current, next) -> String in
+                        var ret = current
+                        
+                        if !ret.isEmpty {
+                            ret += ","
+                        }
+                        
+                        ret += next.address.address
+                        ret += "/" + String(next.prefixLength)
+                        
+                        return ret
+                    }
+                    ipv4LinkLocalAddressLabel.text = "Link Local: \(addresses)"
                 }
                 
-                if nil != ipv4.configuration.fromDHCP {
+                if  let fromDHCP = ipv4.configuration.fromDHCP,
+                    !fromDHCP.isEmpty,
+                    nil != fromDHCP[0].address {
                     ipv4FromDHCPAddressLabel.isHidden = false
+                    let addresses: String = fromDHCP.reduce("") { (current, next) -> String in
+                        var ret = current
+                        
+                        if !ret.isEmpty {
+                            ret += ","
+                        }
+                        
+                        ret += next.address.address
+                        ret += "/" + String(next.prefixLength)
+                        
+                        return ret
+                    }
+                    ipv4FromDHCPAddressLabel.text = "From DHCP: \(addresses)"
                 }
             }
             
             if let ipv6 = networkInterfaceObject.ipV6 {
                 ipv4StackView.isHidden = false
-                if let manual = ipv6.configuration.manual {
+                switch ipv6.configuration.dhcp {
+                case .Auto:
+                    ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 0
+                    
+                case .Stateful:
+                    ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 1
+
+                case .Stateless:
+                    ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 2
+
+                default:
+                    ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 3
+                }
+                if  let manual = ipv6.configuration.manual,
+                    !manual.isEmpty,
+                    nil != manual[0].address {
                     ipv6ManualAddressStackView.isHidden = false
                     ipv6ManualAddressEntryTextField.text = manual[0].address.address
-                    ipv5ManualPrefixLengthTextField.text = String(manual[0].prefixLength)
+                    ipv6ManualPrefixLengthTextField.text = String(manual[0].prefixLength)
                 }
                 
-                if nil != ipv6.configuration.linkLocal {
+                if  let linkLocal = ipv6.configuration.linkLocal,
+                    !linkLocal.isEmpty,
+                    nil != linkLocal[0].address {
                     ipv6LinkLocalAddressLabel.isHidden = false
+                    let addresses: String = linkLocal.reduce("") { (current, next) -> String in
+                        var ret = current
+                        
+                        if !ret.isEmpty {
+                            ret += ","
+                        }
+                        
+                        ret += next.address.address
+                        ret += "/" + String(next.prefixLength)
+                        
+                        return ret
+                    }
+                    ipv6LinkLocalAddressLabel.text = "Link Local: \(addresses)"
                 }
                 
-                if nil != ipv6.configuration.fromDHCP {
+                if  let fromDHCP = ipv6.configuration.fromDHCP,
+                    !fromDHCP.isEmpty,
+                    nil != fromDHCP[0].address {
                     ipv6FromDHCPAddressLabel.isHidden = false
+                    let addresses: String = fromDHCP.reduce("") { (current, next) -> String in
+                        var ret = current
+                        
+                        if !ret.isEmpty {
+                            ret += ","
+                        }
+                        
+                        ret += next.address.address
+                        ret += "/" + String(next.prefixLength)
+                        
+                        return ret
+                    }
+                    ipv6FromDHCPAddressLabel.text = "From DHCP: \(addresses)"
                 }
                 
-                if nil != ipv6.configuration.fromRA {
+                if  let fromRA = ipv6.configuration.fromRA,
+                    !fromRA.isEmpty,
+                    nil != fromRA[0].address {
                     ipv6FromRAAddressLabel.isHidden = false
+                    let addresses: String = fromRA.reduce("") { (current, next) -> String in
+                        var ret = current
+                        
+                        if !ret.isEmpty {
+                            ret += ","
+                        }
+                        
+                        ret += next.address.address
+                        ret += "/" + String(next.prefixLength)
+                        
+                        return ret
+                    }
+                    ipv6FromRAAddressLabel.text = "From RA: \(addresses)"
                 }
             }
             

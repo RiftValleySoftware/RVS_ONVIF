@@ -20,8 +20,8 @@ opt_in_rules:
 - comma
 
 file_length:
-- 2000 # warning
-- 2001 # error
+- 3000 # warning
+- 3001 # error
 
 type_body_length:
 - 1000 # warning
@@ -32,8 +32,8 @@ line_length:
 - 401 # error
 
 cyclomatic_complexity:
-- 19 # warning
-- 20 # error
+- 23 # warning
+- 24 # error
 
 excluded:
 - Pods

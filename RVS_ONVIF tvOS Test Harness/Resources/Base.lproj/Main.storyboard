@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t9H-8u-pk4">
-    <device id="appleTV" orientation="landscape">
-        <adaptation id="light"/>
-    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -175,7 +172,7 @@
                         <viewControllerLayoutGuide type="bottom" id="c02-Vw-5VQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aKR-Bs-tvI">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
@@ -213,7 +210,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fS8-dP-1gK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YF3-eC-wYo">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="7" sectionFooterHeight="7" translatesAutoresizingMaskIntoConstraints="NO" id="0Js-50-5sP">
@@ -653,7 +650,7 @@
                         <viewControllerLayoutGuide type="bottom" id="HGy-0e-km3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NZW-Ot-uae">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-Ql-KK7">
@@ -691,7 +688,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lb4-u2-j66"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pqa-YK-FVp">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-3X-Qs1">
@@ -1397,7 +1394,6 @@
                         <outlet property="ipv4ManualAddressStackView" destination="0wP-e0-g8w" id="jU9-tE-PcF"/>
                         <outlet property="ipv4ManualPrefixLengthTextField" destination="Ft2-fz-egR" id="s1p-df-mqn"/>
                         <outlet property="ipv4StackView" destination="NOq-LZ-gFj" id="tIl-dl-IB7"/>
-                        <outlet property="ipv5ManualPrefixLengthTextField" destination="q6h-i3-Wtx" id="GxQ-JO-2pq"/>
                         <outlet property="ipv6AcceptRALabel" destination="poK-h6-bYV" id="FWD-Py-AdC"/>
                         <outlet property="ipv6AcceptRouterAdvertSegmentedSwitch" destination="T0E-wK-1SU" id="FWg-ah-8Y6"/>
                         <outlet property="ipv6DHCPSegmentedSwitch" destination="Ku1-5r-kYY" id="nLs-Nn-F9L"/>
@@ -1407,6 +1403,7 @@
                         <outlet property="ipv6LinkLocalAddressLabel" destination="X4d-sA-ey5" id="nQX-AW-1vA"/>
                         <outlet property="ipv6ManualAddressEntryTextField" destination="adC-3Z-uHr" id="MX1-jt-YzZ"/>
                         <outlet property="ipv6ManualAddressStackView" destination="ayo-ks-iXF" id="AaD-7b-EvT"/>
+                        <outlet property="ipv6ManualPrefixLengthTextField" destination="q6h-i3-Wtx" id="GxQ-JO-2pq"/>
                         <outlet property="ipv6StackView" destination="yqK-ic-IcA" id="SIS-5n-cKs"/>
                         <outlet property="linkStackView" destination="WaU-Z2-tGg" id="Sbc-Ac-gdd"/>
                         <outlet property="mtuTextField" destination="rLK-GC-8zZ" id="WVU-xJ-3gY"/>
@@ -1431,7 +1428,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Hcs-QZ-rBg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wqA-Ja-4yo">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Pzq-Uy-hlj">
