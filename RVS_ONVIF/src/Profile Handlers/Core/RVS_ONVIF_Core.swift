@@ -114,7 +114,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
          in `getProfiles` to retrieve the token: `<Profiles token="MediaProfile000" fixed="true">`
          */
         var isRetrieveAttributes: Bool {
-            return .GetServiceCapabilities == self || .GetCapabilities == self || .GetServices == self
+            return .GetServiceCapabilities == self || .GetCapabilities == self || .GetServices == self || .GetNetworkInterfaces == self
         }
     }
     
@@ -1090,48 +1090,46 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         var fromDHCP: [IPAddressEntry]! = nil
         var fromRA: [IPAddressEntry]! = nil
 
-        if let dhcpStatusStr = inResponseDictionary["DHCP"] as? String {
-            // IPv4 is different from IPv6.
-            if "true" == dhcpStatusStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).lowercased() {
-                dhcp = .On
-            } else {
-                dhcp = IPConfiguration.IPDHCPConfiguration(rawValue: dhcpStatusStr.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)) ?? .Off
-            }
+        if inIsIPv6, let dhcpString = owner._parseString(inResponseDictionary, key: "DHCP") {
+            dhcp = IPConfiguration.IPDHCPConfiguration(rawValue: dhcpString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)) ?? .Off
+        } else {
+            dhcp = owner._parseBoolean(inResponseDictionary, key: "DHCP") ? .On : .Off
         }
         
-        if let manualArray = inResponseDictionary["Manual"] as? [[String: String]] {
+        print(String(describing: inResponseDictionary["Manual"]))
+        if let manualArray = inResponseDictionary["Manual"] as? [[String: Any]] {
             manual = []
             manualArray.forEach {
                 manual.append(_parseIPAddressEntry($0))
             }
-        } else if let manualStr = inResponseDictionary["Manual"] as? [String: String] {
+        } else if let manualStr = inResponseDictionary["Manual"] as? [String: Any] {
             manual = [_parseIPAddressEntry(manualStr)]
         }
         
-        if let linkLocalArray = inResponseDictionary["LinkLocal"] as? [[String: String]] {
+        if let linkLocalArray = inResponseDictionary["LinkLocal"] as? [[String: Any]] {
             linkLocal = []
             linkLocalArray.forEach {
                 linkLocal.append(_parseIPAddressEntry($0))
             }
-        } else if let linkLocalStr = inResponseDictionary["LinkLocal"] as? [String: String] {
+        } else if let linkLocalStr = inResponseDictionary["LinkLocal"] as? [String: Any] {
             linkLocal = [_parseIPAddressEntry(linkLocalStr)]
         }
         
-        if let fromDHCPArray = inResponseDictionary["FromDHCP"] as? [[String: String]] {
+        if let fromDHCPArray = inResponseDictionary["FromDHCP"] as? [[String: Any]] {
             fromDHCP = []
             fromDHCPArray.forEach {
                 fromDHCP.append(_parseIPAddressEntry($0))
             }
-        } else if let fromDHCPStr = inResponseDictionary["FromDHCP"] as? [String: String] {
+        } else if let fromDHCPStr = inResponseDictionary["FromDHCP"] as? [String: Any] {
             fromDHCP = [_parseIPAddressEntry(fromDHCPStr)]
         }
         
-        if let fromRAArray = inResponseDictionary["FromRA"] as? [[String: String]] {
+        if let fromRAArray = inResponseDictionary["FromRA"] as? [[String: Any]] {
             fromRA = []
             fromRAArray.forEach {
                 fromRA.append(_parseIPAddressEntry($0))
             }
-        } else if let fromRAStr = inResponseDictionary["FromRA"] as? [String: String] {
+        } else if let fromRAStr = inResponseDictionary["FromRA"] as? [String: Any] {
             fromRA = [_parseIPAddressEntry(fromRAStr)]
         }
         

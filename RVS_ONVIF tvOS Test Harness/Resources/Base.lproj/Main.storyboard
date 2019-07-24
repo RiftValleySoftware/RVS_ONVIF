@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t9H-8u-pk4">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -172,7 +175,7 @@
                         <viewControllerLayoutGuide type="bottom" id="c02-Vw-5VQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aKR-Bs-tvI">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Vo1-Mx-OeQ">
@@ -210,7 +213,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fS8-dP-1gK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YF3-eC-wYo">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="7" sectionFooterHeight="7" translatesAutoresizingMaskIntoConstraints="NO" id="0Js-50-5sP">
@@ -650,7 +653,7 @@
                         <viewControllerLayoutGuide type="bottom" id="HGy-0e-km3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NZW-Ot-uae">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-Ql-KK7">
@@ -688,7 +691,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lb4-u2-j66"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pqa-YK-FVp">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-3X-Qs1">
@@ -991,135 +994,6 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="WaU-Z2-tGg" userLabel="Link Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Interface Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxF-mq-gzC" userLabel="Interface Type Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Admin Settings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKg-ff-AO9" userLabel="Admin Settings Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="C8N-0t-J4s" userLabel="Admin Settings Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-Negotiation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoj-gj-j34">
-                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3yn-f1-o7j">
-                                                        <rect key="frame" x="331" y="0.0" width="202" height="1"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
-                                                        <segments>
-                                                            <segment title="On"/>
-                                                            <segment title="Off"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duplex:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaW-S8-BLL">
-                                                        <rect key="frame" x="638" y="0.0" width="130" height="0.0"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LKG-6I-ioO">
-                                                        <rect key="frame" x="776" y="0.0" width="232" height="1"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
-                                                        <segments>
-                                                            <segment title="Full"/>
-                                                            <segment title="Half"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKA-5e-Dsf">
-                                                        <rect key="frame" x="1406" y="0.0" width="126" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ck-be-DZ6">
-                                                        <rect key="frame" x="1540" y="0.0" width="200" height="0.0"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="2kg-MO-9Ra"/>
-                                                        </constraints>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="0Ck-be-DZ6" firstAttribute="leading" secondItem="bKA-5e-Dsf" secondAttribute="trailing" constant="8" id="QWG-TD-3v2"/>
-                                                    <constraint firstItem="3yn-f1-o7j" firstAttribute="leading" secondItem="xoj-gj-j34" secondAttribute="trailing" constant="8" id="maU-Rr-Gxv"/>
-                                                    <constraint firstItem="LKG-6I-ioO" firstAttribute="leading" secondItem="JaW-S8-BLL" secondAttribute="trailing" constant="8" id="pDc-CO-4MU"/>
-                                                </constraints>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Oper Settings:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8T-er-WZD" userLabel="Oper Settings Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="biV-gi-Gtz" userLabel="Oper Settings Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-Negotiation:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9j-bo-SrP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="323" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mGa-hA-rhT">
-                                                        <rect key="frame" x="331" y="0.0" width="202" height="1"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
-                                                        <segments>
-                                                            <segment title="On"/>
-                                                            <segment title="Off"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duplex:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHI-yK-qkJ">
-                                                        <rect key="frame" x="638" y="0.0" width="130" height="0.0"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X5L-kh-mIo">
-                                                        <rect key="frame" x="776" y="0.0" width="232" height="1"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
-                                                        <segments>
-                                                            <segment title="Full"/>
-                                                            <segment title="Half"/>
-                                                        </segments>
-                                                    </segmentedControl>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTx-lo-Yns">
-                                                        <rect key="frame" x="1406" y="0.0" width="126" height="0.0"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K1d-SI-hse">
-                                                        <rect key="frame" x="1540" y="0.0" width="200" height="0.0"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Okz-rH-pjF"/>
-                                                        </constraints>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="K1d-SI-hse" firstAttribute="leading" secondItem="MTx-lo-Yns" secondAttribute="trailing" constant="8" id="0oY-TK-jfh"/>
-                                                    <constraint firstItem="X5L-kh-mIo" firstAttribute="leading" secondItem="QHI-yK-qkJ" secondAttribute="trailing" constant="8" id="RUg-Kw-hFT"/>
-                                                    <constraint firstItem="mGa-hA-rhT" firstAttribute="leading" secondItem="m9j-bo-SrP" secondAttribute="trailing" constant="8" id="oZu-5A-adX"/>
-                                                </constraints>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NOq-LZ-gFj" userLabel="IPv4 Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="1740" height="88"/>
                                         <subviews>
@@ -1201,18 +1075,6 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAo-if-POS">
-                                                <rect key="frame" x="0.0" y="88" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0v-kG-3Wi" userLabel="Ipv4 DHCP Address Label">
-                                                <rect key="frame" x="0.0" y="88" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yqK-ic-IcA" userLabel="IPv6 Stack View">
@@ -1308,24 +1170,6 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4d-sA-ey5">
-                                                <rect key="frame" x="0.0" y="88" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGU-ie-LSO" userLabel="Ipv4 DHCP Address Label">
-                                                <rect key="frame" x="0.0" y="88" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfw-MA-cu2" userLabel="Ipv4 From RA Address Label">
-                                                <rect key="frame" x="0.0" y="88" width="1740" height="0.0"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1378,18 +1222,12 @@
                         <viewLayoutGuide key="safeArea" id="FUX-g7-KGS"/>
                     </view>
                     <connections>
-                        <outlet property="adminAutoNegSegmentedSwitch" destination="3yn-f1-o7j" id="814-XY-j4S"/>
-                        <outlet property="adminDuplexSegmentedSwitch" destination="LKG-6I-ioO" id="guJ-k4-vwS"/>
-                        <outlet property="adminSpeedTextField" destination="0Ck-be-DZ6" id="Da0-S5-8Z9"/>
                         <outlet property="cancelButton" destination="ESW-ZU-Itx" id="9Ej-oM-cdK"/>
                         <outlet property="enabledSegmentedSwitch" destination="tTf-Xj-23W" id="DXG-zn-iZc"/>
                         <outlet property="extensionButton" destination="IJr-jP-jdm" id="gvo-nh-EUC"/>
                         <outlet property="infoStackView" destination="7Km-gq-Sdb" id="Nr4-DG-2Nv"/>
-                        <outlet property="interfaceTypeLabel" destination="JxF-mq-gzC" id="VAm-EM-bza"/>
                         <outlet property="ipv4DHCPSegmentedSwitch" destination="lMm-71-fJ6" id="cuZ-Ga-uBu"/>
                         <outlet property="ipv4EnabledSegmentedSwitch" destination="tTf-Xj-23W" id="vdH-q7-goJ"/>
-                        <outlet property="ipv4FromDHCPAddressLabel" destination="y0v-kG-3Wi" id="Llb-rV-tSA"/>
-                        <outlet property="ipv4LinkLocalAddressLabel" destination="kAo-if-POS" id="APZ-jT-S0F"/>
                         <outlet property="ipv4ManualAddressEntryTextField" destination="cnf-0U-Ivr" id="qYv-4J-a0T"/>
                         <outlet property="ipv4ManualAddressStackView" destination="0wP-e0-g8w" id="jU9-tE-PcF"/>
                         <outlet property="ipv4ManualPrefixLengthTextField" destination="Ft2-fz-egR" id="s1p-df-mqn"/>
@@ -1398,19 +1236,12 @@
                         <outlet property="ipv6AcceptRouterAdvertSegmentedSwitch" destination="T0E-wK-1SU" id="FWg-ah-8Y6"/>
                         <outlet property="ipv6DHCPSegmentedSwitch" destination="Ku1-5r-kYY" id="nLs-Nn-F9L"/>
                         <outlet property="ipv6EnabledSegmentedSwitch" destination="C6L-a8-v5P" id="mGo-iF-V0p"/>
-                        <outlet property="ipv6FromDHCPAddressLabel" destination="HGU-ie-LSO" id="RBl-xg-diB"/>
-                        <outlet property="ipv6FromRAAddressLabel" destination="Hfw-MA-cu2" id="gFY-cY-GPI"/>
-                        <outlet property="ipv6LinkLocalAddressLabel" destination="X4d-sA-ey5" id="nQX-AW-1vA"/>
                         <outlet property="ipv6ManualAddressEntryTextField" destination="adC-3Z-uHr" id="MX1-jt-YzZ"/>
                         <outlet property="ipv6ManualAddressStackView" destination="ayo-ks-iXF" id="AaD-7b-EvT"/>
                         <outlet property="ipv6ManualPrefixLengthTextField" destination="q6h-i3-Wtx" id="GxQ-JO-2pq"/>
                         <outlet property="ipv6StackView" destination="yqK-ic-IcA" id="SIS-5n-cKs"/>
-                        <outlet property="linkStackView" destination="WaU-Z2-tGg" id="Sbc-Ac-gdd"/>
                         <outlet property="mtuTextField" destination="rLK-GC-8zZ" id="WVU-xJ-3gY"/>
                         <outlet property="nameTextField" destination="Uxs-2a-Owr" id="c7H-Ka-4pq"/>
-                        <outlet property="operAutoNegSegmentedSwitch" destination="mGa-hA-rhT" id="d4G-bh-xHl"/>
-                        <outlet property="operDuplexSegmentedSwitch" destination="X5L-kh-mIo" id="GT6-u3-Qby"/>
-                        <outlet property="operSpeedTextField" destination="K1d-SI-hse" id="9ev-CG-eUw"/>
                         <outlet property="sendButton" destination="lxL-Y9-UL7" id="83Q-Qv-fAn"/>
                         <outlet property="tokenHeadlineLabel" destination="zX2-r6-Ak4" id="HTq-u8-VfX"/>
                     </connections>
@@ -1428,7 +1259,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Hcs-QZ-rBg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wqA-Ja-4yo">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Pzq-Uy-hlj">

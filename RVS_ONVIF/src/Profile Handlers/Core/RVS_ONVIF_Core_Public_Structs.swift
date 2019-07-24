@@ -1307,17 +1307,7 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var networkInterfaceParams: [String: Any] = [:]
-// Not writeable.
-//            networkInterfaceParams["tt:token"] = token
             networkInterfaceParams["tt:Enabled"] = isEnabled ? "true" : "false"
-            
-            if let info = info {
-                networkInterfaceParams["tt:Info"] = info.asParameters
-            }
-            
-            if let link = link {
-                networkInterfaceParams["tt:Link"] = link.asParameters
-            }
             
             if let ipV4 = ipV4 {
                 networkInterfaceParams["tt:IPv4"] = ipV4.asParameters
@@ -1401,8 +1391,6 @@ extension RVS_ONVIF_Core {
             var params: [String: Any] = [:]
             params["tt:Name"] = name
             params["tt:MTU"] = mtu
-// Not writable.
-//            params["tt:HwAddress"] = hwAddress
             
             return params
         }
@@ -1438,8 +1426,6 @@ extension RVS_ONVIF_Core {
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
 
-// Not writeable.
-//            params["tt:InterfaceType"] = interfaceType
             params["tt:AdminSettings"] = adminSettings.asParameters
             params["tt:OperSettings"] = operSettings.asParameters
             
@@ -1482,8 +1468,6 @@ extension RVS_ONVIF_Core {
          */
         public var asParameters: [String: Any]! {
             var params: [String: Any] = [:]
-// Not writeable
-//            params["tt:InterfaceType"] = interfaceType
 
             if let dot11 = dot11 {
                 params["tt:Dot11"] = dot11.asParameters
@@ -1780,19 +1764,6 @@ extension RVS_ONVIF_Core {
                 params["tt:Manual"] = array.compactMap { return $0.asParameters }
             }
 
-// Not writeable.
-//            if let array = linkLocal, !array.isEmpty {
-//                params["tt:LinkLocal"] = array.compactMap { return $0.asParameters }
-//            }
-//
-//            if let array = fromDHCP, !array.isEmpty {
-//                params["tt:FromDHCP"] = array.compactMap { return $0.asParameters }
-//            }
-//
-//            if let array = fromRA, !array.isEmpty {
-//                params["tt:FromRA"] = array.compactMap { return $0.asParameters }
-//            }
-
             return params
         }
     }
@@ -1819,10 +1790,9 @@ extension RVS_ONVIF_Core {
          Returns the parameters in a fashion suitable for sending to the device.
          */
         public var asParameters: [String: Any]! {
-            var params: [String: Any] = [:]
+            var params: [String: Any] = configuration.asParameters
             
             params["tt:Enabled"] = isEnabled ? "true" : "false"
-            params["tt:Config"] = configuration.asParameters
             
             return params
         }
