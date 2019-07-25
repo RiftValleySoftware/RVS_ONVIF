@@ -1454,10 +1454,23 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
              _DeviceRequest.SetNTP.soapAction,
              _DeviceRequest.SetNetworkInterfaces.soapAction,
              _DeviceRequest.SetDynamicDNS.soapAction:
-            if let request = _DeviceRequest(rawValue: inSOAPRequest), !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: request) ?? false) {
+            // Make sure to strip off any namespace tag.
+            var commandString = inSOAPRequest
+            if let colonIndex = inSOAPRequest.firstIndex(of: ":") {
+                commandString = String(inSOAPRequest[inSOAPRequest.index(after: colonIndex)...])
+            }
+            // Create the approriate request enum case for the command.
+            if  let request = _DeviceRequest(rawValue: commandString),
+                !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: request) ?? false) {
                 owner.dispatchers.forEach {
-                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetHostname) {
-                        $0.deliverResponse(request, params: nil)
+                    if $0.isAbleToHandleThisCommand(request) {
+                        if  let responseDict = inResponseDictionary["SetNetworkInterfacesResponse"] as? [String: Any],
+                            let response = responseDict["RebootNeeded"] as? String {
+                            let rebootNeededResponse: [String: Bool] = ["RebootNeeded": "true" == response.lowercased()]
+                            $0.deliverResponse(request, params: rebootNeededResponse)
+                        } else {
+                            $0.deliverResponse(request, params: nil)
+                        }
                     }
                 }
             }
