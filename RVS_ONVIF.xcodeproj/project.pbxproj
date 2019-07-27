@@ -370,6 +370,7 @@
 		D44B592922202AFE00F663E9 /* RVS_ONVIF_Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Core.swift; sourceTree = "<group>"; };
 		D44D99CA224107D50071B02E /* RVS_IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_IPAddress.swift; sourceTree = "<group>"; };
 		D4531C4822CE3DA600151E7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4539F6622EBB1BD0072F6EB /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.0.sdk/usr/lib/libxml2.2.tbd; sourceTree = DEVELOPER_DIR; };
 		D45844412216F23C0075F2E8 /* RVS_ONVIF_Profile_S.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Profile_S.swift; sourceTree = "<group>"; };
 		D459765722DB90A900BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_ServiceCapabilities_ViewController.swift; sourceTree = "<group>"; };
 		D459765922DB949500BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_NetworkInterfaces_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_NetworkInterfaces_ViewController.swift; sourceTree = "<group>"; };
@@ -594,6 +595,7 @@
 		52084A5422B0F7EE8046CFE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4539F6622EBB1BD0072F6EB /* libxml2.2.tbd */,
 				D4D9CC1E22E7643E0075BFAE /* CoreMedia.framework */,
 				D4D9CC1C22E7642B0075BFAE /* CoreVideo.framework */,
 				D4D9CC1822E763AE0075BFAE /* libxml2.2.tbd */,
