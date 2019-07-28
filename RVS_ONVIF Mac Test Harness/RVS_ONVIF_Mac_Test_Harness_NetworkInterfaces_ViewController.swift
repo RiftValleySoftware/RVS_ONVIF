@@ -83,10 +83,11 @@ class RVS_ONVIF_Mac_Test_Harness_NetworkInterfaces_ViewController: RVS_ONVIF_Mac
                     }
                     
                     if let ipv6 = i.element.ipV6 {
+                        let isAbletoRA: Bool = ipv6.configuration.isAbleToAcceptRouterAdvert ?? false
                         tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "IPv6", value: ""))
                         tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Enabled", value: ipv6.isEnabled ? "YES" : "NO"))
                         tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "DHCP", value: ipv6.configuration.dhcp.rawValue))
-                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Can Accept Router Advert", value: ipv6.configuration.isAbleToAcceptRouterAdvert ? "YES" : "NO"))
+                        tableRowData.append(RVS_ONVIF_Mac_Test_Harness_GroupedTableData(key: "Can Accept Router Advert", value: isAbletoRA ? "YES" : "NO"))
                         if let list = ipv6.configuration.manual {
                             for i in list.enumerated() {
                                 if let addr = i.element.address {
