@@ -31,7 +31,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /* ################################################################## */
     /**
      */
-    var networkInterfaceObject: RVS_ONVIF_Core.NetworkInterface!
+    var networkInterfaceObjects: [RVS_ONVIF_Core.NetworkInterface]!
     
     /* ################################################################## */
     /**
@@ -42,6 +42,11 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /**
      */
     var command: RVS_ONVIF_DeviceRequestProtocol!
+    
+    /* ################################################################## */
+    /**
+     */
+    var selectedInterfaceObjectIndex: Int = 0
 
     /* ############################################################################################################################## */
     // MARK: - Instance Calculated Properties
@@ -50,13 +55,8 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /**
      */
     var sendParameters: [String: Any] {
-        if var networkInterfaceObject = networkInterfaceObject {
+        if var networkInterfaceObject = networkInterfaceObjects?[selectedInterfaceObjectIndex] {
             networkInterfaceObject.isEnabled = 0 == enabledSegmentedSwitch.selectedSegmentIndex
-            
-            if nil != networkInterfaceObject.info {
-                networkInterfaceObject.info.name = nameTextField.text ?? ""
-                networkInterfaceObject.info.mtu = Int(mtuTextField.text ?? "") ?? 0
-            }
             
             if  nil != networkInterfaceObject.ipV4,
                 let address = ipv4ManualAddressEntryTextField?.text?.ipAddress,
@@ -92,7 +92,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
             }
 
             if let asParameters = networkInterfaceObject.asParameters {
-                self.networkInterfaceObject = networkInterfaceObject
+                networkInterfaceObjects[selectedInterfaceObjectIndex] = networkInterfaceObject
                 print(String(reflecting: asParameters))
                 return asParameters
             }
@@ -109,10 +109,11 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
      */
     @IBOutlet weak var enabledSegmentedSwitch: UISegmentedControl!
     @IBOutlet weak var tokenHeadlineLabel: UILabel!
+    @IBOutlet weak var networkInterfaceSelectorSegmentedSwitch: UISegmentedControl!
     
     @IBOutlet weak var infoStackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var mtuTextField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mtuLabel: UILabel!
     
     @IBOutlet weak var ipv4StackView: UIStackView!
     @IBOutlet weak var ipv4EnabledSegmentedSwitch: UISegmentedControl!
@@ -140,14 +141,22 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /* ################################################################## */
     /**
      */
-    @IBAction func cancelButtonHit(_ sender: Any) {
+    @IBAction func interfaceSwitchHit(_ inSwitch: UISegmentedControl) {
+        selectedInterfaceObjectIndex = inSwitch.selectedSegmentIndex
+        loadInterfaceObject()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    @IBAction func cancelButtonHit(_ inButton: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     /* ################################################################## */
     /**
      */
-    @IBAction func sendButtonHit(_ sender: Any) {
+    @IBAction func sendButtonHit(_ inButton: Any) {
         dispatcher?.sendParameters = sendParameters
         dispatcher?.sendRequest(command)
         dismiss(animated: true, completion: nil)
@@ -156,18 +165,13 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
     /* ################################################################## */
     /**
      */
-    @IBAction func extensionButtonHit(_ sender: Any) {
+    @IBAction func extensionButtonHit(_ inButton: Any) {
     }
     
-    /* ############################################################################################################################## */
-    // MARK: - Base Class Override Methods
-    /* ############################################################################################################################## */
     /* ################################################################## */
     /**
      */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func loadInterfaceObject() {
         infoStackView.isHidden = true
         
         ipv4StackView.isHidden = true
@@ -180,7 +184,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
         
         extensionButton.isHidden = true
 
-        if let networkInterfaceObject = networkInterfaceObject {
+        if let networkInterfaceObject = networkInterfaceObjects?[selectedInterfaceObjectIndex] {
             enabledSegmentedSwitch.selectedSegmentIndex = networkInterfaceObject.isEnabled ? 0 : 1
             var tokenText = networkInterfaceObject.token.isEmpty ? "" : networkInterfaceObject.token
             if let info = networkInterfaceObject.info {
@@ -192,11 +196,11 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
             }
             
             tokenHeadlineLabel.text = tokenText
-
+            
             if let info = networkInterfaceObject.info {
                 infoStackView.isHidden = false
-                nameTextField.text = info.name
-                mtuTextField.text = String(info.mtu)
+                nameLabel.text = info.name
+                mtuLabel.text = "MTU: " + String(info.mtu)
             }
             
             if let ipv4 = networkInterfaceObject.ipV4 {
@@ -220,10 +224,10 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
                     
                 case .Stateful:
                     ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 1
-
+                    
                 case .Stateless:
                     ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 2
-
+                    
                 default:
                     ipv6DHCPSegmentedSwitch.selectedSegmentIndex = 3
                 }
@@ -241,5 +245,30 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController: UIView
             
             extensionButton.isHidden = nil == networkInterfaceObject.networkInterfaceExtension
         }
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - Base Class Override Methods
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let networkInterfaceObjects = networkInterfaceObjects {
+            networkInterfaceSelectorSegmentedSwitch.isHidden = 2 > networkInterfaceObjects.count
+            
+            for networkInterfaceTuple in networkInterfaceObjects.enumerated() {
+                let token = networkInterfaceTuple.element.token
+                if networkInterfaceSelectorSegmentedSwitch.numberOfSegments < networkInterfaceTuple.offset {
+                    networkInterfaceSelectorSegmentedSwitch.insertSegment(withTitle: token, at: networkInterfaceSelectorSegmentedSwitch.numberOfSegments, animated: false)
+                } else {
+                    networkInterfaceSelectorSegmentedSwitch.setTitle(token, forSegmentAt: networkInterfaceTuple.offset)
+                }
+            }
+        }
+        
+        loadInterfaceObject()
     }
 }

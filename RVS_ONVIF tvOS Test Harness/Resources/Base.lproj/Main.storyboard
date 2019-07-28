@@ -942,27 +942,31 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BOL-pf-tTc" userLabel="HeadlineStack View">
                                 <rect key="frame" x="90" y="60" width="1740" height="80"/>
                                 <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XcA-7T-svH">
+                                        <rect key="frame" x="0.0" y="0.0" width="380" height="81"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
+                                        <segments>
+                                            <segment title="0"/>
+                                            <segment title="1"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="interfaceSwitchHit:" destination="4uF-2S-EuL" eventType="valueChanged" id="ncE-Uw-xxv"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zX2-r6-Ak4">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="GhV-kg-ww5"/>
-                                        </constraints>
+                                        <rect key="frame" x="388" y="0.0" width="252" height="80"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="boK-F7-3Uk">
-                                        <rect key="frame" x="408" y="0.0" width="524" height="81"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="boK-F7-3Uk">
+                                        <rect key="frame" x="648" y="0.0" width="1092" height="81"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
                                         <segments>
                                             <segment title="Enabled"/>
                                             <segment title="Disabled"/>
                                         </segments>
                                     </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgq-Mn-YPH">
-                                        <rect key="frame" x="940" y="0.0" width="800" height="80"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="X8i-th-Uni"/>
@@ -974,24 +978,18 @@
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Km-gq-Sdb" userLabel="Info Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="1740" height="0.0"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxs-2a-Owr">
-                                                <rect key="frame" x="0.0" y="0.0" width="1484" height="0.0"/>
-                                                <nil key="textColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-jY-Izv">
+                                                <rect key="frame" x="0.0" y="0.0" width="1635" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MTU:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ew1-aS-xWI">
-                                                <rect key="frame" x="1492" y="0.0" width="97" height="0.0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="MTU:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ew1-aS-xWI">
+                                                <rect key="frame" x="1643" y="0.0" width="97" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MTU" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rLK-GC-8zZ">
-                                                <rect key="frame" x="1597" y="0.0" width="143" height="0.0"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                            </textField>
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NOq-LZ-gFj" userLabel="IPv4 Stack View">
@@ -1240,8 +1238,9 @@
                         <outlet property="ipv6ManualAddressStackView" destination="ayo-ks-iXF" id="AaD-7b-EvT"/>
                         <outlet property="ipv6ManualPrefixLengthTextField" destination="q6h-i3-Wtx" id="GxQ-JO-2pq"/>
                         <outlet property="ipv6StackView" destination="yqK-ic-IcA" id="SIS-5n-cKs"/>
-                        <outlet property="mtuTextField" destination="rLK-GC-8zZ" id="WVU-xJ-3gY"/>
-                        <outlet property="nameTextField" destination="Uxs-2a-Owr" id="c7H-Ka-4pq"/>
+                        <outlet property="mtuLabel" destination="Ew1-aS-xWI" id="j65-L9-yez"/>
+                        <outlet property="nameLabel" destination="k1j-jY-Izv" id="lea-1d-3Zw"/>
+                        <outlet property="networkInterfaceSelectorSegmentedSwitch" destination="XcA-7T-svH" id="LQA-m0-xT8"/>
                         <outlet property="sendButton" destination="lxL-Y9-UL7" id="83Q-Qv-fAn"/>
                         <outlet property="tokenHeadlineLabel" destination="zX2-r6-Ak4" id="HTq-u8-VfX"/>
                     </connections>

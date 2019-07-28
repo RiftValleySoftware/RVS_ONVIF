@@ -253,14 +253,11 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
             case "SetNetworkInterfaces":
                 dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController()
                 if  let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openNamespaceHandlerScreen {
-                    if  1 == owner.core.networkInterfaces.count,
-                        let dEntry = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController {
-                        dEntry.networkInterfaceObject = owner.core.networkInterfaces[0]
+                    if  let dEntry = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController {
+                        dEntry.networkInterfaceObjects = owner.core.networkInterfaces
                         dEntry.dispatcher = self
                         dEntry.command = inCommand
-                    dataEntryDialog = dEntry
-                    } else {
-                        
+                        dataEntryDialog = dEntry
                     }
                 }
 
