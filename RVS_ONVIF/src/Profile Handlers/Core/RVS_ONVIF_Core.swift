@@ -65,6 +65,8 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case GetDynamicDNS
         /// Get Information About the Device Network Interfaces
         case GetNetworkInterfaces
+        /// Get the network protocols configurations.
+        case GetNetworkProtocols
         
         /// Set a New Hostname for the Device
         case SetHostname
@@ -78,7 +80,9 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case SetDynamicDNS
         /// Set a network interface configuration.
         case SetNetworkInterfaces
-        
+        /// Set a network protocols configuration.
+        case SetNetworkProtocols
+
         /* ############################################################## */
         /**
          This is the profile key (for looking up in the profile hander list).
@@ -95,7 +99,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             var ret = false
             
             switch self {
-            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS, .SetNetworkInterfaces:
+            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS, .SetNetworkInterfaces, .SetNetworkProtocols:
                 ret = true
                 
             default:
@@ -944,6 +948,52 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
+     This parses the response from the GetNetworkProtocols command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an Array of NetworkProtocol enum values.
+     */
+    internal func _parseNetworkProtocolsResponse(_ inResponseDictionary: [String: Any]) -> [NetworkProtocol] {
+        #if DEBUG
+            print("Parsing the Network Protocols Response")
+        #endif
+        
+        var ret: [NetworkProtocol] = []
+        
+        var outerWrapperArray: [[String: Any]] = []
+        
+        if let outerWrapperArrayTemp = inResponseDictionary["NetworkProtocols"] as? [[String: Any]] {
+            outerWrapperArray = outerWrapperArrayTemp
+        } else if let outerWrapperArrayTemp = inResponseDictionary["NetworkProtocols"] as? [String: Any] {
+            outerWrapperArray = [outerWrapperArrayTemp]
+        }
+        
+        outerWrapperArray.forEach {
+            if  let name = owner._parseString($0, key: "Name"),
+                let port = owner._parseInteger($0, key: "Port") {
+                let isEnabled = owner._parseBoolean($0, key: "Enabled")
+                
+                switch name {
+                case "HTTP":
+                    ret.append(NetworkProtocol.HTTP(port: port, isEnabled: isEnabled))
+                case "HTTPS":
+                    ret.append(NetworkProtocol.HTTPS(port: port, isEnabled: isEnabled))
+                case "RTSP":
+                    ret.append(NetworkProtocol.RTSP(port: port, isEnabled: isEnabled))
+                default:
+                    ()
+                }
+            }
+        }
+        
+        return ret
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - GetNetworkInterfaces Parser
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
      This parses the response from the GetNetworkInterfaces command.
      
      - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
@@ -1300,6 +1350,12 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      This is the cache for the device network interface information. It is filled at initialization time.
      */
     public var networkInterfaces: [NetworkInterface]!
+    
+    /* ################################################################## */
+    /**
+     This is the cache for the device network protocol information. It is filled at initialization time.
+     */
+    public var networkProtocols: [NetworkProtocol]!
 
     /* ################################################################################################################################## */
     // MARK: - Public Instance Calculated Properties
@@ -1330,7 +1386,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         _DeviceRequest.allCases.forEach {
             switch $0 {
             // We already got these.
-            case .GetDeviceInformation, .GetScopes, .GetServices, .GetCapabilities, .GetServiceCapabilities, .GetNetworkInterfaces:
+            case .GetDeviceInformation, .GetScopes, .GetServices, .GetCapabilities, .GetServiceCapabilities, .GetNetworkInterfaces, .GetNetworkProtocols:
                 break
                 
             case .GetDynamicDNS, .SetDynamicDNS:    // Only supplied if the device supports DynDNS.
@@ -1453,6 +1509,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
              _DeviceRequest.SetDNS.soapAction,
              _DeviceRequest.SetNTP.soapAction,
              _DeviceRequest.SetNetworkInterfaces.soapAction,
+             _DeviceRequest.SetNetworkProtocols.soapAction,
              _DeviceRequest.SetDynamicDNS.soapAction:
             // Make sure to strip off any namespace tag.
             var commandString = inSOAPRequest
@@ -1539,6 +1596,16 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
             
             networkInterfaces = _parseNetworkInterfacesResponse(mainResponse)
+            owner.performRequest(_DeviceRequest.GetNetworkProtocols)    // Cascade to get the network protocols.
+            
+        case _DeviceRequest.GetNetworkProtocols.soapAction:
+            // We do one extra unwind here, to reduce the CC of the parser method.
+            guard let mainResponse = inResponseDictionary["GetNetworkProtocolsResponse"] as? [String: Any] else {
+                owner._errorCallback(RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil)), soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            networkProtocols = _parseNetworkProtocolsResponse(mainResponse)
             owner.performRequest(_DeviceRequest.GetCapabilities)    // Cascade to get the device capabilities.
 
         case _DeviceRequest.GetCapabilities.soapAction:

@@ -1280,6 +1280,25 @@ extension RVS_ONVIF_Core {
     
     /* ###################################################################################################################################### */
     /**
+     This enum describes a single network protocol data model
+     */
+    public enum NetworkProtocol {
+        /// Unencrypted HTTP.
+        /// - parameter port: The TCP Port of this service.
+        /// - parameter isEnabled: True, if the service is enabled.
+        case HTTP(port: Int, isEnabled: Bool)
+        /// Encrypted HTTPS.
+        /// - parameter port: The TCP Port of this service.
+        /// - parameter isEnabled: True, if the service is enabled.
+        case HTTPS(port: Int, isEnabled: Bool)
+        /// RTSP Streaming.
+        /// - parameter port: The TCP Port of this service.
+        /// - parameter isEnabled: True, if the service is enabled.
+        case RTSP(port: Int, isEnabled: Bool)
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
      This struct describes a single network interface data model
      */
     public struct NetworkInterface: OwnedInstanceProtocol {
