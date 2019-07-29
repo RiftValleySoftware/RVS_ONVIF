@@ -157,6 +157,7 @@
 		D49EA23822C69C8E004AE619 /* RVS_ONVIF_Generic_TestBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */; };
 		D49EA23922C69C8E004AE619 /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */; };
 		D4A6A7F322DAB56300A347B8 /* RVS_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F424BB2206540800729C0F /* RVS_Extensions.swift */; };
+		D4A912F522EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A912F422EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift */; };
 		D4AE4E982218DE2F00E39BDA /* RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AE4E972218DE2F00E39BDA /* RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift */; };
 		D4B0F0A122EE4C9D00C29A55 /* RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F0A022EE4C9D00C29A55 /* RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift */; };
 		D4B2B45722D90691005E7BFC /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40F032F22C7DC3300ECC76A /* RVS_PersistentPrefs.swift */; };
@@ -428,6 +429,7 @@
 		D49EA20C22C69BDE004AE619 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/usr/lib/libxml2.2.tbd; sourceTree = DEVELOPER_DIR; };
 		D49EA21F22C69C53004AE619 /* RVS_ONVIF_tvOS_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RVS_ONVIF_tvOS_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49EA22322C69C53004AE619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4A912F422EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift; sourceTree = "<group>"; };
 		D4AE4E972218DE2F00E39BDA /* RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift; sourceTree = "<group>"; };
 		D4B0F0A022EE4C9D00C29A55 /* RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift; sourceTree = "<group>"; };
 		D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 				D4D345DA22DF361F00BAF8B1 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController.swift */,
 				D4D08F5122DFA05E0066B600 /* RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.swift */,
 				D4F7432A22E4BFD6007743FF /* RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController.swift */,
+				D4A912F422EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -1502,6 +1505,7 @@
 				D4F8756122DCD3B000462066 /* RVS_ONVIF_tvOS_Test_Harness_Dispatcher.swift in Sources */,
 				D4F8755F22DCD3B000462066 /* RVS_ONVIF_tvOS_Test_Harness_ProfileSDispatcher.swift in Sources */,
 				D4D08F5222DFA05E0066B600 /* RVS_ONVIF_tvOS_Test_Harness_DisplayStream_ViewController.swift in Sources */,
+				D4A912F522EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift in Sources */,
 				D459765C22DB9AD600BD4FCE /* RVS_ONVIF_tvOS_Test_Harness_Dispatcher_NavigationController.swift in Sources */,
 				D4EA1BDC22CE3C6D00E323BF /* RVS_ONVIF_tvOS_Test_Harness_AppDelegate.swift in Sources */,
 				D4E4C3DB22DE5343009D8595 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_ViewController.swift in Sources */,

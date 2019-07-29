@@ -1257,6 +1257,67 @@
             </objects>
             <point key="canvasLocation" x="2874" y="18434"/>
         </scene>
+        <!--tvOS Test Harness Network Protocols Editor View Controller-->
+        <scene sceneID="bBJ-nT-xdj">
+            <objects>
+                <viewController storyboardIdentifier="networkProtocolsInput" id="qlq-SU-ZvF" customClass="RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TBz-GM-6wd"/>
+                        <viewControllerLayoutGuide type="bottom" id="N1w-kq-zzv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9ya-x1-gSb">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-Gm-cJI">
+                                <rect key="frame" x="90" y="60" width="1740" height="872"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="512" translatesAutoresizingMaskIntoConstraints="NO" id="Egy-9e-Are" userLabel="Button Stack View">
+                                <rect key="frame" x="90" y="940" width="1740" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iC-Z8-1nd">
+                                        <rect key="frame" x="0.0" y="0.0" width="227" height="80"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="CANCEL"/>
+                                        <connections>
+                                            <action selector="cancelButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="2nd-j8-NG7"/>
+                                            <action selector="cancelButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="pHS-wc-IjB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0n-YF-jgY">
+                                        <rect key="frame" x="1561" y="0.0" width="179" height="80"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="SEND"/>
+                                        <connections>
+                                            <action selector="sendButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="3JG-Vs-FlT"/>
+                                            <action selector="sendButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="8Af-2n-tQP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Hbs-gp-oq9"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="eSd-Gm-cJI" firstAttribute="top" secondItem="KXc-jn-HuA" secondAttribute="top" id="804-RE-QYM"/>
+                            <constraint firstItem="KXc-jn-HuA" firstAttribute="trailing" secondItem="Egy-9e-Are" secondAttribute="trailing" id="GoI-Qg-VGt"/>
+                            <constraint firstItem="KXc-jn-HuA" firstAttribute="bottom" secondItem="Egy-9e-Are" secondAttribute="bottom" id="JRB-55-fk9"/>
+                            <constraint firstItem="Egy-9e-Are" firstAttribute="top" secondItem="eSd-Gm-cJI" secondAttribute="bottom" constant="8" id="ZVC-h3-BOY"/>
+                            <constraint firstItem="eSd-Gm-cJI" firstAttribute="trailing" secondItem="KXc-jn-HuA" secondAttribute="trailing" id="bWX-dO-5dQ"/>
+                            <constraint firstItem="eSd-Gm-cJI" firstAttribute="leading" secondItem="KXc-jn-HuA" secondAttribute="leading" id="csC-Hf-2Cr"/>
+                            <constraint firstItem="Egy-9e-Are" firstAttribute="leading" secondItem="KXc-jn-HuA" secondAttribute="leading" id="scc-Y8-fg0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KXc-jn-HuA"/>
+                    </view>
+                    <connections>
+                        <outlet property="mainStackView" destination="eSd-Gm-cJI" id="Ubl-io-VB6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdB-Qf-TWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2874" y="19779"/>
+        </scene>
         <!--SERVICE CAPABILITIES-->
         <scene sceneID="owW-3y-H9S">
             <objects>

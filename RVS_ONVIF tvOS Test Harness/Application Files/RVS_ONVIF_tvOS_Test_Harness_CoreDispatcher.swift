@@ -249,12 +249,21 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
                 
             case "SetDynamicDNS":
                 dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["Type": .pickOne(values: ["NoUpdate", "ServerUpdates", "ClientUpdates"], selectedIndex: 0, callback: dynDNSTypeCallback), "Name": .textEntry(defaultValue: "", callback: nameCallback), "TTL": .textEntry(defaultValue: "", callback: ttlCallback)], command: inCommand, dispatcher: self)
-                
+
             case "SetNetworkInterfaces":
-                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController()
                 if  let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openNamespaceHandlerScreen {
                     if  let dEntry = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_NetworkInterface_Editor_ViewController {
                         dEntry.networkInterfaceObjects = owner.core.networkInterfaces
+                        dEntry.dispatcher = self
+                        dEntry.command = inCommand
+                        dataEntryDialog = dEntry
+                    }
+                }
+                
+            case "SetNetworkProtocols":
+                if  let windowViewController = RVS_ONVIF_tvOS_Test_Harness_AppDelegate.delegateObject.openNamespaceHandlerScreen {
+                    if  let dEntry = windowViewController.storyboard?.instantiateViewController(withIdentifier: RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.storyboardID) as? RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController {
+                        dEntry.networkProtocolsObjects = owner.core.networkProtocols
                         dEntry.dispatcher = self
                         dEntry.command = inCommand
                         dataEntryDialog = dEntry
