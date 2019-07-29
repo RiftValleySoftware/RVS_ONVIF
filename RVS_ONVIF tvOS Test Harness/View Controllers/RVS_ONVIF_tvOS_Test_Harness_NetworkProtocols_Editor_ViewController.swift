@@ -12,6 +12,106 @@ import UIKit
 import RVS_ONVIF_tvOS
 
 /* ################################################################################################################################## */
+// MARK: - Class for The Main Stack View
+/* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_View: UIView {
+}
+
+/* ################################################################################################################################## */
+// MARK: - Class for The Main Vertical Stack View
+/* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_ButtonRowStack: UIStackView {
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
+
+    /* ################################################################## */
+    /**
+     */
+    override func layoutSubviews() {
+        axis = .horizontal
+        super.layoutSubviews()
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - Class for The Main Vertical Stack View
+/* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_MainStack: UIStackView {
+    var nextFocusTarget: UIFocusEnvironment!
+
+    /* ################################################################## */
+    /**
+     */
+    @IBOutlet weak var buttonRow: RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_ButtonRowStack!
+    
+    /* ################################################################## */
+    /**
+     */
+    var protocolRows: [RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_Row] = []
+    
+    /* ################################################################## */
+    /**
+     */
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [nextFocusTarget]
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    override func layoutSubviews() {
+        spacing = 20
+        axis = .vertical
+        super.layoutSubviews()
+        nextFocusTarget = protocolRows[0].portTextField
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func shouldUpdateFocus(in inContext: UIFocusUpdateContext) -> Bool {
+        print(String(describing: inContext))
+        if self == inContext.nextFocusedView {
+            nextFocusTarget = buttonRow
+            setNeedsFocusUpdate()
+            return true
+        } else {
+            return super.shouldUpdateFocus(in: inContext)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    override func didUpdateFocus(in inContext: UIFocusUpdateContext, with inCoordinator: UIFocusAnimationCoordinator) {
+        print(String(describing: inContext))
+        if self == inContext.nextFocusedView {
+            if (    inContext.previouslyFocusedView == buttonRow?.sendButton && .right == inContext.focusHeading)
+                || (inContext.previouslyFocusedView == buttonRow?.sendButton && .up == inContext.focusHeading) {
+                nextFocusTarget = protocolRows[0]
+                setNeedsFocusUpdate()
+            } else if   inContext.previouslyFocusedView != buttonRow?.cancelButton
+                    &&  inContext.previouslyFocusedView != buttonRow?.sendButton
+                    &&  .down == inContext.focusHeading {
+                nextFocusTarget = buttonRow
+                setNeedsFocusUpdate()
+            }
+        } else {
+            super.didUpdateFocus(in: inContext, with: inCoordinator)
+        }
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - Class for One Row of the Protocol Screen
+/* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_Row: UIStackView {
+    var nameLabel: UILabel!
+    var portTextField: UITextField!
+    var isEnabledSegmentedSwitch: UISegmentedControl!
+}
+
+/* ################################################################################################################################## */
 // MARK: - Main View Controller Class
 /* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIViewController {
@@ -48,6 +148,11 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
      */
     var selectedInterfaceObjectIndex: Int = 0
 
+    /* ################################################################## */
+    /**
+     */
+    var betweenRowsAndButtonsFocusGuide = UIFocusGuide()
+
     /* ############################################################################################################################## */
     // MARK: - Instance Calculated Properties
     /* ############################################################################################################################## */
@@ -55,7 +160,17 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
     /**
      */
     var sendParameters: [String: Any] {
-        return [:]
+        var ret: [[String: String]] = []
+        mainStackView.subviews.forEach {
+            if  let rowView = $0 as? RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_Row,
+                let name = rowView.nameLabel?.text,
+                let port = rowView.portTextField.text {
+                let isEnabled = (0 == (rowView.isEnabledSegmentedSwitch?.selectedSegmentIndex ?? 1)) ? "true" : "false"
+                ret.append(["tt:Name": name, "tt:Port": port, "tt:Enabled": isEnabled])
+                }
+            }
+        
+        return ["trt:NetworkProtocols": ret]
     }
 
     /* ############################################################################################################################## */
@@ -64,8 +179,8 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
     /* ################################################################## */
     /**
      */
-    @IBOutlet weak var mainStackView: UIStackView!
-    
+    @IBOutlet weak var mainStackView: RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_MainStack!
+
     /* ############################################################################################################################## */
     // MARK: - IBAction Methods
     /* ############################################################################################################################## */
@@ -80,6 +195,9 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
     /**
      */
     @IBAction func sendButtonHit(_ inButton: Any) {
+        dispatcher?.sendParameters = sendParameters
+        dispatcher?.sendRequest(command)
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -111,7 +229,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
         
         print("Add: \(name), Port: \(portInt), Enabled: \(enabled)")
         
-        let containerView = UIStackView()
+        let containerView = RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_Row()
         containerView.axis = .horizontal
         containerView.spacing = 20
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -123,6 +241,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         containerView.addArrangedSubview(nameLabel)
+        containerView.nameLabel = nameLabel
 
         let portLabel = UILabel()
         portLabel.text = "Port:"
@@ -136,15 +255,30 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
         portTextField.translatesAutoresizingMaskIntoConstraints = false
         portTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         containerView.addArrangedSubview(portTextField)
+        containerView.portTextField = portTextField
 
-        let enabledSegmentedView = UISegmentedControl(items: ["Enabled", "Disabled"])
-        enabledSegmentedView.selectedSegmentIndex = enabled ? 0 : 1
-        portLabel.setContentHuggingPriority(.required, for: .horizontal)
-        containerView.addArrangedSubview(enabledSegmentedView)
-        
+        let isEnabledSegmentedSwitch = UISegmentedControl(items: ["Enabled", "Disabled"])
+        isEnabledSegmentedSwitch.selectedSegmentIndex = enabled ? 0 : 1
+        isEnabledSegmentedSwitch.setContentHuggingPriority(.required, for: .horizontal)
+        containerView.addArrangedSubview(isEnabledSegmentedSwitch)
+        containerView.isEnabledSegmentedSwitch = isEnabledSegmentedSwitch
+
         containerView.addArrangedSubview(UIView())
 
-        mainStackView.addArrangedSubview(containerView)
+        mainStackView.protocolRows.append(containerView)
+        mainStackView.insertArrangedSubview(containerView, at: max(0, mainStackView.subviews.count - 1))
+        mainStackView.setNeedsFocusUpdate()
+    }
+    
+    /* ################################################################## */
+    /**
+     */
+    func setupFocus() {
+        mainStackView.addLayoutGuide(betweenRowsAndButtonsFocusGuide)
+        betweenRowsAndButtonsFocusGuide.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        betweenRowsAndButtonsFocusGuide.bottomAnchor.constraint(equalTo: mainStackView.buttonRow.topAnchor).isActive = true
+        betweenRowsAndButtonsFocusGuide.leadingAnchor.constraint(equalTo: mainStackView.buttonRow.leadingAnchor).isActive = true
+        betweenRowsAndButtonsFocusGuide.trailingAnchor.constraint(equalTo: mainStackView.buttonRow.trailingAnchor).isActive = true
     }
     
     /* ############################################################################################################################## */
@@ -157,13 +291,41 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
         super.viewDidLoad()
         
         if let networkProtocolsObjects = networkProtocolsObjects {
-            mainStackView.spacing = 20
-
+            setupFocus()
             networkProtocolsObjects.forEach {
                 addProtocol($0)
             }
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     */
+    override func didUpdateFocus(in inContext: UIFocusUpdateContext, with inCoordinator: UIFocusAnimationCoordinator) {
+        super.didUpdateFocus(in: inContext, with: inCoordinator)
+
+        guard let lastSelectableRowField = mainStackView.protocolRows.last?.isEnabledSegmentedSwitch else { return }
+        guard let secondToLastSelectableRowField = mainStackView.protocolRows.last?.portTextField else { return }
+        guard let firstSelectableButtonField = mainStackView.buttonRow.cancelButton else { return }
+        guard let lastSelectableButtonField = mainStackView.buttonRow.sendButton else { return }
+
+        guard let nextFocusedView = inContext.nextFocusedView else { return }
+
+        switch nextFocusedView {
+        case firstSelectableButtonField:
+            betweenRowsAndButtonsFocusGuide.preferredFocusEnvironments = [secondToLastSelectableRowField]
             
-            mainStackView.addArrangedSubview(UIView())
+        case lastSelectableButtonField:
+            betweenRowsAndButtonsFocusGuide.preferredFocusEnvironments = [lastSelectableRowField]
+            
+        case secondToLastSelectableRowField:
+            betweenRowsAndButtonsFocusGuide.preferredFocusEnvironments = [firstSelectableButtonField]
+
+        case lastSelectableRowField:
+            betweenRowsAndButtonsFocusGuide.preferredFocusEnvironments = [lastSelectableButtonField]
+
+        default:
+            break
         }
     }
 }

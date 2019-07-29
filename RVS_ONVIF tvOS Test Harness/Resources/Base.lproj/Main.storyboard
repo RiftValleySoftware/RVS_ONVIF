@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1265,48 +1266,53 @@
                         <viewControllerLayoutGuide type="top" id="TBz-GM-6wd"/>
                         <viewControllerLayoutGuide type="bottom" id="N1w-kq-zzv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9ya-x1-gSb">
+                    <view key="view" contentMode="scaleToFill" id="9ya-x1-gSb" customClass="RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_View" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-Gm-cJI">
-                                <rect key="frame" x="90" y="60" width="1740" height="872"/>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="512" translatesAutoresizingMaskIntoConstraints="NO" id="Egy-9e-Are" userLabel="Button Stack View">
-                                <rect key="frame" x="90" y="940" width="1740" height="80"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eSd-Gm-cJI" customClass="RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_MainStack" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target">
+                                <rect key="frame" x="90" y="60" width="1740" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iC-Z8-1nd">
-                                        <rect key="frame" x="0.0" y="0.0" width="227" height="80"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal" title="CANCEL"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Egy-9e-Are" userLabel="Button Stack View" customClass="RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_ButtonRowStack" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="1740" height="80"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iC-Z8-1nd">
+                                                <rect key="frame" x="0.0" y="0.0" width="227" height="80"/>
+                                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                                <state key="normal" title="CANCEL"/>
+                                                <connections>
+                                                    <action selector="cancelButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="2nd-j8-NG7"/>
+                                                    <action selector="cancelButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="pHS-wc-IjB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0n-YF-jgY">
+                                                <rect key="frame" x="1561" y="0.0" width="179" height="80"/>
+                                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                                <state key="normal" title="SEND"/>
+                                                <connections>
+                                                    <action selector="sendButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="3JG-Vs-FlT"/>
+                                                    <action selector="sendButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="8Af-2n-tQP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="Hbs-gp-oq9"/>
+                                        </constraints>
                                         <connections>
-                                            <action selector="cancelButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="2nd-j8-NG7"/>
-                                            <action selector="cancelButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="pHS-wc-IjB"/>
+                                            <outlet property="cancelButton" destination="4iC-Z8-1nd" id="qe1-cx-HzF"/>
+                                            <outlet property="sendButton" destination="z0n-YF-jgY" id="yah-Mr-SpR"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0n-YF-jgY">
-                                        <rect key="frame" x="1561" y="0.0" width="179" height="80"/>
-                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <state key="normal" title="SEND"/>
-                                        <connections>
-                                            <action selector="sendButtonHit:" destination="qlq-SU-ZvF" eventType="primaryActionTriggered" id="3JG-Vs-FlT"/>
-                                            <action selector="sendButtonHit:" destination="4uF-2S-EuL" eventType="primaryActionTriggered" id="8Af-2n-tQP"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Hbs-gp-oq9"/>
-                                </constraints>
+                                <connections>
+                                    <outlet property="buttonRow" destination="Egy-9e-Are" id="XyF-wP-VLo"/>
+                                </connections>
                             </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="eSd-Gm-cJI" firstAttribute="top" secondItem="KXc-jn-HuA" secondAttribute="top" id="804-RE-QYM"/>
-                            <constraint firstItem="KXc-jn-HuA" firstAttribute="trailing" secondItem="Egy-9e-Are" secondAttribute="trailing" id="GoI-Qg-VGt"/>
-                            <constraint firstItem="KXc-jn-HuA" firstAttribute="bottom" secondItem="Egy-9e-Are" secondAttribute="bottom" id="JRB-55-fk9"/>
-                            <constraint firstItem="Egy-9e-Are" firstAttribute="top" secondItem="eSd-Gm-cJI" secondAttribute="bottom" constant="8" id="ZVC-h3-BOY"/>
                             <constraint firstItem="eSd-Gm-cJI" firstAttribute="trailing" secondItem="KXc-jn-HuA" secondAttribute="trailing" id="bWX-dO-5dQ"/>
                             <constraint firstItem="eSd-Gm-cJI" firstAttribute="leading" secondItem="KXc-jn-HuA" secondAttribute="leading" id="csC-Hf-2Cr"/>
-                            <constraint firstItem="Egy-9e-Are" firstAttribute="leading" secondItem="KXc-jn-HuA" secondAttribute="leading" id="scc-Y8-fg0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KXc-jn-HuA"/>
                     </view>
