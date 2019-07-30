@@ -69,7 +69,11 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case GetNetworkProtocols
         /// Get the default gateway[s] for the network.
         case GetNetworkDefaultGateway
-        
+        /// Get Dot11 (WiFi) Capabilities
+        case GetDot11Capabilities
+        /// Get Dot11 (WiFi) Status
+        case GetDot11Status
+
         /// Set a New Hostname for the Device
         case SetHostname
         /// Enable Hostname From DHCP Server
@@ -1038,17 +1042,15 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         
         var ret: [RVS_IPAddress] = []
         
-        if let mainWrapper = inResponseDictionary["GetNetworkDefaultGatewayResponse"] as? [String: Any] {
-            var outerWrapperArray: [String: String] = [:]
-            
-            if let outerWrapperArrayTemp = mainWrapper["NetworkGateway"] as? [String: String] {
-                outerWrapperArray = outerWrapperArrayTemp
-            }
-            
-            outerWrapperArray.forEach {
-                if let ipAddress = $0.value.ipAddress {
-                    ret.append(ipAddress)
-                }
+        var outerWrapperArray: [String: String] = [:]
+        
+        if let outerWrapperArrayTemp = inResponseDictionary["NetworkGateway"] as? [String: String] {
+            outerWrapperArray = outerWrapperArrayTemp
+        }
+        
+        outerWrapperArray.forEach {
+            if let ipAddress = $0.value.ipAddress {
+                ret.append(ipAddress)
             }
         }
         
@@ -1058,7 +1060,60 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
 
         return ret
     }
+    
+    /* ############################################################################################################################## */
+    // MARK: - GetDot11Capabilities Parser
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This parses the response from the GetDot11Capabilities command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a Dot11Capabilities struct. Nil, if there was a problem
+     */
+    internal func _parseGetDot11CapabilitiesResponse(_ inResponseDictionary: [String: Any]) -> Dot11Capabilities! {
+        #if DEBUG
+            print("Parsing the Dot 11 Capabilities Response: \(String(describing: inResponseDictionary))")
+        #endif
+        
+        var outerWrapper: [String: String] = [:]
+        
+        if let outerWrapperArrayTemp = inResponseDictionary["Capabilities"] as? [String: String] {
+            outerWrapper = outerWrapperArrayTemp
+        } else if let outerWrapperArrayTemp = inResponseDictionary["Dot11Capabilities"] as? [String: String] {
+            outerWrapper = outerWrapperArrayTemp
+        }
+        
+        if  !outerWrapper.isEmpty {
+            let tkip = owner._parseBoolean(outerWrapper, key: "TKIP")
+            let wep = owner._parseBoolean(outerWrapper, key: "WEP")
+            let scanAvailableNetworks = owner._parseBoolean(outerWrapper, key: "ScanAvailableNetworks")
+            let multipleConfiguration = owner._parseBoolean(outerWrapper, key: "MultipleConfiguration")
+            let adHocStationMode = owner._parseBoolean(outerWrapper, key: "AdHocStationMode")
+            
+            return Dot11Capabilities(supportsTKIP: tkip, supportsWEP: wep, canScanAvailableNetworks: scanAvailableNetworks, supportsMultipleConfigurations: multipleConfiguration, supportsAdHocStationMode: adHocStationMode)
+        }
 
+        return nil
+    }
+    
+    /* ############################################################################################################################## */
+    // MARK: - GetDot11Status Parser
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This parses the response from the GetDot11Status command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: a Dot11Capabilities struct. Nil, if there was a problem
+     */
+    internal func _parseGetDot11StatusResponse(_ inResponseDictionary: [String: Any]) -> Dot11Capabilities! {
+        #if DEBUG
+            print("Parsing the Dot 11 Status Response: \(String(describing: inResponseDictionary))")
+        #endif
+        return nil
+    }
+    
     /* ############################################################################################################################## */
     // MARK: - GetNetworkInterfaces Parser
     /* ############################################################################################################################## */
@@ -1430,6 +1485,18 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      This is the cache for the device network protocol information. It is filled at initialization time.
      */
     public var networkProtocols: [NetworkProtocol]!
+    
+    /* ################################################################## */
+    /**
+     This is the cache for the default network gateways information. It is filled at initialization time.
+     */
+    public var networkDefaultGateways: [RVS_IPAddress]!
+    
+    /* ################################################################## */
+    /**
+     This is the cache for the device's Dot 11 (WiFi) capabilities. It is filled at initialization time.
+     */
+    public var dot11Capabilities: Dot11Capabilities!
 
     /* ################################################################################################################################## */
     // MARK: - Public Instance Calculated Properties
@@ -1460,7 +1527,15 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         _DeviceRequest.allCases.forEach {
             switch $0 {
             // We already got these.
-            case .GetDeviceInformation, .GetScopes, .GetServices, .GetCapabilities, .GetServiceCapabilities, .GetNetworkInterfaces, .GetNetworkProtocols:
+            case .GetDeviceInformation,
+                 .GetScopes,
+                 .GetServices,
+                 .GetCapabilities,
+                 .GetServiceCapabilities,
+                 .GetNetworkInterfaces,
+                 .GetNetworkProtocols,
+                 .GetNetworkDefaultGateway,
+                 .GetDot11Capabilities:
                 break
                 
             case .GetDynamicDNS, .SetDynamicDNS:    // Only supplied if the device supports DynDNS.
@@ -1472,12 +1547,30 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 if serviceCapabilities.networkCapabilities.isHostnameFromDHCP {
                     ret.append($0)
                 }
+                
+            case .GetDot11Status:   // Only if we have WiFi available.
+                if hasWiFi {
+                    ret.append($0)
+                }
+
             default:
                 ret.append($0)
             }
         }
         
         return ret
+    }
+    
+    /* ############################################################## */
+    /**
+     i returns: true, if this device has WiFi capabilities.
+     */
+    public var hasWiFi: Bool {
+        if let hasWiFi = capabilities?.hasWiFi {
+            return hasWiFi
+        }
+        
+        return false
     }
 
     /* ################################################################################################################################## */
@@ -1577,16 +1670,6 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     }
                 }
             }
-            
-        case _DeviceRequest.GetNetworkDefaultGateway.soapAction:
-            // We give the caller the opportunity to vet the data. Default just passes through.
-            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetNTP) ?? false) {
-                owner.dispatchers.forEach {
-                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetNetworkDefaultGateway) {
-                        $0.deliverResponse(_DeviceRequest.GetNetworkDefaultGateway, params: _parseNetworkDefaultGatewayResponse(inResponseDictionary))
-                    }
-                }
-            }
 
         case _DeviceRequest.SetHostname.soapAction,
              _DeviceRequest.SetHostnameFromDHCP.soapAction,
@@ -1622,6 +1705,17 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         }
         
         return true
+    }
+    
+    /* ################################################################## */
+    /**
+     This just ties things up, and calls the delegate to say we're done.
+     */
+    internal func _wrapUp() {
+        owner._setUpProfileHandlers()   // We ask our handler to establish its profile handlers, based on our available services.
+        
+        // Let the delegate know that we're finally ready.
+        owner.delegate?.onvifInstanceInitialized(owner)
     }
     
     /* ################################################################## */
@@ -1691,6 +1785,15 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
             
             networkProtocols = _parseNetworkProtocolsResponse(mainResponse)
+            owner.performRequest(_DeviceRequest.GetNetworkDefaultGateway)    // Cascade to get the device default gateways.
+            
+        case _DeviceRequest.GetNetworkDefaultGateway.soapAction:
+            guard let mainResponse = inResponseDictionary["GetNetworkDefaultGatewayResponse"] as? [String: Any] else {
+                owner._errorCallback(RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil)), soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            networkDefaultGateways = _parseNetworkDefaultGatewayResponse(mainResponse)
             owner.performRequest(_DeviceRequest.GetCapabilities)    // Cascade to get the device capabilities.
 
         case _DeviceRequest.GetCapabilities.soapAction:
@@ -1701,12 +1804,60 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
             
             capabilities = _parseDeviceCapabilitiesDictionary(capabilitiesResponse)
-            
-            owner._setUpProfileHandlers()   // We ask our handler to establish its profile handlers, based on our available services.
-            
-            // Let the delegate know that we're finally ready.
-            owner.delegate?.onvifInstanceInitialized(owner)
+            // We only look for dot 11 capabilities if the capabilities say we have it.
+            if !hasWiFi {
+                _wrapUp()
+            } else {
+                owner.performRequest(_DeviceRequest.GetDot11Capabilities)    // Cascade to get the device capabilities.
+            }
 
+        default:    // If we don't recognize the call we made, we go on to the next batch of commands.
+            return _callbackHandlerPartFo(inResponseDictionary, soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+        }
+        
+        return true
+    }
+    
+    /* ################################################################## */
+    /**
+     This is an overflow handler, to reduce CC.
+     This method handles the "only if we have WiFi" stuff.
+     
+     This contains all of the initial calls that are made upon initialization, in the order they are made.
+     These calls do not call the preview callback.
+     
+     - parameter inResponseDictionary: The Dictionary ([String: Any]) of the response data.
+     - parameter soapRequest: The SOAP request object call, as a String
+     - parameter soapEngine: The SOAPEngine object that executed the request. This can be nil.
+     - returns: true, if the callback was handled (including as an error).
+     */
+    internal func _callbackHandlerPartFo(_ inResponseDictionary: [String: Any], soapRequest inSOAPRequest: String, soapEngine inSOAPEngine: SOAPEngine?) -> Bool {
+        switch inSOAPRequest {
+        case _DeviceRequest.GetDot11Capabilities.soapAction:
+            guard let mainResponse = inResponseDictionary["GetDot11CapabilitiesResponse"] as? [String: Any] else {
+                owner._errorCallback(RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil)), soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            dot11Capabilities = _parseGetDot11CapabilitiesResponse(mainResponse)
+            _wrapUp()
+        
+            // Ask the device for its
+        case _DeviceRequest.GetDot11Status.soapAction:
+            guard let mainResponse = inResponseDictionary["GetDot11StatusResponse"] as? [String: Any] else {
+                owner._errorCallback(RVS_ONVIF.RVS_Fault(faultCode: .UnknownSOAPError(error: nil)), soapRequest: inSOAPRequest, soapEngine: inSOAPEngine)
+                break
+            }
+            
+            // We give the caller the opportunity to vet the data. Default just passes through.
+            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetDot11Status) ?? false) {
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetDot11Status) {
+                        $0.deliverResponse(_DeviceRequest.GetDot11Status, params: _parseGetDot11StatusResponse(mainResponse))
+                    }
+                }
+            }
+            
         default:    // If we don't recognize the call we made, we drop out.
             return false
         }

@@ -260,7 +260,7 @@
                                 <rect key="frame" x="90" y="145" width="1740" height="875"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCf-a1-SaV">
-                                        <rect key="frame" x="0.0" y="0.0" width="1740" height="167"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1740" height="116"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="SERVICES"/>
                                         <connections>
@@ -268,7 +268,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Og1-Vz-vR4">
-                                        <rect key="frame" x="0.0" y="177" width="1740" height="167"/>
+                                        <rect key="frame" x="0.0" y="126" width="1740" height="117"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="CAPABILITIES"/>
                                         <connections>
@@ -276,7 +276,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgv-wM-Xa9">
-                                        <rect key="frame" x="0.0" y="354" width="1740" height="167"/>
+                                        <rect key="frame" x="0.0" y="253" width="1740" height="116"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="SERVICE CAPABILITIES"/>
                                         <connections>
@@ -284,7 +284,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ6-Rv-xj5">
-                                        <rect key="frame" x="0.0" y="531" width="1740" height="167"/>
+                                        <rect key="frame" x="0.0" y="379" width="1740" height="117"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="NETWORK INTERFACES"/>
                                         <connections>
@@ -292,11 +292,27 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IHf-CC-aFr">
-                                        <rect key="frame" x="0.0" y="708" width="1740" height="167"/>
+                                        <rect key="frame" x="0.0" y="506" width="1740" height="116"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="NETWORK PROTOCOLS"/>
                                         <connections>
                                             <segue destination="LgH-ih-cJ7" kind="show" id="EnQ-rf-LRl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqx-DR-wad">
+                                        <rect key="frame" x="0.0" y="632" width="1740" height="117"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="DEFAULT NETWORK GATEWAYS"/>
+                                        <connections>
+                                            <segue destination="aNT-ux-c4c" kind="show" id="xSj-OE-cdN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcD-1c-UNh">
+                                        <rect key="frame" x="0.0" y="759" width="1740" height="116"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="DOT 11 CAPABILITIES"/>
+                                        <connections>
+                                            <segue destination="21k-fE-aMg" kind="show" id="6i2-P3-0D5"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1522,6 +1538,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aMk-Q8-3ep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2860" y="12878"/>
+        </scene>
+        <!--DOT 11 CAPABILITIES-->
+        <scene sceneID="tam-eT-Ukl">
+            <objects>
+                <viewController title="DOT 11 CAPABILITIES" id="21k-fE-aMg" customClass="RVS_ONVIF_tvOS_Test_Harness_Dot11Capabilities_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K6Y-vz-784"/>
+                        <viewControllerLayoutGuide type="bottom" id="6HQ-XV-yN7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6LZ-Nd-GBO">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="Oey-EG-eIo">
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="21k-fE-aMg" id="9oE-h5-SM2"/>
+                                    <outlet property="delegate" destination="21k-fE-aMg" id="Y4j-Sk-hUe"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Oey-EG-eIo" firstAttribute="bottom" secondItem="9U9-1d-F6D" secondAttribute="bottom" id="1mR-EQ-gcA"/>
+                            <constraint firstItem="Oey-EG-eIo" firstAttribute="leading" secondItem="9U9-1d-F6D" secondAttribute="leading" id="BG9-f5-dVN"/>
+                            <constraint firstItem="Oey-EG-eIo" firstAttribute="trailing" secondItem="9U9-1d-F6D" secondAttribute="trailing" id="QIz-Cq-Idr"/>
+                            <constraint firstItem="Oey-EG-eIo" firstAttribute="top" secondItem="9U9-1d-F6D" secondAttribute="top" id="vrD-7K-iR1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9U9-1d-F6D"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="Oey-EG-eIo" id="Fip-HU-OJh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zhf-lV-FwU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4928" y="13244"/>
+        </scene>
+        <!--DEFAULT NETWORK GATEWAYS-->
+        <scene sceneID="cuz-hn-87r">
+            <objects>
+                <viewController title="DEFAULT NETWORK GATEWAYS" id="aNT-ux-c4c" customClass="RVS_ONVIF_tvOS_Test_Harness_DefaultGateways_ViewController" customModule="RVS_ONVIF_tvOS_Test_Harness" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bhg-um-R1O"/>
+                        <viewControllerLayoutGuide type="bottom" id="ngA-sr-5lS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kh8-8C-As6">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="935"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="66" sectionFooterHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5da-Pi-P2W">
+                                <rect key="frame" x="90" y="0.0" width="1740" height="875"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="aNT-ux-c4c" id="HVY-zn-kMX"/>
+                                    <outlet property="delegate" destination="aNT-ux-c4c" id="GfP-v7-dTE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="5da-Pi-P2W" firstAttribute="trailing" secondItem="CAb-BS-yfn" secondAttribute="trailing" id="3Gt-XH-aq8"/>
+                            <constraint firstItem="5da-Pi-P2W" firstAttribute="top" secondItem="CAb-BS-yfn" secondAttribute="top" id="B8Z-Kj-ARW"/>
+                            <constraint firstItem="5da-Pi-P2W" firstAttribute="bottom" secondItem="CAb-BS-yfn" secondAttribute="bottom" id="Ych-Gs-i1S"/>
+                            <constraint firstItem="5da-Pi-P2W" firstAttribute="leading" secondItem="CAb-BS-yfn" secondAttribute="leading" id="oRo-rI-ws7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CAb-BS-yfn"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="5da-Pi-P2W" id="cy4-6y-HlN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Fc-2e-fod" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4928" y="11944"/>
         </scene>
     </scenes>
 </document>

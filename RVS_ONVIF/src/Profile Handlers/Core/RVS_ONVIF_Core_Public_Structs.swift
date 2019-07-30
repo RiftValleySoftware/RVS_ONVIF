@@ -408,6 +408,18 @@ extension RVS_ONVIF_Core {
         
         /* ############################################################## */
         /**
+         i returns: true, if this device has WiFi capabilities.
+         */
+        public var hasWiFi: Bool {
+            if let networkCapabilities = networkCapabilities {
+                return networkCapabilities.isDot11Configuration
+            }
+            
+            return false
+        }
+
+        /* ############################################################## */
+        /**
          Simple Initializer that sets our only non-mutable property.
          */
         init(owner inOwner: RVS_ONVIF) {
@@ -766,6 +778,18 @@ extension RVS_ONVIF_Core {
         
         /* ############################################################## */
         /**
+         i returns: true, if this device has WiFi capabilities.
+         */
+        public var hasWiFi: Bool {
+            if let networkCapabilities = deviceCapabilities?.networkCapabilities {
+                return networkCapabilities.isDot11Configuration
+            }
+            
+            return false
+        }
+
+        /* ############################################################## */
+        /**
          Simple Initializer that sets our only non-mutable property.
          */
         init(owner inOwner: RVS_ONVIF) {
@@ -868,6 +892,18 @@ extension RVS_ONVIF_Core {
          The various security capabilities for this device.
          */
         public var securityCapabilities: SecurityCapabilities!
+        
+        /* ############################################################## */
+        /**
+         i returns: true, if this device has WiFi capabilities.
+         */
+        public var hasWiFi: Bool {
+            if let networkCapabilities = networkCapabilities {
+                return networkCapabilities.isDot11Configuration
+            }
+            
+            return false
+        }
         
         /* ############################################################## */
         /**
@@ -1413,7 +1449,7 @@ extension RVS_ONVIF_Core {
             
             return params
         }
-   }
+    }
     
     /* ###################################################################################################################################### */
     /**
@@ -1452,6 +1488,70 @@ extension RVS_ONVIF_Core {
         }
     }
     
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for the Dot11 Capabilities struct
+     */
+    public struct Dot11Capabilities {
+        /* ############################################################## */
+        /**
+         - returns: True, if the device supports TKIP
+         */
+        public var supportsTKIP: Bool
+        
+        /* ############################################################## */
+        /**
+         - returns: True, if the device supports Web Encryption Protocol (WEP)
+         */
+        public var supportsWEP: Bool
+        
+        /* ############################################################## */
+        /**
+         - returns: True, if the device supports scanning for networks
+         */
+        public var canScanAvailableNetworks: Bool
+        
+        /* ############################################################## */
+        /**
+         - returns: True, if the device multiple configurations
+         */
+        public var supportsMultipleConfigurations: Bool
+        
+        /* ############################################################## */
+        /**
+         - returns: True, if the device supports Ad Hoc Station Mode
+         */
+        public var supportsAdHocStationMode: Bool
+
+        /* ############################################################## */
+        /**
+         Returns the parameters in a fashion suitable for sending to the device.
+         */
+        public var asParameters: [String: Any]! {
+            var params: [String: Any] = [:]
+            
+            params["tt:TKIP"] = supportsTKIP ? "true" : "false"
+            params["tt:WEP"] = supportsWEP ? "true" : "false"
+            params["tt:ScanAvailableNetworks"] = canScanAvailableNetworks ? "true" : "false"
+            params["tt:MultipleConfiguration"] = supportsMultipleConfigurations ? "true" : "false"
+            params["tt:AdHocStationMode"] = supportsAdHocStationMode ? "true" : "false"
+
+            return params
+        }
+    }
+    
+    /* ###################################################################################################################################### */
+    /**
+     This struct describes the model for the Dot11 Status struct
+     */
+    public struct Dot11Status {
+        /* ############################################################## */
+        /**
+         - returns: The connected SSID
+         */
+        public var SSID: String
+    }
+
     /* ###################################################################################################################################### */
     /**
      This struct describes the model for a network interface extension record.
