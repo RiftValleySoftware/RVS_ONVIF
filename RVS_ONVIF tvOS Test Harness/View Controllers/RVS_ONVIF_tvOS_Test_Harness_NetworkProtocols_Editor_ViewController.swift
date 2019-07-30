@@ -14,6 +14,20 @@ import RVS_ONVIF_tvOS
 /* ################################################################################################################################## */
 // MARK: - Class for The Main Stack View
 /* ################################################################################################################################## */
+class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_SegmentedSwitch: UISegmentedControl {
+    var nextFocusTarget: UIFocusEnvironment!
+    
+    /* ################################################################## */
+    /**
+     */
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return nil == nextFocusTarget ? super.preferredFocusEnvironments : [nextFocusTarget]
+    }
+}
+
+/* ################################################################################################################################## */
+// MARK: - Class for The Main Stack View
+/* ################################################################################################################################## */
 class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_View: UIView {
 }
 
@@ -257,7 +271,7 @@ class RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController: UIView
         containerView.addArrangedSubview(portTextField)
         containerView.portTextField = portTextField
 
-        let isEnabledSegmentedSwitch = UISegmentedControl(items: ["Enabled", "Disabled"])
+        let isEnabledSegmentedSwitch = RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController_SegmentedSwitch(items: ["Enabled", "Disabled"])
         isEnabledSegmentedSwitch.selectedSegmentIndex = enabled ? 0 : 1
         isEnabledSegmentedSwitch.setContentHuggingPriority(.required, for: .horizontal)
         containerView.addArrangedSubview(isEnabledSegmentedSwitch)

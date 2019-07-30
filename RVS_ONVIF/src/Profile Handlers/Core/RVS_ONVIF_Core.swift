@@ -67,6 +67,8 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case GetNetworkInterfaces
         /// Get the network protocols configurations.
         case GetNetworkProtocols
+        /// Get the default gateway[s] for the network.
+        case GetNetworkDefaultGateway
         
         /// Set a New Hostname for the Device
         case SetHostname
@@ -944,7 +946,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     }
     
     /* ############################################################################################################################## */
-    // MARK: - GetNetworkInterfaces Parser
+    // MARK: - GetNetworkProtocols Parser
     /* ############################################################################################################################## */
     /* ################################################################## */
     /**
@@ -989,6 +991,40 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         return ret
     }
     
+    /* ############################################################################################################################## */
+    // MARK: - GetNetworkDefaultGateway Parser
+    /* ############################################################################################################################## */
+    /* ################################################################## */
+    /**
+     This parses the response from the GetNetworkDefaultGateway command.
+     
+     - parameter inResponseDictionary: The Dictionary containing the partially-parsed response from SOAPEngine.
+     - returns: an Array of RVS_IPAddress values.
+     */
+    internal func _parseNetworkDefaultGatewayResponse(_ inResponseDictionary: [String: Any]) -> [RVS_IPAddress] {
+        #if DEBUG
+            print("Parsing the Network Default Gateway Response: \(String(describing: inResponseDictionary))")
+        #endif
+        
+        var ret: [RVS_IPAddress] = []
+        
+        if let mainWrapper = inResponseDictionary["GetNetworkDefaultGatewayResponse"] as? [String: Any] {
+            var outerWrapperArray: [String: String] = [:]
+            
+            if let outerWrapperArrayTemp = mainWrapper["NetworkGateway"] as? [String: String] {
+                outerWrapperArray = outerWrapperArrayTemp
+            }
+            
+            outerWrapperArray.forEach {
+                if let ipAddress = $0.value.ipAddress {
+                    ret.append(ipAddress)
+                }
+            }
+        }
+        
+        return ret
+    }
+
     /* ############################################################################################################################## */
     // MARK: - GetNetworkInterfaces Parser
     /* ############################################################################################################################## */
@@ -1504,6 +1540,16 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                 }
             }
             
+        case _DeviceRequest.GetNetworkDefaultGateway.soapAction:
+            // We give the caller the opportunity to vet the data. Default just passes through.
+            if !(owner.delegate?.onvifInstance(owner, rawDataPreview: inResponseDictionary, deviceRequest: _DeviceRequest.GetNTP) ?? false) {
+                owner.dispatchers.forEach {
+                    if $0.isAbleToHandleThisCommand(_DeviceRequest.GetNetworkDefaultGateway) {
+                        $0.deliverResponse(_DeviceRequest.GetNetworkDefaultGateway, params: _parseNetworkDefaultGatewayResponse(inResponseDictionary))
+                    }
+                }
+            }
+
         case _DeviceRequest.SetHostname.soapAction,
              _DeviceRequest.SetHostnameFromDHCP.soapAction,
              _DeviceRequest.SetDNS.soapAction,
