@@ -131,6 +131,29 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
             sendParameters["SearchDomain"] = domainStr.split(separator: ",")
         }
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func defaultNetworkGatewayIPAddressListCallback(_ inControl: UIView?) {
+        if let control = inControl as? UITextField, !(control.text?.isEmpty ?? false) {
+            let servers: [String] = (control.text?.split(separator: ",").compactMap { return String($0) }) ?? []
+            let ipAddresses: [RVS_IPAddress] = servers.compactMap {
+                return $0.ipAddress
+            }
+            
+            var ips: [[String: String]] = []
+            
+            ipAddresses.forEach {
+                let type = $0.isV6 ? "IPv6" : "IPv4"
+                let key = "tt:" + type + "Address"
+                let val: [String: String] = [key: $0.address]
+                ips.append(val)
+            }
+            
+            sendParameters["NetworkGateway"] = ips
+        }
+    }
 
     /* ################################################################## */
     /**
@@ -269,6 +292,9 @@ class RVS_ONVIF_tvOS_Test_Harness_CoreDispatcher: RVS_ONVIF_tvOS_Test_Harness_Di
                         dataEntryDialog = dEntry
                     }
                 }
+
+            case "SetNetworkDefaultGateway":
+                dataEntryDialog = RVS_ONVIF_tvOS_Test_Harness_FunctionData_ViewController.dialogFactory(["IPAddresses": .textEntry(defaultValue: "", callback: defaultNetworkGatewayIPAddressListCallback)], command: inCommand, dispatcher: self)
 
             default:
                 ()

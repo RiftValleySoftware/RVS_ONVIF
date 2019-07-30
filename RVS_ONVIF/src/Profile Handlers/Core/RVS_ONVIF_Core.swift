@@ -82,8 +82,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         case SetDynamicDNS
         /// Set a network interface configuration.
         case SetNetworkInterfaces
-        /// Set a network protocols configuration.
+        /// Set the network protocols configuration.
         case SetNetworkProtocols
+        /// Set the default gateway[s] for the network.
+        case SetNetworkDefaultGateway
 
         /* ############################################################## */
         /**
@@ -101,7 +103,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             var ret = false
             
             switch self {
-            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS, .SetNetworkInterfaces, .SetNetworkProtocols:
+            case .GetServices, .SetHostname, .SetHostnameFromDHCP, .SetDNS, .SetNTP, .SetDynamicDNS, .SetNetworkInterfaces, .SetNetworkProtocols, .SetNetworkDefaultGateway:
                 ret = true
                 
             default:
@@ -614,6 +616,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         if let ext = _parseNetworkInterfaceExtension(networkCapabilities) {
             print("Extension: \(String(describing: ext))")
         }
+        
+        #if DEBUG
+            print("\tDNetwork Services Capabilities Info: \(ret)")
+        #endif
 
         return ret
     }
@@ -651,6 +657,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
         ret.maxUserNameLength = owner._parseInteger(securityCapabilities, key: "MaxUserNameLength")
         ret.maxPasswordLength = owner._parseInteger(securityCapabilities, key: "MaxPasswordLength")
         
+        #if DEBUG
+            print("\tSecurity Service Capabilities Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -686,6 +696,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             ret.storageTypesSupported = val.components(separatedBy: ",")
         }
         
+        #if DEBUG
+            print("\tSystem Service Capabilities Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -796,6 +810,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
         }
         
+        #if DEBUG
+            print("\tService Capabilities Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -872,6 +890,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
         }
         
+        #if DEBUG
+            print("\tServices Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -942,6 +964,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
         }
         
+        #if DEBUG
+            print("\tScopes Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -957,7 +983,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      */
     internal func _parseNetworkProtocolsResponse(_ inResponseDictionary: [String: Any]) -> [NetworkProtocol] {
         #if DEBUG
-            print("Parsing the Network Protocols Response")
+            print("Parsing the Network Protocols Response: \(String(describing: inResponseDictionary))")
         #endif
         
         var ret: [NetworkProtocol] = []
@@ -988,6 +1014,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
         }
         
+        #if DEBUG
+            print("\tNetwork Protocol Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -1022,6 +1052,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             }
         }
         
+        #if DEBUG
+            print("\tDefault Network Gateway Info: \(ret)")
+        #endif
+
         return ret
     }
 
@@ -1037,7 +1071,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      */
     internal func _parseNetworkInterfacesResponse(_ inResponseDictionary: [String: Any]) -> [NetworkInterface] {
         #if DEBUG
-            print("Parsing the Network Interfaces Response")
+            print("Parsing the Network Interfaces Response: \(String(describing: inResponseDictionary))")
         #endif
         
         var ret: [NetworkInterface] = []
@@ -1073,6 +1107,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
             ret.append(NetworkInterface(owner: owner, token: token, isEnabled: isEnabled, info: info, link: link, ipV4: ipv4, ipV6: ipv6, networkInterfaceExtension: networkInterfaceExtension))
         }
         
+        #if DEBUG
+            print("\tNetwork Interfaces Info: \(ret)")
+        #endif
+
         return ret
     }
     
@@ -1556,7 +1594,8 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
              _DeviceRequest.SetNTP.soapAction,
              _DeviceRequest.SetNetworkInterfaces.soapAction,
              _DeviceRequest.SetNetworkProtocols.soapAction,
-             _DeviceRequest.SetDynamicDNS.soapAction:
+             _DeviceRequest.SetDynamicDNS.soapAction,
+             _DeviceRequest.SetNetworkDefaultGateway.soapAction:
             // Make sure to strip off any namespace tag.
             var commandString = inSOAPRequest
             if let colonIndex = inSOAPRequest.firstIndex(of: ":") {

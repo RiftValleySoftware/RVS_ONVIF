@@ -90,14 +90,14 @@ import SOAPEngine64
     internal var _profiles: [String: ProfileHandlerProtocol] = [:]
 
     /* ################################################################################################################################## */
-    // MARK: - Internal Initializers
+    // MARK: - Initializers
     /* ################################################################################################################################## */
     /**
      These need to be declared in the main context, which is why they are not in the internals file.
      */
     /* ################################################################## */
     /**
-     Blank initializer (Internal, so only the factory can create it outside the framework).
+     Blank initializer (Public).
      */
     public override init() {
         loginCredentials = nil
