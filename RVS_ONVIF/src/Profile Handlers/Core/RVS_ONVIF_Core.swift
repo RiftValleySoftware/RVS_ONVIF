@@ -1566,13 +1566,9 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
      i returns: true, if this device has WiFi capabilities.
      */
     public var hasWiFi: Bool {
-        if let hasWiFi = capabilities?.hasWiFi {
-            return hasWiFi
-        }
-        
-        return false
+        return serviceCapabilities?.hasWiFi ?? false
     }
-
+    
     /* ################################################################################################################################## */
     // MARK: - Public Callback Handler Instance Method
     /* ################################################################################################################################## */

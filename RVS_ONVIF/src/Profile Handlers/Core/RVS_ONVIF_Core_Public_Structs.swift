@@ -408,14 +408,10 @@ extension RVS_ONVIF_Core {
         
         /* ############################################################## */
         /**
-         i returns: true, if this device has WiFi capabilities.
+         - returns: true, if this device has WiFi capabilities.
          */
         public var hasWiFi: Bool {
-            if let networkCapabilities = networkCapabilities {
-                return networkCapabilities.isDot11Configuration
-            }
-            
-            return false
+            return networkCapabilities?.hasWiFi ?? false
         }
 
         /* ############################################################## */
@@ -486,6 +482,14 @@ extension RVS_ONVIF_Core {
          */
         public var isDHCPv6: Bool = false
         
+        /* ############################################################## */
+        /**
+         - returns: true, if this device has WiFi capabilities.
+         */
+        public var hasWiFi: Bool {
+            return isDot11Configuration
+        }
+
         /* ############################################################## */
         /**
          Simple Initializer that sets our only non-mutable property.
@@ -775,18 +779,6 @@ extension RVS_ONVIF_Core {
          The Search capabilities for this device.
          */
         public var searchCapabilities: SearchCapabilities!
-        
-        /* ############################################################## */
-        /**
-         i returns: true, if this device has WiFi capabilities.
-         */
-        public var hasWiFi: Bool {
-            if let networkCapabilities = deviceCapabilities?.networkCapabilities {
-                return networkCapabilities.isDot11Configuration
-            }
-            
-            return false
-        }
 
         /* ############################################################## */
         /**
@@ -895,14 +887,10 @@ extension RVS_ONVIF_Core {
         
         /* ############################################################## */
         /**
-         i returns: true, if this device has WiFi capabilities.
+         - returns: true, if this device has WiFi capabilities.
          */
         public var hasWiFi: Bool {
-            if let networkCapabilities = networkCapabilities {
-                return networkCapabilities.isDot11Configuration
-            }
-            
-            return false
+            return networkCapabilities?.hasWiFi ?? false
         }
         
         /* ############################################################## */
