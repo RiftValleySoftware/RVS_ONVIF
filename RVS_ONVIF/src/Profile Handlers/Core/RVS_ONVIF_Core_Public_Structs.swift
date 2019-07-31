@@ -1763,8 +1763,21 @@ extension RVS_ONVIF_Core {
      This struct describes the model for an IPv4 or IPv6 interface configuration. It has a couple of fields which are not filled for IPv4.
      */
     public struct IPConfiguration {
+        /* ############################################################## */
+        /**
+         This enum describes the IPv6 DHCP configuration.
+         */
         public enum IPDHCPConfiguration: String {
-            case On, Off, Auto, Stateful, Stateless
+            /// Simply "On"
+            case On
+            /// Simply "Off"
+            case Off
+            /// Fetch the address automatically from RA.
+            case Auto
+            /// Fetch multiple IPv6 addresses (like Router and DNS) from RA.
+            case Stateful
+            /// Fetch multiple IPv6 addresses (like Router and DNS) from a DHCP Server.
+            case Stateless
         }
         
         /* ############################################################## */

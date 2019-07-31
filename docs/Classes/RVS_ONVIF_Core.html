@@ -138,6 +138,9 @@
                 <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/SearchCapabilities.html">– SearchCapabilities</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkProtocol.html">– NetworkProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterface.html">– NetworkInterface</a>
               </li>
               <li class="nav-group-task">
@@ -145,6 +148,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceLink.html">– NetworkInterfaceLink</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Dot11Capabilities.html">– Dot11Capabilities</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/Dot11Status.html">– Dot11Status</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/RVS_ONVIF_Core/NetworkInterfaceExtension.html">– NetworkInterfaceExtension</a>
@@ -606,6 +615,87 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC16networkProtocolsSayAC15NetworkProtocolOGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/networkProtocols" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC16networkProtocolsSayAC15NetworkProtocolOGSgvp">networkProtocols</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the cache for the device network protocol information. It is filled at initialization time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">networkProtocols</span><span class="p">:</span> <span class="p">[</span><span class="kt">RVS_ONVIF_Core</span><span class="o">.</span><span class="kt"><a href="../Classes/RVS_ONVIF_Core/NetworkProtocol.html">NetworkProtocol</a></span><span class="p">]</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC22networkDefaultGatewaysSayAA0A10_IPAddress_pGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/networkDefaultGateways" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC22networkDefaultGatewaysSayAA0A10_IPAddress_pGSgvp">networkDefaultGateways</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the cache for the default network gateways information. It is filled at initialization time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">networkDefaultGateways</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RVS_IPAddress.html">RVS_IPAddress</a></span><span class="p">]</span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC17dot11CapabilitiesAC05Dot11F0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/dot11Capabilities" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC17dot11CapabilitiesAC05Dot11F0VSgvp">dot11Capabilities</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the cache for the device&rsquo;s Dot 11 (WiFi) capabilities. It is filled at initialization time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dot11Capabilities</span><span class="p">:</span> <span class="kt">RVS_ONVIF_Core</span><span class="o">.</span><span class="kt"><a href="../Classes/RVS_ONVIF_Core/Dot11Capabilities.html">Dot11Capabilities</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -694,6 +784,36 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">availableCommands</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/RVS_ONVIF_DeviceRequestProtocol.html">RVS_ONVIF_DeviceRequestProtocol</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC7hasWiFiSbvp"></a>
+                    <a name="//apple_ref/swift/Property/hasWiFi" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC7hasWiFiSbvp">hasWiFi</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">hasWiFi</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>true, if this device has WiFi capabilities.</p>
                       </div>
                     </section>
                   </div>
@@ -1469,6 +1589,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC15NetworkProtocolO"></a>
+                    <a name="//apple_ref/swift/Enum/NetworkProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC15NetworkProtocolO">NetworkProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This enum describes a single network protocol data model</p>
+
+                        <a href="../Classes/RVS_ONVIF_Core/NetworkProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NetworkProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC16NetworkInterfaceV"></a>
                     <a name="//apple_ref/swift/Struct/NetworkInterface" class="dashAnchor"></a>
                     <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC16NetworkInterfaceV">NetworkInterface</a>
@@ -1544,6 +1692,62 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NetworkInterfaceLink</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC17Dot11CapabilitiesV"></a>
+                    <a name="//apple_ref/swift/Struct/Dot11Capabilities" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC17Dot11CapabilitiesV">Dot11Capabilities</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This struct describes the model for the Dot11 Capabilities struct</p>
+
+                        <a href="../Classes/RVS_ONVIF_Core/Dot11Capabilities.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Dot11Capabilities</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0a1_B5_CoreC11Dot11StatusV"></a>
+                    <a name="//apple_ref/swift/Struct/Dot11Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0a1_B5_CoreC11Dot11StatusV">Dot11Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This struct describes the model for the Dot11 Status struct</p>
+
+                        <a href="../Classes/RVS_ONVIF_Core/Dot11Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Dot11Status</span></code></pre>
 
                         </div>
                       </div>

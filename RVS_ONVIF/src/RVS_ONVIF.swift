@@ -314,6 +314,8 @@ import SOAPEngine64
     /* ################################################################## */
     /**
      This simply contains our login credentials, as Strings.
+     - parameter login: The login ID.
+     - parameter password: The password.
      */
     public typealias LoginCredentialTuple = (login: String, password: String)
 
