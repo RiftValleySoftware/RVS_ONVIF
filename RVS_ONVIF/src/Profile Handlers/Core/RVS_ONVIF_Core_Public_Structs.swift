@@ -405,14 +405,6 @@ extension RVS_ONVIF_Core {
          Lists of commands supported by SendAuxiliaryCommand. It is optional, and may be nil.
          */
         public var auxiliaryCommands: [String]!
-        
-        /* ############################################################## */
-        /**
-         - returns: true, if this device has WiFi capabilities.
-         */
-        public var hasWiFi: Bool {
-            return networkCapabilities?.hasWiFi ?? false
-        }
 
         /* ############################################################## */
         /**
@@ -481,14 +473,6 @@ extension RVS_ONVIF_Core {
          Indicates support for Stateful IPv6 DHCP.
          */
         public var isDHCPv6: Bool = false
-        
-        /* ############################################################## */
-        /**
-         - returns: true, if this device has WiFi capabilities.
-         */
-        public var hasWiFi: Bool {
-            return isDot11Configuration
-        }
 
         /* ############################################################## */
         /**
@@ -884,14 +868,6 @@ extension RVS_ONVIF_Core {
          The various security capabilities for this device.
          */
         public var securityCapabilities: SecurityCapabilities!
-        
-        /* ############################################################## */
-        /**
-         - returns: true, if this device has WiFi capabilities.
-         */
-        public var hasWiFi: Bool {
-            return networkCapabilities?.hasWiFi ?? false
-        }
         
         /* ############################################################## */
         /**

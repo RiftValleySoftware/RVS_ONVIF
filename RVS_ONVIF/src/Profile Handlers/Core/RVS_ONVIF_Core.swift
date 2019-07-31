@@ -862,7 +862,7 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
                     if  let value = owner._parseString(element, key: "Namespace") {
                         namespace = value
                     }
-                
+                    
                     // We do all this weirdness, because manufacturers can pick and choose how they return their capabilities.
                     if let capabilitiesAny = element["Capabilities"] as? [String: Any], 0 < capabilitiesAny.count {
                         if let capabilitiesAsAttributes = capabilitiesAny["attributes"] as? [String: Any], 0 < capabilitiesAsAttributes.count {
@@ -1563,10 +1563,10 @@ open class RVS_ONVIF_Core: ProfileHandlerProtocol {
     
     /* ############################################################## */
     /**
-     i returns: true, if this device has WiFi capabilities.
+     - returns: true, if this device has WiFi capabilities.
      */
     public var hasWiFi: Bool {
-        return serviceCapabilities?.hasWiFi ?? false
+        return serviceCapabilities?.networkCapabilities?.isDot11Configuration ?? false
     }
     
     /* ################################################################################################################################## */

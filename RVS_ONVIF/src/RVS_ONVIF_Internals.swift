@@ -31,8 +31,6 @@ extension RVS_ONVIF {
         #if DEBUG
             print("Unsuccessful \(inSOAPRequest) SOAP Call. Reason: \(String(describing: inReason))")
         #endif
-        
-        delegate?.onvifInstance(self, failureWithReason: inReason)
     }
     
     /* ################################################################## */
