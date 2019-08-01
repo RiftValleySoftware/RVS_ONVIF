@@ -124,8 +124,8 @@ open class RVS_ONVIF_TestTarget_MockDevice {
         if !inXML.isEmpty {
             let xml = SWXMLHash.config { config in
                 config.shouldProcessNamespaces = true   // No namespaces. We are copying the way SOAPEngine does it.
+                config.detectParsingErrors = true
                 }.parse(inXML)
-            
             if let main = xml["Envelope"]["Body"]["\(strippedAction.element)Response"].element {
                 ret = [:]
                 if let val =  type(of: self).downTheRabbithole(main) {
@@ -203,6 +203,14 @@ open class RVS_ONVIF_TestTarget_MockDevice {
             "trt:GetNetworkInterfaces":
             "",
             
+            /// Core GetNetworkProtocols
+            "trt:GetNetworkProtocols":
+            "",
+            
+            /// Core GetNetworkDefaultGateway
+            "trt:GetNetworkDefaultGateway":
+            "",
+
             /// Core GetCapabilities
             "trt:GetCapabilities":
             "",

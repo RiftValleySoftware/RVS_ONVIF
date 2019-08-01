@@ -177,6 +177,13 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
         XCTAssertFalse(inStreamURI.invalidAfterReboot)
         XCTAssertEqual(inStreamURI.timeoutInSeconds, 60)
     }
+    
+    /* ################################################################## */
+    /**
+     */
+    func evaluateVideoSourceConfigurations(_ inConfigurations: RVS_ONVIF_Profile_S.VideoSourceConfiguration) {
+        XCTAssertEqual(inConfigurations.owner, testTarget)
+    }
 
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
@@ -198,6 +205,13 @@ class RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher: RVS_ONVIF_Gene
         } else if "trt:GetProfiles" == inCommand.soapAction {
             if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
                 evaluateProfiles(params)
+            }
+            
+            expectation.fulfill()
+            return true
+        } else if "trt:GetVideoSourceConfigurations" == inCommand.soapAction {
+            if let params = params as? RVS_ONVIF_Profile_S.VideoSourceConfiguration {
+                evaluateVideoSourceConfigurations(params)
             }
             
             expectation.fulfill()

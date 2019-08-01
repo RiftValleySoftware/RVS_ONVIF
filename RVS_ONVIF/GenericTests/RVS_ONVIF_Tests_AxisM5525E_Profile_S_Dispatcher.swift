@@ -152,6 +152,13 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
         XCTAssertEqual(inStreamURI.timeoutInSeconds, 0)
     }
     
+    /* ################################################################## */
+    /**
+     */
+    func evaluateVideoSourceConfigurations(_ inConfigurations: RVS_ONVIF_Profile_S.VideoSourceConfiguration) {
+        XCTAssertEqual(inConfigurations.owner, testTarget)
+    }
+
     /* ############################################################################################################################## */
     // MARK: - RVS_ONVIF_Profile_SDispatcher Methods
     /* ############################################################################################################################## */
@@ -172,6 +179,13 @@ class RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher: RVS_ONVIF_Generic_TestBas
         } else if "trt:GetProfiles" == inCommand.soapAction {
             if let params = params as? [RVS_ONVIF_Profile_S.Profile] {
                 evaluateProfiles(params)
+            }
+            
+            expectation.fulfill()
+            return true
+        } else if "trt:GetVideoSourceConfigurations" == inCommand.soapAction {
+            if let params = params as? RVS_ONVIF_Profile_S.VideoSourceConfiguration {
+                evaluateVideoSourceConfigurations(params)
             }
             
             expectation.fulfill()

@@ -1,5 +1,9 @@
 ![Icon](./icon.png)
 
+RVS_ONVIF
+=
+This project is a low-level [ONVIF](https://onvif.org) "driver" for Cocoa (Apple's [MacOS](https://www.apple.com/macos), [iOS](https://www.apple.com/ios) and [tvOS](https://www.apple.com/tvos)).
+
 DEPENDENCIES
 =
 BUILD DEPENDENCIES
