@@ -1,1 +1,4 @@
+binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/MobileVLCKit.json" "3.3.2"
 binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/TVVLCKit.json" "3.3.2"
+binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/VLCKit.json" "3.3.2"
+github "drmohundro/SWXMLHash" "4.9.0"

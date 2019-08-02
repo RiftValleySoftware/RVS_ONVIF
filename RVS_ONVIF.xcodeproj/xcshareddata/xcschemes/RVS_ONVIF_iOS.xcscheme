@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1030"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -37,6 +37,26 @@
                BlueprintName = "RVS_ONVIF_iOS_Tests"
                ReferencedContainer = "container:RVS_ONVIF.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RVS_ONVIF_Generic_TestBaseClass">
+               </Test>
+               <Test
+                  Identifier = "RVS_ONVIF_Tests_AxisM5525E_Profile_S_Dispatcher">
+               </Test>
+               <Test
+                  Identifier = "RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Initializer">
+               </Test>
+               <Test
+                  Identifier = "RVS_ONVIF_Tests_HikvisionDS2CD2143G0I_Profile_S_Dispatcher">
+               </Test>
+               <Test
+                  Identifier = "RVS_ONVIF_Tests_PelcoIMP3211ES_Initializer">
+               </Test>
+               <Test
+                  Identifier = "RVS_ONVIF_Tests_PelcoIMP3211ES_Profile_S_Dispatcher">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

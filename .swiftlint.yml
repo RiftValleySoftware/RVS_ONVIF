@@ -37,5 +37,6 @@ cyclomatic_complexity:
 
 excluded:
 - Pods
+- Carthage
 - SOAPEngine
 - RVS_ONVIF/GenericTests

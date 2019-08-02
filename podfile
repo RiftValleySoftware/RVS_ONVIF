@@ -30,22 +30,18 @@ target 'RVS_ONVIF_tvOS' do
 end
 
 target 'RVS_ONVIF_iOS_Tests' do
-    pod 'SWXMLHash', '~> 4.7.0'
     shared_pods_ios
 end
 
 target 'RVS_ONVIF_MacOS_Tests' do
-  pod 'SWXMLHash', '~> 4.7.0'
   shared_pods_macos
 end
 
 target 'RVS_ONVIF_tvOS_Tests' do
-    pod 'SWXMLHash', '~> 4.7.0'
     shared_pods_tvos
 end
 
 target 'RVS_ONVIF iOS Test Harness' do
-  pod 'MobileVLCKit'
   shared_pods_ios
 end
 
