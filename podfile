@@ -31,14 +31,17 @@ end
 
 target 'RVS_ONVIF_iOS_Tests' do
     shared_pods_ios
+    pod 'SWXMLHash', '~> 4.7.0'
 end
 
 target 'RVS_ONVIF_MacOS_Tests' do
   shared_pods_macos
+  pod 'SWXMLHash', '~> 4.7.0'
 end
 
 target 'RVS_ONVIF_tvOS_Tests' do
     shared_pods_tvos
+    pod 'SWXMLHash', '~> 4.7.0'
 end
 
 target 'RVS_ONVIF iOS Test Harness' do
