@@ -28,6 +28,10 @@ import SOAPEngine64
  
  This is a "pure" Swift protocol, requiring that it be applied to a class.
  
+ There can only be one Delegate at a time for an RVS_ONVIF instance (as opposed to Dispatchers, which can be more than one).
+ 
+ None of the Delegate methods are required.
+ 
  These methods are all called in the main thread.
  */
 public protocol RVS_ONVIFDelegate: class {

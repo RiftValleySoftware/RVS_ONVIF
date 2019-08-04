@@ -14,16 +14,20 @@ import SOAPEngine64
 /* ###################################################################################################################################### */
 /**
  This is an ONVIF Swift Framework driver.
- This is inspired by the ONVIFCamera library, by Rémy Virin, but is a great deal more robust. He did an excellent job, but I'm a "fiddler."
+ 
+ The driver is designed to be usable for MacOS, iOS and tvOS.
+ 
+ This was initially inspired by the ONVIFCamera library, by Rémy Virin, but has gone far past his implementation.
 
- It uses SOAPEngine, by Danilo Priore (http://www.prioregroup.com) to handle the stuff below the session layer.
+ It uses [SOAPEngine](https://github.com/priore/SOAPEngine), by [Danilo Priore](http://www.prioregroup.com) to handle the stuff below the session layer.
+ 
  If you want to use this on a device (as opposed to the simulator), you need to purchase a SOAPEngine license from the Priore Group (see URI, above).
 
  This relies on a delegate pattern, as opposed to the closure pattern that Rémy Virin's library used.
 
- HOW THE FRAMEWORK OPERATES
+ **HOW THE FRAMEWORK OPERATES**
  
- The RVS_ONVIF Framework is a "hub and spokes" framework, in a similar pattern to the ONVIF specification.
+ The RVS_ONVIF Framework is a "hub and spokes" framework, in a similar pattern to [the ONVIF specification](https://www.onvif.org/profiles/).
  
  There is a "core," and a bunch of "profiles," as defined by the ONVIF specification.
  
@@ -33,12 +37,15 @@ import SOAPEngine64
  
  This framework does not handle device discovery. You are expected to give it an IP number and TCP port. It will handle both IPv4 and IPv6.
 
- DELEGATE
+ **DELEGATE**
  
- Each delegate call is optional. This is done by extending the delegate protocol with "do nothing" methods. They are also all called in the main thread. There are only a couple of calls
- that come if for errors, successful connection, and successful disconnection.
+ Each delegate call is optional. This is done by extending the delegate protocol with "do nothing" default methods.
+ 
+ There can only be one Delegate.
+ 
+ All Delegate methods are called in the main thread. There are only a couple of methods for errors, successful connection, and successful disconnection.
 
- DISPATCHER
+ **DISPATCHER**
  
  We use "smart dispatchers" to manage the conversation with the driver. The client instantiates profile dispatchers, and registers them with the driver.
  
@@ -422,8 +429,8 @@ import SOAPEngine64
      */
     public var dispatchers: [RVS_ONVIF_Dispatcher] = [] {
         didSet {
-            for var dispatcher in dispatchers {
-                dispatcher.owner = self
+            dispatchers.forEach {
+                $0.owner = self
             }
         }
     }

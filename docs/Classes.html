@@ -387,17 +387,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is an ONVIF Swift Framework driver.
-This is inspired by the ONVIFCamera library, by Rémy Virin, but is a great deal more robust. He did an excellent job, but I&rsquo;m a <q>fiddler.</q></p>
+                        <p>This is an ONVIF Swift Framework driver.</p>
 
-<p>It uses SOAPEngine, by Danilo Priore (<a href="http://www.prioregroup.com">http://www.prioregroup.com</a>) to handle the stuff below the session layer.
-If you want to use this on a device (as opposed to the simulator), you need to purchase a SOAPEngine license from the Priore Group (see URI, above).</p>
+<p>The driver is designed to be usable for MacOS, iOS and tvOS.</p>
+
+<p>This was initially inspired by the ONVIFCamera library, by Rémy Virin, but has gone far past his implementation.</p>
+
+<p>It uses <a href="https://github.com/priore/SOAPEngine">SOAPEngine</a>, by <a href="http://www.prioregroup.com">Danilo Priore</a> to handle the stuff below the session layer.</p>
+
+<p>If you want to use this on a device (as opposed to the simulator), you need to purchase a SOAPEngine license from the Priore Group (see URI, above).</p>
 
 <p>This relies on a delegate pattern, as opposed to the closure pattern that Rémy Virin&rsquo;s library used.</p>
 
-<p>HOW THE FRAMEWORK OPERATES</p>
+<p><strong>HOW THE FRAMEWORK OPERATES</strong></p>
 
-<p>The RVS_ONVIF Framework is a <q>hub and spokes</q> framework, in a similar pattern to the ONVIF specification.</p>
+<p>The RVS_ONVIF Framework is a <q>hub and spokes</q> framework, in a similar pattern to <a href="https://www.onvif.org/profiles/">the ONVIF specification</a>.</p>
 
 <p>There is a <q>core,</q> and a bunch of <q>profiles,</q> as defined by the ONVIF specification.</p>
 
@@ -407,12 +411,15 @@ If you want to use this on a device (as opposed to the simulator), you need to p
 
 <p>This framework does not handle device discovery. You are expected to give it an IP number and TCP port. It will handle both IPv4 and IPv6.</p>
 
-<p>DELEGATE</p>
+<p><strong>DELEGATE</strong></p>
 
-<p>Each delegate call is optional. This is done by extending the delegate protocol with <q>do nothing</q> methods. They are also all called in the main thread. There are only a couple of calls
-that come if for errors, successful connection, and successful disconnection.</p>
+<p>Each delegate call is optional. This is done by extending the delegate protocol with <q>do nothing</q> default methods.</p>
 
-<p>DISPATCHER</p>
+<p>There can only be one Delegate.</p>
+
+<p>All Delegate methods are called in the main thread. There are only a couple of methods for errors, successful connection, and successful disconnection.</p>
+
+<p><strong>DISPATCHER</strong></p>
 
 <p>We use <q>smart dispatchers</q> to manage the conversation with the driver. The client instantiates profile dispatchers, and registers them with the driver.</p>
 
