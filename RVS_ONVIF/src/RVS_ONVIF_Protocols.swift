@@ -191,26 +191,31 @@ public protocol ProfileHandlerProtocol: OwnedInstanceProtocol {
      This is the scope enum for this handler.
      */
     static var scopeProfile: RVS_ONVIF_Core.Scope.ProfileType { get }
+    
     /* ############################################################## */
     /**
      These are the namespaces handled by this profile handler.
      */
     static var namespaces: [String] { get }
+    
     /* ############################################################## */
     /**
      This is which of the profile namespaces are supported by this device. Latest version is last.
      */
     var supportedNamespaces: [String] { get set }
+    
     /* ############################################################## */
     /**
      This is the profile name key.
      */
     var profileName: String { get }
+    
     /* ############################################################## */
     /**
      This is a list of the commands (as enum values) available for this enum
      */
     var availableCommands: [RVS_ONVIF_DeviceRequestProtocol] { get }
+    
     /* ############################################################## */
     /**
      This is a list of the commands (as Strings) available for this handler
@@ -272,6 +277,10 @@ extension ProfileHandlerProtocol {
 /* ###################################################################################################################################### */
 /**
  This protocol defines the basic structure of our SOAP command enums.
+ 
+ This is a way to have "opaque" command enums that are independent of the calling context.
+ 
+ This should only be applied to enums, and should only be used internally for the RVS_ONVIF library.
  */
 public protocol RVS_ONVIF_DeviceRequestProtocol {
     /* ############################################################## */
@@ -279,32 +288,38 @@ public protocol RVS_ONVIF_DeviceRequestProtocol {
      This is the profile key (for looking up in the profile hander list).
      */
     var profileKey: String { get }
+    
     /* ############################################################## */
     /**
      This allows us to use enum rawValues in our defaults.
      I got the idea for this here: https://stackoverflow.com/a/33571134/879365
      */
     var rawValue: String { get }
+    
     /* ############################################################## */
     /**
      This is the namespace indicator for the SOAP action.
      */
     var soapSpace: String { get }
+    
     /* ############################################################## */
     /**
      This is the namespace indicator for the SOAP action's parameters.
      */
     var paramSpace: String { get }
+    
     /* ############################################################## */
     /**
      This is the actual SOAP XML element name for the command.
      */
     var soapAction: String { get }
+    
     /* ############################################################## */
     /**
      If true, then the SOAP call will include decoded attributes (not just node values).
      */
     var isRetrieveAttributes: Bool { get }
+    
     /* ############################################################## */
     /**
      If true, then this operation requires additional parameters (needs a custom setup). Default is false.
@@ -318,6 +333,7 @@ public protocol RVS_ONVIF_DeviceRequestProtocol {
      - returns: a String, with the namespace.
      */
     func headerNamespaceFor(_ inONVIF_Handler: RVS_ONVIF!) -> String
+    
     /* ############################################################## */
     /**
      This is the path for our ONVIF call.
@@ -444,8 +460,25 @@ public extension ConfigurationProtocol {
 /* ################################################################################################################################## */
 /**
  This protocol describes the expectations for generic ONVIF Dispatchers.
+ 
+ DISPATCHERS
+ 
+ These are a specialization of the [Delegate Pattern](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Delegation.html).
+ Your implementation context will define classes that conform to specializations of the RVS_ONVIF_Dispatcher protocol. They must be classes.
+ The protocols will have default implementations of all methods and calculated properties, but some are empty.
+ Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality "behind the scenes." Each profile handler will
+ also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
+ declare its own Dispatchers.
+ The Dispatchers are "registered" with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
+ they can handle specific calls.
+ When a call is returned from the device, the RVS_ONVIF driver will iterate the registered Dispatchers, and will stop when a Dispatcher signals that it will handle the response.
+ Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are "opaque" enums.
+ Basically, the important part of your Dispatcher is that your implementation should implement the `isAbleToHandleThisCommand`, `deliverResponse`, and, if applicable, the `getParametersForCommand`
+ methods. If `deliverResponse` returns true, then the iteration stops, once the `deliverResponse` call is made. The `deliverResponse` call will not be made, unless the Dispatcher returns true
+ from its `isAbleToHandleThisCommand` method.
+ All calls are made in the main thread.
  */
-public protocol RVS_ONVIF_Dispatcher {
+public protocol RVS_ONVIF_Dispatcher: class {
     /* ################################################################## */
     /**
      This is the RVS_ONVIF instance that the dispatcher references. It is required to be implemented (and populated) by the final dispatcher instance.

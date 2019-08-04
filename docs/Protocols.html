@@ -491,6 +491,10 @@
                       <div class="abstract">
                         <p>This protocol defines the basic structure of our SOAP command enums.</p>
 
+<p>This is a way to have <q>opaque</q> command enums that are independent of the calling context.</p>
+
+<p>This should only be applied to enums, and should only be used internally for the RVS_ONVIF library.</p>
+
                         <a href="Protocols/RVS_ONVIF_DeviceRequestProtocol.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -558,13 +562,30 @@
                       <div class="abstract">
                         <p>This protocol describes the expectations for generic ONVIF Dispatchers.</p>
 
+<p>DISPATCHERS</p>
+
+<p>These are a specialization of the <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Delegation.html">Delegate Pattern</a>.
+Your implementation context will define classes that conform to specializations of the RVS_ONVIF_Dispatcher protocol. They must be classes.
+The protocols will have default implementations of all methods and calculated properties, but some are empty.
+Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality <q>behind the scenes.</q> Each profile handler will
+also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
+declare its own Dispatchers.
+The Dispatchers are <q>registered</q> with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
+they can handle specific calls.
+When a call is returned from the device, the RVS_ONVIF driver will iterate the registered Dispatchers, and will stop when a Dispatcher signals that it will handle the response.
+Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are <q>opaque</q> enums.
+Basically, the important part of your Dispatcher is that your implementation should implement the <code>isAbleToHandleThisCommand</code>, <code>deliverResponse</code>, and, if applicable, the <code>getParametersForCommand</code>
+methods. If <code>deliverResponse</code> returns true, then the iteration stops, once the <code>deliverResponse</code> call is made. The <code>deliverResponse</code> call will not be made, unless the Dispatcher returns true
+from its <code>isAbleToHandleThisCommand</code> method.
+All calls are made in the main thread.</p>
+
                         <a href="Protocols/RVS_ONVIF_Dispatcher.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_ONVIF_Dispatcher</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_ONVIF_Dispatcher</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                         </div>
                       </div>

@@ -475,6 +475,8 @@ extension RVS_ONVIF_Profile_SDispatcher {
     /**
      This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the "first level" protocol override.
      
+     You should not implement this in the implementation-context Dispatcher.
+
      - returns: "RVS_ONVIF_ProfileS"
      */
     public var profileSig: String {
