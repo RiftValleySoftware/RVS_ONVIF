@@ -151,7 +151,7 @@ public extension String {
 
 /* ################################################################################################################################## */
 /**
- This extension provides the reverse of the above.
+ This extension provides the reverse of asXMLDuration.
  
  You can have an instance of DateComponents express itself as a legal, optimized xs:duration String.
  */
