@@ -156,11 +156,12 @@
 		D49EA23822C69C8E004AE619 /* RVS_ONVIF_Generic_TestBaseClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C8A8BB22C393720054F52F /* RVS_ONVIF_Generic_TestBaseClass.swift */; };
 		D49EA23922C69C8E004AE619 /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9A1922C628E1005B8B7C /* RVS_ONVIF_Tests_AxisM5525E_Initializer.swift */; };
 		D4A6A7F322DAB56300A347B8 /* RVS_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F424BB2206540800729C0F /* RVS_Extensions.swift */; };
+		D4A7B6C222F7408A00B2E1A8 /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F7422F4DB67006EB3BD /* TVVLCKit.framework */; };
+		D4A7B6C322F7408A00B2E1A8 /* TVVLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F7422F4DB67006EB3BD /* TVVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4A912F522EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A912F422EF0AB5008B1194 /* RVS_ONVIF_tvOS_Test_Harness_NetworkProtocols_Editor_ViewController.swift */; };
 		D4AE4E982218DE2F00E39BDA /* RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AE4E972218DE2F00E39BDA /* RVS_ONVIF_iOS_Test_Harness_ONVIF_TableViewController.swift */; };
 		D4B0F0A122EE4C9D00C29A55 /* RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B0F0A022EE4C9D00C29A55 /* RVS_ONVIF_tvOS_Test_Harness_Protocols_ViewController.swift */; };
 		D4B2B45722D90691005E7BFC /* RVS_PersistentPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40F032F22C7DC3300ECC76A /* RVS_PersistentPrefs.swift */; };
-		D4B2B46F22D924EE005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; };
 		D4B2B47122D92543005E7BFC /* RVS_ONVIF_tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D49EA20222C69B9C004AE619 /* RVS_ONVIF_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4B9EB382268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B9EB372268BCCA0048732A /* RVS_ONVIF_Mac_Test_Harness_Capabilities_ViewController.swift */; };
 		D4BA079422F5F1AF006C3586 /* MobileVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F6A22F4DAAA006EB3BD /* MobileVLCKit.framework */; };
@@ -185,8 +186,6 @@
 		D4D21F6C22F4DAB6006EB3BD /* MobileVLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F6A22F4DAAA006EB3BD /* MobileVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4D21F7022F4DB1E006EB3BD /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F6F22F4DB1E006EB3BD /* VLCKit.framework */; };
 		D4D21F7122F4DB26006EB3BD /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F6F22F4DB1E006EB3BD /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D4D21F7522F4DB67006EB3BD /* TVVLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F7422F4DB67006EB3BD /* TVVLCKit.framework */; };
-		D4D21F7622F4DB72006EB3BD /* TVVLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21F7422F4DB67006EB3BD /* TVVLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4D345DB22DF361F00BAF8B1 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D345DA22DF361F00BAF8B1 /* RVS_ONVIF_tvOS_Test_Harness_DisplayResponse_Profile_ViewController.swift */; };
 		D4D345DD22DF39FF00BAF8B1 /* RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D345DC22DF39FE00BAF8B1 /* RVS_ONVIF_tvOS_Test_Harness_Profiles_ViewController.swift */; };
 		D4D793702210C9F6008022FC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D7936F2210C9F6008022FC /* Default-568h@2x.png */; };
@@ -296,7 +295,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D4B2B47122D92543005E7BFC /* RVS_ONVIF_tvOS.framework in Embed Frameworks */,
-				D4D21F7622F4DB72006EB3BD /* TVVLCKit.framework in Embed Frameworks */,
+				D4A7B6C322F7408A00B2E1A8 /* TVVLCKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,15 +570,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A7B6C222F7408A00B2E1A8 /* TVVLCKit.framework in Frameworks */,
 				D4D9CC1F22E7643E0075BFAE /* CoreMedia.framework in Frameworks */,
 				D4D9CC1722E7638A0075BFAE /* AVFoundation.framework in Frameworks */,
-				D4D21F7522F4DB67006EB3BD /* TVVLCKit.framework in Frameworks */,
 				D4D9CC1522E763840075BFAE /* VideoToolbox.framework in Frameworks */,
 				D4D9CC1322E7637D0075BFAE /* AudioToolbox.framework in Frameworks */,
 				D4D08F8622DFB2A60066B600 /* libbz2.tbd in Frameworks */,
 				D4C7C04422E240D500652FB4 /* libc++.tbd in Frameworks */,
 				D4D08F6822DFAAB20066B600 /* libiconv.tbd in Frameworks */,
-				D4B2B46F22D924EE005E7BFC /* RVS_ONVIF_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
