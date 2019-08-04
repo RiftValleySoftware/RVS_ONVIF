@@ -461,21 +461,28 @@ public extension ConfigurationProtocol {
 /**
  This protocol describes the expectations for generic ONVIF Dispatchers.
  
- DISPATCHERS
+ **DISPATCHERS**
  
  These are a specialization of the [Delegate Pattern](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Delegation.html).
+ 
  Your implementation context will define classes that conform to specializations of the RVS_ONVIF_Dispatcher protocol. They must be classes.
+ 
  The protocols will have default implementations of all methods and calculated properties, but some are empty.
+ 
  Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality "behind the scenes." Each profile handler will
  also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
  declare its own Dispatchers.
+ 
  The Dispatchers are "registered" with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
  they can handle specific calls.
+ 
  When a call is returned from the device, the RVS_ONVIF driver will iterate the registered Dispatchers, and will stop when a Dispatcher signals that it will handle the response.
  Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are "opaque" enums.
  Basically, the important part of your Dispatcher is that your implementation should implement the `isAbleToHandleThisCommand`, `deliverResponse`, and, if applicable, the `getParametersForCommand`
  methods. If `deliverResponse` returns true, then the iteration stops, once the `deliverResponse` call is made. The `deliverResponse` call will not be made, unless the Dispatcher returns true
  from its `isAbleToHandleThisCommand` method.
+ 
+ `deliverResponse` is the only method that is *required* to be implemented by the conforming class, but you should also implement `getParametersForCommand` if you will provide arguments.
  All calls are made in the main thread.
  */
 public protocol RVS_ONVIF_Dispatcher: class {
@@ -492,7 +499,9 @@ public protocol RVS_ONVIF_Dispatcher: class {
     
     /* ################################################################## */
     /**
-     This method is required to be implemented by the final dispatcher. It is called to handle a command (as opposed to a callback).
+     This method is called to handle sending a command (as opposed to a callback).
+     
+     As part of the process, the Dispatcher's getParametersForCommand method is called, and is expected to provide a Dictionary of parameters for the command.
      
      - parameter inCommand: The command being sent.
      - returns: true, if the command is being handled. Can be ignored.
