@@ -24,7 +24,7 @@ import SOAPEngine64
 
 /* ###################################################################################################################################### */
 /**
- This is the delegate protocol for use with the RVS_ONVIF framework. It has all required methods.
+ This is the delegate protocol for use with the RVS_ONVIF framework.
  
  This is a "pure" Swift protocol, requiring that it be applied to a class.
  
