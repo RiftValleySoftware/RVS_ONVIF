@@ -445,6 +445,8 @@ public struct RVS_IPAddressV6: RVS_IPAddress {
      You can have a maximum of eight (8) elements.
      
      Illegal formats and syntax errors result in no address being set. This method does not guess.
+     
+     - parameter inString: The String to be parsed.
      */
     public init(_ inString: String) {
         /* ################################################################## */
