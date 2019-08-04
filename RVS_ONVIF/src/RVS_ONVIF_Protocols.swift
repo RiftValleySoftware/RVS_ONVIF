@@ -471,7 +471,7 @@ public extension ConfigurationProtocol {
  
  Your implementation context will define classes that conform to specializations of the RVS_ONVIF_Dispatcher protocol. They must be classes.
  
- The protocols will have default implementations of all methods and calculated properties, but some are empty.
+ The protocols will have default implementations of all methods and calculated properties except for `deliverResponse`, but some of the defaults are empty.
  
  Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality "behind the scenes." Each profile handler will
  also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to

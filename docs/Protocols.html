@@ -572,7 +572,7 @@
 
 <p>Your implementation context will define classes that conform to specializations of the RVS_ONVIF_Dispatcher protocol. They must be classes.</p>
 
-<p>The protocols will have default implementations of all methods and calculated properties, but some are empty.</p>
+<p>The protocols will have default implementations of all methods and calculated properties except for <code>deliverResponse</code>, but some of the defaults are empty.</p>
 
 <p>Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality <q>behind the scenes.</q> Each profile handler will
 also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
