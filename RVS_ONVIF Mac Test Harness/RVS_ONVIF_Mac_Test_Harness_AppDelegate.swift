@@ -11,7 +11,7 @@
 import Cocoa
 import RVS_ONVIF_MacOS
 
-// Frome here: https://stackoverflow.com/a/52523517/879365
+// From here: https://stackoverflow.com/a/52523517/879365
 extension NSView {
     var isDarkMode: Bool {
         if #available(OSX 10.14, *) {
