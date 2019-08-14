@@ -99,6 +99,9 @@ class RVS_ONVIF_Mac_Test_Harness_Profile_SDispatcher: RVS_ONVIF_Mac_Test_Harness
         } else if "GetStreamUri" == inCommand.rawValue, let streamingURI = inParams as? RVS_ONVIF_Profile_S.Stream_URI {
             if let videoDisplayScreen = profileScreen.storyboard?.instantiateController(withIdentifier: "RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController") as? RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController {
                 videoDisplayScreen.streamingURL = streamingURI.uri
+                #if DEBUG
+                    print("StreamingURI: \(streamingURI.uri.absoluteString)")
+                #endif
                 profileScreen.presentAsSheet(videoDisplayScreen)
             }
             return true
