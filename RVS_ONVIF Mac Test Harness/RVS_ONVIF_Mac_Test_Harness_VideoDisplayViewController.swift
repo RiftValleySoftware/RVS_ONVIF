@@ -34,6 +34,10 @@ class RVS_ONVIF_Mac_Test_Harness_VideoDisplayViewController: NSViewController, V
     /**
      */
     @IBOutlet weak var videoDisplayView: NSView!
+    
+    /* ################################################################## */
+    /**
+     */
     @IBOutlet weak var throbber: NSProgressIndicator!
     
     /* ################################################################## */
