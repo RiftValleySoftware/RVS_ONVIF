@@ -342,7 +342,6 @@
 		BFE4F00C3FF4FB488CF5E878 /* Pods-RVS_ONVIF_MacOS_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF_MacOS_Tests.release.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF_MacOS_Tests/Pods-RVS_ONVIF_MacOS_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D1730E4976BF035670EC926A /* Pods-RVS_ONVIF tvOS Test Harness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RVS_ONVIF tvOS Test Harness.debug.xcconfig"; path = "Target Support Files/Pods-RVS_ONVIF tvOS Test Harness/Pods-RVS_ONVIF tvOS Test Harness.debug.xcconfig"; sourceTree = "<group>"; };
 		D401C7EE22DA400100181EEA /* RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_Services_ViewController.swift; sourceTree = "<group>"; };
-		D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RVS_ONVIF Mac Test Harness.entitlements"; sourceTree = "<group>"; };
 		D40AB9E1228F4B8400FC3AB4 /* RVS_ONVIF_iOS_Test_Harness_ProfileSProfile_Viewer_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_iOS_Test_Harness_ProfileSProfile_Viewer_ViewController.swift; sourceTree = "<group>"; };
 		D40DB0BF22D3E40700DEB086 /* RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_tvOS_Test_Harness_UITabBarController.swift; sourceTree = "<group>"; };
 		D40E203D226A4E4400B4A392 /* RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_ONVIF_Mac_Test_Harness_ServiceCapabilities_ViewController.swift; sourceTree = "<group>"; };
@@ -957,7 +956,6 @@
 		D4EEC5C3227855B900799F6F /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				D402F18E2266744600C26CA8 /* RVS_ONVIF Mac Test Harness.entitlements */,
 				D41E2D13227CD65D006BB481 /* RVS_ONVIF_Mac_Test_Harness-Bridging-Header.h */,
 				D45DFCF92260C76300E486B7 /* Info.plist */,
 			);
