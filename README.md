@@ -49,7 +49,7 @@ The messages that each profile handler/dispatcher wrks with are an "opaque" enum
 
 IMPLEMENTATION
 -
-In order to use this, you need 
+In order to use this, you need to create one instance of the driver per device connection. The driver will handle interactions with that device. You can instantiate more than one instance of RVS_ONVIF.
 
 DEPENDENCIES
 =
