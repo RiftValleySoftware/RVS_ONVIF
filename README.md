@@ -45,7 +45,7 @@ The driver uses a "Dispatcher" pattern, similar to Apple's Delegate pattern, but
 1) You can have more than one "delegate." We call them "Dispatchers." The approach is more like registering for observer notifications than the "one only" registration that the Delegate pattern uses, but with the back-and-forth that the Delegate pattern prescribes. Each Dispatcher talks to the driver. It is not a one-way conversation.
 2) Each "Dispatcher" prescribes a protocol (not a class, like a delegate) that extends a central one.
 
-The messages that each profile handler/dispatcher wrks with are an "opaque" enum. We play some games to allow each dispatcher to add its own commands to the "smart" enum declared by the the central "hub."
+The messages that each profile handler/dispatcher works with are an "opaque" enum. We play some games to allow each dispatcher to add its own commands to the "smart" enum declared by the the central "hub."
 
 IMPLEMENTATION
 -
