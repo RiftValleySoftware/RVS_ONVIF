@@ -1151,7 +1151,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "The Great Rift Valley Software Company";
 				TargetAttributes = {
 					D45DFCE62260C5FE00E486B7 = {
@@ -1894,7 +1894,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85B1A380130513EF8894D516 /* Pods-RVS_ONVIF_tvOS.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
@@ -1926,7 +1926,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DD90638B0F31F4B05CAECC0 /* Pods-RVS_ONVIF_tvOS.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KSAUGZFWP2;
