@@ -282,7 +282,7 @@ class RVS_ONVIF_Test_Harness_Connect_ViewController: UIViewController, UITextFie
 
         let defaultPrefs: [String: Any] = ["ip_address": "", "tcp_port": 0, "login_id": "", "password": "", "soap_key": "", "auth_method": 0]
         
-        type(of: self).persistentPrefs = RVS_PersistentPrefs(tag: "TestONVIFSettings", values: defaultPrefs)
+        type(of: self).persistentPrefs = RVS_PersistentPrefs(key: "TestONVIFSettings", values: defaultPrefs)
         _loadState()
     }
     
