@@ -1,5 +1,5 @@
 binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/MobileVLCKit.json" "3.3.9"
 binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/TVVLCKit.json" "3.3.2"
 binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/VLCKit.json" "3.3.2"
-github "RiftValleySoftware/RVS_Generic_Swift_Toolbox" "0.93"
+github "RiftValleySoftware/RVS_Generic_Swift_Toolbox" "1.0"
 github "RiftValleySoftware/RVS_PersistentPrefs" "1.0.4"

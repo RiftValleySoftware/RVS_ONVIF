@@ -1,5 +1,7 @@
-binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/TVVLCKit.json" ~> 3.3.0
-binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/MobileVLCKit.json" ~> 3.3.0
-binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/VLCKit.json" ~> 3.3.0
 github "RiftValleySoftware/RVS_PersistentPrefs"
 github "RiftValleySoftware/RVS_Generic_Swift_Toolbox"
+github "RiftValleySoftware/RVS_IPAddress"
+github "RiftValleySoftware/RVS_ParseXMLDuration"
+binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/MobileVLCKit.json" ~> 3.3.9
+binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/VLCKit.json" ~> 3.3.2
+binary "https://code.videolan.org/videolan/VLCKit/raw/master/Packaging/TVVLCKit.json" ~> 3.3.2
