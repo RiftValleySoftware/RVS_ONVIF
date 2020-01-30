@@ -230,9 +230,6 @@
                 <a class="nav-group-task-link" href="Extensions/DateComponents.html">DateComponents</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Sequence.html">Sequence</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
@@ -281,6 +278,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -299,7 +299,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>Protocols</h1>
             <p>The following protocols are available globally.</p>
 
@@ -310,11 +310,92 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Standardized%20Sequence%20Protocol%20to%20Let%20Collectors%20be%20Sequences"></a>
+                <a name="//apple_ref/swift/Section/Standardized Sequence Protocol to Let Collectors be Sequences" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Standardized%20Sequence%20Protocol%20to%20Let%20Collectors%20be%20Sequences"></a>
+                  <h3 class="section-name"><p>Standardized Sequence Protocol to Let Collectors be Sequences</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A17_SequenceProtocolP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_SequenceProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A17_SequenceProtocolP">RVS_SequenceProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If you conform to this protocol, you get a few basic Sequence attributes for free.</p>
+
+<p>You&rsquo;ll need to set up a sequence_contents Array (read/write), and set the Element type, and that&rsquo;s about all.</p>
+
+<p>This also gives you a read-only subscript.</p>
+
+<p>This cannot be applied to enums, as it requires a stored property.</p>
+
+                        <a href="Protocols/RVS_SequenceProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_SequenceProtocol</span> <span class="p">:</span> <span class="kt">Sequence</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13RVS_ONVIF_iOS0A10_IPAddressP"></a>
+                    <a name="//apple_ref/swift/Protocol/RVS_IPAddress" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A10_IPAddressP">RVS_IPAddress</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This protocol is an abstract base for IP addresses. When we parse a String as an IP address, it will return a specific implementation of this.</p>
+
+<p>When we say &ldquo;valid,&rdquo; we don&rsquo;t mean the address resolves to anything; just that it is syntactically correct.</p>
+
+<p>This file is the only one that you need for your implementation. Simply copy it wherever you want in your project, and add it to your chosen target.</p>
+
+                        <a href="Protocols/RVS_IPAddress.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_IPAddress</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Dispatch%20Core%20Functions"></a>
                 <a name="//apple_ref/swift/Section/Dispatch Core Functions" class="dashAnchor"></a>
-                <a href="#/Dispatch%20Core%20Functions">
-                  <h3 class="section-name">Dispatch Core Functions</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Dispatch%20Core%20Functions"></a>
+                  <h3 class="section-name"><p>Dispatch Core Functions</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -351,9 +432,11 @@
               <div class="task-name-container">
                 <a name="/Dispatch%20Profile%20S%20Functions"></a>
                 <a name="//apple_ref/swift/Section/Dispatch Profile S Functions" class="dashAnchor"></a>
-                <a href="#/Dispatch%20Profile%20S%20Functions">
-                  <h3 class="section-name">Dispatch Profile S Functions</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Dispatch%20Profile%20S%20Functions"></a>
+                  <h3 class="section-name"><p>Dispatch Profile S Functions</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -384,10 +467,6 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -403,7 +482,7 @@
                       <div class="abstract">
                         <p>This is the delegate protocol for use with the RVS_ONVIF framework.</p>
 
-<p>This is a <q>pure</q> Swift protocol, requiring that it be applied to a class.</p>
+<p>This is a &ldquo;pure&rdquo; Swift protocol, requiring that it be applied to a class.</p>
 
 <p>There can only be one Delegate at a time for an RVS_ONVIF instance (as opposed to Dispatchers, which can be more than one).</p>
 
@@ -437,7 +516,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is a base protocol for structs returned from the ONVIF object. They can all refer back to their <q>owner.</q></p>
+                        <p>This is a base protocol for structs returned from the ONVIF object. They can all refer back to their &ldquo;owner.&rdquo;</p>
 
                         <a href="Protocols/OwnedInstanceProtocol.html" class="slightly-smaller">See more</a>
                       </div>
@@ -495,7 +574,7 @@
                       <div class="abstract">
                         <p>This protocol defines the basic structure of our SOAP command enums.</p>
 
-<p>This is a way to have <q>opaque</q> command enums that are independent of the calling context.</p>
+<p>This is a way to have &ldquo;opaque&rdquo; command enums that are independent of the calling context.</p>
 
 <p>This should only be applied to enums, and should only be used internally for the RVS_ONVIF library.</p>
 
@@ -546,9 +625,11 @@
               <div class="task-name-container">
                 <a name="/This%20is%20a%20special%20protocol%20for%20developing%20%22dispatcher%22%20handlers%20for%20RVS_ONVIF%20instances."></a>
                 <a name="//apple_ref/swift/Section/This is a special protocol for developing &quot;dispatcher&quot; handlers for RVS_ONVIF instances." class="dashAnchor"></a>
-                <a href="#/This%20is%20a%20special%20protocol%20for%20developing%20%22dispatcher%22%20handlers%20for%20RVS_ONVIF%20instances.">
-                  <h3 class="section-name">This is a special protocol for developing &quot;dispatcher&quot; handlers for RVS_ONVIF instances.</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/This%20is%20a%20special%20protocol%20for%20developing%20%22dispatcher%22%20handlers%20for%20RVS_ONVIF%20instances."></a>
+                  <h3 class="section-name"><p>This is a special protocol for developing &ldquo;dispatcher&rdquo; handlers for RVS_ONVIF instances.</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -574,15 +655,15 @@
 
 <p>The protocols will have default implementations of all methods and calculated properties except for <code>deliverResponse</code>, but some of the defaults are empty.</p>
 
-<p>Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality <q>behind the scenes.</q> Each profile handler will
+<p>Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality &ldquo;behind the scenes.&rdquo; Each profile handler will
 also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
 declare its own Dispatchers.</p>
 
-<p>The Dispatchers are <q>registered</q> with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
+<p>The Dispatchers are &ldquo;registered&rdquo; with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
 they can handle specific calls.</p>
 
 <p>When a call is returned from the device, the RVS_ONVIF driver will iterate the registered Dispatchers, and will stop when a Dispatcher signals that it will handle the response.
-Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are <q>opaque</q> enums.
+Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are &ldquo;opaque&rdquo; enums.
 Basically, the important part of your Dispatcher is that your implementation should implement the <code>isAbleToHandleThisCommand</code>, <code>deliverResponse</code>, and, if applicable, the <code>getParametersForCommand</code>
 methods. If <code>deliverResponse</code> returns true, then the iteration stops, once the <code>deliverResponse</code> call is made. The <code>deliverResponse</code> call will not be made, unless the Dispatcher returns true
 from its <code>isAbleToHandleThisCommand</code> method.</p>
@@ -605,42 +686,6 @@ All calls are made in the main thread.</p>
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13RVS_ONVIF_iOS0A10_IPAddressP"></a>
-                    <a name="//apple_ref/swift/Protocol/RVS_IPAddress" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13RVS_ONVIF_iOS0A10_IPAddressP">RVS_IPAddress</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>This protocol is an abstract base for IP addresses. When we parse a String as an IP address, it will return a specific implementation of this.</p>
-
-<p>When we say <q>valid,</q> we don&rsquo;t mean the address resolves to anything; just that it is syntactically correct.</p>
-
-<p>This file is the only one that you need for your implementation. Simply copy it wherever you want in your project, and add it to your chosen target.</p>
-
-                        <a href="Protocols/RVS_IPAddress.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">RVS_IPAddress</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </div>
         </section>
 
@@ -648,7 +693,7 @@ All calls are made in the main thread.</p>
     </div>
     <section class="footer">
       <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

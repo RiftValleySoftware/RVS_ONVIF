@@ -230,9 +230,6 @@
                 <a class="nav-group-task-link" href="../Extensions/DateComponents.html">DateComponents</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Sequence.html">Sequence</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
@@ -281,6 +278,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -299,7 +299,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RVS_ONVIFDelegate</h1>
               <div class="declaration">
                 <div class="language">
@@ -309,7 +309,7 @@
               </div>
             <p>This is the delegate protocol for use with the RVS_ONVIF framework.</p>
 
-<p>This is a <q>pure</q> Swift protocol, requiring that it be applied to a class.</p>
+<p>This is a &ldquo;pure&rdquo; Swift protocol, requiring that it be applied to a class.</p>
 
 <p>There can only be one Delegate at a time for an RVS_ONVIF instance (as opposed to Dispatchers, which can be more than one).</p>
 
@@ -340,14 +340,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is a <q>general purpose</q> callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
+                        <p>This is a &ldquo;general purpose&rdquo; callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
 It contains the information that would be sent to the following specialized callback, but as the initial partially-parsed dictionary from SOAPEngine.
 This is not called for errors.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>This is a <q>general purpose</q> callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
+                        <p>This is a &ldquo;general purpose&rdquo; callback that is made immediately before any other callback. It allows the client to interrupt the parsing process.
 It contains the information that would be sent to the following specialized callback, but as the initial partially-parsed dictionary from SOAPEngine.
 This is not called for errors.</p>
 
@@ -496,14 +496,14 @@ This is not called for errors.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is called when a response is a simple empty packet. It is a simple <q>ack.</q></p>
+                        <p>This is called when a response is a simple empty packet. It is a simple &ldquo;ack.&rdquo;</p>
 
 <p>This is not required, but it&rsquo;s a good idea to implement it, as many responses use it.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>This is called when a response is a simple empty packet. It is a simple <q>ack.</q></p>
+                        <p>This is called when a response is a simple empty packet. It is a simple &ldquo;ack.&rdquo;</p>
 
 <p>This is not required, but it&rsquo;s a good idea to implement it, as many responses use it.</p>
 
@@ -620,12 +620,12 @@ This is not called for errors.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is called if the instance is <q>deinitialized.</q> It is optional.</p>
+                        <p>This is called if the instance is &ldquo;deinitialized.&rdquo; It is optional.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>This is called if the instance is <q>deinitialized.</q> It is optional.</p>
+                        <p>This is called if the instance is &ldquo;deinitialized.&rdquo; It is optional.</p>
 
                       </div>
                       <div class="declaration">
@@ -667,7 +667,7 @@ This is not called for errors.</p>
     </div>
     <section class="footer">
       <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

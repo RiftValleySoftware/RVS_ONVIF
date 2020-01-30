@@ -230,9 +230,6 @@
                 <a class="nav-group-task-link" href="../Extensions/DateComponents.html">DateComponents</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Sequence.html">Sequence</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
@@ -281,6 +278,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -299,7 +299,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RVS_ONVIF</h1>
               <div class="declaration">
                 <div class="language">
@@ -322,11 +322,11 @@
 
 <p><strong>HOW THE FRAMEWORK OPERATES</strong></p>
 
-<p>The RVS_ONVIF Framework is a <q>hub and spokes</q> framework, in a similar pattern to <a href="https://www.onvif.org/profiles/">the ONVIF specification</a>.</p>
+<p>The RVS_ONVIF Framework is a &ldquo;hub and spokes&rdquo; framework, in a similar pattern to <a href="https://www.onvif.org/profiles/">the ONVIF specification</a>.</p>
 
-<p>There is a <q>core,</q> and a bunch of <q>profiles,</q> as defined by the ONVIF specification.</p>
+<p>There is a &ldquo;core,&rdquo; and a bunch of &ldquo;profiles,&rdquo; as defined by the ONVIF specification.</p>
 
-<p>The profiles (including the core) are the <q>spokes</q> of the framework, and are instantiated as needed to address the needs of the device to which the framework instance is dedicated.</p>
+<p>The profiles (including the core) are the &ldquo;spokes&rdquo; of the framework, and are instantiated as needed to address the needs of the device to which the framework instance is dedicated.</p>
 
 <p>You instantiate one RVS_ONVIF instance to connect to one device. You can have as many instances as you want, for multiple devices, but each instance corresponds to only one device.</p>
 
@@ -334,7 +334,7 @@
 
 <p><strong>DELEGATE</strong></p>
 
-<p>Each delegate call is optional. This is done by extending the delegate protocol with <q>do nothing</q> default methods.</p>
+<p>Each delegate call is optional. This is done by extending the delegate protocol with &ldquo;do nothing&rdquo; default methods.</p>
 
 <p>There can only be one Delegate.</p>
 
@@ -342,7 +342,7 @@
 
 <p><strong>DISPATCHER</strong></p>
 
-<p>We use <q>smart dispatchers</q> to manage the conversation with the driver. The client instantiates profile dispatchers, and registers them with the driver.</p>
+<p>We use &ldquo;smart dispatchers&rdquo; to manage the conversation with the driver. The client instantiates profile dispatchers, and registers them with the driver.</p>
 
 <p>The driver then uses these to deliver responses, and the client uses them to send requests.</p>
 
@@ -357,9 +357,11 @@
               <div class="task-name-container">
                 <a name="/Initializers"></a>
                 <a name="//apple_ref/swift/Section/Initializers" class="dashAnchor"></a>
-                <a href="#/Initializers">
-                  <h3 class="section-name">Initializers</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Initializers"></a>
+                  <h3 class="section-name"><p>Initializers</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -395,9 +397,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Class%20Methods"></a>
                 <a name="//apple_ref/swift/Section/Public Class Methods" class="dashAnchor"></a>
-                <a href="#/Public%20Class%20Methods">
-                  <h3 class="section-name">Public Class Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Class%20Methods"></a>
+                  <h3 class="section-name"><p>Public Class Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -508,9 +512,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Typealiases"></a>
                 <a name="//apple_ref/swift/Section/Public Typealiases" class="dashAnchor"></a>
-                <a href="#/Public%20Typealiases">
-                  <h3 class="section-name">Public Typealiases</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Typealiases"></a>
+                  <h3 class="section-name"><p>Public Typealiases</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -577,9 +583,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Enums"></a>
                 <a name="//apple_ref/swift/Section/Public Enums" class="dashAnchor"></a>
-                <a href="#/Public%20Enums">
-                  <h3 class="section-name">Public Enums</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Enums"></a>
+                  <h3 class="section-name"><p>Public Enums</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -616,9 +624,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Calculated%20Instance%20Properties"></a>
                 <a name="//apple_ref/swift/Section/Public Calculated Instance Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Calculated%20Instance%20Properties">
-                  <h3 class="section-name">Public Calculated Instance Properties</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Calculated%20Instance%20Properties"></a>
+                  <h3 class="section-name"><p>Public Calculated Instance Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -686,9 +696,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Stored%20Instance%20Properties"></a>
                 <a name="//apple_ref/swift/Section/Public Stored Instance Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Stored%20Instance%20Properties">
-                  <h3 class="section-name">Public Stored Instance Properties</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Stored%20Instance%20Properties"></a>
+                  <h3 class="section-name"><p>Public Stored Instance Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -861,9 +873,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Calculated%20Instance%20Properties2"></a>
                 <a name="//apple_ref/swift/Section/Public Calculated Instance Properties" class="dashAnchor"></a>
-                <a href="#/Public%20Calculated%20Instance%20Properties2">
-                  <h3 class="section-name">Public Calculated Instance Properties</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Calculated%20Instance%20Properties2"></a>
+                  <h3 class="section-name"><p>Public Calculated Instance Properties</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1089,9 +1103,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Instance%20Methods"></a>
                 <a name="//apple_ref/swift/Section/Public Instance Methods" class="dashAnchor"></a>
-                <a href="#/Public%20Instance%20Methods">
-                  <h3 class="section-name">Public Instance Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Instance%20Methods"></a>
+                  <h3 class="section-name"><p>Public Instance Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1226,9 +1242,11 @@
               <div class="task-name-container">
                 <a name="/Public%20Structs%20and%20Classes"></a>
                 <a name="//apple_ref/swift/Section/Public Structs and Classes" class="dashAnchor"></a>
-                <a href="#/Public%20Structs%20and%20Classes">
-                  <h3 class="section-name">Public Structs and Classes</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Structs%20and%20Classes"></a>
+                  <h3 class="section-name"><p>Public Structs and Classes</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1267,9 +1285,11 @@
               <div class="task-name-container">
                 <a name="/Public%20SOAPEngineDelegate%20Instance%20Methods"></a>
                 <a name="//apple_ref/swift/Section/Public SOAPEngineDelegate Instance Methods" class="dashAnchor"></a>
-                <a href="#/Public%20SOAPEngineDelegate%20Instance%20Methods">
-                  <h3 class="section-name">Public SOAPEngineDelegate Instance Methods</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20SOAPEngineDelegate%20Instance%20Methods"></a>
+                  <h3 class="section-name"><p>Public SOAPEngineDelegate Instance Methods</p>
+</h3>
+                </div>
               </div>
               <ul class="item-container">
                 <li class="item">
@@ -1474,7 +1494,7 @@ We use this method to form our own Digest Auth.</p>
     </div>
     <section class="footer">
       <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

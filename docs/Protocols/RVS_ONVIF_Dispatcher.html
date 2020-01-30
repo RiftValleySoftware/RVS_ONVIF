@@ -230,9 +230,6 @@
                 <a class="nav-group-task-link" href="../Extensions/DateComponents.html">DateComponents</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Sequence.html">Sequence</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
@@ -281,6 +278,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -299,7 +299,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             <h1>RVS_ONVIF_Dispatcher</h1>
               <div class="declaration">
                 <div class="language">
@@ -317,15 +317,15 @@
 
 <p>The protocols will have default implementations of all methods and calculated properties except for <code>deliverResponse</code>, but some of the defaults are empty.</p>
 
-<p>Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality <q>behind the scenes.</q> Each profile handler will
+<p>Each profile handler will declare a specialization of the ProfileHandlerProtocol, and will take care of profile-specific functionality &ldquo;behind the scenes.&rdquo; Each profile handler will
 also declare a specialization of the RVS_ONVIF_Dispatcher protocol that applies to its own functionality, and the implementation context will then use these specializations to
 declare its own Dispatchers.</p>
 
-<p>The Dispatchers are <q>registered</q> with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
+<p>The Dispatchers are &ldquo;registered&rdquo; with the main driver, in a manner similar to Delegates. However, Dispatchers are assigned to an Array, and will signal to the RVS_ONVIF instance when
 they can handle specific calls.</p>
 
 <p>When a call is returned from the device, the RVS_ONVIF driver will iterate the registered Dispatchers, and will stop when a Dispatcher signals that it will handle the response.
-Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are <q>opaque</q> enums.
+Commands are handled by protocol-hander-sepcific implementations the RVS_ONVIF_DeviceRequestProtocol protocol, and are &ldquo;opaque&rdquo; enums.
 Basically, the important part of your Dispatcher is that your implementation should implement the <code>isAbleToHandleThisCommand</code>, <code>deliverResponse</code>, and, if applicable, the <code>getParametersForCommand</code>
 methods. If <code>deliverResponse</code> returns true, then the iteration stops, once the <code>deliverResponse</code> call is made. The <code>deliverResponse</code> call will not be made, unless the Dispatcher returns true
 from its <code>isAbleToHandleThisCommand</code> method.</p>
@@ -383,12 +383,12 @@ All calls are made in the main thread.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the <q>first level</q> protocol override.</p>
+                        <p>This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the &ldquo;first level&rdquo; protocol override.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the <q>first level</q> protocol override.</p>
+                        <p>This is a String, returned by the dispatcher, that indicates which profile handler to use for it. It is implemented by the &ldquo;first level&rdquo; protocol override.</p>
 
                       </div>
                       <div class="declaration">
@@ -600,12 +600,12 @@ All calls are made in the main thread.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the <q>first level</q> protocol override.</p>
+                        <p>This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the &ldquo;first level&rdquo; protocol override.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the <q>first level</q> protocol override.</p>
+                        <p>This is a simple test, to see if the instance can handle the given command. It is implemented by this protocol, but is made final by the &ldquo;first level&rdquo; protocol override.</p>
 
                       </div>
                       <div class="declaration">
@@ -651,7 +651,7 @@ All calls are made in the main thread.</p>
     </div>
     <section class="footer">
       <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

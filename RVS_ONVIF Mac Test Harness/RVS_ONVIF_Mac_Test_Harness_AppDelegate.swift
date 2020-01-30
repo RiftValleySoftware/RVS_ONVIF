@@ -104,7 +104,7 @@ class RVS_ONVIF_Mac_Test_Harness_AppDelegate: NSObject, NSApplicationDelegate, R
                     }
                 }
                 
-                prefs = RVS_PersistentPrefs(tag: "RVS_ONVIF_Test", values: val)
+                prefs = RVS_PersistentPrefs(key: "RVS_ONVIF_Test", values: val)
             }
             
             return prefs?.values as? [String: String] ?? [:]

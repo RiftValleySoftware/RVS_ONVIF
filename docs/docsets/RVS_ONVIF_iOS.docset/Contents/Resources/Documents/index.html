@@ -229,9 +229,6 @@
                 <a class="nav-group-task-link" href="Extensions/DateComponents.html">DateComponents</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/Sequence.html">Sequence</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
@@ -280,6 +277,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RVS_ONVIF_Profile_SDispatcher.html">RVS_ONVIF_Profile_SDispatcher</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/RVS_SequenceProtocol.html">RVS_SequenceProtocol</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -298,25 +298,86 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             
             <p><img src="./icon.png" alt="Icon"></p>
 <h1 id='rvs_onvif' class='heading'>RVS_ONVIF</h1>
 
-<p>This project is a low-level <a href="https://onvif.org">ONVIF</a> <q>driver</q> for Cocoa (Apple&rsquo;s <a href="https://www.apple.com/macos">MacOS</a>, <a href="https://www.apple.com/ios">iOS</a> and <a href="https://www.apple.com/tvos">tvOS</a>).</p>
+<p>This project is a low-level <a href="https://onvif.org">ONVIF</a> &ldquo;driver&rdquo; for Cocoa (Apple&rsquo;s <a href="https://www.apple.com/macos">MacOS</a>, <a href="https://www.apple.com/ios">iOS</a> and <a href="https://www.apple.com/tvos">tvOS</a>).</p>
+<h2 id='warning-this-is-a-work-in-progress' class='heading'>WARNING: THIS IS A WORK IN PROGRESS!</h2>
+
+<p>RVS_ONVIF is a large-scale project that is still very much under development. It does not yet have full support for the ONVIF Core profile, and there&rsquo;s still a lot of work to do on the S profile (for example, supporting PTZ).</p>
+
+<p>That said, it has been tested on cameras from a number of different manufacturers, and is designed to be completely &ldquo;manufacturer-agnostic.&rdquo; There&rsquo;s a lot of &ldquo;leeway&rdquo; built into the driver, and it works well with the current functionality.</p>
+
+<p>It works, and it works now; just not at 100% of planned functionality. What has been done already, works.</p>
+<h2 id='handles-onvif-compliant-networked-devices' class='heading'>HANDLES ONVIF-COMPLIANT NETWORKED DEVICES</h2>
+
+<p>The RVS_ONVIF driver has been developed primarily to access and control networked video surveillance cameras, but there is no reason that it can&rsquo;t be applied to other types of ONVIF-compliant devices.</p>
+
+<p>The devices must be connected via TCP/IP to a network accessible by the device used to instantiate and control the driver.</p>
+<h2 id='not-a-device-driver' class='heading'>NOT A DEVICE DRIVER </h2>
+
+<p>RVS_ONVIF is a low-level native Swift (Apple) driver. It is not a &ldquo;device driver,&rdquo; which usually sit at an operating system level (kernel or user space). It is designed to translate between an IP connection to a device, and a user application; presenting an object model of the ONVIF device.</p>
+<h2 id='does-not-do-device-discovery' class='heading'>DOES NOT DO DEVICE DISCOVERY</h2>
+
+<p>The driver is not designed to do ONVIF device discovery. That&rsquo;s a separate process that can be done at a different level from the driver. The driver expects to be supplied an IP address and a TCP port for the device upon instantiation.</p>
+<h2 id='does-not-directly-handle-video' class='heading'>DOES NOT DIRECTLY HANDLE VIDEO</h2>
+
+<p>The driver does not handle video directly. It allows access to the various video parameters (including the RTSP URIs), but users of the driver are expected to take the streaming URI, and connect it directly with the video consumer, in peer-to-peer fashion.</p>
+<h2 id='multi-operating-system' class='heading'>MULTI-OPERATING SYSTEM</h2>
+
+<p>RVS_ONVIF is designed to support <a href="https://apple.com/ios">iOS</a>/<a href="https://apple.com/ipados">ipadOS</a>, <a href="https://apple.com/ios">macOS</a>, and <a href="https://apple.com/ios">tvOS</a>. There are test harnesses for all of these operating systems.</p>
+<h2 id='basic-structure' class='heading'>BASIC STRUCTURE</h2>
+
+<p>The project uses a &ldquo;hub and spokes&rdquo; structure, with a central &ldquo;engine,&rdquo; and adapters for the various profiles.</p>
+<h2 id='dispatchers' class='heading'>DISPATCHERS</h2>
+
+<p>The driver uses a &ldquo;Dispatcher&rdquo; pattern, similar to Apple&rsquo;s Delegate pattern, but with a couple of differences:</p>
+
+<p>1) You can have more than one &ldquo;delegate.&rdquo; We call them &ldquo;Dispatchers.&rdquo; The approach is more like registering for observer notifications than the &ldquo;one only&rdquo; registration that the Delegate pattern uses, but with the back-and-forth that the Delegate pattern prescribes. Each Dispatcher talks to the driver. It is not a one-way conversation.
+2) Each &ldquo;Dispatcher&rdquo; prescribes a protocol (not a class, like a delegate) that extends a central one.</p>
+
+<p>The messages that each profile handler/dispatcher works with are an &ldquo;opaque&rdquo; enum. We play some games to allow each dispatcher to add its own commands to the &ldquo;smart&rdquo; enum declared by the the central &ldquo;hub.&rdquo;</p>
+<h2 id='implementation' class='heading'>IMPLEMENTATION</h2>
+
+<p>In order to use this, you need to create one instance of the driver per device connection. The driver will handle interactions with that device. You can instantiate more than one instance of RVS_ONVIF.</p>
 <h1 id='dependencies' class='heading'>DEPENDENCIES</h1>
 <h2 id='build-dependencies' class='heading'>BUILD DEPENDENCIES</h2>
 
 <p>For testing, we depend upon <a href="https://github.com/drmohundro/SWXMLHash">SWXMLHash</a>, written by <a href="https://mohundro.com/">David Mohundro</a> to parse mock XML data.
-<strong>NOTE:</strong> For whatever reason, the CocoaPods project sets the Swift version of the SWXMLHash project to 3.0. Set it to 5. It will work.
+<em>**NOTE:</em>* For whatever reason, the CocoaPods project sets the Swift version of the SWXMLHash project to 3.0. Set it to 5. It will work*.
 For code LINTing, we use <a href="https://github.com/realm/SwiftLint">SwiftLint</a>, written by the fine folks at <a href="https://realm.io/">Realm.io</a>.
 For video display in our test harneses, we depend on variations of <a href="https://code.videolan.org/videolan/VLCKit">VLCKit</a>, written and maintained by the team at <a href="https://www.videolan.org/">VideoLAN</a>.</p>
+
+<p>We use <a href="https://github.com/Carthage/Carthage">Carthage</a> to include the VLCKit variants, and <a href="https://cocoapods.org">CocoaPods</a> to include SwiftLint.</p>
+<h2 id='runtime-dependencies' class='heading'>RUNTIME DEPENDENCIES</h2>
+
+<p>We use <a href="https://github.com/priore/SOAPEngine">SOAPEngine</a> written and maintained by <a href="https://www.prioregroup.com">the Priore Group</a> for dealing with the low-level SOAP wrapper.</p>
+
+<p>SOAPEngine is directly copied and embedded in the project. It is not a submodule.</p>
+
+<p>If you want to use RVS_ONVIF on devices, then you must <a href="https://github.com/priore/SOAPEngine/blob/master/README.md#licenses">obtain a license for SOAPEngine</a> from Priore Group.</p>
 <h2 id='note-about-testing' class='heading'>NOTE ABOUT TESTING:</h2>
 
 <p>We directly include the unit tests, as opposed to building the modules, because we are using completely generic tests, applied to all three platforms, so we don&rsquo;t want to deal with any conditional import weirdness.</p>
-<h2 id='runtime-dependencies' class='heading'>RUNTIME DEPENDENCIES</h2>
+<h2 id='license' class='heading'>LICENSE</h2>
 
-<p>We use <a href="https://github.com/priore/SOAPEngine">SOAPEngine</a> written and maintained by <a href="https://www.prioregroup.com">the Priore Group</a> for dealing with the low-level SOAP wrapper. If you want to use this on devices, then you must <a href="https://github.com/priore/SOAPEngine/blob/master/README.md#licenses">obtain a license for SOAPEngine</a> from Priore Group.</p>
+<p>© Copyright 2019, <a href="https://riftvalleysoftware.com">The Great Rift Valley Software Company</a></p>
+
+<p><a href="https://opensource.org/licenses/MIT">MIT License</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the &ldquo;Software&rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 
           </div>
         </section>
@@ -326,7 +387,7 @@ For video display in our test harneses, we depend on variations of <a href="http
     </div>
     <section class="footer">
       <p><a class="link" href="https://riftvalleysoftware.com" target="_blank" rel="external">©2019 The Great Rift Valley Software Company</a></p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
